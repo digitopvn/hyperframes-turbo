@@ -11,7 +11,7 @@
   "profile": "producer-default.control",
   "instrumented": false,
   "profileEnv": {
-    "HYPERFRAMES_EXTRACT_CACHE_DIR": "D:\\Temp\\turbo-bench-xcache-X0Dncn"
+    "HYPERFRAMES_EXTRACT_CACHE_DIR": "$TMP\\turbo-bench-xcache-EPN66O"
   },
   "resolvedEngineConfig": {
     "fps": 30,
@@ -54,17 +54,17 @@
     "verifyRuntime": true,
     "extractCacheMaxBytes": 2147483648,
     "debug": false,
-    "extractCacheDir": "D:\\Temp\\turbo-bench-xcache-X0Dncn"
+    "extractCacheDir": "$TMP\\turbo-bench-xcache-EPN66O"
   },
   "run": 0,
   "kind": "cold",
-  "startedAt": "2026-10-26T20:00:17.492Z",
-  "wallMs": 10545.0846,
+  "startedAt": "2026-10-26T22:52:23.433Z",
+  "wallMs": 31883.105500000005,
   "error": null,
   "idle": {
     "ok": true,
-    "cpuBusyPct": 18.08464358958424,
-    "gpuUtilPct": 0.4166666666666667,
+    "cpuBusyPct": 15.12528254701101,
+    "gpuUtilPct": 0.16666666666666666,
     "gpuEncPct": 0,
     "attempts": 1,
     "thresholds": {
@@ -102,7 +102,7 @@
     "counts": {
       "error": 0,
       "warn": 0,
-      "info": 27,
+      "info": 28,
       "debug": 1
     },
     "firstMessages": []
@@ -111,7 +111,7 @@
     {
       "phase": "pipeline",
       "status": "checkpoint",
-      "elapsedMs": 3
+      "elapsedMs": 2
     },
     {
       "phase": "compile",
@@ -121,119 +121,124 @@
     {
       "phase": "compile",
       "status": "end",
-      "elapsedMs": 178,
-      "durationMs": 174
+      "elapsedMs": 186,
+      "durationMs": 182
     },
     {
       "phase": "compile",
       "status": "checkpoint",
-      "elapsedMs": 179
+      "elapsedMs": 186
     },
     {
       "phase": "browser_probe",
       "status": "start",
-      "elapsedMs": 179
+      "elapsedMs": 186
     },
     {
       "phase": "browser_probe",
       "status": "end",
-      "elapsedMs": 206,
-      "durationMs": 27
+      "elapsedMs": 214,
+      "durationMs": 28
     },
     {
       "phase": "browser_probe",
       "status": "checkpoint",
-      "elapsedMs": 206
+      "elapsedMs": 214
     },
     {
       "phase": "video_extract",
       "status": "start",
-      "elapsedMs": 206
+      "elapsedMs": 214
     },
     {
       "phase": "video_extract",
       "status": "end",
-      "elapsedMs": 207,
+      "elapsedMs": 215,
       "durationMs": 1
     },
     {
       "phase": "video_extract",
       "status": "checkpoint",
-      "elapsedMs": 207
+      "elapsedMs": 215
     },
     {
       "phase": "hdr_detection",
       "status": "checkpoint",
-      "elapsedMs": 207
+      "elapsedMs": 215
     },
     {
       "phase": "audio_process",
       "status": "start",
-      "elapsedMs": 207
+      "elapsedMs": 215
     },
     {
       "phase": "audio_process",
       "status": "end",
-      "elapsedMs": 208,
+      "elapsedMs": 216,
       "durationMs": 1
     },
     {
       "phase": "file_server",
       "status": "start",
-      "elapsedMs": 208
+      "elapsedMs": 216
     },
     {
       "phase": "file_server",
       "status": "end",
-      "elapsedMs": 211,
+      "elapsedMs": 219,
       "durationMs": 3
     },
     {
       "phase": "capture_calibration",
       "status": "checkpoint",
-      "elapsedMs": 213
+      "elapsedMs": 222
     },
     {
       "phase": "worker_resolution",
       "status": "checkpoint",
-      "elapsedMs": 214
+      "elapsedMs": 222
     },
     {
       "phase": "capture_strategy",
       "status": "checkpoint",
-      "elapsedMs": 215
+      "elapsedMs": 223
     },
     {
       "phase": "capture_streaming",
       "status": "start",
-      "elapsedMs": 215
+      "elapsedMs": 223
+    },
+    {
+      "phase": "capture_streaming",
+      "status": "checkpoint",
+      "elapsedMs": 30231
     },
     {
       "phase": "capture_streaming",
       "status": "end",
-      "elapsedMs": 10453,
-      "durationMs": 10238
+      "elapsedMs": 31795,
+      "durationMs": 31572
     },
     {
       "phase": "assemble",
       "status": "start",
-      "elapsedMs": 10454
+      "elapsedMs": 31795
     },
     {
       "phase": "assemble",
       "status": "end",
-      "elapsedMs": 10454,
-      "durationMs": 0
+      "elapsedMs": 31796,
+      "durationMs": 1
     },
     {
       "phase": "pipeline",
       "status": "checkpoint",
-      "elapsedMs": 10538
+      "elapsedMs": 31884
     }
   ],
   "perfSummary": {
-    "renderId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d",
-    "totalElapsedMs": 10538,
+    "renderId": "9a8475e4-4764-4543-8505-9cce95ee1fcb",
+    "totalElapsedMs": 31884,
     "fps": 30,
     "quality": "high",
     "workers": 1,
@@ -262,26 +267,26 @@
     "videoCount": 0,
     "audioCount": 0,
     "stages": {
-      "compileOnlyMs": 173,
+      "compileOnlyMs": 181,
       "browserProbeMs": 27,
-      "compileMs": 202,
+      "compileMs": 210,
       "videoExtractMs": 0,
       "audioProcessMs": 0,
-      "captureMs": 10245,
-      "captureFrameMs": 10238,
+      "captureMs": 31579,
+      "captureFrameMs": 31572,
       "captureSetupMs": 7,
-      "encodeMs": 10209,
+      "encodeMs": 31530,
       "assembleMs": 0
     },
     "tmpPeakBytes": 275267,
     "observability": {
-      "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d",
+      "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb",
       "compositionHash": "c77a561570adb32c",
       "events": [
         {
           "phase": "pipeline",
           "status": "checkpoint",
-          "elapsedMs": 3,
+          "elapsedMs": 2,
           "message": "started",
           "data": {
             "format": "webm",
@@ -293,7 +298,7 @@
             "playerReadyTimeoutMs": 45000,
             "requestedWorkers": 1
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "compile",
@@ -302,22 +307,22 @@
           "data": {
             "needsAlpha": true
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "compile",
           "status": "end",
-          "elapsedMs": 178,
-          "durationMs": 174,
+          "elapsedMs": 186,
+          "durationMs": 182,
           "data": {
             "needsAlpha": true
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "compile",
           "status": "checkpoint",
-          "elapsedMs": 179,
+          "elapsedMs": 186,
           "message": "composition metadata resolved",
           "data": {
             "width": 640,
@@ -329,33 +334,33 @@
             "forceScreenshot": true,
             "compositionHash": "c77a561570adb32c"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "browser_probe",
           "status": "start",
-          "elapsedMs": 179,
+          "elapsedMs": 186,
           "data": {
             "forceScreenshot": true,
             "stagePhase": "calibrating"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "browser_probe",
           "status": "end",
-          "elapsedMs": 206,
-          "durationMs": 27,
+          "elapsedMs": 214,
+          "durationMs": 28,
           "data": {
             "forceScreenshot": true,
             "stagePhase": "calibrating"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "browser_probe",
           "status": "checkpoint",
-          "elapsedMs": 206,
+          "elapsedMs": 214,
           "message": "duration resolved",
           "data": {
             "durationSeconds": 2,
@@ -363,31 +368,31 @@
             "compositionHash": "c77a561570adb32c",
             "beginFrameStalled": false
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "video_extract",
           "status": "start",
-          "elapsedMs": 206,
+          "elapsedMs": 214,
           "data": {
             "videoCount": 0
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "video_extract",
           "status": "end",
-          "elapsedMs": 207,
+          "elapsedMs": 215,
           "durationMs": 1,
           "data": {
             "videoCount": 0
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "video_extract",
           "status": "checkpoint",
-          "elapsedMs": 207,
+          "elapsedMs": 215,
           "message": "frames resolved",
           "data": {
             "videoCount": 0,
@@ -403,12 +408,12 @@
             "minVideoFrameCoverageRatio": null,
             "authoredTimedClipCount": 3
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "hdr_detection",
           "status": "checkpoint",
-          "elapsedMs": 207,
+          "elapsedMs": 215,
           "message": "resolved",
           "data": {
             "requestedHdrMode": "force-sdr",
@@ -416,47 +421,47 @@
             "nativeHdrVideoCount": 0,
             "nativeHdrImageCount": 0
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "audio_process",
           "status": "start",
-          "elapsedMs": 207,
+          "elapsedMs": 215,
           "data": {
             "audioCount": 0
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "audio_process",
           "status": "end",
-          "elapsedMs": 208,
+          "elapsedMs": 216,
           "durationMs": 1,
           "data": {
             "audioCount": 0
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "file_server",
           "status": "start",
-          "elapsedMs": 208,
+          "elapsedMs": 216,
           "data": {
             "reused": false
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "file_server",
           "status": "end",
-          "elapsedMs": 211,
+          "elapsedMs": 219,
           "durationMs": 3,
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "capture_calibration",
           "status": "checkpoint",
-          "elapsedMs": 213,
+          "elapsedMs": 222,
           "message": "skipped",
           "data": {
             "requestedWorkers": 1,
@@ -466,22 +471,22 @@
             "deInversionEligible": false,
             "deParallelRouterEligible": false
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "worker_resolution",
           "status": "checkpoint",
-          "elapsedMs": 214,
+          "elapsedMs": 222,
           "message": "resolved",
           "data": {
             "workerCount": 1
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "capture_strategy",
           "status": "checkpoint",
-          "elapsedMs": 215,
+          "elapsedMs": 223,
           "message": "resolved",
           "data": {
             "workerCount": 1,
@@ -494,12 +499,12 @@
             "hasShaderTransitions": false,
             "isPngSequence": false
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "capture_streaming",
           "status": "start",
-          "elapsedMs": 215,
+          "elapsedMs": 223,
           "data": {
             "stagePhase": "capturing",
             "workerCount": 1,
@@ -509,13 +514,31 @@
             "captureMode": "screenshot",
             "captureOperation": "captureScreenshot"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
+        },
+        {
+          "phase": "capture_streaming",
+          "status": "checkpoint",
+          "elapsedMs": 30231,
+          "message": "stage still running",
+          "data": {
+            "stagePhase": "capturing",
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "totalFrames": 60,
+            "framesCompleted": 60,
+            "captureMode": "screenshot",
+            "captureOperation": "encode",
+            "heartbeatIndex": 1,
+            "stageElapsedMs": 30008
+          },
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "capture_streaming",
           "status": "end",
-          "elapsedMs": 10453,
-          "durationMs": 10238,
+          "elapsedMs": 31795,
+          "durationMs": 31572,
           "data": {
             "stagePhase": "capturing",
             "workerCount": 1,
@@ -525,12 +548,12 @@
             "captureMode": "screenshot",
             "captureOperation": "encode"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "assemble",
           "status": "start",
-          "elapsedMs": 10454,
+          "elapsedMs": 31795,
           "data": {
             "stagePhase": "capturing",
             "hasAudio": false,
@@ -541,13 +564,13 @@
             "captureMode": "screenshot",
             "captureOperation": "encode"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "assemble",
           "status": "end",
-          "elapsedMs": 10454,
-          "durationMs": 0,
+          "elapsedMs": 31796,
+          "durationMs": 1,
           "data": {
             "stagePhase": "capturing",
             "hasAudio": false,
@@ -558,29 +581,29 @@
             "captureMode": "screenshot",
             "captureOperation": "encode"
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         },
         {
           "phase": "pipeline",
           "status": "checkpoint",
-          "elapsedMs": 10538,
+          "elapsedMs": 31884,
           "message": "artifact validated",
           "data": {
-            "totalElapsedMs": 10538
+            "totalElapsedMs": 31884
           },
-          "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+          "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
         }
       ],
-      "eventCount": 23,
+      "eventCount": 24,
       "lastEvent": {
         "phase": "pipeline",
         "status": "checkpoint",
-        "elapsedMs": 10538,
+        "elapsedMs": 31884,
         "message": "artifact validated",
         "data": {
-          "totalElapsedMs": 10538
+          "totalElapsedMs": 31884
         },
-        "renderJobId": "ff8f3e9c-5452-4cc2-b1f4-50d50e58430d"
+        "renderJobId": "9a8475e4-4764-4543-8505-9cce95ee1fcb"
       },
       "browserDiagnostics": {
         "total": 3,
@@ -627,8 +650,8 @@
         "usePageSideCompositing": false,
         "hasHdrContent": false,
         "chromeBrowserRssPeakMb": 57,
-        "chromeRendererRssPeakMb": 82,
-        "chromeRssLastMb": 230,
+        "chromeRendererRssPeakMb": 85,
+        "chromeRssLastMb": 232,
         "chromeGpuProcessSeenLastSample": true,
         "chromeMemorySamples": 1,
         "captureBeyondViewport": false
@@ -641,16 +664,16 @@
         "authoredTimedClipCount": 3
       },
       "init": {
-        "initDurationMs": 535,
+        "initDurationMs": 546,
         "tweenCount": 2,
         "elementCount": 21
       }
     },
-    "captureAvgMs": 171,
+    "captureAvgMs": 526,
     "subTimelineWait": "ready",
     "captureP50Ms": 35,
-    "peakRssMb": 262,
-    "peakHeapUsedMb": 97,
+    "peakRssMb": 176,
+    "peakHeapUsedMb": 66,
     "staticDedup": {
       "enabled": true,
       "armed": false,

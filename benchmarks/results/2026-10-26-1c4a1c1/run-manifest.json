@@ -1,7 +1,7 @@
 {
   "schema": "turbo-bench-manifest/1",
-  "startedAt": "2026-10-26T18:32:37.709Z",
-  "finishedAt": "2026-10-26T20:45:26.790Z",
+  "startedAt": "2026-10-26T20:57:38.995Z",
+  "finishedAt": "2026-10-26T23:41:14.476Z",
   "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --warm-runs 5",
   "warmRuns": 5,
   "profiles": {
@@ -24,11 +24,11 @@
     "cell": "producer-default.control",
     "instrumentation": "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)"
   },
-  "orderRule": "variants rotate by fixture index",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
   "preflight": {
     "ok": true,
-    "cpuBusyPct": 7.361987297187234,
-    "gpuUtilPct": 5.615384615384615,
+    "cpuBusyPct": 14.07519944650697,
+    "gpuUtilPct": 1.9487179487179487,
     "gpuEncPct": 0,
     "attempts": 1,
     "thresholds": {
@@ -54,6 +54,11 @@
     },
     {
       "fixture": "gsap-static-holds",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
       "profile": "cli-local-default",
       "exitCode": 0
     },
@@ -63,16 +68,6 @@
       "exitCode": 0
     },
     {
-      "fixture": "gsap-static-holds",
-      "profile": "producer-default",
-      "exitCode": 0
-    },
-    {
-      "fixture": "css-filters-blend",
-      "profile": "producer-default.control",
-      "exitCode": 0
-    },
-    {
       "fixture": "css-filters-blend",
       "profile": "producer-default",
       "exitCode": 0
@@ -80,6 +75,11 @@
     {
       "fixture": "css-filters-blend",
       "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "producer-default.control",
       "exitCode": 0
     },
     {
@@ -99,6 +99,11 @@
     },
     {
       "fixture": "video-heavy",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
       "profile": "cli-local-default",
       "exitCode": 0
     },
@@ -108,16 +113,6 @@
       "exitCode": 0
     },
     {
-      "fixture": "video-heavy",
-      "profile": "producer-default",
-      "exitCode": 0
-    },
-    {
-      "fixture": "audio-mix",
-      "profile": "producer-default.control",
-      "exitCode": 0
-    },
-    {
       "fixture": "audio-mix",
       "profile": "producer-default",
       "exitCode": 0
@@ -125,6 +120,11 @@
     {
       "fixture": "audio-mix",
       "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "producer-default.control",
       "exitCode": 0
     },
     {
@@ -144,21 +144,16 @@
     },
     {
       "fixture": "webm-transparency",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
       "profile": "cli-local-default",
       "exitCode": 0
     },
     {
       "fixture": "webm-transparency",
-      "profile": "producer-default.control",
-      "exitCode": 0
-    },
-    {
-      "fixture": "webm-transparency",
-      "profile": "producer-default",
-      "exitCode": 0
-    },
-    {
-      "fixture": "hdr-hlg-regression",
       "profile": "producer-default.control",
       "exitCode": 0
     },
@@ -170,6 +165,11 @@
     {
       "fixture": "hdr-hlg-regression",
       "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "producer-default.control",
       "exitCode": 0
     },
     {

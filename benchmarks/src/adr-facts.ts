@@ -20,9 +20,10 @@ const hdr = cells.filter(isHdr);
 
 type Pick = (c: CellSummary) => number | null | undefined;
 function range(set: CellSummary[], pick: Pick) {
-  const vals = set
-    .map((c) => ({ cell: `${c.fixture}/${c.profile}`, v: pick(c) }))
-    .filter((x): x is { cell: string; v: number } => typeof x.v === "number" && Number.isFinite(x.v));
+  return rangeOf(set.map((c) => ({ cell: `${c.fixture}/${c.profile}`, v: pick(c) })));
+}
+function rangeOf(items: Array<{ cell: string; v: number | null | undefined }>) {
+  const vals = items.filter((x): x is { cell: string; v: number } => typeof x.v === "number" && Number.isFinite(x.v));
   if (!vals.length) return null;
   const lo = vals.reduce((a, b) => (b.v < a.v ? b : a));
   const hi = vals.reduce((a, b) => (b.v > a.v ? b : a));
@@ -41,6 +42,22 @@ const cliVsProducer = fixtures.map((f) => {
   const b = byProfile(f, "cli-local-default")?.warm.wallMs?.median;
   return { fixture: f, producerMs: a, cliMs: b, cliDeltaPct: a && b ? ((b - a) / a) * 100 : null };
 });
+
+interface Overhead {
+  fixture: string;
+  profile: string;
+  warmMedianOverheadPct: number | null;
+  coldOverheadPct: number | null;
+  controlWarmCv: number | null;
+  instrumentedWarmCv: number | null;
+}
+function overheadRange(k: "warmMedianOverheadPct" | "coldOverheadPct") {
+  const rows: Overhead[] = summary.harnessOverhead ?? [];
+  return {
+    ...rangeOf(rows.map((o) => ({ cell: `${o.fixture}/${o.profile}`, v: o[k] }))),
+    perCell: rows.map((o) => ({ cell: `${o.fixture}/${o.profile}`, pct: o[k], controlCv: o.controlWarmCv, instrumentedCv: o.instrumentedWarmCv })),
+  };
+}
 
 const facts = {
   source: join(dir, "summary.json"),
@@ -73,14 +90,80 @@ const facts = {
   warmCv: range(cells, (c) => c.warm.wallMs?.cv),
   cliVsProducer,
   cliSlowerCount: cliVsProducer.filter((x) => (x.cliDeltaPct ?? 0) > 0).length,
-  harnessOverheadWarmPct: range(
-    (summary.harnessOverhead ?? []).map((o: any) => ({ fixture: o.fixture, profile: o.profile, warm: { o: { median: o.warmMedianOverheadPct } } })) as any,
-    (c: any) => c.warm.o.median,
+  harnessOverheadWarmPct: overheadRange("warmMedianOverheadPct"),
+  harnessOverheadColdPct: overheadRange("coldOverheadPct"),
+  mixedPathCells: summary.cells
+    .filter((c: CellSummary) => c.mixedPath)
+    .map((c: CellSummary) => ({
+      cell: `${c.fixture}/${c.profile}`,
+      groups: c.pathGroups.map((g) => ({ capturePath: g.capturePath, workers: g.workers, runs: g.runs, setupMedianMs: g.warm.captureSetupMs?.median ?? null, wallMedianMs: g.warm.wallMs?.median ?? null })),
+    })),
+  // Per capture path across every SDR cell (instrumented and control), so
+  // bimodal cells are never summarised by a pooled median.
+  ...Object.fromEntries(
+    ["disk", "streaming"].flatMap((path) => {
+      const groups = (summary.cells as CellSummary[])
+        .filter((c) => !isHdr(c))
+        .flatMap((c) => c.pathGroups.filter((g) => g.capturePath === path).map((g) => ({ cell: `${c.fixture}/${c.profile}`, g })));
+      const r = (pick: (g: CellSummary["pathGroups"][number]) => number | null | undefined) =>
+        rangeOf(groups.map(({ cell, g }) => ({ cell, v: pick(g) })));
+      return [
+        [`${path}PathWorkers`, [...new Set(groups.map(({ g }) => g.workers))]],
+        [`${path}PathWarmRuns`, groups.reduce((a, { g }) => a + g.runs.length, 0)],
+        [`${path}PathSetupMs`, r((g) => g.warm.captureSetupMs?.median)],
+        [`${path}PathFramesMs`, r((g) => g.warm.captureFrameMs?.median)],
+        [`${path}PathWallMs`, r((g) => g.warm.wallMs?.median)],
+      ];
+    }),
   ),
-  harnessOverheadColdPct: range(
-    (summary.harnessOverhead ?? []).map((o: any) => ({ fixture: o.fixture, profile: o.profile, warm: { o: { median: o.coldOverheadPct } } })) as any,
-    (c: any) => c.warm.o.median,
+  // Only the cells whose warm runs flipped between paths.
+  ...Object.fromEntries(
+    ["disk", "streaming"].flatMap((path) => {
+      const groups = (summary.cells as CellSummary[])
+        .filter((c) => c.mixedPath)
+        .flatMap((c) => c.pathGroups.filter((g) => g.capturePath === path).map((g) => ({ cell: `${c.fixture}/${c.profile}`, g })));
+      return [
+        [`mixedCells_${path}SetupMs`, rangeOf(groups.map(({ cell, g }) => ({ cell, v: g.warm.captureSetupMs?.median })))],
+        [`mixedCells_${path}WallMs`, rangeOf(groups.map(({ cell, g }) => ({ cell, v: g.warm.wallMs?.median })))],
+      ];
+    }),
   ),
+  // From runs.csv: every run's capture path against upstream's calibration-failure warning.
+  calibrationVsPath: (() => {
+    const [head, ...rows] = readFileSync(join(dir, "runs.csv"), "utf8").trim().split("\n").map((l) => l.split(","));
+    const ix = (k: string) => head!.indexOf(k);
+    const out: Record<string, number> = {};
+    for (const r of rows) {
+      const k = `${r[ix("capturePath")] || "none"}/calibrationFailed=${r[ix("calibrationFailed")]}`;
+      out[k] = (out[k] ?? 0) + 1;
+    }
+    return out;
+  })(),
+  mixedCellCount: (summary.cells as CellSummary[]).filter((c) => c.mixedPath).length,
+  sdrCellCount: (summary.cells as CellSummary[]).filter((c) => !isHdr(c)).length,
+  // Instrumented vs control, compared only within the same capture path.
+  pathMatchedOverheadPct: (summary.cells as CellSummary[])
+    .filter((c) => c.instrumented && !isHdr(c))
+    .flatMap((c) => {
+      const ctl = (summary.cells as CellSummary[]).find((x) => !x.instrumented && x.fixture === c.fixture && `${c.profile}.control` === x.profile);
+      if (!ctl) return [];
+      return c.pathGroups.flatMap((g) => {
+        const h = ctl.pathGroups.find((x) => x.capturePath === g.capturePath && x.workers === g.workers);
+        const a = g.warm.wallMs?.median;
+        const b = h?.warm.wallMs?.median;
+        return a != null && b ? [{ cell: `${c.fixture}/${c.profile}`, path: g.capturePath, nInstrumented: g.runs.length, nControl: h!.runs.length, pct: ((a - b) / b) * 100 }] : [];
+      });
+    }),
+  concurrency: range(cells, (c) => c.representativeTrace?.concurrencyFactor),
+  concurrencyInferredCells: range(
+    cells.filter((c) => c.representativeTrace?.inferredPhases.length),
+    (c) => c.representativeTrace?.concurrencyFactor,
+  ),
+  diskSetupExceedsFrames: (() => {
+    const disk = sdr.filter((c) => c.facts.capturePath === "disk");
+    const over = disk.filter((c) => (c.warm.captureSetupMs?.median ?? 0) > (c.warm.captureFrameMs?.median ?? Infinity));
+    return { over: over.length, of: disk.length, cells: over.map((c) => `${c.fixture}/${c.profile}`) };
+  })(),
 };
 writeFileSync(join(dir, "adr-facts.json"), JSON.stringify(facts, null, 2) + "\n");
 console.log(JSON.stringify(facts, null, 2));

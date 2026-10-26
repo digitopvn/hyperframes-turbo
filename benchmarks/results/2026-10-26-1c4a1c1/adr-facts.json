@@ -1,17 +1,17 @@
 {
   "source": "benchmarks\\results\\2026-10-26-1c4a1c1\\summary.json",
   "sdrCaptureModes": [
-    "screenshot/streaming",
-    "screenshot/disk"
+    "screenshot/mixed",
+    "screenshot/streaming"
   ],
   "drawElementClampReasons": {
-    "audio-mix/cli-local-default": null,
+    "audio-mix/cli-local-default": "parallel",
     "audio-mix/producer-default": "software_gpu",
     "canvas-webgl/cli-local-default": "parallel",
     "canvas-webgl/producer-default": "software_gpu",
-    "css-filters-blend/cli-local-default": "parallel",
+    "css-filters-blend/cli-local-default": null,
     "css-filters-blend/producer-default": "software_gpu",
-    "gsap-static-holds/cli-local-default": "parallel",
+    "gsap-static-holds/cli-local-default": null,
     "gsap-static-holds/producer-default": "software_gpu",
     "hdr-hlg-regression/cli-local-default": null,
     "hdr-hlg-regression/producer-default": null,
@@ -27,81 +27,87 @@
     "webm-transparency/producer-default": "software_gpu"
   },
   "sdrRenderFactor": {
-    "min": 0.1304277276027865,
-    "minCell": "canvas-webgl/cli-local-default",
-    "max": 0.4575376022846043,
-    "maxCell": "typography-svg/producer-default",
+    "min": 0.08440642682069355,
+    "minCell": "canvas-webgl/producer-default",
+    "max": 0.32006720259012483,
+    "maxCell": "typography-svg/cli-local-default",
     "n": 16
   },
   "hdrRenderFactor": {
-    "min": 0.05899396030256694,
-    "minCell": "hdr-regression/producer-default",
-    "max": 0.16723124660188196,
+    "min": 0.0583679462469504,
+    "minCell": "hdr-regression/cli-local-default",
+    "max": 0.16249526955958413,
     "maxCell": "hdr-hlg-regression/cli-local-default",
     "n": 4
   },
   "hdrFps": {
-    "min": 1.7698188090770082,
-    "minCell": "hdr-regression/producer-default",
-    "max": 5.016937398056458,
+    "min": 1.751038387408512,
+    "minCell": "hdr-regression/cli-local-default",
+    "max": 4.8748580867875235,
     "maxCell": "hdr-hlg-regression/cli-local-default",
     "n": 4
   },
   "sdrCaptureShareOfWall": {
-    "min": 0.9710663968320483,
-    "minCell": "mixed-complex/producer-default",
-    "max": 0.9883823325039764,
-    "maxCell": "gsap-static-holds/cli-local-default",
+    "min": 0.956030869786714,
+    "minCell": "mixed-complex/cli-local-default",
+    "max": 0.9977261682340083,
+    "maxCell": "canvas-webgl/producer-default",
     "n": 16
   },
   "sdrCaptureSetupMs": {
     "min": 5,
     "minCell": "webm-transparency/cli-local-default",
-    "max": 33134,
-    "maxCell": "mixed-complex/cli-local-default",
+    "max": 35128,
+    "maxCell": "mixed-complex/producer-default",
     "n": 16
   },
   "sdrEncodeMs": {
-    "min": 100,
-    "minCell": "audio-mix/producer-default",
-    "max": 10026,
-    "maxCell": "webm-transparency/producer-default",
+    "min": 103,
+    "minCell": "audio-mix/cli-local-default",
+    "max": 48049,
+    "maxCell": "mixed-complex/producer-default",
     "n": 16
   },
   "overlapMs": {
     "min": 0,
     "minCell": "audio-mix/cli-local-default",
-    "max": 96118,
-    "maxCell": "hdr-regression/producer-default",
+    "max": 96056,
+    "maxCell": "hdr-regression/cli-local-default",
     "n": 20
   },
   "cellsWithInferredEncode": [
-    "audio-mix/cli-local-default",
+    "audio-mix/producer-default",
+    "canvas-webgl/producer-default",
+    "css-filters-blend/cli-local-default",
+    "gsap-static-holds/cli-local-default",
+    "gsap-static-holds/producer-default",
     "hdr-hlg-regression/cli-local-default",
     "hdr-hlg-regression/producer-default",
     "hdr-regression/cli-local-default",
     "hdr-regression/producer-default",
+    "mixed-complex/producer-default",
+    "typography-svg/producer-default",
     "webm-transparency/cli-local-default",
     "webm-transparency/producer-default"
   ],
   "sdrCaptureRpcP50Ms": {
-    "min": 32.487600000000384,
+    "min": 32.39280000000144,
     "minCell": "webm-transparency/producer-default",
-    "max": 94.41790000000037,
+    "max": 88.12349999998696,
     "maxCell": "css-filters-blend/producer-default",
     "n": 16
   },
   "sdrFrameRpcKiBPerFrame": {
     "min": 12.4517578125,
     "minCell": "webm-transparency/producer-default",
-    "max": 723.6719672309027,
-    "maxCell": "canvas-webgl/producer-default",
+    "max": 723.6724717881945,
+    "maxCell": "canvas-webgl/cli-local-default",
     "n": 16
   },
   "hdrCdpInMiB": {
-    "min": 5.83852481842041,
+    "min": 5.838501930236816,
     "minCell": "hdr-hlg-regression/producer-default",
-    "max": 8.647520065307617,
+    "max": 8.647584915161133,
     "maxCell": "hdr-regression/producer-default",
     "n": 4
   },
@@ -113,157 +119,1041 @@
     "n": 4
   },
   "hdrDiskWriteGiB": {
-    "min": 7.0030266819521785,
+    "min": 7.003597755916417,
     "minCell": "hdr-hlg-regression/cli-local-default",
-    "max": 8.407558478415012,
+    "max": 8.405947944149375,
     "maxCell": "hdr-regression/producer-default",
     "n": 4
   },
   "sdrDiskWriteMiB": {
-    "min": 6.730962753295898,
+    "min": 6.73537540435791,
     "minCell": "webm-transparency/producer-default",
-    "max": 766.4479131698608,
-    "maxCell": "canvas-webgl/cli-local-default",
+    "max": 634.6128950119019,
+    "maxCell": "mixed-complex/cli-local-default",
     "n": 16
   },
   "hdrCpuSeconds": {
-    "min": 330,
+    "min": 331,
     "minCell": "hdr-hlg-regression/cli-local-default",
-    "max": 557.046875,
+    "max": 520.9375,
     "maxCell": "hdr-regression/producer-default",
     "n": 4
   },
   "sdrCpuSeconds": {
-    "min": 4.28125,
+    "min": 4.0625,
     "minCell": "webm-transparency/producer-default",
-    "max": 117.15625,
-    "maxCell": "canvas-webgl/producer-default",
+    "max": 111.1875,
+    "maxCell": "canvas-webgl/cli-local-default",
     "n": 16
   },
   "cpuSecondsPerOutputMin": {
-    "min": 128.4375,
-    "minCell": "webm-transparency/producer-default",
-    "max": 5570.46875,
+    "min": 111.84375,
+    "minCell": "gsap-static-holds/cli-local-default",
+    "max": 5209.375,
     "maxCell": "hdr-regression/producer-default",
     "n": 20
   },
   "estUsdPerOutputMin": {
-    "min": 0.0015911979166666665,
-    "minCell": "webm-transparency/producer-default",
-    "max": 0.06901191840277777,
+    "min": 0.0013856197916666667,
+    "minCell": "gsap-static-holds/cli-local-default",
+    "max": 0.06453836805555556,
     "maxCell": "hdr-regression/producer-default",
     "n": 20
   },
   "coldVideoExtractMs": {
-    "min": 228,
+    "min": 227,
     "minCell": "hdr-regression/cli-local-default",
-    "max": 1398,
+    "max": 1388,
     "maxCell": "video-heavy/cli-local-default",
     "n": 8
   },
   "warmVideoExtractMs": {
     "min": 3,
     "minCell": "hdr-hlg-regression/cli-local-default",
-    "max": 10,
-    "maxCell": "video-heavy/producer-default",
+    "max": 7,
+    "maxCell": "video-heavy/cli-local-default",
     "n": 8
   },
   "peakTreeWorkingSetMiB": {
-    "min": 597.0859375,
-    "minCell": "webm-transparency/cli-local-default",
-    "max": 6024.78515625,
+    "min": 577.78125,
+    "minCell": "webm-transparency/producer-default",
+    "max": 5177.59375,
     "maxCell": "video-heavy/producer-default",
     "n": 20
   },
   "peakVramDeltaMiB": {
-    "min": 1,
-    "minCell": "mixed-complex/cli-local-default",
-    "max": 895,
-    "maxCell": "canvas-webgl/cli-local-default",
+    "min": 0,
+    "minCell": "audio-mix/producer-default",
+    "max": 5,
+    "maxCell": "canvas-webgl/producer-default",
     "n": 20
   },
   "warmCv": {
-    "min": 0.0032294378046819876,
+    "min": 0.005893969239540581,
     "minCell": "hdr-hlg-regression/producer-default",
-    "max": 0.30172261102778514,
-    "maxCell": "mixed-complex/producer-default",
+    "max": 0.5986992754128395,
+    "maxCell": "video-heavy/producer-default",
     "n": 20
   },
   "cliVsProducer": [
     {
       "fixture": "audio-mix",
-      "producerMs": 46263.5404,
-      "cliMs": 51724.05449999997,
-      "cliDeltaPct": 11.80306144490397
+      "producerMs": 73146.51619999995,
+      "cliMs": 45667.451,
+      "cliDeltaPct": -37.56715511216646
     },
     {
       "fixture": "canvas-webgl",
-      "producerMs": 35274.581399999995,
-      "cliMs": 46002.48819999999,
-      "cliDeltaPct": 30.41257011202973
+      "producerMs": 71084.63450000001,
+      "cliMs": 28046.73629999999,
+      "cliDeltaPct": -60.544586748912685
     },
     {
       "fixture": "css-filters-blend",
-      "producerMs": 29188.583100000018,
-      "cliMs": 37825.56839999999,
-      "cliDeltaPct": 29.590286278747
+      "producerMs": 25079.88360000006,
+      "cliMs": 67307.94129999995,
+      "cliDeltaPct": 168.37421725513826
     },
     {
       "fixture": "gsap-static-holds",
-      "producerMs": 24388.314100000003,
-      "cliMs": 23388.7224,
-      "cliDeltaPct": -4.098650262996262
+      "producerMs": 61414.668999999994,
+      "cliMs": 60448.54129999998,
+      "cliDeltaPct": -1.573122050043145
     },
     {
       "fixture": "hdr-hlg-regression",
-      "producerMs": 30238.787500000006,
-      "cliMs": 29898.718700000005,
-      "cliDeltaPct": -1.1246112298649569
+      "producerMs": 30788.032000000007,
+      "cliMs": 30770.126499999984,
+      "cliDeltaPct": -0.05815733853993195
     },
     {
       "fixture": "hdr-regression",
-      "producerMs": 101705.32659999991,
-      "cliMs": 100766.5097,
-      "cliDeltaPct": -0.9230754488329018
+      "producerMs": 102413.5673,
+      "cliMs": 102796.14730000007,
+      "cliDeltaPct": 0.37356378660200673
     },
     {
       "fixture": "mixed-complex",
-      "producerMs": 47707.345400000006,
-      "cliMs": 50840.66890000002,
-      "cliDeltaPct": 6.567800982697338
+      "producerMs": 84424.96260000009,
+      "cliMs": 31617.17989999999,
+      "cliDeltaPct": -62.54996279974667
     },
     {
       "fixture": "typography-svg",
-      "producerMs": 17484.9017,
-      "cliMs": 20653.65240000002,
-      "cliDeltaPct": 18.122782468945893
+      "producerMs": 54966.60409999997,
+      "cliMs": 24994.750899999985,
+      "cliDeltaPct": -54.527387475989265
     },
     {
       "fixture": "video-heavy",
-      "producerMs": 46675.1909,
-      "cliMs": 41863.4025,
-      "cliDeltaPct": -10.309092062010194
+      "producerMs": 27766.47259999998,
+      "cliMs": 27798.690300000017,
+      "cliDeltaPct": 0.11603094301592153
     },
     {
       "fixture": "webm-transparency",
-      "producerMs": 10279.248599999999,
-      "cliMs": 10212.77440000001,
-      "cliDeltaPct": -0.6466834550532191
+      "producerMs": 15253.387599999987,
+      "cliMs": 15470.70670000001,
+      "cliDeltaPct": 1.4247267931487075
     }
   ],
-  "cliSlowerCount": 5,
+  "cliSlowerCount": 4,
   "harnessOverheadWarmPct": {
-    "min": -13.261344752433587,
-    "minCell": "mixed-complex/producer-default",
-    "max": 8.73560518805553,
-    "maxCell": "css-filters-blend/producer-default",
-    "n": 10
+    "min": -63.343514547502345,
+    "minCell": "video-heavy/producer-default",
+    "max": 138.02829621531723,
+    "maxCell": "gsap-static-holds/producer-default",
+    "n": 10,
+    "perCell": [
+      {
+        "cell": "audio-mix/producer-default",
+        "pct": 130.58404294657274,
+        "controlCv": 0.507738499083768,
+        "instrumentedCv": 0.27901810602757454
+      },
+      {
+        "cell": "canvas-webgl/producer-default",
+        "pct": 1.4888372619904011,
+        "controlCv": 0.43724413540522966,
+        "instrumentedCv": 0.45228883073650794
+      },
+      {
+        "cell": "css-filters-blend/producer-default",
+        "pct": -60.88250885816803,
+        "controlCv": 0.44464319249148543,
+        "instrumentedCv": 0.5413619431891579
+      },
+      {
+        "cell": "gsap-static-holds/producer-default",
+        "pct": 138.02829621531723,
+        "controlCv": 0.503990319192081,
+        "instrumentedCv": 0.43478287273544974
+      },
+      {
+        "cell": "hdr-hlg-regression/producer-default",
+        "pct": 1.6436213401756956,
+        "controlCv": 0.01928966225815677,
+        "instrumentedCv": 0.005893969239540581
+      },
+      {
+        "cell": "hdr-regression/producer-default",
+        "pct": 2.125358305073772,
+        "controlCv": 0.017785897388529415,
+        "instrumentedCv": 0.006111865078879483
+      },
+      {
+        "cell": "mixed-complex/producer-default",
+        "pct": 1.1448873112354767,
+        "controlCv": 0.45597110285519854,
+        "instrumentedCv": 0.46423222345067294
+      },
+      {
+        "cell": "typography-svg/producer-default",
+        "pct": -2.091574824481342,
+        "controlCv": 0.2615545615784965,
+        "instrumentedCv": 0.4068155640901181
+      },
+      {
+        "cell": "video-heavy/producer-default",
+        "pct": -63.343514547502345,
+        "controlCv": 0.4481329610327439,
+        "instrumentedCv": 0.5986992754128395
+      },
+      {
+        "cell": "webm-transparency/producer-default",
+        "pct": -5.732188894865342,
+        "controlCv": 0.04372625291559337,
+        "instrumentedCv": 0.020008929814848298
+      }
+    ]
   },
   "harnessOverheadColdPct": {
-    "min": -38.62783278202977,
-    "minCell": "mixed-complex/producer-default",
-    "max": 14.986089155907218,
-    "maxCell": "gsap-static-holds/producer-default",
-    "n": 10
+    "min": -55.189632999372904,
+    "minCell": "audio-mix/producer-default",
+    "max": 141.65000540680242,
+    "maxCell": "css-filters-blend/producer-default",
+    "n": 10,
+    "perCell": [
+      {
+        "cell": "audio-mix/producer-default",
+        "pct": -55.189632999372904,
+        "controlCv": 0.507738499083768,
+        "instrumentedCv": 0.27901810602757454
+      },
+      {
+        "cell": "canvas-webgl/producer-default",
+        "pct": -15.308196870731441,
+        "controlCv": 0.43724413540522966,
+        "instrumentedCv": 0.45228883073650794
+      },
+      {
+        "cell": "css-filters-blend/producer-default",
+        "pct": 141.65000540680242,
+        "controlCv": 0.44464319249148543,
+        "instrumentedCv": 0.5413619431891579
+      },
+      {
+        "cell": "gsap-static-holds/producer-default",
+        "pct": -51.76212078823438,
+        "controlCv": 0.503990319192081,
+        "instrumentedCv": 0.43478287273544974
+      },
+      {
+        "cell": "hdr-hlg-regression/producer-default",
+        "pct": -9.267740600530217,
+        "controlCv": 0.01928966225815677,
+        "instrumentedCv": 0.005893969239540581
+      },
+      {
+        "cell": "hdr-regression/producer-default",
+        "pct": -1.1161664848168102,
+        "controlCv": 0.017785897388529415,
+        "instrumentedCv": 0.006111865078879483
+      },
+      {
+        "cell": "mixed-complex/producer-default",
+        "pct": 31.45961139031747,
+        "controlCv": 0.45597110285519854,
+        "instrumentedCv": 0.46423222345067294
+      },
+      {
+        "cell": "typography-svg/producer-default",
+        "pct": -53.43196683031807,
+        "controlCv": 0.2615545615784965,
+        "instrumentedCv": 0.4068155640901181
+      },
+      {
+        "cell": "video-heavy/producer-default",
+        "pct": 47.93116779544415,
+        "controlCv": 0.4481329610327439,
+        "instrumentedCv": 0.5986992754128395
+      },
+      {
+        "cell": "webm-transparency/producer-default",
+        "pct": -48.72194774125752,
+        "controlCv": 0.04372625291559337,
+        "instrumentedCv": 0.020008929814848298
+      }
+    ]
+  },
+  "mixedPathCells": [
+    {
+      "cell": "audio-mix/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 35128,
+          "wallMedianMs": 73285.83615000002
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 12741,
+          "wallMedianMs": 32550.04059999995
+        }
+      ]
+    },
+    {
+      "cell": "audio-mix/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2,
+            3,
+            5
+          ],
+          "setupMedianMs": 13095.5,
+          "wallMedianMs": 31651.015649999958
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            4
+          ],
+          "setupMedianMs": 35113,
+          "wallMedianMs": 66013.99560000002
+        }
+      ]
+    },
+    {
+      "cell": "audio-mix/producer-default",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1
+          ],
+          "setupMedianMs": 14003,
+          "wallMedianMs": 32685.389800000004
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35123,
+          "wallMedianMs": 73302.09344999999
+        }
+      ]
+    },
+    {
+      "cell": "canvas-webgl/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            5
+          ],
+          "setupMedianMs": 35130.5,
+          "wallMedianMs": 72463.26149999998
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 9329,
+          "wallMedianMs": 27725.22159999993
+        }
+      ]
+    },
+    {
+      "cell": "canvas-webgl/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 10498,
+          "wallMedianMs": 27946.95995000002
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35117,
+          "wallMedianMs": 70937.00949999993
+        }
+      ]
+    },
+    {
+      "cell": "canvas-webgl/producer-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 35115,
+          "wallMedianMs": 71707.14570000005
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 9426,
+          "wallMedianMs": 27391.38770000002
+        }
+      ]
+    },
+    {
+      "cell": "css-filters-blend/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 11542,
+          "wallMedianMs": 27957.063999999984
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35126,
+          "wallMedianMs": 68125.30709999998
+        }
+      ]
+    },
+    {
+      "cell": "css-filters-blend/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 35120,
+          "wallMedianMs": 65912.76610000001
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 9144.5,
+          "wallMedianMs": 25579.040749999986
+        }
+      ]
+    },
+    {
+      "cell": "css-filters-blend/producer-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            5
+          ],
+          "setupMedianMs": 35121,
+          "wallMedianMs": 64642.25580000003
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 8319,
+          "wallMedianMs": 24802.641500000027
+        }
+      ]
+    },
+    {
+      "cell": "gsap-static-holds/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 35117,
+          "wallMedianMs": 61766.277500000026
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 8332,
+          "wallMedianMs": 25227.567849999934
+        }
+      ]
+    },
+    {
+      "cell": "gsap-static-holds/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            5
+          ],
+          "setupMedianMs": 35114,
+          "wallMedianMs": 62575.439549999996
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 9108,
+          "wallMedianMs": 25798.37710000004
+        }
+      ]
+    },
+    {
+      "cell": "gsap-static-holds/producer-default",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 8058.5,
+          "wallMedianMs": 24618.026600000027
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35124,
+          "wallMedianMs": 61799.00140000007
+        }
+      ]
+    },
+    {
+      "cell": "mixed-complex/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            5
+          ],
+          "setupMedianMs": 35135.5,
+          "wallMedianMs": 85676.36765000003
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 11253,
+          "wallMedianMs": 31337.895600000047
+        }
+      ]
+    },
+    {
+      "cell": "mixed-complex/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 11879.5,
+          "wallMedianMs": 31731.47319999998
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35119,
+          "wallMedianMs": 84698.03379999998
+        }
+      ]
+    },
+    {
+      "cell": "mixed-complex/producer-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 35142,
+          "wallMedianMs": 84808.97769999999
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 11158.5,
+          "wallMedianMs": 31170.16294999997
+        }
+      ]
+    },
+    {
+      "cell": "typography-svg/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 8315,
+          "wallMedianMs": 24809.4179
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            5
+          ],
+          "setupMedianMs": 35120,
+          "wallMedianMs": 59462.72730000003
+        }
+      ]
+    },
+    {
+      "cell": "typography-svg/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 22152.5,
+          "wallMedianMs": 37795.61739999999
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 35113,
+          "wallMedianMs": 56298.096900000004
+        }
+      ]
+    },
+    {
+      "cell": "typography-svg/producer-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 35106,
+          "wallMedianMs": 55951.721099999966
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 7986.5,
+          "wallMedianMs": 24273.08740000002
+        }
+      ]
+    },
+    {
+      "cell": "video-heavy/cli-local-default",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            2,
+            3
+          ],
+          "setupMedianMs": 8916,
+          "wallMedianMs": 26557.832400000014
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            4,
+            5
+          ],
+          "setupMedianMs": 35125,
+          "wallMedianMs": 78067.74894999998
+        }
+      ]
+    },
+    {
+      "cell": "video-heavy/producer-default.control",
+      "groups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1,
+            5
+          ],
+          "setupMedianMs": 11507,
+          "wallMedianMs": 29272.648599999986
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            2,
+            3,
+            4
+          ],
+          "setupMedianMs": 35116,
+          "wallMedianMs": 75970.48969999998
+        }
+      ]
+    },
+    {
+      "cell": "video-heavy/producer-default",
+      "groups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2
+          ],
+          "setupMedianMs": 35120.5,
+          "wallMedianMs": 78613.72265
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            3,
+            4,
+            5
+          ],
+          "setupMedianMs": 8875,
+          "wallMedianMs": 26437.92889999994
+        }
+      ]
+    }
+  ],
+  "diskPathWorkers": [
+    5
+  ],
+  "diskPathWarmRuns": 52,
+  "diskPathSetupMs": {
+    "min": 7986.5,
+    "minCell": "typography-svg/producer-default",
+    "max": 22152.5,
+    "maxCell": "typography-svg/producer-default.control",
+    "n": 21
+  },
+  "diskPathFramesMs": {
+    "min": 15337,
+    "minCell": "typography-svg/producer-default.control",
+    "max": 18945,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 21
+  },
+  "diskPathWallMs": {
+    "min": 24273.08740000002,
+    "minCell": "typography-svg/producer-default",
+    "max": 37795.61739999999,
+    "maxCell": "typography-svg/producer-default.control",
+    "n": 21
+  },
+  "streamingPathWorkers": [
+    1
+  ],
+  "streamingPathWarmRuns": 68,
+  "streamingPathSetupMs": {
+    "min": 5,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 35142,
+    "maxCell": "mixed-complex/producer-default",
+    "n": 24
+  },
+  "streamingPathFramesMs": {
+    "min": 15050,
+    "minCell": "webm-transparency/producer-default",
+    "max": 49308,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 24
+  },
+  "streamingPathWallMs": {
+    "min": 15253.387599999987,
+    "minCell": "webm-transparency/producer-default",
+    "max": 85676.36765000003,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 24
+  },
+  "mixedCells_diskSetupMs": {
+    "min": 7986.5,
+    "minCell": "typography-svg/producer-default",
+    "max": 22152.5,
+    "maxCell": "typography-svg/producer-default.control",
+    "n": 21
+  },
+  "mixedCells_diskWallMs": {
+    "min": 24273.08740000002,
+    "minCell": "typography-svg/producer-default",
+    "max": 37795.61739999999,
+    "maxCell": "typography-svg/producer-default.control",
+    "n": 21
+  },
+  "mixedCells_streamingSetupMs": {
+    "min": 35106,
+    "minCell": "typography-svg/producer-default",
+    "max": 35142,
+    "maxCell": "mixed-complex/producer-default",
+    "n": 21
+  },
+  "mixedCells_streamingWallMs": {
+    "min": 55951.721099999966,
+    "minCell": "typography-svg/producer-default",
+    "max": 85676.36765000003,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 21
+  },
+  "calibrationVsPath": {
+    "streaming/calibrationFailed=true": 61,
+    "disk/calibrationFailed=false": 65,
+    "hdr_layered/calibrationFailed=false": 36,
+    "streaming/calibrationFailed=false": 18
+  },
+  "mixedCellCount": 21,
+  "sdrCellCount": 24,
+  "pathMatchedOverheadPct": [
+    {
+      "cell": "audio-mix/producer-default",
+      "path": "disk",
+      "nInstrumented": 1,
+      "nControl": 4,
+      "pct": 3.268059898735187
+    },
+    {
+      "cell": "audio-mix/producer-default",
+      "path": "streaming",
+      "nInstrumented": 4,
+      "nControl": 1,
+      "pct": 11.040231368755324
+    },
+    {
+      "cell": "canvas-webgl/producer-default",
+      "path": "streaming",
+      "nInstrumented": 3,
+      "nControl": 3,
+      "pct": 1.0856620619172357
+    },
+    {
+      "cell": "canvas-webgl/producer-default",
+      "path": "disk",
+      "nInstrumented": 2,
+      "nControl": 2,
+      "pct": -1.9879523604498424
+    },
+    {
+      "cell": "css-filters-blend/producer-default",
+      "path": "streaming",
+      "nInstrumented": 2,
+      "nControl": 3,
+      "pct": -1.9275633161448824
+    },
+    {
+      "cell": "css-filters-blend/producer-default",
+      "path": "disk",
+      "nInstrumented": 3,
+      "nControl": 2,
+      "pct": -3.035294628865076
+    },
+    {
+      "cell": "gsap-static-holds/producer-default",
+      "path": "disk",
+      "nInstrumented": 2,
+      "nControl": 3,
+      "pct": -4.575289737896006
+    },
+    {
+      "cell": "gsap-static-holds/producer-default",
+      "path": "streaming",
+      "nInstrumented": 3,
+      "nControl": 2,
+      "pct": -1.240803349658499
+    },
+    {
+      "cell": "mixed-complex/producer-default",
+      "path": "streaming",
+      "nInstrumented": 3,
+      "nControl": 3,
+      "pct": 0.13098757435383698
+    },
+    {
+      "cell": "mixed-complex/producer-default",
+      "path": "disk",
+      "nInstrumented": 2,
+      "nControl": 2,
+      "pct": -1.7689385124419938
+    },
+    {
+      "cell": "typography-svg/producer-default",
+      "path": "streaming",
+      "nInstrumented": 3,
+      "nControl": 3,
+      "pct": -0.615253124124766
+    },
+    {
+      "cell": "typography-svg/producer-default",
+      "path": "disk",
+      "nInstrumented": 2,
+      "nControl": 2,
+      "pct": -35.77803705886804
+    },
+    {
+      "cell": "video-heavy/producer-default",
+      "path": "streaming",
+      "nInstrumented": 2,
+      "nControl": 3,
+      "pct": 3.479289077163893
+    },
+    {
+      "cell": "video-heavy/producer-default",
+      "path": "disk",
+      "nInstrumented": 3,
+      "nControl": 2,
+      "pct": -9.683851088213611
+    },
+    {
+      "cell": "webm-transparency/producer-default",
+      "path": "streaming",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": -5.732188894865342
+    }
+  ],
+  "concurrency": {
+    "min": 1,
+    "minCell": "audio-mix/cli-local-default",
+    "max": 1.9907791609036423,
+    "maxCell": "webm-transparency/producer-default",
+    "n": 20
+  },
+  "concurrencyInferredCells": {
+    "min": 1.3603854701788902,
+    "minCell": "typography-svg/producer-default",
+    "max": 1.9907791609036423,
+    "maxCell": "webm-transparency/producer-default",
+    "n": 13
+  },
+  "diskSetupExceedsFrames": {
+    "over": 0,
+    "of": 0,
+    "cells": []
   }
 }

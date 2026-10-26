@@ -1,9 +1,9 @@
 {
   "schema": "turbo-bench-environment/1",
-  "generatedAt": "2026-10-26T18:32:27.014Z",
+  "generatedAt": "2026-10-26T20:57:28.229Z",
   "generator": "benchmarks/src/collect-environment.ts",
   "repo": {
-    "turboSha": "b2b4a8f4bd9aa0f7156ea8d1f4dbb7da036b1a3f",
+    "turboSha": "38e21efe79f0153a4b89d78b90cf4c2414486211",
     "turboDirty": true
   },
   "upstream": {

@@ -64,6 +64,8 @@ export interface RunMetrics {
   overlapMs: number | null;
   /** Phases whose interval came from perfSummary.stages because upstream emits no trace event. */
   inferredPhases: string | null;
+  /** Why the trace analysis of this run is incomplete, if it is. */
+  traceWarnings: string | null;
   untracedMs: number | null;
   cdpInboundBytes: number | null;
   cdpOutboundBytes: number | null;
@@ -87,6 +89,8 @@ export interface RunMetrics {
   extractCacheMisses: number | null;
   captureMode: string | null;
   capturePath: string | null;
+  /** Upstream logged "Auto-worker calibration failed" (conservative worker budget). */
+  calibrationFailed: boolean;
   drawElementClampReason: string | null;
   workers: number | null;
   staticDedupReused: number | null;
@@ -174,6 +178,7 @@ export function runMetrics(r: Run): RunMetrics {
     concurrencyFactor: trace ? trace.concurrencyFactor : null,
     overlapMs: trace ? trace.overlapMs : null,
     inferredPhases: trace?.inferredPhases.length ? trace.inferredPhases.join("+") : null,
+    traceWarnings: trace?.warnings.length ? trace.warnings.join("; ") : null,
     untracedMs: trace ? trace.untracedMs : null,
     cdpInboundBytes: num(r.cdpTap?.inboundBytes),
     cdpOutboundBytes: num(r.cdpTap?.outboundBytes),
@@ -195,6 +200,7 @@ export function runMetrics(r: Run): RunMetrics {
     extractCacheMisses: num(extraction.cacheMisses),
     captureMode: ps.observability?.capture?.captureMode ?? null,
     capturePath: ps.observability?.capture?.capturePath ?? null,
+    calibrationFailed: (r.upstreamLog?.firstMessages ?? []).some((m: string) => m.includes("Auto-worker calibration failed")),
     drawElementClampReason: ps.drawElement?.clampReason ?? null,
     workers: num(ps.workers),
     staticDedupReused: num(ps.staticDedup?.reusedFrames),
@@ -229,6 +235,14 @@ export interface CellSummary {
   warm: Partial<Record<(typeof AGG_KEYS)[number], Distribution | null>>;
   /** Stage overlap of the warm run closest to the warm median wall time. */
   representativeTrace: ReturnType<typeof analyzeTrace> | null;
+  /**
+   * Upstream auto-calibration can pick a different capture path or worker
+   * count per run, so warm medians may mix pipelines. One entry per distinct
+   * (capturePath, workers) among the warm runs, with its own distributions.
+   */
+  pathGroups: Array<{ capturePath: string | null; workers: number | null; runs: number[]; warm: Partial<Record<(typeof AGG_KEYS)[number], Distribution | null>> }>;
+  /** True when the warm runs used more than one (capturePath, workers) pair. */
+  mixedPath: boolean;
   facts: Pick<
     RunMetrics,
     "captureMode" | "capturePath" | "drawElementClampReason" | "workers" | "videoCodec" | "pixFmt" | "colorTransfer" | "alphaMode" | "audioCodec" | "frames"
@@ -259,6 +273,16 @@ function summarize(cr: Run[], m: RunMetrics[]): CellSummary {
   const rep = med != null && warm.length ? warm.reduce((a, b) => (Math.abs(b.wallMs - med) < Math.abs(a.wallMs - med) ? b : a)) : null;
   const repRun = rep ? cr.find((r) => r.run === rep.run) : null;
   const ref = rep ?? cold;
+  const groups = new Map<string, RunMetrics[]>();
+  for (const x of warm) {
+    const k = `${x.capturePath}/${x.workers}`;
+    groups.set(k, [...(groups.get(k) ?? []), x]);
+  }
+  const pathGroups = [...groups.values()].map((g) => {
+    const d: CellSummary["warm"] = {};
+    for (const k of AGG_KEYS) d[k] = describe(g.map((x) => x[k] as number).filter((v) => v != null));
+    return { capturePath: g[0]!.capturePath, workers: g[0]!.workers, runs: g.map((x) => x.run), warm: d };
+  });
   return {
     fixture: m[0]!.fixture,
     category: m[0]!.category,
@@ -269,14 +293,16 @@ function summarize(cr: Run[], m: RunMetrics[]): CellSummary {
     warmFailed: warmAll.length - warm.length,
     idleFlagged: m.filter((x) => !x.idleOk).length,
     warm: agg,
+    pathGroups,
+    mixedPath: pathGroups.length > 1,
     representativeTrace: repRun?.traceEvents?.length
       ? analyzeTrace(repRun.traceEvents, repRun.wallMs, repRun.perfSummary?.stages)
       : null,
     facts: {
       captureMode: ref?.captureMode ?? null,
-      capturePath: ref?.capturePath ?? null,
+      capturePath: pathGroups.length > 1 ? "mixed" : (ref?.capturePath ?? null),
       drawElementClampReason: ref?.drawElementClampReason ?? null,
-      workers: ref?.workers ?? null,
+      workers: pathGroups.length > 1 ? null : (ref?.workers ?? null),
       videoCodec: ref?.videoCodec ?? null,
       pixFmt: ref?.pixFmt ?? null,
       colorTransfer: ref?.colorTransfer ?? null,
@@ -379,7 +405,6 @@ export function writeReport(outDir: string): CellSummary[] {
     ) + "\n",
   );
 
-  const n = summaries[0]?.warm.wallMs?.n ?? 0;
   const L: string[] = [];
   const up = env?.upstream;
   const host = env?.host;
@@ -407,7 +432,7 @@ export function writeReport(outDir: string): CellSummary[] {
   }
   L.push(`- Refused runs (host busy under --strict-idle): ${refused}`, "");
   L.push(
-    `Warm = the ${n} successful warm runs per cell: median, **max** and coefficient of variation (cv). With n = ${n} a nearest-rank p95 is the max, so the max is reported under its own name. Cold = first render in a fresh process with an empty extraction cache, reported separately.`,
+    `Warm = the successful warm runs of each cell (n per cell in the *warm ok/n* column): median, **max** and coefficient of variation (cv). With n ≤ 5 a nearest-rank p95 is the max, so the max is reported under its own name. Cold = first render in a fresh process with an empty extraction cache, reported separately.`,
     "",
   );
 
@@ -471,7 +496,7 @@ export function writeReport(outDir: string): CellSummary[] {
     const out = [s.facts.videoCodec, s.facts.pixFmt, s.facts.colorTransfer, s.facts.alphaMode ? `alpha_mode=${s.facts.alphaMode}` : null, s.facts.audioCodec]
       .filter(Boolean)
       .join(" ");
-    const gpu = s.cold ? metrics.filter((x) => x.fixture === s.fixture && x.profile === s.profile && x.kind === "warm").map((x) => x.gpuUtilMeanPct ?? NaN) : [];
+    const gpu = s.cold ? metrics.filter((x) => x.fixture === s.fixture && x.profile === s.profile && x.kind === "warm" && x.ok).map((x) => x.gpuUtilMeanPct ?? NaN) : [];
     L.push(
       `| ${s.fixture} | ${s.profile} | ${fmt(w.peakTreeWorkingSetMb?.median)} | ${fmt(w.peakVramDeltaMiB?.median)} | ${fmt(describe(gpu)?.median, 1)} | ${fmt(w.cpuSeconds?.median, 1)} | ${fmt(w.cpuSecondsPerOutputMin?.median)} | ${fmt(w.wallSecondsPerOutputMin?.median)} | ${fmt(w.estUsdPerOutputMin?.median, 4)} | ${mib(w.outputBytes?.median)} | ${fmt((w.outputBitRate?.median ?? NaN) / 1e6, 2)} | ${out} |`,
     );
@@ -494,6 +519,25 @@ export function writeReport(outDir: string): CellSummary[] {
     L.push("");
   }
 
+  const mixed = all.filter((s) => s.mixedPath);
+  if (mixed.length) {
+    L.push(`## Mixed capture path within a cell`, "");
+    L.push(
+      `Upstream auto-calibration chose a different capture path or worker count across the warm runs of these cells, so their pooled warm medians mix pipelines. Per-path distributions (warm medians, n = runs on that path):`,
+      "",
+    );
+    L.push(`| fixture | profile | capture path | workers | runs | n | wall median s | wall max s | setup median ms | frames median ms | encode median ms |`);
+    L.push(`|---|---|---|---:|---|---:|---:|---:|---:|---:|---:|`);
+    for (const s of mixed) {
+      for (const g of s.pathGroups) {
+        L.push(
+          `| ${s.fixture} | ${s.profile} | ${g.capturePath ?? "—"} | ${g.workers ?? "—"} | ${g.runs.join(",")} | ${g.runs.length} | ${fmt((g.warm.wallMs?.median ?? NaN) / 1000, 2)} | ${fmt((g.warm.wallMs?.max ?? NaN) / 1000, 2)} | ${fmt(g.warm.captureSetupMs?.median)} | ${fmt(g.warm.captureFrameMs?.median)} | ${fmt(g.warm.encodeMs?.median)} |`,
+        );
+      }
+    }
+    L.push("");
+  }
+
   const noisy = summaries.filter((s) => (s.warm.wallMs?.cv ?? 0) > 0.1);
   if (noisy.length) {
     L.push(`## High-variance cells (warm cv > 10 %)`, "");
@@ -501,7 +545,7 @@ export function writeReport(outDir: string): CellSummary[] {
       const warm = metrics.filter((x) => x.fixture === s.fixture && x.profile === s.profile && x.kind === "warm");
       L.push(
         `- ${s.fixture}/${s.profile}: ` +
-          warm.map((x) => `run ${x.run} ${fmt(x.wallMs / 1000, 2)} s (setup ${fmt(x.captureSetupMs)} ms, idle attempts ${fmt(x.idleAttempts)})`).join("; "),
+          warm.map((x) => `run ${x.run} ${fmt(x.wallMs / 1000, 2)} s (${x.capturePath ?? "—"}, workers ${fmt(x.workers)}, setup ${fmt(x.captureSetupMs)} ms, idle attempts ${fmt(x.idleAttempts)})`).join("; "),
       );
     }
     L.push("");

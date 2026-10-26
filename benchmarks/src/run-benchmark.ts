@@ -52,20 +52,69 @@ function parseArgs(): Args {
   };
 }
 
-function runChild(args: string[], env: NodeJS.ProcessEnv): Promise<number> {
-  return new Promise((resolve) => {
-    const tsxLoader = join(UPSTREAM_ROOT, "node_modules", "tsx", "dist", "loader.mjs");
-    const child = spawn(
-      process.execPath,
-      ["--import", `file:///${tsxLoader.replace(/\\/g, "/")}`, join(BENCH_ROOT, "src", "render-worker.ts"), ...args],
-      { env, stdio: ["ignore", "ignore", "pipe"], cwd: REPO_ROOT },
-    );
-    child.stderr.setEncoding("utf8");
-    child.stderr.on("data", (d: string) => {
-      for (const line of d.split("\n")) if (line.startsWith("[worker]") || line.includes("error")) process.stderr.write(`${line}\n`);
-    });
-    child.on("exit", (code) => resolve(code ?? 1));
+/** Must match the marker render-worker.ts writes after each served run. */
+const DONE_MARKER = "@@turbo-bench-done";
+
+/** A render-worker child in `--serve` mode that renders one run per call. */
+interface ServedWorker {
+  run(n: number): Promise<void>;
+  /** Close stdin and wait for exit. */
+  close(): Promise<number>;
+}
+
+function spawnWorker(args: string[], env: NodeJS.ProcessEnv): ServedWorker {
+  const tsxLoader = join(UPSTREAM_ROOT, "node_modules", "tsx", "dist", "loader.mjs");
+  const child = spawn(
+    process.execPath,
+    ["--import", `file:///${tsxLoader.replace(/\\/g, "/")}`, join(BENCH_ROOT, "src", "render-worker.ts"), "--serve", ...args],
+    { env, stdio: ["pipe", "pipe", "pipe"], cwd: REPO_ROOT },
+  );
+  child.stderr!.setEncoding("utf8");
+  child.stderr!.on("data", (d: string) => {
+    for (const line of d.split("\n")) if (line.startsWith("[worker]") || line.includes("error")) process.stderr.write(`${line}\n`);
   });
+  const exited = new Promise<number>((resolve) => child.on("exit", (code) => resolve(code ?? 1)));
+  let pending: { n: number; resolve: () => void; reject: (e: Error) => void } | null = null;
+  let buf = "";
+  child.stdout!.setEncoding("utf8");
+  child.stdout!.on("data", (d: string) => {
+    buf += d;
+    let i: number;
+    while ((i = buf.indexOf("\n")) >= 0) {
+      const line = buf.slice(0, i).trim();
+      buf = buf.slice(i + 1);
+      if (pending && line === `${DONE_MARKER} ${pending.n}`) {
+        const p = pending;
+        pending = null;
+        p.resolve();
+      }
+    }
+  });
+  void exited.then((code) => pending?.reject(new Error(`worker exited (${code}) during run ${pending.n}`)));
+  return {
+    run: (n) =>
+      new Promise<void>((resolve, reject) => {
+        pending = { n, resolve, reject };
+        child.stdin!.write(`run ${n}\n`);
+      }),
+    close: () => {
+      child.stdin!.end();
+      return exited;
+    },
+  };
+}
+
+/**
+ * Run order for one fixture: every variant's cold run first, then warm rounds
+ * in which each variant renders once (A,B,C,A,B,C,...). The variant order
+ * rotates per fixture and per round so no variant is always first or last.
+ */
+export function interleavedSchedule(variantCount: number, warmRuns: number, fixtureIndex: number): Array<{ variant: number; run: number }> {
+  const out: Array<{ variant: number; run: number }> = [];
+  for (let run = 0; run <= warmRuns; run++) {
+    for (let i = 0; i < variantCount; i++) out.push({ variant: (i + fixtureIndex + run) % variantCount, run });
+  }
+  return out;
 }
 
 async function main(): Promise<void> {
@@ -99,10 +148,9 @@ async function main(): Promise<void> {
     ...(args.control ? [{ profile: args.control, control: true }] : []),
   ];
   for (const [fi, fx] of manifest.entries()) {
-    // Variants of a fixture run back to back so they share host state; the
-    // order rotates per fixture so no variant always runs first (or last).
-    const order = variants.map((_, i) => variants[(i + fi) % variants.length]!);
-    for (const { profile, control } of order) {
+    // All variants of a fixture stay alive in their own warm process and
+    // their runs are interleaved, so slow host drift hits every variant alike.
+    const workers = variants.map(({ profile, control }) => {
       const cacheDir = mkdtempSync(join(tmpdir(), `turbo-bench-xcache-`));
       const childEnv = {
         ...process.env,
@@ -116,9 +164,22 @@ async function main(): Promise<void> {
       const childArgs = ["--fixture", fx.id, "--profile", cellName, "--warm-runs", String(args.warmRuns), "--out", join(outDir, "raw", fx.id, cellName)];
       if (args.strictIdle) childArgs.push("--strict-idle");
       if (control) childArgs.push("--uninstrumented");
-      const exitCode = await runChild(childArgs, childEnv);
-      cells.push({ fixture: fx.id, profile: cellName, exitCode });
-      rmSync(cacheDir, { recursive: true, force: true });
+      return { cellName, cacheDir, worker: spawnWorker(childArgs, childEnv), failed: false };
+    });
+    for (const { variant, run } of interleavedSchedule(workers.length, args.warmRuns, fi)) {
+      const w = workers[variant]!;
+      if (w.failed) continue;
+      try {
+        await w.worker.run(run);
+      } catch (err) {
+        w.failed = true;
+        console.error(`[bench] ${fx.id}/${w.cellName}: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+    for (const w of workers) {
+      const exitCode = await w.worker.close();
+      cells.push({ fixture: fx.id, profile: w.cellName, exitCode: w.failed ? 1 : exitCode });
+      rmSync(w.cacheDir, { recursive: true, force: true });
     }
   }
 
@@ -133,7 +194,7 @@ async function main(): Promise<void> {
         warmRuns: args.warmRuns,
         profiles: Object.fromEntries(args.profiles.map((p) => [p, PROFILES[p]])),
         control: args.control ? { profile: args.control, cell: `${args.control}${CONTROL_SUFFIX}`, instrumentation: "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)" } : null,
-        orderRule: "variants rotate by fixture index",
+        orderRule: "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
         preflight,
         cells,
       },

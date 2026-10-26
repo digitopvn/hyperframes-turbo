@@ -57,6 +57,8 @@ export interface TraceAnalysis {
   criticalPath: Array<{ phase: string; ms: number }>;
   /** Phases whose interval was reconstructed from perfSummary.stages, not traced. */
   inferredPhases: string[];
+  /** Reasons the analysis is incomplete for this run (empty when complete). */
+  warnings: string[];
 }
 
 /**
@@ -75,15 +77,22 @@ const SELF_ENCODING_CAPTURE = new Set(["capture_streaming", "capture_hdr_layered
 export function withInferredEncode(
   events: TraceEvent[],
   stages: { encodeMs?: number } | undefined,
-): { events: TraceEvent[]; inferred: string[] } {
+): { events: TraceEvent[]; inferred: string[]; warnings: string[] } {
   const encodeMs = stages?.encodeMs;
-  if (typeof encodeMs !== "number" || encodeMs <= 0) return { events, inferred: [] };
-  if (events.some((e) => e.phase === "encode" && e.status === "end")) return { events, inferred: [] };
-  const cap = events.find((e) => SELF_ENCODING_CAPTURE.has(e.phase) && e.status === "end" && typeof e.durationMs === "number");
-  if (!cap) return { events, inferred: [] };
+  if (typeof encodeMs !== "number" || encodeMs <= 0) return { events, inferred: [], warnings: [] };
+  if (events.some((e) => e.phase === "encode" && e.status === "end")) return { events, inferred: [], warnings: [] };
+  const caps = events.filter((e) => SELF_ENCODING_CAPTURE.has(e.phase) && e.status === "end" && typeof e.durationMs === "number");
+  // With several self-encoding segments the single encodeMs cannot be placed
+  // unambiguously, so nothing is inferred and the run is flagged instead.
+  if (caps.length > 1) {
+    return { events, inferred: [], warnings: [`${caps.length} self-encoding capture segments; encode interval not inferred`] };
+  }
+  const cap = caps[0];
+  if (!cap) return { events, inferred: [], warnings: [] };
   return {
     events: [...events, { phase: "encode", status: "end", elapsedMs: cap.elapsedMs, durationMs: Math.min(encodeMs, cap.elapsedMs) }],
     inferred: ["encode"],
+    warnings: [],
   };
 }
 
@@ -107,7 +116,7 @@ export function analyzeTrace(
   wallMs: number,
   stages?: { encodeMs?: number },
 ): TraceAnalysis {
-  const { events, inferred } = withInferredEncode(rawEvents, stages);
+  const { events, inferred, warnings } = withInferredEncode(rawEvents, stages);
   const intervals = buildIntervals(events);
   const boundaries = new Set<number>([0, wallMs]);
   for (const iv of intervals) {
@@ -176,5 +185,6 @@ export function analyzeTrace(
     concurrencyFactor: coveredMs > 0 ? totalActive / coveredMs : 0,
     criticalPath: critical,
     inferredPhases: inferred,
+    warnings,
   };
 }

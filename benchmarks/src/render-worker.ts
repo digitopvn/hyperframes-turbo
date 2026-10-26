@@ -10,6 +10,7 @@
  * may be reused exactly as upstream would reuse them).
  */
 import { spawnSync } from "node:child_process";
+import { createInterface } from "node:readline";
 import { mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -26,6 +27,8 @@ import type { TraceEvent } from "./trace-analysis.js";
  */
 const IDLE_CPU_PCT = 20;
 const IDLE_GPU_PCT = 15;
+/** Line written to stdout after each served run (matched in run-benchmark.ts). */
+const DONE_MARKER = "@@turbo-bench-done";
 
 interface Args {
   fixture: string;
@@ -35,6 +38,8 @@ interface Args {
   strictIdle: boolean;
   /** Control run: no CDP tap, no host samplers; only wall time and outputs. */
   uninstrumented: boolean;
+  /** Wait for `run <n>` commands on stdin instead of running all runs. */
+  serve: boolean;
 }
 
 function parseArgs(): Args {
@@ -50,6 +55,7 @@ function parseArgs(): Args {
     outDir: get("out")!,
     strictIdle: a.includes("--strict-idle"),
     uninstrumented: a.includes("--uninstrumented"),
+    serve: a.includes("--serve"),
   };
 }
 
@@ -98,6 +104,12 @@ function ffprobe(path: string): unknown {
   };
 }
 
+/** Replace the host temp dir (which contains the user name on Windows) with `$TMP`. */
+function redactTmp(json: string): string {
+  const t = tmpdir();
+  return [JSON.stringify(t).slice(1, -1), JSON.stringify(t.replace(/\\/g, "/")).slice(1, -1)].reduce((acc, v) => acc.split(v).join("$TMP"), json);
+}
+
 async function main(): Promise<void> {
   const args = parseArgs();
   const entry = loadManifest().find((f) => f.id === args.fixture);
@@ -131,7 +143,7 @@ async function main(): Promise<void> {
   const projectDir = join(tmpRoot, "src");
   const inputs = prepareProject(fx, projectDir);
 
-  for (let run = 0; run < totalRuns; run++) {
+  const runOnce = async (run: number): Promise<void> => {
     const kind = run === 0 ? "cold" : "warm";
     const idle = await waitForIdle({ cpuPct: IDLE_CPU_PCT, gpuPct: IDLE_GPU_PCT, maxWaitMs: 60_000, windowMs: 3000 });
     if (!idle.ok && args.strictIdle) {
@@ -140,7 +152,7 @@ async function main(): Promise<void> {
         JSON.stringify({ fixture: fx.id, profile: args.profile, run, kind, refused: true, idle }, null, 2),
       );
       console.error(`[worker] ${fx.id}/${args.profile} run ${run}: host busy, refused (strict)`);
-      continue;
+      return;
     }
     const baselineVram = gpuAvailable ? (await sampleGpu(1000)).at(-1)?.memUsedMiB ?? null : null;
 
@@ -238,11 +250,26 @@ async function main(): Promise<void> {
       perfSummary: job.perfSummary ?? null,
       jobStatus: job.status,
     };
-    writeFileSync(join(args.outDir, `run-${run}.json`), JSON.stringify(result, null, 2));
+    writeFileSync(join(args.outDir, `run-${run}.json`), redactTmp(JSON.stringify(result, null, 2)));
     console.error(
       `[worker] ${fx.id}/${args.profile} run ${run} (${kind}): ${error ? "FAILED" : `${Math.round(wallMs)} ms`}`,
     );
     rmSync(outputPath, { force: true });
+  };
+
+  if (args.serve) {
+    // Driven by run-benchmark.ts: one run per `run <n>` line on stdin, so
+    // runs of several variants of a fixture can be interleaved while each
+    // variant keeps its own warm process, browser pool and extraction cache.
+    const rl = createInterface({ input: process.stdin });
+    for await (const line of rl) {
+      const m = /^run (\d+)$/.exec(line.trim());
+      if (!m) break;
+      await runOnce(Number(m[1]));
+      process.stdout.write(`${DONE_MARKER} ${m[1]}\n`);
+    }
+  } else {
+    for (let run = 0; run < totalRuns; run++) await runOnce(run);
   }
   rmSync(tmpRoot, { recursive: true, force: true });
 }
