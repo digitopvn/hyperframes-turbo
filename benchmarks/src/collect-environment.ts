@@ -8,7 +8,7 @@
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFileSync, writeFileSync } from "node:fs";
-import { cpus, totalmem, release, platform, arch } from "node:os";
+import { cpus, totalmem, release, platform, arch, homedir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { BENCH_ROOT, REPO_ROOT, UPSTREAM_ROOT } from "./fixtures.js";
@@ -53,7 +53,20 @@ async function chromeInfo(): Promise<Record<string, unknown>> {
   return { headlessShellPath: path, version };
 }
 
+/** Replace the user's home directory with `~` in every string value. */
+function redactHome<T>(value: T): T {
+  const home = homedir();
+  if (!home) return value;
+  return JSON.parse(JSON.stringify(value), (_k, v) =>
+    typeof v === "string" ? v.split(home).join("~").split(home.replace(/\\/g, "/")).join("~") : v,
+  );
+}
+
 export async function collectEnvironment(): Promise<Record<string, unknown>> {
+  return redactHome(await probeEnvironment());
+}
+
+async function probeEnvironment(): Promise<Record<string, unknown>> {
   const gitUp = (args: string[]) => run("git", args, UPSTREAM_ROOT);
   const nvidia = run("nvidia-smi", [
     "--query-gpu=name,driver_version,memory.total,pcie.link.gen.max,pcie.link.width.max,power.limit,clocks.max.graphics,vbios_version",

@@ -33,6 +33,8 @@ interface Args {
   warmRuns: number;
   outDir: string;
   strictIdle: boolean;
+  /** Control run: no CDP tap, no host samplers; only wall time and outputs. */
+  uninstrumented: boolean;
 }
 
 function parseArgs(): Args {
@@ -47,6 +49,7 @@ function parseArgs(): Args {
     warmRuns: Number(get("warm-runs") ?? 5),
     outDir: get("out")!,
     strictIdle: a.includes("--strict-idle"),
+    uninstrumented: a.includes("--uninstrumented"),
   };
 }
 
@@ -102,7 +105,7 @@ async function main(): Promise<void> {
   const fx = resolveFixture(entry);
   mkdirSync(args.outDir, { recursive: true });
 
-  const tapped = process.env.BENCH_CDP_TAP === "0" ? [] : await installCdpTap(UPSTREAM_ROOT);
+  const tapped = args.uninstrumented || process.env.BENCH_CDP_TAP === "0" ? [] : await installCdpTap(UPSTREAM_ROOT);
   const orchestrator = await import(
     pathToFileURL(join(UPSTREAM_ROOT, "packages", "producer", "src", "services", "renderOrchestrator.ts")).href
   );
@@ -119,7 +122,7 @@ async function main(): Promise<void> {
   const fpsRaw = fx.meta.renderConfig.fps;
   const format = fx.meta.renderConfig.format ?? "mp4";
   const sourceHash = hashFixtureSource(fx);
-  const gpuAvailable = hasNvidiaSmi();
+  const gpuAvailable = !args.uninstrumented && hasNvidiaSmi();
   const totalRuns = 1 + args.warmRuns;
   // One project directory for every run of this cell, like a user re-exporting
   // the same project: the extraction cache is keyed on source path + mtime, so
@@ -177,7 +180,7 @@ async function main(): Promise<void> {
     const tree = new ProcessTreeSampler(process.pid, 1000);
     resetCdpTap();
     if (gpuAvailable) gpu.start(200);
-    tree.start();
+    if (!args.uninstrumented) tree.start();
 
     const job = createRenderJob({
       fps: fpsRaw,
@@ -214,6 +217,7 @@ async function main(): Promise<void> {
       fixtureSourceSha256: sourceHash,
       inputs,
       profile: args.profile,
+      instrumented: !args.uninstrumented,
       profileEnv,
       resolvedEngineConfig: run === 0 ? resolvedEngineConfig : undefined,
       run,
@@ -222,10 +226,10 @@ async function main(): Promise<void> {
       wallMs,
       error,
       idle,
-      cdpTap: { installedOn: tapped, ...cdp },
+      cdpTap: tapped.length ? { installedOn: tapped, ...cdp } : null,
       gpu: summarizeGpu(gpuSamples, baselineVram),
       gpuTimeline: gpuSamples.map((s) => [s.t, s.utilGpu, s.utilEnc, s.utilDec, s.memUsedMiB]),
-      processTree: treeSummary,
+      processTree: args.uninstrumented ? null : treeSummary,
       processTreeTimeline: tree.samples.map((s) => [s.t, s.workingSetBytes, s.processCount]),
       extractCacheBytesAfter: extractCacheDir ? dirBytes(extractCacheDir) : null,
       output,

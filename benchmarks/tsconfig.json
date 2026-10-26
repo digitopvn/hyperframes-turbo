@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "es2022",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "typeRoots": ["../upstream/hyperframes/node_modules/@types"],
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts"]
+}

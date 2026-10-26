@@ -10,7 +10,7 @@
  *
  *   node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
  *     benchmarks/src/run-benchmark.ts [--warm-runs 5] [--profiles a,b] \
- *     [--fixtures id,id] [--out dir] [--strict-idle]
+ *     [--fixtures id,id] [--out dir] [--strict-idle] [--control profile | --no-control]
  */
 import { spawn } from "node:child_process";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync, copyFileSync } from "node:fs";
@@ -29,7 +29,12 @@ interface Args {
   fixtures: string[] | null;
   out: string | null;
   strictIdle: boolean;
+  /** Profile that also gets an uninstrumented control cell, or null. */
+  control: string | null;
 }
+
+/** Suffix of the result directory of an uninstrumented control cell. */
+export const CONTROL_SUFFIX = ".control";
 
 function parseArgs(): Args {
   const a = process.argv.slice(2);
@@ -43,6 +48,7 @@ function parseArgs(): Args {
     fixtures: get("fixtures")?.split(",") ?? null,
     out: get("out") ?? null,
     strictIdle: a.includes("--strict-idle"),
+    control: a.includes("--no-control") ? null : (get("control") ?? "producer-default"),
   };
 }
 
@@ -73,7 +79,9 @@ async function main(): Promise<void> {
   const outDir = args.out ?? join(BENCH_ROOT, "results", `${date}-${upstreamSha.slice(0, 7)}`);
   mkdirSync(join(outDir, "raw"), { recursive: true });
   writeFileSync(join(outDir, "environment.json"), JSON.stringify(env, null, 2) + "\n");
-  copyFileSync(join(outDir, "environment.json"), join(BENCH_ROOT, "environment.json"));
+  // benchmarks/environment.json is a copy of the latest default-location run's
+  // manifest, never written by hand and never from ad-hoc --out runs.
+  if (!args.out) copyFileSync(join(outDir, "environment.json"), join(BENCH_ROOT, "environment.json"));
 
   console.error(`[bench] ${manifest.length} fixture(s) x ${args.profiles.length} profile(s) x (1 cold + ${args.warmRuns} warm) -> ${outDir}`);
   const preflight = await waitForIdle({ cpuPct: 20, gpuPct: 15, maxWaitMs: 300_000, windowMs: 10_000 });
@@ -85,21 +93,31 @@ async function main(): Promise<void> {
 
   const startedAt = new Date().toISOString();
   const cells: Array<{ fixture: string; profile: string; exitCode: number }> = [];
-  for (const fx of manifest) {
-    // Profiles run back to back per fixture so each pair shares the same host state.
-    for (const profile of args.profiles) {
+  delete process.env.HF_PROFILE_FALLBACK_CAPTURE;
+  const variants = [
+    ...args.profiles.map((profile) => ({ profile, control: false })),
+    ...(args.control ? [{ profile: args.control, control: true }] : []),
+  ];
+  for (const [fi, fx] of manifest.entries()) {
+    // Variants of a fixture run back to back so they share host state; the
+    // order rotates per fixture so no variant always runs first (or last).
+    const order = variants.map((_, i) => variants[(i + fi) % variants.length]!);
+    for (const { profile, control } of order) {
       const cacheDir = mkdtempSync(join(tmpdir(), `turbo-bench-xcache-`));
       const childEnv = {
         ...process.env,
         ...PROFILES[profile]!.env,
         HYPERFRAMES_EXTRACT_CACHE_DIR: cacheDir,
         // Opt-in upstream diagnostic: per-frame p50/p95/p99 on the screenshot fallback path.
-        HF_PROFILE_FALLBACK_CAPTURE: "true",
+        // Left off in control cells so they measure upstream with no harness additions.
+        ...(control ? {} : { HF_PROFILE_FALLBACK_CAPTURE: "true" }),
       };
-      const childArgs = ["--fixture", fx.id, "--profile", profile, "--warm-runs", String(args.warmRuns), "--out", join(outDir, "raw", fx.id, profile)];
+      const cellName = control ? `${profile}${CONTROL_SUFFIX}` : profile;
+      const childArgs = ["--fixture", fx.id, "--profile", cellName, "--warm-runs", String(args.warmRuns), "--out", join(outDir, "raw", fx.id, cellName)];
       if (args.strictIdle) childArgs.push("--strict-idle");
+      if (control) childArgs.push("--uninstrumented");
       const exitCode = await runChild(childArgs, childEnv);
-      cells.push({ fixture: fx.id, profile, exitCode });
+      cells.push({ fixture: fx.id, profile: cellName, exitCode });
       rmSync(cacheDir, { recursive: true, force: true });
     }
   }
@@ -114,6 +132,8 @@ async function main(): Promise<void> {
         command: `node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts ${process.argv.slice(2).join(" ")}`.trim(),
         warmRuns: args.warmRuns,
         profiles: Object.fromEntries(args.profiles.map((p) => [p, PROFILES[p]])),
+        control: args.control ? { profile: args.control, cell: `${args.control}${CONTROL_SUFFIX}`, instrumentation: "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)" } : null,
+        orderRule: "variants rotate by fixture index",
         preflight,
         cells,
       },

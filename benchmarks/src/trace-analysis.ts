@@ -42,16 +42,49 @@ export interface TraceAnalysis {
   stages: StageAttribution[];
   /** Union of all stage intervals. */
   coveredMs: number;
+  /** Wall time during which two or more stages were active at once. */
+  overlapMs: number;
   /** Render wall time not covered by any traced stage. */
   untracedMs: number;
   /** Sum of all stage active times divided by covered time (1 = fully serial). */
   concurrencyFactor: number;
   /**
-   * Ordered chain of stages that bounds wall time: at each instant the stage
+   * Heuristic chain of stages that bounds wall time: at each instant the stage
    * that ends last among active ones is "on the critical path". Consecutive
-   * segments of the same stage are merged.
+   * segments of the same stage are merged. This is not a dependency graph;
+   * upstream does not emit stage dependencies.
    */
   criticalPath: Array<{ phase: string; ms: number }>;
+  /** Phases whose interval was reconstructed from perfSummary.stages, not traced. */
+  inferredPhases: string[];
+}
+
+/**
+ * Capture stages that encode inside themselves (frames piped to FFmpeg while
+ * capturing). Upstream emits no separate `encode` trace event for them but
+ * reports `perfSummary.stages.encodeMs`.
+ */
+const SELF_ENCODING_CAPTURE = new Set(["capture_streaming", "capture_hdr_layered"]);
+
+/**
+ * When a self-encoding capture stage ran and no `encode` interval was traced,
+ * add one that ends with that capture stage and lasts `encodeMs`. Upstream
+ * finalises the encoder when the capture loop finishes, so the end alignment
+ * is exact; the start is derived from the reported duration.
+ */
+export function withInferredEncode(
+  events: TraceEvent[],
+  stages: { encodeMs?: number } | undefined,
+): { events: TraceEvent[]; inferred: string[] } {
+  const encodeMs = stages?.encodeMs;
+  if (typeof encodeMs !== "number" || encodeMs <= 0) return { events, inferred: [] };
+  if (events.some((e) => e.phase === "encode" && e.status === "end")) return { events, inferred: [] };
+  const cap = events.find((e) => SELF_ENCODING_CAPTURE.has(e.phase) && e.status === "end" && typeof e.durationMs === "number");
+  if (!cap) return { events, inferred: [] };
+  return {
+    events: [...events, { phase: "encode", status: "end", elapsedMs: cap.elapsedMs, durationMs: Math.min(encodeMs, cap.elapsedMs) }],
+    inferred: ["encode"],
+  };
 }
 
 /** Trace phases that are wrappers around other phases, not work of their own. */
@@ -69,7 +102,12 @@ export function buildIntervals(events: TraceEvent[]): StageInterval[] {
   return out.sort((a, b) => a.startMs - b.startMs);
 }
 
-export function analyzeTrace(events: TraceEvent[], wallMs: number): TraceAnalysis {
+export function analyzeTrace(
+  rawEvents: TraceEvent[],
+  wallMs: number,
+  stages?: { encodeMs?: number },
+): TraceAnalysis {
+  const { events, inferred } = withInferredEncode(rawEvents, stages);
   const intervals = buildIntervals(events);
   const boundaries = new Set<number>([0, wallMs]);
   for (const iv of intervals) {
@@ -103,6 +141,7 @@ export function analyzeTrace(events: TraceEvent[], wallMs: number): TraceAnalysi
   }
 
   let coveredMs = 0;
+  let overlapMs = 0;
   const critical: Array<{ phase: string; ms: number }> = [];
   for (let i = 0; i < points.length - 1; i++) {
     const a = points[i]!;
@@ -113,6 +152,7 @@ export function analyzeTrace(events: TraceEvent[], wallMs: number): TraceAnalysi
     if (active.length === 0) continue;
     coveredMs += len;
     const phases = [...new Set(active.map((iv) => iv.phase))];
+    if (phases.length > 1) overlapMs += len;
     for (const p of phases) {
       const s = stat(p);
       if (phases.length === 1) s.exclusiveMs += len;
@@ -131,8 +171,10 @@ export function analyzeTrace(events: TraceEvent[], wallMs: number): TraceAnalysi
     intervals,
     stages: [...byPhase.values()].sort((x, y) => y.sharedAttributionMs - x.sharedAttributionMs),
     coveredMs,
+    overlapMs,
     untracedMs: Math.max(0, wallMs - coveredMs),
     concurrencyFactor: coveredMs > 0 ? totalActive / coveredMs : 0,
     criticalPath: critical,
+    inferredPhases: inferred,
   };
 }

@@ -1,9 +1,9 @@
 {
   "schema": "turbo-bench-environment/1",
-  "generatedAt": "2026-10-26T17:22:28.851Z",
+  "generatedAt": "2026-10-26T18:32:27.014Z",
   "generator": "benchmarks/src/collect-environment.ts",
   "repo": {
-    "turboSha": "8d273209342cdea3ed19d56d3e8fcec9d3d82e7c",
+    "turboSha": "b2b4a8f4bd9aa0f7156ea8d1f4dbb7da036b1a3f",
     "turboDirty": true
   },
   "upstream": {
@@ -31,7 +31,7 @@
       "h264_amf"
     ],
     "chrome": {
-      "headlessShellPath": "C:\\Users\\admin\\.cache\\hyperframes\\chrome\\chrome-headless-shell\\win64-152.0.7977.30\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "headlessShellPath": "~\\.cache\\hyperframes\\chrome\\chrome-headless-shell\\win64-152.0.7977.30\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
       "version": "HeadlessChrome/152.0.7977.30"
     }
   },

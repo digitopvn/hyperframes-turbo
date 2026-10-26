@@ -1,10 +1,10 @@
 # Benchmark protocol
 
-The harness under `benchmarks/` extends upstream `packages/producer/src/benchmark.ts`. It uses the same `createRenderJob` + `executeRenderJob` entry point, the same `perfSummary`, and the same fixture layout (`src/index.html` + `meta.json`). Upstream code is not modified. Every additional metric is observed from outside the render.
+The harness under `benchmarks/` extends upstream `packages/producer/src/benchmark.ts`. It uses the same `createRenderJob` + `executeRenderJob` entry point, the same `perfSummary`, and the same fixture layout (`src/index.html` + `meta.json`). Upstream code is never modified; everything extra is observed from outside the render.
 
 ## Reproduce
 
-Prerequisites: Node 24, Bun, FFmpeg/ffprobe on `PATH`, and `nvidia-smi` (optional, for GPU/VRAM).
+Requirements: Node 24, Bun, FFmpeg and ffprobe on `PATH`, and optionally `nvidia-smi` for GPU/VRAM sampling.
 
 ```bash
 git submodule update --init
@@ -12,37 +12,46 @@ cd upstream/hyperframes && bun install --frozen-lockfile && bun run build && cd 
 node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --warm-runs 5
 ```
 
-Options:
+Runner options:
 
 | Option | Effect |
 |---|---|
-| `--fixtures a,b` | Run only the listed fixtures |
-| `--profiles producer-default,cli-local-default` | Choose the profiles (`benchmarks/src/profiles.ts`) |
+| `--fixtures a,b` | Run only these fixtures |
+| `--profiles producer-default,cli-local-default` | Profiles to run, from `benchmarks/src/profiles.ts` |
+| `--control <profile>` / `--no-control` | Add or skip the uninstrumented control cell. Default: control for `producer-default` |
 | `--out dir` | Write results to `dir` |
-| `--strict-idle` | Refuse to run instead of only flagging when the host is busy |
+| `--strict-idle` | Refuse to run on a busy host instead of only flagging it |
 
-Other commands:
+Other commands, run from `benchmarks/` (`benchmarks/package.json` has the same commands as scripts):
 
-- Regenerate a report from existing raw data: `node --import … benchmarks/src/report.ts benchmarks/results/<dir>`.
-- Write only the environment manifest: `node --import … benchmarks/src/collect-environment.ts`.
+- Regenerate the report from raw data: `node --import … src/report.ts results/<dir>`
+- Recompute every number the ADR quotes: `node --import … src/adr-facts.ts results/<dir>`
+- Typecheck: `../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json`
 
 ## Method
 
-- **Cells.** Each fixture × profile pair is one cell, run as a fresh Node child process with a fresh, empty extraction-cache dir (`HYPERFRAMES_EXTRACT_CACHE_DIR`).
-- **Run order.** Run 0 is **cold**: new process, new Chrome, empty cache. Runs 1..N are **warm**: same process and the same project dir, so upstream may reuse its browser pool and extraction cache exactly as a user re-export would.
-- **Statistics.** Cold runs are never mixed into warm statistics.
-- **Profile pairing.** For each fixture, the profiles run back to back, so paired cells share host conditions.
-- **Idle gate.** A 10 s idle check runs before the benchmark starts, and a 3 s check runs before every run. The thresholds are CPU < 20 % (above this desktop's measured ~10-14 % noise floor) and GPU util < 15 %. A run on a busy host gets `idle.ok=false`, which is counted in the report as "idle flags". With `--strict-idle` the run is refused and written as `{refused:true}`.
+- **Cells.** A cell is one fixture with one variant. Each cell runs in a fresh Node child process with a fresh, empty extraction-cache dir (`HYPERFRAMES_EXTRACT_CACHE_DIR`).
+- **Cold vs warm.** Run 0 is **cold**: new process, new Chrome, empty cache. Runs 1..N are **warm**: same process and same project dir, so upstream can reuse its browser pool and extraction cache exactly as it would for a user re-export. Cold results are never mixed into warm statistics.
+- **Variants.** There are three: `producer-default`, `cli-local-default`, and `producer-default.control`. All variants of a fixture run back to back. Their order rotates by fixture index, so no variant always runs first or last.
+- **Control.** A control cell runs with no CDP tap, no GPU or process-tree samplers, and `HF_PROFILE_FALLBACK_CAPTURE` unset. It records wall time and ffprobe output only. `overhead.csv` and the report's *Harness overhead* table compare it with the instrumented cell of the same profile.
+- **Idle gate.** Before the benchmark starts, a 10 s check runs; before every run, a 3 s check. Thresholds: CPU < 20 % (above this desktop's measured noise floor of ~10-14 %) and GPU util < 15 %. The gate retries for up to 60 s.
+  - Each run records `idle.attempts` and `idle.ok`.
+  - `ok=false` is counted as an *idle flag*.
+  - With `--strict-idle`, a busy host makes the run refused and written as `{refused:true}`.
+  - Cells with warm cv > 10 % are listed in the report together with per-run setup time and idle attempts.
 - **Samplers.**
   - `nvidia-smi` every 200 ms: utilisation of gpu/enc/dec and `memory.used`. ΔVRAM is measured against a sample taken right before the run.
-  - A process-tree sampler (PowerShell CIM) every 1 s: the summed working set of Node and every descendant, CPU seconds, and I/O transfer bytes.
-  - A CDP tap: in-memory patching of puppeteer `Connection._rawSend`/`onMessage`, which counts request/response/event bytes per CDP method and per-call latency.
-- **Stage critical path.** Upstream `[Render:trace]` end events give `[elapsed − duration, elapsed]` intervals. `trace-analysis.ts` sweeps them, attributes each wall-time slice to the active stages, and marks as critical the stage that ends last.
-- **Hardware and platforms.** One host only. `environment.json → testedPlatforms / notTested` lists which platforms were tested and which were not.
+  - Process tree (PowerShell CIM) every 1 s: summed working set, CPU seconds and I/O transfer bytes of Node and every descendant.
+  - CDP tap: in-memory patching of puppeteer `Connection._rawSend`/`onMessage`, which counts request bytes (`sentBytes`) and response bytes (`bytes`) per method, plus per-call latency.
+- **Stage overlap.** Upstream `[Render:trace]` end events give `[elapsed − duration, elapsed]` intervals, and `trace-analysis.ts` sweeps them.
+  - The self-encoding capture stages (`capture_streaming`, `capture_hdr_layered`) emit no `encode` event. For those, an `encode` interval is **inferred** from `perfSummary.stages.encodeMs`, aligned to the end of the capture stage, and listed under `inferredPhases`.
+  - The critical path is a heuristic, not a dependency graph: at each instant it takes the stage that ends last.
+- **Statistics.** With n = 5 warm runs, a nearest-rank p95 equals the max, so the report shows median, **max** and cv. Raw `Distribution` objects keep `p95` for larger n.
+- **Cost.** The measured cost figures are CPU-seconds and wall-seconds per output minute. `est. $/output-min` is an **estimate**: CPU-seconds × a reference vCPU-hour price. The price defaults to AWS c7i.xlarge on-demand in us-east-1 ($0.0446/vCPU-h, a public list price as known in 2025) and can be overridden with `BENCH_USD_PER_VCPU_HOUR`. The source string is written into `summary.json → referenceRate`.
 
 ## Fixtures
 
-Fixtures are listed in `benchmarks/fixtures/manifest.json`. Golden fixtures are tagged `turbo-golden`, 1920×1080 at 30 fps. Media comes from FFmpeg `lavfi` recipes (`media-recipes.json`), is generated on first use, and is cached in `benchmarks/.cache/` (gitignored). The file hashes are recorded in every run.
+Fixtures are listed in `benchmarks/fixtures/manifest.json`. Local golden fixtures are tagged `turbo-golden` and render at 1920×1080, 30 fps. Media comes from FFmpeg `lavfi` recipes in `media-recipes.json`; it is generated on first use, cached in `benchmarks/.cache/` (gitignored), and its hashes are recorded in every run.
 
 | Category | Fixture |
 |---|---|
@@ -60,36 +69,41 @@ Fixtures are listed in `benchmarks/fixtures/manifest.json`. Golden fixtures are 
 
 ```text
 benchmarks/results/<YYYY-MM-DD>-<upstreamSha7>/
-  environment.json        turbo-bench-environment/1
-  run-manifest.json       turbo-bench-manifest/1   (command, window, profiles, preflight, cell exit codes)
-  raw/<fixture>/<profile>/run-<n>.json   turbo-bench-run/1
-  runs.csv                one row per run (RunMetrics, benchmarks/src/report.ts)
-  summary.csv / summary.json   turbo-bench-summary/1 (per cell: cold, warm Distribution per metric)
+  environment.json        turbo-bench-environment/1 (home dir replaced by ~)
+  run-manifest.json       turbo-bench-manifest/1   (command, window, profiles, control, order rule, preflight, cell exit codes)
+  raw/<fixture>/<variant>/run-<n>.json   turbo-bench-run/1
+  runs.csv                one row per run (RunMetrics in benchmarks/src/report.ts)
+  summary.csv / summary.json   turbo-bench-summary/2 (per cell: cold, warm Distribution per metric; referenceRate; harnessOverhead)
+  overhead.csv            instrumented vs control wall time per fixture
+  adr-facts.json          every range quoted by the ADR, recomputed from summary.json
   report.md
 ```
 
-### `turbo-bench-run/1` (raw, source of truth)
+`benchmarks/environment.json` is a copy of the environment manifest of the latest default-location run. It is never written by hand, and ad-hoc `--out` runs do not touch it.
+
+### `turbo-bench-run/1` (raw data, the source of truth)
 
 | Field | Meaning |
 |---|---|
-| `fixture`, `category`, `source`, `fixtureSourceSha256`, `inputs.media/vendor` | Provenance: hashes of every input |
-| `profile`, `profileEnv` | Profile name and every `PRODUCER_*`/`HF_*`/`HYPERFRAMES_*` env var in effect |
-| `resolvedEngineConfig` | Run 0 only: upstream `resolveConfig()` output, i.e. which fast paths were eligible |
-| `run`, `kind` (`cold`/`warm`), `startedAt`, `wallMs`, `error`, `jobStatus` | Run identity and outcome. `wallMs` covers `executeRenderJob` from start to end. |
-| `idle` | The `{ok, cpuBusyPct, gpuUtilPct, gpuEncPct, attempts, thresholds}` result of the gate before this run |
-| `cdpTap` | `inboundBytes`, `outboundBytes`, `eventBytes`, and `byMethod[m] = {calls, bytes, latenciesMs[]}` |
-| `gpu`, `gpuTimeline` | GPU summary (avg/peak util, peak VRAM, ΔVRAM) and samples as `[t, gpu%, enc%, dec%, MiB]` |
-| `processTree`, `processTreeTimeline` | Peak working set (total and by process name), CPU s, read/write transfer bytes; samples as `[t, bytes, count]` |
+| `fixture`, `category`, `source`, `fixtureSourceSha256`, `inputs.media/vendor` | Provenance; every input is identified by hash |
+| `profile`, `instrumented`, `profileEnv` | Variant name; `false` for control cells; every `PRODUCER_*`/`HF_*`/`HYPERFRAMES_*` env var in effect |
+| `resolvedEngineConfig` | Run 0 only. Upstream `resolveConfig()` output, i.e. which fast paths were eligible |
+| `run`, `kind` (`cold`/`warm`), `startedAt`, `wallMs`, `error`, `jobStatus` | Identity and outcome. `wallMs` measures `executeRenderJob` from start to end |
+| `idle` | Gate result before this run: `{ok, cpuBusyPct, gpuUtilPct, gpuEncPct, attempts, thresholds}` |
+| `cdpTap` | `inboundBytes`, `outboundBytes`, `eventBytes`, and `byMethod[m] = {calls, bytes, sentBytes, latenciesMs[]}`. `null` in control cells |
+| `gpu`, `gpuTimeline` | GPU summary (avg/peak util, peak VRAM, ΔVRAM) and samples `[t, gpu%, enc%, dec%, MiB]` |
+| `processTree`, `processTreeTimeline` | Peak working set (total and by process name), CPU s, read/write transfer bytes; samples `[t, bytes, count]`. `null` in control cells |
 | `extractCacheBytesAfter` | Size of the extraction cache dir after the run |
-| `output` | ffprobe result: size, duration, bitrate, and per stream codec/pix_fmt/frame rate/packets/color/alpha_mode/audio |
-| `traceEvents` | Every upstream `[Render:trace]` event (the full logger stream, not the 160-event capped copy) |
+| `output` | ffprobe result: size, duration, bitrate, and per stream codec/pix_fmt/frame rate/packets/colour/alpha_mode/audio |
+| `traceEvents` | Every upstream `[Render:trace]` event from the full logger stream, not the copy capped at 160 events |
 | `perfSummary` | Upstream `RenderPerfSummary`, unmodified |
 
-The derived metrics in `RunMetrics` (`report.ts`) are pure functions of a raw run. PR01 should add fidelity fields to the raw run, for example under a new `fidelity` key, and bump the schema to `/2`. It should not change existing fields.
+Every derived metric in `RunMetrics` (`report.ts`) is a pure function of one raw run. PR01 should add fidelity data under a new `fidelity` key in the raw run and bump that schema to `/2`, rather than change the existing fields.
 
 ## Known measurement limits
 
-- The CDP tap counts bytes after puppeteer receives them. Readback inside Chrome (GPU → CPU) is not visible.
+- The CDP tap counts bytes as puppeteer sees them. Readback inside Chrome (GPU → CPU) is not visible.
+- Pixels that never cross CDP are visible only as process-tree disk I/O and `tmpPeakBytes`. The main example is the HDR layered path, where FFmpeg pre-extracts native HDR frames and Node composites them (`producer/src/services/renderOrchestrator.ts:4551-4555`).
 - Working set is sampled every 1 s, so short peaks can be missed. Upstream `peakRssMb` covers the Node process only.
-- Readback counts `Page.captureScreenshot`, `HeadlessExperimental.beginFrame`, `Runtime.callFunctionOn` and `Runtime.evaluate` response bytes. The last two also carry non-frame traffic, such as drawElement pixels and HDR float16 buffers, as well as small control replies. The per-method split is in `cdpTap.byMethod`.
-- "Cost/minute" is not reported as money. The report gives CPU seconds and wall time per output second (render factor), so any instance price can be applied.
+- `frameRpcResponseBytes` counts responses of `Page.captureScreenshot`, `HeadlessExperimental.beginFrame` and `Runtime.callFunctionOn`. The last of these also carries small non-frame replies; the per-method split is in `cdpTap.byMethod`.
+- The inferred `encode` interval assumes upstream finalises encoding when the capture stage ends. Its start is derived from the reported duration, not observed.

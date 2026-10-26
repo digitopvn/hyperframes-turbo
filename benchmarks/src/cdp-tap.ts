@@ -1,5 +1,5 @@
 /**
- * Measures browser -> Node CDP traffic without modifying upstream source.
+ * Measures CDP traffic in both directions without modifying upstream source.
  *
  * Wraps puppeteer-core's internal `Connection.prototype._rawSend` (to learn
  * which method each request id belongs to) and `onMessage` (to count the
@@ -18,7 +18,10 @@ import { pathToFileURL } from "node:url";
 
 export interface MethodTraffic {
   calls: number;
+  /** Response bytes (Chrome -> Node). */
   bytes: number;
+  /** Request bytes (Node -> Chrome), e.g. pixels pushed into the page. */
+  sentBytes: number;
   latenciesMs: number[];
 }
 
@@ -26,7 +29,7 @@ export interface CdpTapSnapshot {
   inboundBytes: number;
   outboundBytes: number;
   eventBytes: number;
-  byMethod: Record<string, { calls: number; bytes: number; latenciesMs: number[] }>;
+  byMethod: Record<string, MethodTraffic>;
 }
 
 const state = {
@@ -43,7 +46,7 @@ let installed: string[] = [];
 function bucket(method: string): MethodTraffic {
   let b = state.byMethod.get(method);
   if (!b) {
-    b = { calls: 0, bytes: 0, latenciesMs: [] };
+    b = { calls: 0, bytes: 0, sentBytes: 0, latenciesMs: [] };
     state.byMethod.set(method, b);
   }
   return b;
@@ -62,7 +65,9 @@ function patch(Connection: any): void {
           let m = pending.get(conn);
           if (!m) pending.set(conn, (m = new Map()));
           m.set(id, { method, t0: performance.now() });
-          state.outboundBytes += JSON.stringify(params ?? {}).length + method.length;
+          const sent = JSON.stringify(params ?? {}).length + method.length;
+          state.outboundBytes += sent;
+          bucket(method).sentBytes += sent;
           fn(id);
         }),
     };
@@ -123,7 +128,7 @@ export function resetCdpTap(): void {
 
 export function snapshotCdpTap(): CdpTapSnapshot {
   const byMethod: CdpTapSnapshot["byMethod"] = {};
-  for (const [m, b] of state.byMethod) byMethod[m] = { calls: b.calls, bytes: b.bytes, latenciesMs: [...b.latenciesMs] };
+  for (const [m, b] of state.byMethod) byMethod[m] = { ...b, latenciesMs: [...b.latenciesMs] };
   return {
     inboundBytes: state.inboundBytes,
     outboundBytes: state.outboundBytes,

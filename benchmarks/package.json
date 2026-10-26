@@ -1,0 +1,11 @@
+{
+  "name": "hyperframes-turbo-benchmarks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/run-benchmark.ts",
+    "report": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/report.ts",
+    "env": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/collect-environment.ts",
+    "typecheck": "../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json"
+  }
+}
