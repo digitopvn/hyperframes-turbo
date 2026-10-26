@@ -1,0 +1,8 @@
+{
+  "name": "Typography + SVG",
+  "description": "HyperFrames Turbo golden benchmark fixture (1920x1080, 30 fps).",
+  "tags": ["typography","svg","text", "turbo-golden"],
+  "renderConfig": {
+    "fps": 30
+  }
+}

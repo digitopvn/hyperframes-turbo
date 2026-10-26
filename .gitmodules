@@ -1,0 +1,3 @@
+[submodule "upstream/hyperframes"]
+	path = upstream/hyperframes
+	url = https://github.com/heygen-com/hyperframes.git

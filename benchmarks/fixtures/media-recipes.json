@@ -1,0 +1,28 @@
+{
+  "$comment": "FFmpeg recipes for generated fixture media. Synthetic sources (lavfi testsrc2/sine) avoid third-party copyright and keep inputs reproducible from the pinned FFmpeg build. The SHA-256 of each generated file is recorded in every result's environment snapshot.",
+  "h264-1080p30.mp4": [
+    "-f", "lavfi", "-i", "testsrc2=size=1920x1080:rate=30:duration=8",
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-g", "30", "-threads", "1", "-an"
+  ],
+  "hevc-1080p60.mp4": [
+    "-f", "lavfi", "-i", "testsrc2=size=1920x1080:rate=60:duration=8",
+    "-c:v", "libx265", "-preset", "medium", "-crf", "24", "-pix_fmt", "yuv420p", "-tag:v", "hvc1",
+    "-x265-params", "pools=1:frame-threads=1:log-level=error", "-an"
+  ],
+  "h264-vfr.mp4": [
+    "-f", "lavfi", "-i", "testsrc2=size=1280x720:rate=30:duration=7",
+    "-vf", "select='lt(n\\,60)+not(mod(n\\,3))'",
+    "-fps_mode", "vfr", "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-threads", "1", "-an"
+  ],
+  "music-bed.wav": [
+    "-f", "lavfi", "-i", "sine=frequency=220:sample_rate=48000:duration=8",
+    "-f", "lavfi", "-i", "sine=frequency=330:sample_rate=48000:duration=8",
+    "-filter_complex", "[0][1]amix=inputs=2:normalize=0,volume=0.4,afade=t=in:d=1,afade=t=out:st=6.5:d=1.5,aformat=channel_layouts=stereo",
+    "-c:a", "pcm_s16le"
+  ],
+  "sfx-blip.wav": [
+    "-f", "lavfi", "-i", "sine=frequency=1000:sample_rate=48000:duration=0.3",
+    "-af", "volume=0.8,afade=t=out:st=0.1:d=0.2,aformat=channel_layouts=stereo",
+    "-c:a", "pcm_s16le"
+  ]
+}

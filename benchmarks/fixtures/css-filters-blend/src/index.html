@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo golden: CSS filters and blend</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #111; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: radial-gradient(circle at 30% 40%, #ff006e, #3a0ca3 50%, #000 90%); }
+      .blob { position: absolute; width: 520px; height: 520px; border-radius: 50%; }
+      #b1 { left: 200px; top: 200px; background: #ffbe0b; mix-blend-mode: screen; filter: blur(24px); }
+      #b2 { left: 560px; top: 300px; background: #3a86ff; mix-blend-mode: multiply; }
+      #b3 { left: 1100px; top: 160px; background: #8338ec; mix-blend-mode: difference; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6)); }
+      .glass { position: absolute; left: 760px; top: 620px; width: 900px; height: 300px; border-radius: 32px; backdrop-filter: blur(18px) saturate(160%); background: rgba(255, 255, 255, 0.15); border: 2px solid rgba(255, 255, 255, 0.4); color: #fff; font: 700 72px Arial, sans-serif; display: flex; align-items: center; justify-content: center; }
+      .spinner { position: absolute; left: 140px; top: 760px; width: 160px; height: 160px; border: 18px solid rgba(255, 255, 255, 0.2); border-top-color: #fff; border-radius: 50%; animation: spin 1.5s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      .gray { position: absolute; left: 1500px; top: 760px; width: 260px; height: 160px; background: linear-gradient(90deg, #06d6a0, #ef476f); filter: grayscale(0) hue-rotate(0deg); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="css-filters-blend" data-width="1920" data-height="1080" data-duration="6">
+      <div class="blob" id="b1"></div>
+      <div class="blob" id="b2"></div>
+      <div class="blob" id="b3"></div>
+      <div class="glass" id="glass">backdrop-filter</div>
+      <div class="spinner"></div>
+      <div class="gray" id="gray"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#b1", { x: 700, filter: "blur(4px)", duration: 6, ease: "sine.inOut" }, 0);
+      tl.to("#b2", { y: -200, scale: 1.3, duration: 3, yoyo: true, repeat: 1, ease: "sine.inOut" }, 0);
+      tl.to("#b3", { x: -500, rotation: 90, duration: 6, ease: "none" }, 0);
+      tl.to("#glass", { x: -500, duration: 6, ease: "power1.inOut" }, 0);
+      tl.to("#gray", { filter: "grayscale(1) hue-rotate(180deg)", duration: 6, ease: "none" }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["css-filters-blend"] = tl;
+    </script>
+  </body>
+</html>

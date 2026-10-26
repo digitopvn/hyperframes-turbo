@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo golden: audio bed with fades + SFX</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #1b263b; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #1b263b; }
+      .bar { position: absolute; bottom: 200px; width: 120px; background: #e0e1dd; transform-origin: bottom center; }
+      .title { position: absolute; top: 120px; left: 0; width: 100%; text-align: center; color: #e0e1dd; font: 700 80px Arial, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="audio-mix" data-width="1920" data-height="1080" data-duration="8">
+      <!-- Music bed has 1 s fade-in / 1.5 s fade-out baked into the generated source. -->
+      <audio id="bed" src="media/music-bed.wav" data-start="0" data-duration="8" data-track-index="0" data-volume="1"></audio>
+      <audio id="sfx1" src="media/sfx-blip.wav" data-start="1" data-duration="0.3" data-track-index="1" data-volume="1"></audio>
+      <audio id="sfx2" src="media/sfx-blip.wav" data-start="3.5" data-duration="0.3" data-track-index="2" data-volume="1"></audio>
+      <audio id="sfx3" src="media/sfx-blip.wav" data-start="6" data-duration="0.3" data-track-index="3" data-volume="1"></audio>
+      <div class="title">Audio fades + SFX sync</div>
+      <div class="bar" id="s1" style="left: 560px; height: 400px"></div>
+      <div class="bar" id="s2" style="left: 900px; height: 400px"></div>
+      <div class="bar" id="s3" style="left: 1240px; height: 400px"></div>
+    </div>
+    <script>
+      // Each bar flashes exactly when its SFX starts, so A/V sync can be checked visually.
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#s1", { scaleY: 0.1 }, { scaleY: 1, duration: 0.3 }, 1);
+      tl.fromTo("#s2", { scaleY: 0.1 }, { scaleY: 1, duration: 0.3 }, 3.5);
+      tl.fromTo("#s3", { scaleY: 0.1 }, { scaleY: 1, duration: 0.3 }, 6);
+      tl.to({}, { duration: 8 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["audio-mix"] = tl;
+    </script>
+  </body>
+</html>

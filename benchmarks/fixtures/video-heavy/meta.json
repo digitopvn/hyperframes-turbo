@@ -1,0 +1,8 @@
+{
+  "name": "Video-heavy multi-source (H.264/HEVC/VFR)",
+  "description": "HyperFrames Turbo golden benchmark fixture (1920x1080, 30 fps).",
+  "tags": ["video","hevc","vfr","cuts", "turbo-golden"],
+  "renderConfig": {
+    "fps": 30
+  }
+}

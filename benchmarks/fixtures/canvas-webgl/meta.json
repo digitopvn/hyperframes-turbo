@@ -1,0 +1,8 @@
+{
+  "name": "Canvas 2D + WebGL shader",
+  "description": "HyperFrames Turbo golden benchmark fixture (1920x1080, 30 fps).",
+  "tags": ["canvas","webgl","shader", "turbo-golden"],
+  "renderConfig": {
+    "fps": 30
+  }
+}

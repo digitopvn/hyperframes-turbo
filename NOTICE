@@ -1,0 +1,20 @@
+HyperFrames Turbo
+Copyright 2026 digitopvn and HyperFrames Turbo contributors
+
+This product is an independent research project. It is not affiliated with,
+sponsored by, or endorsed by HeyGen, Inc. "HyperFrames" and "HeyGen" are
+used only to identify the upstream project this work measures and extends.
+
+This repository references, as a git submodule at upstream/hyperframes,
+HyperFrames (https://github.com/heygen-com/hyperframes),
+Copyright 2026 HeyGen, Inc., licensed under the Apache License, Version 2.0.
+The submodule is pinned to commit 1c4a1c162033f22935c0c315efc5245b0cd6ac5d and
+is not modified by this repository. Upstream ships no NOTICE file at that
+commit; its LICENSE is reproduced in upstream/hyperframes/LICENSE.
+
+Benchmark fixtures load GSAP (https://gsap.com), Copyright GreenSock, under
+the GSAP Standard "no charge" license, not Apache-2.0. GSAP is not
+redistributed here: the harness copies it at run time from the upstream
+dependency tree (node_modules) into a temporary project directory.
+
+See docs/upstream-license-audit.md for the full audit.
