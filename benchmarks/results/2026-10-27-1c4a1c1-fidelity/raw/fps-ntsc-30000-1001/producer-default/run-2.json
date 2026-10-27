@@ -4356,7 +4356,7 @@
   "jobStatus": "complete",
   "fidelity": {
     "schema": "turbo-fidelity/1",
-    "generatedAt": "2026-10-27T07:51:29.584Z",
+    "generatedAt": "2026-10-27T08:40:44.225Z",
     "fixture": "fps-ntsc-30000-1001",
     "verdict": "PASS",
     "reasons": [],
@@ -4512,8 +4512,14 @@
         "colorTransfer": "bt709",
         "colorPrimaries": "bt709",
         "alpha": false,
-        "masteringDisplay": null,
-        "contentLight": null,
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 240,
+            "value": ""
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 1182019,
         "bitRate": 1180838,
@@ -4533,8 +4539,14 @@
         "colorTransfer": "bt709",
         "colorPrimaries": "bt709",
         "alpha": false,
-        "masteringDisplay": null,
-        "contentLight": null,
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 240,
+            "value": ""
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 1179975,
         "bitRate": 1178796,
@@ -4867,8 +4879,14 @@
             "matrix": "bt709",
             "range": "tv",
             "pixFmt": "yuv420p",
-            "masteringDisplay": null,
-            "contentLight": null
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 240,
+                "value": ""
+              }
+            ]
           },
           "candidate": {
             "transfer": "bt709",
@@ -4876,8 +4894,14 @@
             "matrix": "bt709",
             "range": "tv",
             "pixFmt": "yuv420p",
-            "masteringDisplay": null,
-            "contentLight": null
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 240,
+                "value": ""
+              }
+            ]
           }
         }
       },
@@ -4911,7 +4935,7 @@
       }
     },
     "measurementErrors": {},
-    "peakRssBytes": 268623872,
-    "wallMs": 4361.0664
+    "peakRssBytes": 248299520,
+    "wallMs": 4232.033300000001
   }
 }

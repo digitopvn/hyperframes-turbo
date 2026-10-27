@@ -33,11 +33,11 @@ VP8/VP9 is decoded with libvpx so the alpha plane is included.
 | dimensions | width, height, SAR, codec, pix_fmt | exact |
 | frameCount | decoded frames | exact |
 | timestamps | `r_frame_rate` against the declared rational fps; each frame's PTS against `i / fps` in exact BigInt ticks; PTS/DTS monotonicity and DTS ≤ PTS; VFR (more than one distinct frame interval, ±1 tick) | exact. PTS error may not exceed the reference's own error, or 1 tick |
-| temporal | 64×36 grey thumbnail of **every** frame, aligned against the reference | Classifies dropped, duplicated, reordered and stale frames. The match tolerance is calibrated |
+| temporal | 64×36 grey thumbnail of **every** frame, aligned against the reference | Classifies dropped, duplicated, reordered and stale frames. A frame matching no reference frame within ±3 is `FRAME_CONTENT_UNIDENTIFIED` (FAIL, never a blind PASS). The match tolerance is calibrated |
 | pixels | Full-frame MSE, PSNR, luma SSIM, max \|diff\| and diff-pixel % on sampled frames, at native bit depth (`rgb48le`/`rgba64le` for >8-bit) | calibrated |
-| audio | Stream format; envelope cross-correlation in up to 3 transient windows (A/V offset); duration; residual | Format exact. Drift and duration are calibrated, with a floor of one codec frame (AAC 1024 samples, Opus 20 ms) |
+| audio | Stream format; envelope cross-correlation in up to 3 transient windows (A/V offset); duration; residual (relative to the reference; against a silent reference, below -80 dBFS absolute, otherwise FALLBACK if unmeasurable) | Format exact. Drift and duration are calibrated, with a floor of one codec frame (AAC 1024 samples, Opus 20 ms) |
 | alpha | Alpha plane present (pix_fmt or libvpx-decoded plane, never container tags); alpha MSE on sampled frames | presence exact, MSE calibrated |
-| color | transfer, primaries, matrix, range; mastering display and content light metadata | exact |
+| color | transfer, primaries, matrix, range; mastering display and content light metadata on two separate carriers: container/stream side data, and the SEI of **every** frame (all entries, not only the first) | exact |
 | encoded | Full-sequence PSNR and SSIM (FFmpeg `psnr`/`ssim`, worst frame); VMAF worst frame (SDR without alpha only); bitrate | calibrated |
 
 VMAF is never the only gate. It is skipped as *not applicable* for HDR and

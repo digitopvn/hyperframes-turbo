@@ -7,11 +7,11 @@
  * Any exception inside a measurement is kept and becomes CHECK_ERROR (FAIL).
  */
 import { decodeFrames, decodeThumbnails, PIXFMT_LAYOUT, type RawPixFmt } from "./decode.js";
-import { analyzeAudio, ANALYSIS_RATE, type AudioAnalysis } from "./metrics/audio.js";
+import { analyzeAudio, ANALYSIS_RATE, SILENCE_RMS, type AudioAnalysis } from "./metrics/audio.js";
 import { analyzeEncoded, type EncodedAnalysis } from "./metrics/encoded.js";
 import { comparePixels, type PixelStats } from "./metrics/pixels.js";
 import { analyzeTemporal, analyzeTimestamps, type TemporalAnalysis, type TimestampAnalysis } from "./metrics/temporal.js";
-import { hasAlpha, probeMedia, sideDataOfType, type MediaInput, type MediaProbe, type VideoInfo } from "./probe.js";
+import { hasAlpha, hdrStaticMetadata, probeMedia, type MediaInput, type MediaProbe, type VideoInfo } from "./probe.js";
 import { parseRational, ratEq, ratToString, type Rational } from "./rational.js";
 import { buildSamplePlan, type FixtureFidelitySpec, type SampledFrame } from "./sample-plan.js";
 import { toNum, within, type FixtureThresholds } from "./thresholds.js";
@@ -24,6 +24,32 @@ export interface CompareContext {
   seed: string;
   cutTimes: number[];
   spec: FixtureFidelitySpec;
+}
+
+/** `count` consecutive frames from `from` carrying the same HDR static metadata (`value`, "" = none). */
+export interface HdrRun {
+  from: number;
+  count: number;
+  value: string;
+}
+
+export function hdrRuns(perFrame: string[]): HdrRun[] {
+  const out: HdrRun[] = [];
+  perFrame.forEach((value, i) => {
+    const last = out[out.length - 1];
+    if (last && last.value === value) last.count++;
+    else out.push({ from: i, count: 1, value });
+  });
+  return out;
+}
+
+/** First frame (within both) whose HDR static metadata differs, or null. */
+export function firstHdrFrameMismatch(r: HdrRun[], c: HdrRun[]): { frame: number; reference: string; candidate: string } | null {
+  const expand = (runs: HdrRun[]) => runs.flatMap((x) => Array<string>(x.count).fill(x.value));
+  const a = expand(r);
+  const b = expand(c);
+  for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) return { frame: i, reference: a[i]!, candidate: b[i]! };
+  return null;
 }
 
 export interface StreamSummary {
@@ -40,8 +66,10 @@ export interface StreamSummary {
   colorTransfer: string | null;
   colorPrimaries: string | null;
   alpha: boolean;
-  masteringDisplay: Record<string, unknown> | null;
-  contentLight: Record<string, unknown> | null;
+  /** Container/stream-level HDR static metadata (see `hdrStaticMetadata`). */
+  hdrStream: string[];
+  /** Per-frame HDR static metadata (SEI), run-length encoded over every frame. */
+  hdrFrames: HdrRun[];
   formatName: string;
   sizeBytes: number;
   bitRate: number | null;
@@ -72,7 +100,6 @@ export interface Measurements {
 function summarize(p: MediaProbe): StreamSummary {
   const v = p.video;
   if (!v) throw new Error(`${p.input.path}: no video stream`);
-  const one = (re: RegExp) => sideDataOfType(v, re)[0] ?? null;
   return {
     codec: v.codec,
     profile: v.profile,
@@ -87,8 +114,8 @@ function summarize(p: MediaProbe): StreamSummary {
     colorTransfer: v.colorTransfer,
     colorPrimaries: v.colorPrimaries,
     alpha: hasAlpha(v),
-    masteringDisplay: one(/mastering display/i),
-    contentLight: one(/content light/i),
+    hdrStream: hdrStaticMetadata(v.streamSideData),
+    hdrFrames: hdrRuns(v.frameSideData.map((l) => hdrStaticMetadata(l).join("\n"))),
     formatName: p.formatName,
     sizeBytes: p.sizeBytes,
     bitRate: p.bitRate,
@@ -302,12 +329,15 @@ function judgeTimestamps(m: Measurements, ctx: CompareContext): CheckResult {
   return done(k);
 }
 
-function judgeTemporal(m: Measurements, t: FixtureThresholds): CheckResult {
+export function judgeTemporal(m: Measurements, t: FixtureThresholds): CheckResult {
   if (m.errors.thumbnails || !m.thumbs) return errored({}, "thumbnail decode", m.errors.thumbnails ?? "no thumbnails");
   const tol = toNum(t.temporal.thumbMseTol.limit);
   const a: TemporalAnalysis = analyzeTemporal(m.thumbs.reference, m.thumbs.candidate, tol);
   const k = check({ thumbMseTol: tol, ...a });
   for (const e of a.events) k.fail(TEMPORAL_REASON[e.kind]!, `candidate frame ${e.candidateIndex} shows reference frame ${e.showsReferenceIndex} (${e.kind})`);
+  // A frame that matches no nearby reference frame has an unknown identity:
+  // the temporal check cannot vouch for it, so it never passes blind.
+  if (a.contentMismatchFrames > 0) k.fail("FRAME_CONTENT_UNIDENTIFIED", `${a.contentMismatchFrames} candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance ${tol})`);
   return done(k);
 }
 
@@ -339,7 +369,7 @@ function judgePixels(m: Measurements, t: FixtureThresholds): CheckResult {
   return done(k);
 }
 
-function judgeAudio(m: Measurements, t: FixtureThresholds | null, tp: string): CheckResult {
+export function judgeAudio(m: Measurements, t: FixtureThresholds | null, tp: string): CheckResult {
   const r = m.reference!.audio;
   const c = m.candidate!.audio;
   if (!r && !c) return notApplicable({}, "neither output has audio");
@@ -365,7 +395,14 @@ function judgeAudio(m: Measurements, t: FixtureThresholds | null, tp: string): C
   const a = m.audio;
   if (!within(a.avDriftMs, t.audio.maxAvDriftMs, "max")) k.fail("AV_DRIFT", `A/V offset ${a.avDriftMs?.toFixed(2)} ms > ${t.audio.maxAvDriftMs.limit} ms`);
   if (!within(a.durationDeltaMs, t.audio.maxDurationDeltaMs, "max")) k.fail("AUDIO_DURATION_MISMATCH", `audio duration differs by ${a.durationDeltaMs?.toFixed(2)} ms`);
-  if (a.residualDb !== null && !within(a.residualDb, t.audio.maxResidualDb, "max")) k.fail("AUDIO_MISMATCH", `residual ${a.residualDb.toFixed(2)} dB > ${t.audio.maxResidualDb.limit} dB`);
+  if (a.residualDb !== null) {
+    if (!within(a.residualDb, t.audio.maxResidualDb, "max")) k.fail("AUDIO_MISMATCH", `residual ${a.residualDb.toFixed(2)} dB > ${t.audio.maxResidualDb.limit} dB`);
+  } else if (a.residualRms === null) {
+    k.fallback("CHECK_ERROR", "audio residual could not be measured");
+  } else if (a.residualRms > SILENCE_RMS) {
+    // Silent reference: the candidate must be silent too (absolute floor, -80 dBFS).
+    k.fail("AUDIO_MISMATCH", `reference is silent but the candidate residual is ${(20 * Math.log10(a.residualRms)).toFixed(2)} dBFS > ${20 * Math.log10(SILENCE_RMS)} dBFS`);
+  }
   return done(k);
 }
 
@@ -388,8 +425,8 @@ function judgeAlpha(m: Measurements, t: FixtureThresholds | null, tp: string, ct
   return done(k);
 }
 
-function judgeColor(r: StreamSummary, c: StreamSummary, ctx: CompareContext): CheckResult {
-  const pick = (s: StreamSummary) => ({ transfer: s.colorTransfer, primaries: s.colorPrimaries, matrix: s.colorSpace, range: s.colorRange, pixFmt: s.pixFmt, masteringDisplay: s.masteringDisplay, contentLight: s.contentLight });
+export function judgeColor(r: StreamSummary, c: StreamSummary, ctx: CompareContext): CheckResult {
+  const pick = (s: StreamSummary) => ({ transfer: s.colorTransfer, primaries: s.colorPrimaries, matrix: s.colorSpace, range: s.colorRange, pixFmt: s.pixFmt, hdrStream: s.hdrStream, hdrFrames: s.hdrFrames });
   const k = check({ declaredHdr: ctx.spec.hdr ?? null, reference: pick(r), candidate: pick(c) });
   if (ctx.spec.hdr && r.colorTransfer !== TRANSFER[ctx.spec.hdr]) k.fail("REFERENCE_INVALID", `fixture declares ${ctx.spec.hdr} but reference transfer is ${r.colorTransfer}`);
   const transferish = (r.colorTransfer !== c.colorTransfer || r.colorPrimaries !== c.colorPrimaries || r.colorSpace !== c.colorSpace);
@@ -397,8 +434,14 @@ function judgeColor(r: StreamSummary, c: StreamSummary, ctx: CompareContext): Ch
   if (transferish)
     k.fail(hdr ? "HDR_TRANSFER_MISMATCH" : "COLOR_METADATA_CHANGED", `transfer/primaries/matrix ${c.colorTransfer}/${c.colorPrimaries}/${c.colorSpace} vs reference ${r.colorTransfer}/${r.colorPrimaries}/${r.colorSpace}`);
   if (r.colorRange !== c.colorRange) k.fail(hdr ? "HDR_METADATA_MISMATCH" : "COLOR_METADATA_CHANGED", `range ${c.colorRange} vs reference ${r.colorRange}`);
-  if (hdr && JSON.stringify(r.masteringDisplay) !== JSON.stringify(c.masteringDisplay)) k.fail("HDR_METADATA_MISMATCH", "mastering display metadata differs from the reference");
-  if (hdr && JSON.stringify(r.contentLight) !== JSON.stringify(c.contentLight)) k.fail("HDR_METADATA_MISMATCH", "content light level metadata differs from the reference");
+  if (hdr) {
+    // Container boxes and in-band SEI are independent carriers: a muxer can keep
+    // one while the encoder drops the other, so each is compared on its own.
+    if (JSON.stringify(r.hdrStream) !== JSON.stringify(c.hdrStream))
+      k.fail("HDR_METADATA_MISMATCH", `container mastering/content-light metadata ${JSON.stringify(c.hdrStream)} vs reference ${JSON.stringify(r.hdrStream)}`);
+    const d = firstHdrFrameMismatch(r.hdrFrames, c.hdrFrames);
+    if (d) k.fail("HDR_METADATA_MISMATCH", `frame ${d.frame} SEI mastering/content-light ${d.candidate || "(none)"} vs reference ${d.reference || "(none)"}`);
+  }
   return done(k);
 }
 

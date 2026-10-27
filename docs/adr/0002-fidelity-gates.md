@@ -81,17 +81,28 @@ All numbers come from committed artefacts. Platforms not listed are not tested.
   | typography-svg | 4/10 | 63 | 1.62 | 62.18 dB |
 
   Per-fixture limits for these four are in `benchmarks/fidelity/thresholds/producer-default.win32.json`.
-- The gate gave PASS on all 13 fixtures (run 2 vs run 1). It took 0.5 to 6.5 s per fixture and about 50 s in total. The peak comparator RSS was 269 MiB, excluding FFmpeg children.
+- The gate gave PASS on all 13 fixtures (run 2 vs run 1). It took 0.5 to 6.9 s per fixture and about 51 s in total. The peak comparator RSS was 284 MiB, excluding FFmpeg children.
 - VMAF between identical 1080p encodes is about 97.43, not 100. VMAF is therefore never the sole check.
-- Fault injection caught 107 of 107 faults across 14 kinds, with 0 missed. All 13 untouched controls gave PASS (`benchmarks/fidelity/negative-results/producer-default.win32.md`).
-- `--keep-output` overhead (typography-svg, 5 warm runs each, idle checks passed):
-  - Without the flag, warm wall times were 48.2, 56.2, 26.0, 59.8 and 25.6 s (median 48.2 s).
-  - With it, they were 50.3, 56.3, 30.7, 63.0 and 25.8 s (median 50.3 s).
-  - The spread between runs is about 2× and dwarfs the difference, so the result is inconclusive.
-  - The copy and hash run after the worker stops its wall clock (`render-worker.ts`), so recorded render times do not include them by construction.
+- Fault injection caught 111 of 111 faults across 16 kinds, with 0 missed. All 13 untouched controls gave PASS (`benchmarks/fidelity/negative-results/producer-default.win32.md`).
+  - The two single-property HDR faults fail with `HDR_METADATA_MISMATCH` and no other reason on both HDR fixtures. They are `hdr-sei-stripped` (byte-neutral retype of every prefix SEI, in-band and in `hvcC`, VUI kept) and `hdr-max-cll-changed` (MaxCLL only).
+- Negative result: the earlier HDR metadata check was blind.
+  - ffprobe `-show_entries frame=side_data_list` prints every entry empty, so mastering and content-light metadata compared `null` with `null`.
+  - The old `hdr-metadata-stripped` fault was caught only through `HDR_TRANSFER_MISMATCH`.
+  - The check now reads `frame_side_data` for every frame and compares stream-level and per-frame carriers separately.
+- `--keep-output` overhead: **not measured**. A 5+5 run comparison was made, but its raw runs were not kept, so no numbers are claimed. By construction, the copy and hash run after the worker stops its wall clock (`render-worker.ts`), so recorded render times exclude them. Their own cost is unmeasured.
 - The first attempt is kept as a negative result: `producer-default.win32.attempt-1-injector-colour-defect.md`.
 
 **ubuntu-24.04 GitHub runner, SwiftShader, FFmpeg 6.0.1 static** (correctness only, no performance claims):
 
 - Four fixtures were bit-exact (`producer-default.linux.json`).
 - The gate gave PASS on all four, and fault injection caught 13 kinds with 0 missed (CI workflow `fidelity.yml`).
+
+## Known limits
+
+These are tracked in a follow-up issue and are not solved by this ADR:
+
+- Candidate backends have no tolerance source of their own yet. Thresholds come from reference-vs-reference spread, and a new backend needs its own calibrated path.
+- No near-threshold drift faults: injected faults are well beyond the limits, so sensitivity right at a limit is unproven.
+- No temporal faults on HDR or alpha outputs: frame-rewrite faults cover H.264 yuv420p only.
+- No CLI exit-code test, and no note on a frozen "golden" reference for cross-version comparisons.
+- Container-level HDR metadata (MP4 `mdcv`/`clli`) is compared but was absent from every output here. Only the per-frame SEI branch has been exercised by a real fault; the container branch is covered by a unit test only.

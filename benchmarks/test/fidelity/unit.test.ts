@@ -4,11 +4,14 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { BENCH_ROOT, loadManifest } from "../../src/fixtures.js";
+import { firstHdrFrameMismatch, hdrRuns, judgeAudio, judgeColor, judgeTemporal, type CompareContext, type HdrRun, type Measurements, type StreamSummary } from "../../src/fidelity/compare.js";
+import { SILENCE_RMS } from "../../src/fidelity/metrics/audio.js";
 import { analyzeTemporal } from "../../src/fidelity/metrics/temporal.js";
+import { hdrStaticMetadata } from "../../src/fidelity/probe.js";
 import { comparePixels } from "../../src/fidelity/metrics/pixels.js";
 import { frameAtOrAfter, frameTicks, parseRational, ptsErrorTicks, rat, ratToNumber } from "../../src/fidelity/rational.js";
 import { buildSamplePlan, cutTimesFromHtml, loadFidelitySpec, parseFidelitySpec } from "../../src/fidelity/sample-plan.js";
-import { deriveLimit, MIN_RUNS, validateThresholds, within } from "../../src/fidelity/thresholds.js";
+import { deriveLimit, MIN_RUNS, validateThresholds, within, type FixtureThresholds } from "../../src/fidelity/thresholds.js";
 import { aggregate } from "../../src/fidelity/verdict.js";
 
 test("30000/1001 maps 10,000 frames to exact ticks with no drift", () => {
@@ -141,4 +144,63 @@ test("pixel stats: identical frames are exact, a changed pixel is seen", () => {
   const t = comparePixels(rgba, rgba2, 4, 4, "rgba");
   assert.equal(t.mse, 0);
   assert.ok(t.alphaMse! > 0);
+});
+
+// ---- HDR static metadata, blind temporal, silent-reference audio ----
+// The judges take full Measurements/FixtureThresholds; tests build only the
+// fields each judge reads and cast (the cast is the test's explicit contract).
+
+const lim = (limit: number) => ({ limit, worst: limit, mad: 0, margin: 0, rule: "exact" as const });
+
+test("HDR metadata: all entries count, stream and per-frame carriers are separate", () => {
+  const md = { side_data_type: "Mastering display metadata", red_x: "34000/50000", max_luminance: "10000000/10000" };
+  const cll = (n: number) => ({ side_data_type: "Content light level metadata", max_content: n, max_average: 400 });
+  const other = { side_data_type: "H.26[45] User Data Unregistered SEI message" };
+  assert.deepEqual(hdrStaticMetadata([other]), []);
+  // Key order and entry order do not matter; every entry is kept, not only the first.
+  assert.deepEqual(hdrStaticMetadata([cll(1000), md]), hdrStaticMetadata([{ ...md }, { max_average: 400, max_content: 1000, side_data_type: "Content light level metadata" }]));
+  assert.equal(hdrStaticMetadata([md, cll(1000), cll(2000)]).length, 3);
+  const ref = hdrRuns([0, 1, 2, 3].map(() => hdrStaticMetadata([md, cll(1000)]).join("\n")));
+  assert.deepEqual(ref.map((r) => [r.from, r.count]), [[0, 4]]);
+  assert.equal(firstHdrFrameMismatch(ref, ref), null);
+  // SEI kept on frame 0 but changed from frame 2 on: found beyond frame 0.
+  const cand = hdrRuns([0, 1, 2, 3].map((i) => hdrStaticMetadata([md, cll(i < 2 ? 1000 : 1100)]).join("\n")));
+  assert.equal(firstHdrFrameMismatch(ref, cand)?.frame, 2);
+
+  const ctx = { spec: { hdr: "pq", probes: [] } } as unknown as CompareContext;
+  const base = { colorTransfer: "smpte2084", colorPrimaries: "bt2020", colorSpace: "bt2020nc", colorRange: "tv", pixFmt: "yuv420p10le" };
+  const summary = (hdrStream: string[], hdrFrames: HdrRun[]) => ({ ...base, hdrStream, hdrFrames }) as unknown as StreamSummary;
+  const box = hdrStaticMetadata([md, cll(1000)]);
+  assert.equal(judgeColor(summary(box, ref), summary(box, ref), ctx).verdict, "PASS");
+  // Container box survives, SEI stripped: still a mismatch.
+  const stripped = judgeColor(summary(box, ref), summary(box, hdrRuns(["", "", "", ""])), ctx);
+  assert.deepEqual([stripped.verdict, stripped.reasons], ["FAIL", ["HDR_METADATA_MISMATCH"]]);
+  // SEI intact, container box changed: also a mismatch.
+  const boxChanged = judgeColor(summary(box, ref), summary(hdrStaticMetadata([md, cll(2000)]), ref), ctx);
+  assert.deepEqual([boxChanged.verdict, boxChanged.reasons], ["FAIL", ["HDR_METADATA_MISMATCH"]]);
+});
+
+test("temporal never passes while a frame matches no reference frame", () => {
+  const frame = (v: number) => Buffer.alloc(64 * 36, v);
+  const ref = [0, 40, 80, 120, 160, 200].map(frame);
+  const cand = [...ref];
+  cand[3] = frame(250); // unrelated content, no drop/dup/reorder pattern
+  const m = { errors: {}, thumbs: { reference: ref, candidate: cand } } as unknown as Measurements;
+  const t = { temporal: { thumbMseTol: lim(0) } } as unknown as FixtureThresholds;
+  const r = judgeTemporal(m, t);
+  assert.equal(r.verdict, "FAIL");
+  assert.deepEqual(r.reasons, ["FRAME_CONTENT_UNIDENTIFIED"]);
+  assert.equal(judgeTemporal({ ...m, thumbs: { reference: ref, candidate: ref } } as unknown as Measurements, t).verdict, "PASS");
+});
+
+test("silent reference: candidate noise fails against the absolute floor, silence passes", () => {
+  const fmt = { codec: "aac", sampleRate: 48000, channels: 2 };
+  const t = { audio: { maxAvDriftMs: lim(1), maxDurationDeltaMs: lim(1), maxResidualDb: lim(-60) } } as unknown as FixtureThresholds;
+  const m = (residualRms: number | null) =>
+    ({ errors: {}, reference: { audio: fmt }, candidate: { audio: fmt }, audio: { avDriftMs: 0, durationDeltaMs: 0, residualDb: null, residualRms, referenceRms: 0 } }) as unknown as Measurements;
+  assert.equal(judgeAudio(m(0), t, "").verdict, "PASS");
+  assert.equal(judgeAudio(m(SILENCE_RMS / 2), t, "").verdict, "PASS");
+  const noisy = judgeAudio(m(0.01), t, "");
+  assert.deepEqual([noisy.verdict, noisy.reasons], ["FAIL", ["AUDIO_MISMATCH"]]);
+  assert.equal(judgeAudio(m(null), t, "").verdict, "FALLBACK");
 });

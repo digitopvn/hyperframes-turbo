@@ -97,19 +97,19 @@ Gate records (`turbo-fidelity/1`) attached by `fidelity/run-fidelity.ts`. Verdic
 
 | fixture | profile | run | vs reference | threshold path | verdict | reasons | checks not PASS | gate wall s | gate peak RSS MiB |
 |---|---|---:|---|---|---|---|---|---:|---:|
-| audio-mix | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | alpha=NOT_APPLICABLE | 4.6 | 250.7 |
-| canvas-webgl | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.3 | 256.2 |
-| css-filters-blend | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.7 | 256.2 |
-| fps-ntsc-30000-1001 | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.4 | 256.2 |
-| gsap-static-holds | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 5.3 | 256.2 |
-| hdr-hlg-regression | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.3 | 269.0 |
-| hdr-regression | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.1 | 269.0 |
-| mixed-complex | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | alpha=NOT_APPLICABLE | 6.5 | 269.0 |
-| motion-blur | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 2.7 | 269.0 |
-| transition-crossfade | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.3 | 269.0 |
-| typography-svg | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.1 | 269.0 |
-| video-heavy | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.8 | 269.0 |
-| webm-transparency | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE | 0.5 | 269.0 |
+| audio-mix | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | alpha=NOT_APPLICABLE | 4.5 | 225.8 |
+| canvas-webgl | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.3 | 236.8 |
+| css-filters-blend | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.7 | 236.8 |
+| fps-ntsc-30000-1001 | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.2 | 236.8 |
+| gsap-static-holds | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 5.4 | 236.8 |
+| hdr-hlg-regression | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.4 | 284.1 |
+| hdr-regression | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.1 | 284.1 |
+| mixed-complex | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | alpha=NOT_APPLICABLE | 6.9 | 284.1 |
+| motion-blur | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 2.6 | 284.1 |
+| transition-crossfade | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 3.3 | 284.1 |
+| typography-svg | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.1 | 284.1 |
+| video-heavy | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE, alpha=NOT_APPLICABLE | 4.9 | 284.1 |
+| webm-transparency | producer-default | 2 | producer-default run 1 | producer-default.win32 | PASS | — | audio=NOT_APPLICABLE | 0.5 | 284.1 |
 
 ## Mixed capture path within a cell
 

@@ -14,7 +14,7 @@ import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
 import { deriveFixtureThresholds, observe } from "../../src/fidelity/calibrate.js";
 import { measure, type CompareContext } from "../../src/fidelity/compare.js";
-import { applicableFaults, EXPECTED, injectFault, pickFaultFrame, type FaultKind } from "../../src/fidelity/inject-faults.js";
+import { applicableFaults, EXPECTED, faultCaught, injectFault, pickFaultFrame, type FaultKind } from "../../src/fidelity/inject-faults.js";
 import { PNG_SEQUENCE_PATTERN, probeMedia } from "../../src/fidelity/probe.js";
 import { FFMPEG, liveProcessCount, runTool } from "../../src/fidelity/proc.js";
 import { rat } from "../../src/fidelity/rational.js";
@@ -59,10 +59,10 @@ const KINDS: Kind[] = [
     args: [
       "-f", "lavfi", "-i", VIDEO.replace("d=4", "d=2"),
       "-c:v", "libx265", "-preset", "ultrafast", "-pix_fmt", "yuv420p10le", "-tag:v", "hvc1",
-      "-x265-params", "log-level=error:pools=1:frame-threads=1:colorprim=bt2020:transfer=smpte2084:colormatrix=bt2020nc:master-display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1):max-cll=1000,400",
+      "-x265-params", "log-level=error:info=0:pools=1:frame-threads=1:colorprim=bt2020:transfer=smpte2084:colormatrix=bt2020nc:master-display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1):max-cll=1000,400",
       "-color_primaries", "bt2020", "-color_trc", "smpte2084", "-colorspace", "bt2020nc",
     ],
-    faults: ["hdr-metadata-stripped"],
+    faults: ["hdr-metadata-stripped", "hdr-sei-stripped", "hdr-max-cll-changed"],
   },
 ];
 
@@ -123,7 +123,7 @@ for (const k of KINDS) {
           await injectFault(fault, src, target, ctxFor(k), frame!);
           const rec = await run(k, target);
           assert.equal(rec.verdict, "FAIL", `verdict ${rec.verdict} (${rec.reasons.join(",")})`);
-          assert.ok(EXPECTED[fault].some((r) => rec.reasons.includes(r)), `reasons ${rec.reasons.join(",")} lack ${EXPECTED[fault].join("/")}`);
+          assert.ok(faultCaught(fault, rec), `reasons ${rec.reasons.join(",")} do not match ${EXPECTED[fault].join("/")}`);
         } finally {
           rmSync(target, { force: true });
         }

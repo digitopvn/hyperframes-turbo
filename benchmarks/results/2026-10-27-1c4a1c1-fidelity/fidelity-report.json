@@ -13,7 +13,7 @@
   "records": [
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:17.155Z",
+      "generatedAt": "2026-10-27T08:40:32.033Z",
       "fixture": "audio-mix",
       "verdict": "PASS",
       "reasons": [],
@@ -249,8 +249,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 242565,
           "bitRate": 242565,
@@ -274,8 +280,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 242565,
           "bitRate": 242565,
@@ -788,7 +800,9 @@
             ],
             "avDriftMs": 0,
             "durationDeltaMs": 0,
-            "residualDb": "-inf"
+            "residualDb": "-inf",
+            "residualRms": 0,
+            "referenceRms": 0.047821297129628224
           }
         },
         "alpha": {
@@ -811,8 +825,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -820,8 +840,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -855,12 +881,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 262836224,
-      "wallMs": 4576.3956
+      "peakRssBytes": 236728320,
+      "wallMs": 4513.641
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:21.513Z",
+      "generatedAt": "2026-10-27T08:40:36.317Z",
       "fixture": "canvas-webgl",
       "verdict": "PASS",
       "reasons": [],
@@ -999,8 +1025,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 5410917,
           "bitRate": 7214556,
@@ -1020,8 +1052,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 5410917,
           "bitRate": 7214556,
@@ -1316,8 +1354,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -1325,8 +1369,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -1360,12 +1410,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 268623872,
-      "wallMs": 4333.9991
+      "peakRssBytes": 248299520,
+      "wallMs": 4267.4662
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:25.210Z",
+      "generatedAt": "2026-10-27T08:40:39.980Z",
       "fixture": "css-filters-blend",
       "verdict": "PASS",
       "reasons": [],
@@ -1511,8 +1561,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1627970,
           "bitRate": 2170626,
@@ -1532,8 +1588,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1627970,
           "bitRate": 2170626,
@@ -1842,8 +1904,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -1851,8 +1919,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -1886,12 +1960,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 268623872,
-      "wallMs": 3686.9578
+      "peakRssBytes": 248299520,
+      "wallMs": 3652.0103
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:29.584Z",
+      "generatedAt": "2026-10-27T08:40:44.225Z",
       "fixture": "fps-ntsc-30000-1001",
       "verdict": "PASS",
       "reasons": [],
@@ -2047,8 +2121,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1182019,
           "bitRate": 1180838,
@@ -2068,8 +2148,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1179975,
           "bitRate": 1178796,
@@ -2402,8 +2488,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -2411,8 +2503,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -2446,12 +2544,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 268623872,
-      "wallMs": 4361.0664
+      "peakRssBytes": 248299520,
+      "wallMs": 4232.033300000001
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:34.912Z",
+      "generatedAt": "2026-10-27T08:40:49.595Z",
       "fixture": "gsap-static-holds",
       "verdict": "PASS",
       "reasons": [],
@@ -2643,8 +2741,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 300,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 315281,
           "bitRate": 252224,
@@ -2664,8 +2768,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 300,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 315385,
           "bitRate": 252308,
@@ -3076,8 +3186,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 300,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -3085,8 +3201,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 300,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -3120,12 +3242,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 268623872,
-      "wallMs": 5320.1235000000015
+      "peakRssBytes": 248299520,
+      "wallMs": 5360.069500000001
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:38.286Z",
+      "generatedAt": "2026-10-27T08:40:52.974Z",
       "fixture": "hdr-hlg-regression",
       "verdict": "PASS",
       "reasons": [],
@@ -3270,24 +3392,14 @@
           "colorTransfer": "arib-std-b67",
           "colorPrimaries": "bt2020",
           "alpha": false,
-          "masteringDisplay": {
-            "side_data_type": "Mastering display metadata",
-            "red_x": "34000/50000",
-            "red_y": "16000/50000",
-            "green_x": "13250/50000",
-            "green_y": "34500/50000",
-            "blue_x": "7500/50000",
-            "blue_y": "3000/50000",
-            "white_point_x": "15635/50000",
-            "white_point_y": "16450/50000",
-            "min_luminance": "1/10000",
-            "max_luminance": "10000000/10000"
-          },
-          "contentLight": {
-            "side_data_type": "Content light level metadata",
-            "max_content": 1000,
-            "max_average": 400
-          },
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 150,
+              "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 6164609,
           "bitRate": 9863374,
@@ -3307,24 +3419,14 @@
           "colorTransfer": "arib-std-b67",
           "colorPrimaries": "bt2020",
           "alpha": false,
-          "masteringDisplay": {
-            "side_data_type": "Mastering display metadata",
-            "red_x": "34000/50000",
-            "red_y": "16000/50000",
-            "green_x": "13250/50000",
-            "green_y": "34500/50000",
-            "blue_x": "7500/50000",
-            "blue_y": "3000/50000",
-            "white_point_x": "15635/50000",
-            "white_point_y": "16450/50000",
-            "min_luminance": "1/10000",
-            "max_luminance": "10000000/10000"
-          },
-          "contentLight": {
-            "side_data_type": "Content light level metadata",
-            "max_content": 1000,
-            "max_average": 400
-          },
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 150,
+              "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 6164609,
           "bitRate": 9863374,
@@ -3632,24 +3734,14 @@
               "matrix": "bt2020nc",
               "range": "tv",
               "pixFmt": "yuv420p10le",
-              "masteringDisplay": {
-                "side_data_type": "Mastering display metadata",
-                "red_x": "34000/50000",
-                "red_y": "16000/50000",
-                "green_x": "13250/50000",
-                "green_y": "34500/50000",
-                "blue_x": "7500/50000",
-                "blue_y": "3000/50000",
-                "white_point_x": "15635/50000",
-                "white_point_y": "16450/50000",
-                "min_luminance": "1/10000",
-                "max_luminance": "10000000/10000"
-              },
-              "contentLight": {
-                "side_data_type": "Content light level metadata",
-                "max_content": 1000,
-                "max_average": 400
-              }
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 150,
+                  "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+                }
+              ]
             },
             "candidate": {
               "transfer": "arib-std-b67",
@@ -3657,24 +3749,14 @@
               "matrix": "bt2020nc",
               "range": "tv",
               "pixFmt": "yuv420p10le",
-              "masteringDisplay": {
-                "side_data_type": "Mastering display metadata",
-                "red_x": "34000/50000",
-                "red_y": "16000/50000",
-                "green_x": "13250/50000",
-                "green_y": "34500/50000",
-                "blue_x": "7500/50000",
-                "blue_y": "3000/50000",
-                "white_point_x": "15635/50000",
-                "white_point_y": "16450/50000",
-                "min_luminance": "1/10000",
-                "max_luminance": "10000000/10000"
-              },
-              "contentLight": {
-                "side_data_type": "Content light level metadata",
-                "max_content": 1000,
-                "max_average": 400
-              }
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 150,
+                  "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+                }
+              ]
             }
           }
         },
@@ -3703,12 +3785,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 3348.028699999999
+      "peakRssBytes": 297914368,
+      "wallMs": 3351.131999999998
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:41.403Z",
+      "generatedAt": "2026-10-27T08:40:56.058Z",
       "fixture": "hdr-regression",
       "verdict": "PASS",
       "reasons": [],
@@ -3884,24 +3966,14 @@
           "colorTransfer": "smpte2084",
           "colorPrimaries": "bt2020",
           "alpha": false,
-          "masteringDisplay": {
-            "side_data_type": "Mastering display metadata",
-            "red_x": "34000/50000",
-            "red_y": "16000/50000",
-            "green_x": "13250/50000",
-            "green_y": "34500/50000",
-            "blue_x": "7500/50000",
-            "blue_y": "3000/50000",
-            "white_point_x": "15635/50000",
-            "white_point_y": "16450/50000",
-            "min_luminance": "1/10000",
-            "max_luminance": "10000000/10000"
-          },
-          "contentLight": {
-            "side_data_type": "Content light level metadata",
-            "max_content": 1000,
-            "max_average": 400
-          },
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 3730868,
           "bitRate": 4974490,
@@ -3921,24 +3993,14 @@
           "colorTransfer": "smpte2084",
           "colorPrimaries": "bt2020",
           "alpha": false,
-          "masteringDisplay": {
-            "side_data_type": "Mastering display metadata",
-            "red_x": "34000/50000",
-            "red_y": "16000/50000",
-            "green_x": "13250/50000",
-            "green_y": "34500/50000",
-            "blue_x": "7500/50000",
-            "blue_y": "3000/50000",
-            "white_point_x": "15635/50000",
-            "white_point_y": "16450/50000",
-            "min_luminance": "1/10000",
-            "max_luminance": "10000000/10000"
-          },
-          "contentLight": {
-            "side_data_type": "Content light level metadata",
-            "max_content": 1000,
-            "max_average": 400
-          },
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 180,
+              "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 3730868,
           "bitRate": 4974490,
@@ -4312,24 +4374,14 @@
               "matrix": "bt2020nc",
               "range": "tv",
               "pixFmt": "yuv420p10le",
-              "masteringDisplay": {
-                "side_data_type": "Mastering display metadata",
-                "red_x": "34000/50000",
-                "red_y": "16000/50000",
-                "green_x": "13250/50000",
-                "green_y": "34500/50000",
-                "blue_x": "7500/50000",
-                "blue_y": "3000/50000",
-                "white_point_x": "15635/50000",
-                "white_point_y": "16450/50000",
-                "min_luminance": "1/10000",
-                "max_luminance": "10000000/10000"
-              },
-              "contentLight": {
-                "side_data_type": "Content light level metadata",
-                "max_content": 1000,
-                "max_average": 400
-              }
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+                }
+              ]
             },
             "candidate": {
               "transfer": "smpte2084",
@@ -4337,24 +4389,14 @@
               "matrix": "bt2020nc",
               "range": "tv",
               "pixFmt": "yuv420p10le",
-              "masteringDisplay": {
-                "side_data_type": "Mastering display metadata",
-                "red_x": "34000/50000",
-                "red_y": "16000/50000",
-                "green_x": "13250/50000",
-                "green_y": "34500/50000",
-                "blue_x": "7500/50000",
-                "blue_y": "3000/50000",
-                "white_point_x": "15635/50000",
-                "white_point_y": "16450/50000",
-                "min_luminance": "1/10000",
-                "max_luminance": "10000000/10000"
-              },
-              "contentLight": {
-                "side_data_type": "Content light level metadata",
-                "max_content": 1000,
-                "max_average": 400
-              }
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 180,
+                  "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+                }
+              ]
             }
           }
         },
@@ -4383,12 +4425,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 3102.6553999999996
+      "peakRssBytes": 297914368,
+      "wallMs": 3069.1360999999997
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:47.926Z",
+      "generatedAt": "2026-10-27T08:41:03.014Z",
       "fixture": "mixed-complex",
       "verdict": "PASS",
       "reasons": [],
@@ -4596,8 +4638,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 300,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 11320686,
           "bitRate": 9056548,
@@ -4621,8 +4669,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 300,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 11320686,
           "bitRate": 9056548,
@@ -5079,7 +5133,9 @@
             ],
             "avDriftMs": 0,
             "durationDeltaMs": 0,
-            "residualDb": "-inf"
+            "residualDb": "-inf",
+            "residualRms": 0,
+            "referenceRms": 0.040771807196682955
           }
         },
         "alpha": {
@@ -5102,8 +5158,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 300,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -5111,8 +5173,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 300,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -5146,12 +5214,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 6490.228999999999
+      "peakRssBytes": 297914368,
+      "wallMs": 6921.052599999999
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:50.627Z",
+      "generatedAt": "2026-10-27T08:41:05.649Z",
       "fixture": "motion-blur",
       "verdict": "PASS",
       "reasons": [],
@@ -5320,8 +5388,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 90,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 257424,
           "bitRate": 686464,
@@ -5341,8 +5415,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 90,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 257294,
           "bitRate": 686117,
@@ -5702,8 +5782,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 90,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -5711,8 +5797,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 90,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -5746,12 +5838,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 2694.1666999999943
+      "peakRssBytes": 297914368,
+      "wallMs": 2627.6227999999974
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:53.965Z",
+      "generatedAt": "2026-10-27T08:41:08.935Z",
       "fixture": "transition-crossfade",
       "verdict": "PASS",
       "reasons": [],
@@ -5919,8 +6011,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 150,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1236624,
           "bitRate": 1978598,
@@ -5940,8 +6038,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 150,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1236624,
           "bitRate": 1978598,
@@ -6293,8 +6397,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 150,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -6302,8 +6412,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 150,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -6337,12 +6453,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 3328.5553999999975
+      "peakRssBytes": 297914368,
+      "wallMs": 3277.4424999999974
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:51:58.073Z",
+      "generatedAt": "2026-10-27T08:41:13.071Z",
       "fixture": "typography-svg",
       "verdict": "PASS",
       "reasons": [],
@@ -6516,8 +6632,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1184659,
           "bitRate": 1184659,
@@ -6537,8 +6659,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 1184659,
           "bitRate": 1184659,
@@ -6910,8 +7038,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -6919,8 +7053,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -6954,12 +7094,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 4099.531300000002
+      "peakRssBytes": 297914368,
+      "wallMs": 4126.9899000000005
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:52:02.905Z",
+      "generatedAt": "2026-10-27T08:41:17.943Z",
       "fixture": "video-heavy",
       "verdict": "PASS",
       "reasons": [],
@@ -7164,8 +7304,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 6713525,
           "bitRate": 6713525,
@@ -7185,8 +7331,14 @@
           "colorTransfer": "bt709",
           "colorPrimaries": "bt709",
           "alpha": false,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 240,
+              "value": ""
+            }
+          ],
           "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
           "sizeBytes": 6713525,
           "bitRate": 6713525,
@@ -7624,8 +7776,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": "bt709",
@@ -7633,8 +7791,14 @@
               "matrix": "bt709",
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 240,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -7668,12 +7832,12 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 4813.957000000002
+      "peakRssBytes": 297914368,
+      "wallMs": 4853.3447000000015
     },
     {
       "schema": "turbo-fidelity/1",
-      "generatedAt": "2026-10-27T07:52:03.415Z",
+      "generatedAt": "2026-10-27T08:41:18.406Z",
       "fixture": "webm-transparency",
       "verdict": "PASS",
       "reasons": [],
@@ -7818,8 +7982,14 @@
           "colorTransfer": null,
           "colorPrimaries": null,
           "alpha": true,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 60,
+              "value": ""
+            }
+          ],
           "formatName": "matroska,webm",
           "sizeBytes": 27293,
           "bitRate": 109172,
@@ -7839,8 +8009,14 @@
           "colorTransfer": null,
           "colorPrimaries": null,
           "alpha": true,
-          "masteringDisplay": null,
-          "contentLight": null,
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 60,
+              "value": ""
+            }
+          ],
           "formatName": "matroska,webm",
           "sizeBytes": 27293,
           "bitRate": 109172,
@@ -8156,8 +8332,14 @@
               "matrix": null,
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 60,
+                  "value": ""
+                }
+              ]
             },
             "candidate": {
               "transfer": null,
@@ -8165,8 +8347,14 @@
               "matrix": null,
               "range": "tv",
               "pixFmt": "yuv420p",
-              "masteringDisplay": null,
-              "contentLight": null
+              "hdrStream": [],
+              "hdrFrames": [
+                {
+                  "from": 0,
+                  "count": 60,
+                  "value": ""
+                }
+              ]
             }
           }
         },
@@ -8195,8 +8383,8 @@
         }
       },
       "measurementErrors": {},
-      "peakRssBytes": 282083328,
-      "wallMs": 504.52739999999903
+      "peakRssBytes": 297914368,
+      "wallMs": 454.53319999999803
     }
   ]
 }

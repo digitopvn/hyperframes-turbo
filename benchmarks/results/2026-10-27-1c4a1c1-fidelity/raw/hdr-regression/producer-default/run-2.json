@@ -8041,7 +8041,7 @@
   "jobStatus": "complete",
   "fidelity": {
     "schema": "turbo-fidelity/1",
-    "generatedAt": "2026-10-27T07:51:41.403Z",
+    "generatedAt": "2026-10-27T08:40:56.058Z",
     "fixture": "hdr-regression",
     "verdict": "PASS",
     "reasons": [],
@@ -8217,24 +8217,14 @@
         "colorTransfer": "smpte2084",
         "colorPrimaries": "bt2020",
         "alpha": false,
-        "masteringDisplay": {
-          "side_data_type": "Mastering display metadata",
-          "red_x": "34000/50000",
-          "red_y": "16000/50000",
-          "green_x": "13250/50000",
-          "green_y": "34500/50000",
-          "blue_x": "7500/50000",
-          "blue_y": "3000/50000",
-          "white_point_x": "15635/50000",
-          "white_point_y": "16450/50000",
-          "min_luminance": "1/10000",
-          "max_luminance": "10000000/10000"
-        },
-        "contentLight": {
-          "side_data_type": "Content light level metadata",
-          "max_content": 1000,
-          "max_average": 400
-        },
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 180,
+            "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 3730868,
         "bitRate": 4974490,
@@ -8254,24 +8244,14 @@
         "colorTransfer": "smpte2084",
         "colorPrimaries": "bt2020",
         "alpha": false,
-        "masteringDisplay": {
-          "side_data_type": "Mastering display metadata",
-          "red_x": "34000/50000",
-          "red_y": "16000/50000",
-          "green_x": "13250/50000",
-          "green_y": "34500/50000",
-          "blue_x": "7500/50000",
-          "blue_y": "3000/50000",
-          "white_point_x": "15635/50000",
-          "white_point_y": "16450/50000",
-          "min_luminance": "1/10000",
-          "max_luminance": "10000000/10000"
-        },
-        "contentLight": {
-          "side_data_type": "Content light level metadata",
-          "max_content": 1000,
-          "max_average": 400
-        },
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 180,
+            "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 3730868,
         "bitRate": 4974490,
@@ -8645,24 +8625,14 @@
             "matrix": "bt2020nc",
             "range": "tv",
             "pixFmt": "yuv420p10le",
-            "masteringDisplay": {
-              "side_data_type": "Mastering display metadata",
-              "red_x": "34000/50000",
-              "red_y": "16000/50000",
-              "green_x": "13250/50000",
-              "green_y": "34500/50000",
-              "blue_x": "7500/50000",
-              "blue_y": "3000/50000",
-              "white_point_x": "15635/50000",
-              "white_point_y": "16450/50000",
-              "min_luminance": "1/10000",
-              "max_luminance": "10000000/10000"
-            },
-            "contentLight": {
-              "side_data_type": "Content light level metadata",
-              "max_content": 1000,
-              "max_average": 400
-            }
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 180,
+                "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+              }
+            ]
           },
           "candidate": {
             "transfer": "smpte2084",
@@ -8670,24 +8640,14 @@
             "matrix": "bt2020nc",
             "range": "tv",
             "pixFmt": "yuv420p10le",
-            "masteringDisplay": {
-              "side_data_type": "Mastering display metadata",
-              "red_x": "34000/50000",
-              "red_y": "16000/50000",
-              "green_x": "13250/50000",
-              "green_y": "34500/50000",
-              "blue_x": "7500/50000",
-              "blue_y": "3000/50000",
-              "white_point_x": "15635/50000",
-              "white_point_y": "16450/50000",
-              "min_luminance": "1/10000",
-              "max_luminance": "10000000/10000"
-            },
-            "contentLight": {
-              "side_data_type": "Content light level metadata",
-              "max_content": 1000,
-              "max_average": 400
-            }
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 180,
+                "value": "{\"blue_x\":\"7500/50000\",\"blue_y\":\"3000/50000\",\"green_x\":\"13250/50000\",\"green_y\":\"34500/50000\",\"max_luminance\":\"10000000/10000\",\"min_luminance\":\"1/10000\",\"red_x\":\"34000/50000\",\"red_y\":\"16000/50000\",\"side_data_type\":\"Mastering display metadata\",\"white_point_x\":\"15635/50000\",\"white_point_y\":\"16450/50000\"}\n{\"max_average\":400,\"max_content\":1000,\"side_data_type\":\"Content light level metadata\"}"
+              }
+            ]
           }
         }
       },
@@ -8716,7 +8676,7 @@
       }
     },
     "measurementErrors": {},
-    "peakRssBytes": 282083328,
-    "wallMs": 3102.6553999999996
+    "peakRssBytes": 297914368,
+    "wallMs": 3069.1360999999997
   }
 }

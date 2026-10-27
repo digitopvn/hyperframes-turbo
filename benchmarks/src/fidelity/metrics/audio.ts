@@ -15,7 +15,8 @@ import { FFMPEG, runTool } from "../proc.js";
 export const ANALYSIS_RATE = 8000;
 const WINDOW_SEC = 1.5;
 const MAX_LAG_SEC = 0.25;
-const SILENCE_RMS = 1e-4;
+/** Full-scale RMS below which audio counts as silence (-80 dBFS). */
+export const SILENCE_RMS = 1e-4;
 
 async function decodeMono(probe: MediaProbe): Promise<Float32Array> {
   const r = await runTool(FFMPEG, [
@@ -124,8 +125,12 @@ export interface AudioAnalysis {
   avDriftMs: number | null;
   /** |decoded duration candidate - reference|, ms. */
   durationDeltaMs: number | null;
-  /** RMS of (cand - ref) after alignment, relative to reference RMS, dB (-Infinity = identical). */
+  /** RMS of (cand - ref) after alignment, relative to reference RMS, dB (-Infinity = identical); null when the reference is silent. */
   residualDb: number | null;
+  /** RMS of (cand - ref) after alignment, full scale (absolute; used when the reference is silent). */
+  residualRms: number | null;
+  /** Reference RMS, full scale. */
+  referenceRms: number | null;
 }
 
 export async function analyzeAudio(ref: MediaProbe, cand: MediaProbe): Promise<AudioAnalysis> {
@@ -138,6 +143,8 @@ export async function analyzeAudio(ref: MediaProbe, cand: MediaProbe): Promise<A
     avDriftMs: null,
     durationDeltaMs: null,
     residualDb: null,
+    residualRms: null,
+    referenceRms: null,
   };
   if (!ref.audio || !cand.audio || !ref.video || !cand.video) return base;
   const off = (p: MediaProbe) => (p.audio!.startTimeSec - p.video!.startTimeSec) * 1000;
@@ -174,6 +181,10 @@ export async function analyzeAudio(ref: MediaProbe, cand: MediaProbe): Promise<A
     windows,
     avDriftMs: drift,
     durationDeltaMs: (Math.abs(r.length - c.length) / ANALYSIS_RATE) * 1000,
-    residualDb: refRms > 0 ? (resRms === 0 ? -Infinity : 20 * Math.log10(resRms / refRms)) : null,
+    // A relative residual against silence is meaningless; the judge then holds
+    // the absolute residual to the silence floor instead.
+    residualDb: refRms >= SILENCE_RMS ? (resRms === 0 ? -Infinity : 20 * Math.log10(resRms / refRms)) : null,
+    residualRms: resRms,
+    referenceRms: refRms,
   };
 }

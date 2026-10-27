@@ -40,8 +40,10 @@ export interface VideoInfo {
   bitsPerRawSample: number | null;
   /** VP8/VP9 only: "1" when libvpx decodes an alpha plane, "0" when not (verified by decoding, never from tags). */
   alphaMode: string | null;
-  /** Side data on the stream and the first frame (mastering display, content light, ...). */
-  sideData: Array<Record<string, unknown>>;
+  /** Container/stream-level side data (e.g. MP4 mdcv/clli, Matroska colour metadata). */
+  streamSideData: Array<Record<string, unknown>>;
+  /** Per-frame side data in decode-output order (e.g. HEVC/AVC SEI mastering display, content light), aligned with `frames`. */
+  frameSideData: Array<Array<Record<string, unknown>>>;
   frames: VideoFrame[];
   packets: Array<{ pts: bigint | null; dts: bigint | null }>;
 }
@@ -161,13 +163,13 @@ export async function probeMedia(input: MediaInput): Promise<MediaProbe> {
       "-select_streams",
       "v:0",
       "-show_entries",
-      "frame=pts,duration,key_frame:packet=pts,dts",
+      // `frame_side_data` must be named as a section: `frame=side_data_list`
+      // prints the list with every entry empty.
+      "frame=pts,duration,key_frame:frame_side_data:packet=pts,dts",
       "-show_frames",
       "-show_packets",
       ...src,
     ]);
-    const first = await ffprobeJson(["-select_streams", "v:0", "-read_intervals", "%+#1", "-show_frames", "-show_entries", "frame=side_data_list", ...src]);
-    const firstFrame = ((first.frames as Array<Record<string, unknown>> | undefined) ?? [])[0];
     // With both -show_frames and -show_packets, ffprobe interleaves them in one
     // `packets_and_frames` array, tagged by `type`.
     const mixed = (timeline.packets_and_frames as Array<Record<string, unknown>> | undefined) ?? [];
@@ -197,7 +199,8 @@ export async function probeMedia(input: MediaInput): Promise<MediaProbe> {
       colorPrimaries: str(vs.color_primaries),
       bitsPerRawSample: num(vs.bits_per_raw_sample),
       alphaMode: (vs.codec_name === "vp9" || vs.codec_name === "vp8") && !isDir ? await decodedVpxAlphaMode(input.path, vs) : null,
-      sideData: [...(vs.side_data_list ?? []), ...(((firstFrame?.side_data_list as Array<Record<string, unknown>>) ?? []))],
+      streamSideData: vs.side_data_list ?? [],
+      frameSideData: rawFrames.map((f) => (f.side_data_list as Array<Record<string, unknown>> | undefined) ?? []),
       frames,
       packets,
     };
@@ -226,9 +229,24 @@ export async function probeMedia(input: MediaInput): Promise<MediaProbe> {
   };
 }
 
-/** Side data entries of a given type name (ffprobe `side_data_type`). */
-export function sideDataOfType(v: VideoInfo, type: RegExp): Array<Record<string, unknown>> {
-  return v.sideData.filter((s) => type.test(String(s.side_data_type ?? "")));
+const HDR_STATIC_METADATA = /mastering display|content light/i;
+
+const stableJson = (v: unknown): string =>
+  v !== null && typeof v === "object" && !Array.isArray(v)
+    ? `{${Object.keys(v as Record<string, unknown>)
+        .sort()
+        .map((k) => `${JSON.stringify(k)}:${stableJson((v as Record<string, unknown>)[k])}`)
+        .join(",")}}`
+    : JSON.stringify(v);
+
+/**
+ * Every HDR static-metadata entry (mastering display, content light level) in
+ * a side-data list, serialised with sorted keys and sorted, so two lists
+ * compare equal exactly when they carry the same metadata. All entries count,
+ * not only the first.
+ */
+export function hdrStaticMetadata(list: Array<Record<string, unknown>>): string[] {
+  return list.filter((s) => HDR_STATIC_METADATA.test(String(s.side_data_type ?? ""))).map(stableJson).sort();
 }
 
 /** True when the stream carries an alpha plane (alpha pix_fmt, or a libvpx-decoded VP8/VP9 alpha plane). */

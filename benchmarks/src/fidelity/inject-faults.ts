@@ -14,7 +14,7 @@
  * Writes <out>/<path>.json and .md (default benchmarks/fidelity/negative-results).
  * Exit 1 if any fault is missed or the unmodified control does not pass.
  */
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -23,7 +23,7 @@ import type { CompareContext } from "./compare.js";
 import { decodeThumbnails } from "./decode.js";
 import { thumbMse } from "./metrics/pixels.js";
 import { hasAlpha, inputArgs, probeMedia, type MediaProbe } from "./probe.js";
-import { FFMPEG, runTool, spawnTool } from "./proc.js";
+import { FFMPEG, FFPROBE, runTool, spawnTool } from "./proc.js";
 import { ratToString } from "./rational.js";
 import { buildSamplePlan } from "./sample-plan.js";
 import { evaluate, keptOutput } from "./run-fidelity.js";
@@ -44,6 +44,8 @@ export type FaultKind =
   | "bitrate-drop"
   | "alpha-stripped"
   | "hdr-metadata-stripped"
+  | "hdr-sei-stripped"
+  | "hdr-max-cll-changed"
   | "audio-offset"
   | "missing-audio";
 
@@ -61,9 +63,40 @@ export const EXPECTED: Record<FaultKind, Reason[]> = {
   "bitrate-drop": ["BITRATE_DROP"],
   "alpha-stripped": ["ALPHA_MISSING"],
   "hdr-metadata-stripped": ["HDR_TRANSFER_MISMATCH", "HDR_METADATA_MISMATCH"],
+  "hdr-sei-stripped": ["HDR_METADATA_MISMATCH"],
+  "hdr-max-cll-changed": ["HDR_METADATA_MISMATCH"],
   "audio-offset": ["AV_DRIFT"],
   "missing-audio": ["AUDIO_MISSING"],
 };
+
+/**
+ * Faults that change exactly one property: the gate must FAIL with these
+ * reasons and no other, so a different check cannot catch them by accident.
+ */
+export const ONLY: Partial<Record<FaultKind, Reason[]>> = {
+  "hdr-sei-stripped": ["HDR_METADATA_MISMATCH"],
+  "hdr-max-cll-changed": ["HDR_METADATA_MISMATCH"],
+};
+
+/** Whether the gate caught `fault`: FAIL, with an expected reason, and (for single-property faults) nothing else. */
+export function faultCaught(fault: FaultKind, rec: { verdict: string; reasons: Reason[] }): boolean {
+  if (rec.verdict !== "FAIL" || !EXPECTED[fault].some((r) => rec.reasons.includes(r))) return false;
+  const only = ONLY[fault];
+  return !only || rec.reasons.every((r) => only.includes(r));
+}
+
+/** In-band (SEI) content light level of the first frame that carries one. */
+function seiContentLight(p: MediaProbe): { maxContent: number; maxAverage: number; frames: number } | null {
+  const per = p.video!.frameSideData.map((l) => l.find((s) => /content light/i.test(String(s.side_data_type ?? ""))));
+  const first = per.find(Boolean);
+  if (!first) return null;
+  const maxContent = Number(first.max_content);
+  const maxAverage = Number(first.max_average);
+  if (!Number.isInteger(maxContent) || !Number.isInteger(maxAverage)) return null;
+  return { maxContent, maxAverage, frames: per.filter(Boolean).length };
+}
+
+const hasSeiHdrMetadata = (p: MediaProbe) => p.video!.frameSideData.some((l) => l.some((s) => /mastering display|content light/i.test(String(s.side_data_type ?? ""))));
 
 const FRAME_REWRITE: FaultKind[] = ["dropped-frame", "duplicated-frame", "reordered-frames", "stale-frame", "pixel-corruption-sampled", "pixel-corruption-unsampled", "wrong-fps", "vfr-timestamps"];
 
@@ -82,7 +115,11 @@ export function applicableFaults(p: MediaProbe, ctx: CompareContext): FaultKind[
   const rewritable = v.codec === "h264" && v.pixFmt === "yuv420p" && !p.isImageSequence;
   if (rewritable) out.push(...FRAME_REWRITE, "wrong-resolution", "bitrate-drop");
   if (hasAlpha(v) && v.codec === "vp9") out.push("alpha-stripped");
-  if (ctx.spec.hdr && v.codec === "hevc") out.push("hdr-metadata-stripped");
+  if (ctx.spec.hdr && v.codec === "hevc") {
+    out.push("hdr-metadata-stripped");
+    if (hasSeiHdrMetadata(p)) out.push("hdr-sei-stripped");
+    if (seiContentLight(p)) out.push("hdr-max-cll-changed");
+  }
   if (p.audio && !p.isImageSequence) out.push("audio-offset", "missing-audio");
   return out;
 }
@@ -193,6 +230,89 @@ async function rewriteFrames(src: MediaProbe, out: string, seq: number[], opts: 
   if (pos !== seq.length) throw new Error(`fault rewrite wrote ${pos} of ${seq.length} frames`);
 }
 
+/** A different MaxCLL whose two bytes are both non-zero (no new emulation-prevention pattern). */
+function nextContentLight(v: number): number {
+  for (let n = v + 100; n !== v; n = (n + 1) & 0xffff) if (n >> 8 !== 0 && (n & 0xff) !== 0) return n;
+  throw new Error("no replacement MaxCLL value");
+}
+
+/**
+ * Rewrite MaxCLL in every HEVC content-light-level SEI payload (type 144,
+ * size 4: MaxCLL u16, MaxFALL u16), in-band and in hvcC alike. The result is
+ * verified by decoding, so a stray match in slice data cannot pass unnoticed.
+ */
+function patchContentLight(file: Buffer, cll: { maxContent: number; maxAverage: number }, next: number): { file: Buffer; count: number } {
+  const needle = Buffer.from([0x90, 0x04, cll.maxContent >> 8, cll.maxContent & 0xff, cll.maxAverage >> 8, cll.maxAverage & 0xff]);
+  const out = Buffer.from(file);
+  let count = 0;
+  for (let i = file.indexOf(needle); i >= 0; i = file.indexOf(needle, i + 1)) {
+    out[i + 2] = next >> 8;
+    out[i + 3] = next & 0xff;
+    count++;
+  }
+  if (!count) throw new Error("content light SEI payload not found");
+  return { file: out, count };
+}
+
+const SEI_PREFIX = 39;
+const RESERVED_NON_VCL = 41;
+const retypeNalHeader = (b: Buffer, at: number) => (b[at] = (b[at]! & 0x81) | (RESERVED_NON_VCL << 1));
+
+/** Byte offset and size of every video packet (ffprobe `pos`/`size`). */
+async function videoPacketSpans(path: string): Promise<Array<{ pos: number; size: number }>> {
+  const r = await runTool(FFPROBE, ["-v", "error", "-select_streams", "v:0", "-show_entries", "packet=pos,size", "-of", "json", path]);
+  const raw = ((JSON.parse(r.stdout.toString("utf8")) as { packets?: Array<{ pos?: string; size?: string }> }).packets ?? []).map((p) => ({ pos: Number(p.pos), size: Number(p.size) }));
+  if (!raw.length || raw.some((p) => !Number.isInteger(p.pos) || !Number.isInteger(p.size) || p.pos < 0 || p.size < 0)) throw new Error(`${path}: packet positions unavailable`);
+  return raw;
+}
+
+/**
+ * Retype every HEVC prefix-SEI NAL unit to a reserved type, in place: those in
+ * the MP4 hvcC box (ISO/IEC 14496-15: 22-byte header with lengthSizeMinusOne
+ * at byte 21, numOfArrays, then per array a type byte, numNalus and u16
+ * length-prefixed NALs) and those in-band in each length-prefixed sample.
+ */
+function retypeHevcSei(file: Buffer, packets: Array<{ pos: number; size: number }>): { file: Buffer; config: number; inBand: number } {
+  const out = Buffer.from(file);
+  const at = out.indexOf("hvcC");
+  if (at < 4) throw new Error("no hvcC box (only MP4/MOV HEVC is supported)");
+  const end = at - 4 + out.readUInt32BE(at - 4);
+  const lengthSize = (out[at + 4 + 21]! & 3) + 1;
+  let o = at + 4 + 22;
+  const arrays = out[o++]!;
+  let config = 0;
+  for (let a = 0; a < arrays; a++) {
+    const typeAt = o++;
+    const sei = (out[typeAt]! & 0x3f) === SEI_PREFIX;
+    const nalus = out.readUInt16BE(o);
+    o += 2;
+    for (let k = 0; k < nalus; k++) {
+      const len = out.readUInt16BE(o);
+      o += 2;
+      if (sei) {
+        retypeNalHeader(out, o);
+        config++;
+      }
+      o += len;
+    }
+    if (sei) out[typeAt] = (out[typeAt]! & 0xc0) | RESERVED_NON_VCL;
+    if (o > end) throw new Error("malformed hvcC box");
+  }
+  let inBand = 0;
+  for (const p of packets) {
+    for (let q = p.pos; q < p.pos + p.size; ) {
+      const len = out.readUIntBE(q, lengthSize);
+      q += lengthSize;
+      if (len < 2 || q + len > p.pos + p.size) throw new Error(`malformed NAL length at byte ${q - lengthSize}`);
+      if (((out[q]! >> 1) & 0x3f) === SEI_PREFIX) {
+        retypeNalHeader(out, q);
+        inBand++;
+      }
+      q += len;
+    }
+  }
+  return { file: out, config, inBand };
+}
 /** Paint a 25 % x 25 % white block into the luma plane (visible, local corruption). */
 function corruptLuma(frame: Buffer, w: number, h: number): Buffer {
   const bw = Math.floor(w / 4);
@@ -246,6 +366,32 @@ export async function injectFault(kind: FaultKind, src: MediaProbe, out: string,
     case "hdr-metadata-stripped":
       await ff(["-i", src.input.path, "-map", "0", "-c", "copy", "-bsf:v", "filter_units=remove_types=39,hevc_metadata=colour_primaries=2:transfer_characteristics=2:matrix_coefficients=2", "-color_primaries", "unknown", "-color_trc", "unknown", "-colorspace", "unknown"]);
       return { detail: "stream copy: prefix SEI NAL units removed, VUI and container colour description set to unspecified (container mastering/CLL boxes may survive)" };
+    case "hdr-sei-stripped": {
+      // Prefix SEI (NAL type 39) lives in two places: in-band in the samples and
+      // in the hvcC decoder configuration, which a stream copy keeps and the
+      // decoder applies to every frame. Both are retyped in place to reserved
+      // NAL type 41, which decoders skip. Byte-neutral: file size, bitrate,
+      // slices, timestamps, VUI and container tags stay identical, so the only
+      // observable change is the missing HDR metadata.
+      const pkts = await videoPacketSpans(src.input.path);
+      const retyped = retypeHevcSei(readFileSync(src.input.path), pkts);
+      writeFileSync(out, retyped.file);
+      const after = await probeMedia({ path: out });
+      if (hasSeiHdrMetadata(after)) throw new Error("HDR SEI still decoded after stripping");
+      if (after.video!.frames.length !== n) throw new Error(`SEI strip changed the frame count ${n} -> ${after.video!.frames.length}`);
+      return { detail: `${retyped.inBand} in-band and ${retyped.config} hvcC prefix-SEI NAL(s) retyped in place to reserved type 41 (byte-neutral); VUI, container colour tags, timestamps and slices identical` };
+    }
+    case "hdr-max-cll-changed": {
+      const cll = seiContentLight(src);
+      if (!cll) throw new Error("no content light level SEI to change");
+      const next = nextContentLight(cll.maxContent);
+      const patched = patchContentLight(readFileSync(src.input.path), cll, next);
+      writeFileSync(out, patched.file);
+      const after = seiContentLight(await probeMedia({ path: out }));
+      if (!after || after.maxContent !== next || after.maxAverage !== cll.maxAverage || after.frames !== cll.frames)
+        throw new Error(`MaxCLL patch not decoded as intended: ${JSON.stringify(after)}`);
+      return { detail: `byte patch of ${patched.count} content-light SEI payload(s): MaxCLL ${cll.maxContent} -> ${next} (MaxFALL ${cll.maxAverage} kept) on all ${cll.frames} frames; nothing else changed` };
+    }
     case "audio-offset": {
       const a = src.audio!;
       const dur = a.durationSec ?? src.durationSec ?? 0;
@@ -315,7 +461,7 @@ async function main(): Promise<number> {
             const rec = await evaluate({ fixture, reference: ref, candidate: out, path, backend: `fault:${fault}` });
             row.verdict = rec.verdict;
             row.reasons = rec.reasons;
-            row.caught = rec.verdict === "FAIL" && EXPECTED[fault].some((r) => rec.reasons.includes(r));
+            row.caught = faultCaught(fault, rec);
           }
         } catch (e) {
           row.error = (e as Error).message;
@@ -341,9 +487,9 @@ async function main(): Promise<number> {
     `- Distinct fault kinds caught: ${kinds.size}`,
     `- Missed or errored: ${missed.length}`,
     "",
-    "| fixture | fault | injected | expected reason (any) | verdict | reasons | caught |",
+    "| fixture | fault | injected | expected reason | verdict | reasons | caught |",
     "|---|---|---|---|---|---|---|",
-    ...rows.map((r) => `| ${r.fixture} | ${r.fault} | ${r.detail}${r.error ? ` — error: ${r.error}` : ""} | ${r.expected.join(" / ") || "PASS"} | ${r.verdict} | ${r.reasons.join(", ") || "—"} | ${r.caught ? "yes" : "**NO**"} |`),
+    ...rows.map((r) => `| ${r.fixture} | ${r.fault} | ${r.detail}${r.error ? ` — error: ${r.error}` : ""} | ${r.fault !== "control-unmodified" && ONLY[r.fault] ? `only ${ONLY[r.fault]!.join(", ")}` : r.expected.join(" / ") || "PASS"} | ${r.verdict} | ${r.reasons.join(", ") || "—"} | ${r.caught ? "yes" : "**NO**"} |`),
     "",
   ];
   writeFileSync(join(outDir, `${path}.md`), L.join("\n"));

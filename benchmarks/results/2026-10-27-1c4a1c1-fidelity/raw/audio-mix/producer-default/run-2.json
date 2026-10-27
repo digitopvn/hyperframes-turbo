@@ -4283,7 +4283,7 @@
   "jobStatus": "complete",
   "fidelity": {
     "schema": "turbo-fidelity/1",
-    "generatedAt": "2026-10-27T07:51:17.155Z",
+    "generatedAt": "2026-10-27T08:40:32.033Z",
     "fixture": "audio-mix",
     "verdict": "PASS",
     "reasons": [],
@@ -4519,8 +4519,14 @@
         "colorTransfer": "bt709",
         "colorPrimaries": "bt709",
         "alpha": false,
-        "masteringDisplay": null,
-        "contentLight": null,
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 240,
+            "value": ""
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 242565,
         "bitRate": 242565,
@@ -4544,8 +4550,14 @@
         "colorTransfer": "bt709",
         "colorPrimaries": "bt709",
         "alpha": false,
-        "masteringDisplay": null,
-        "contentLight": null,
+        "hdrStream": [],
+        "hdrFrames": [
+          {
+            "from": 0,
+            "count": 240,
+            "value": ""
+          }
+        ],
         "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
         "sizeBytes": 242565,
         "bitRate": 242565,
@@ -5058,7 +5070,9 @@
           ],
           "avDriftMs": 0,
           "durationDeltaMs": 0,
-          "residualDb": "-inf"
+          "residualDb": "-inf",
+          "residualRms": 0,
+          "referenceRms": 0.047821297129628224
         }
       },
       "alpha": {
@@ -5081,8 +5095,14 @@
             "matrix": "bt709",
             "range": "tv",
             "pixFmt": "yuv420p",
-            "masteringDisplay": null,
-            "contentLight": null
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 240,
+                "value": ""
+              }
+            ]
           },
           "candidate": {
             "transfer": "bt709",
@@ -5090,8 +5110,14 @@
             "matrix": "bt709",
             "range": "tv",
             "pixFmt": "yuv420p",
-            "masteringDisplay": null,
-            "contentLight": null
+            "hdrStream": [],
+            "hdrFrames": [
+              {
+                "from": 0,
+                "count": 240,
+                "value": ""
+              }
+            ]
           }
         }
       },
@@ -5125,7 +5151,7 @@
       }
     },
     "measurementErrors": {},
-    "peakRssBytes": 262836224,
-    "wallMs": 4576.3956
+    "peakRssBytes": 236728320,
+    "wallMs": 4513.641
   }
 }
