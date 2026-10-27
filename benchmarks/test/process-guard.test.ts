@@ -37,3 +37,29 @@ test("a sampler that really dies still aborts fail-closed", { skip: !win && "sam
     guard.stop();
   }
 });
+
+test("a hung sampler is caught even while the harness event loop keeps stalling", { skip: !win && "sampler is Windows-only" }, async () => {
+  const aborts: AbortInfo[] = [];
+  // 500 ms interval, 1 s query allowance: silence limit 2.5 s of listening.
+  const guard = new ProcessGuard(permissive, (a) => aborts.push(a), 500, 1000);
+  try {
+    await guard.start();
+    guard.simulateHungSampler();
+    // Every watchdog tick lands late (stalls of 1.2 s with short gaps). The old
+    // watchdog moved its "last sample" mark forward on each late tick and so
+    // never saw the hung sampler.
+    const deadline = Date.now() + 20_000;
+    while (aborts.length === 0 && Date.now() < deadline) {
+      const until = Date.now() + 1200;
+      while (Date.now() < until) {
+        /* busy */
+      }
+      await delay(50);
+    }
+    assert.equal(aborts.length >= 1, true, "hung sampler not detected within 20 s of repeated stalls");
+    assert.match(aborts[0]!.reason, /sampler silent for \d+ ms of listening/);
+    assert.ok(guard.maxLoopLagMs >= 600, `loop lag tracked (${guard.maxLoopLagMs} ms)`);
+  } finally {
+    guard.stop();
+  }
+});
