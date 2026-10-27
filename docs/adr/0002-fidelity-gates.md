@@ -66,4 +66,32 @@ An **offline comparator, independent of the renderer**, works on outputs written
 
 ## Measurements
 
-Filled in from committed evidence; see below.
+All numbers come from committed artefacts. Platforms not listed are not tested.
+
+**Windows 11, RTX 5060 Ti, FFmpeg 8.0 (gyan.dev essentials), upstream `1c4a1c1`**
+(`benchmarks/results/2026-10-27-1c4a1c1-fidelity/`, 13 fixtures × 1 cold + 5 warm):
+
+- Nine fixtures were bit-exact across all warm pairs. Four were not:
+
+  | fixture | non-exact pairs | max abs diff | max diff-pixel % | min encoded PSNR |
+  |---|---|---|---|---|
+  | fps-ntsc-30000-1001 | 6/10 | 67 | 1.64 | 62.30 dB |
+  | gsap-static-holds | 4/10 | 21 | 2.67 | 55.29 dB |
+  | motion-blur | 9/10 | 52 | 4.14 | 60.64 dB |
+  | typography-svg | 4/10 | 63 | 1.62 | 62.18 dB |
+
+  Per-fixture limits for these four are in `benchmarks/fidelity/thresholds/producer-default.win32.json`.
+- The gate gave PASS on all 13 fixtures (run 2 vs run 1). It took 0.5 to 6.5 s per fixture and about 50 s in total. The peak comparator RSS was 269 MiB, excluding FFmpeg children.
+- VMAF between identical 1080p encodes is about 97.43, not 100. VMAF is therefore never the sole check.
+- Fault injection caught 107 of 107 faults across 14 kinds, with 0 missed. All 13 untouched controls gave PASS (`benchmarks/fidelity/negative-results/producer-default.win32.md`).
+- `--keep-output` overhead (typography-svg, 5 warm runs each, idle checks passed):
+  - Without the flag, warm wall times were 48.2, 56.2, 26.0, 59.8 and 25.6 s (median 48.2 s).
+  - With it, they were 50.3, 56.3, 30.7, 63.0 and 25.8 s (median 50.3 s).
+  - The spread between runs is about 2× and dwarfs the difference, so the result is inconclusive.
+  - The copy and hash run after the worker stops its wall clock (`render-worker.ts`), so recorded render times do not include them by construction.
+- The first attempt is kept as a negative result: `producer-default.win32.attempt-1-injector-colour-defect.md`.
+
+**ubuntu-24.04 GitHub runner, SwiftShader, FFmpeg 6.0.1 static** (correctness only, no performance claims):
+
+- Four fixtures were bit-exact (`producer-default.linux.json`).
+- The gate gave PASS on all four, and fault injection caught 13 kinds with 0 missed (CI workflow `fidelity.yml`).

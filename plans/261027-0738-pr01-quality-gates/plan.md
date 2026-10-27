@@ -245,12 +245,12 @@ Lệnh xác minh (cho người thực hiện, không chạy lúc lập plan): `b
 
 ## 15. Tiêu chí chấp nhận đo được
 
-- [ ] Mọi fault trong `inject-faults.ts` (>=10 loại) đều bị phát hiện với đúng mã lý do; 0 false PASS.
-- [ ] Ref vs ref (2 run độc lập) PASS cho mọi fixture trên CI.
-- [ ] File ngưỡng có >=5 run tham chiếu, kèm cặp thô và nguồn gốc.
-- [ ] `fidelity` có trong `turbo-bench-run/2`; `report.ts` đọc được kết quả PR00 cũ không lỗi.
-- [ ] Workflow xanh trên PR và có artifact report; job đỏ khi cố ý tiêm lỗi.
-- [ ] PR body có: ADR 0002, đo trước/sau (overhead của `--keep-output` và thời gian fidelity, >=5 cặp), báo cáo fidelity, peak RSS của bộ so sánh, chiến lược fallback/rollback, negative results.
+- [x] Mọi fault trong `inject-faults.ts` (>=10 loại) đều bị phát hiện với đúng mã lý do; 0 false PASS.
+- [x] Ref vs ref (2 run độc lập) PASS cho mọi fixture trên CI.
+- [x] File ngưỡng có >=5 run tham chiếu, kèm cặp thô và nguồn gốc.
+- [x] `fidelity` có trong `turbo-bench-run/2`; `report.ts` đọc được kết quả PR00 cũ không lỗi.
+- [x] Workflow xanh trên PR và có artifact report; job đỏ khi cố ý tiêm lỗi.
+- [x] PR body có: ADR 0002, đo trước/sau (overhead của `--keep-output` và thời gian fidelity, >=5 cặp), báo cáo fidelity, peak RSS của bộ so sánh, chiến lược fallback/rollback, negative results.
 
 ## Câu hỏi chưa giải quyết
 
