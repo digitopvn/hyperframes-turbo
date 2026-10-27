@@ -46,7 +46,7 @@ jobs:
         working-directory: benchmarks
         run: |
           ../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json
-          node --import $TSX --test --test-concurrency=1 test/fidelity/unit.test.ts test/fidelity/gate.test.ts
+          node --import $TSX --test --test-concurrency=1 test/process-guard.test.ts test/fidelity/unit.test.ts test/fidelity/gate.test.ts
       - name: Render reference subset (1 cold + 2 warm, SwiftShader)
         run: >
           node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts
@@ -82,10 +82,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      # The write token is never persisted in .git/config: only the push step
+      # below receives it, so rendering and calibration code cannot push.
       - uses: actions/checkout@v4
         with:
           submodules: recursive
           ref: ${{ github.event.pull_request.head.ref }}
+          persist-credentials: false
       - uses: ./.github/actions/fidelity-setup
       - name: Render reference subset (1 cold + 5 warm, SwiftShader)
         run: >
@@ -107,10 +110,14 @@ jobs:
             ${{ runner.temp }}/fidelity-calibration/**/*.csv
             ${{ runner.temp }}/fidelity-calibration/**/*.md
       - name: Commit thresholds to the PR branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          REPO: ${{ github.repository }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add benchmarks/fidelity/thresholds/producer-default.linux.json benchmarks/fidelity/calibration/producer-default.linux.pairs.json
           git diff --cached --quiet && { echo "thresholds unchanged"; exit 0; }
           git commit -m "chore(fidelity): calibrate producer-default.linux thresholds on ubuntu-24.04 SwiftShader"
-          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "HEAD:refs/heads/${HEAD_REF}"
