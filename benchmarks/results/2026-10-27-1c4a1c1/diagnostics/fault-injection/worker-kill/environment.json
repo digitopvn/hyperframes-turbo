@@ -1,0 +1,98 @@
+{
+  "schema": "turbo-bench-environment/1",
+  "generatedAt": "2026-10-27T04:06:50.797Z",
+  "generator": "benchmarks/src/collect-environment.ts",
+  "repo": {
+    "turboSha": "e9af147923155d8552ea6c7dc8394a2567d42bb8",
+    "turboDirty": true
+  },
+  "upstream": {
+    "repository": "https://github.com/heygen-com/hyperframes",
+    "submodulePath": "upstream/hyperframes",
+    "sha": "1c4a1c162033f22935c0c315efc5245b0cd6ac5d",
+    "describe": "1c4a1c162033f22935c0c315efc5245b0cd6ac5d 2026-10-26T12:51:59-04:00 Merge pull request #6446 from heygen-com/release/v0.8.205",
+    "dirty": false,
+    "lockfile": "bun.lock",
+    "lockfileSha256": "cff7e8bdaabad6d5bf799594fd2648fafca2c6b7f7d3c9c8f4150d37263269d5",
+    "producerVersion": "0.8.205"
+  },
+  "toolchain": {
+    "node": "v24.20.0",
+    "bun": "1.4.2",
+    "tsx": "4.21.0",
+    "ffmpeg": "ffmpeg version 8.0-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+    "ffmpegConfiguration": "configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband",
+    "ffprobe": "ffprobe version 8.0-essentials_build-www.gyan.dev Copyright (c) 2007-2025 the FFmpeg developers",
+    "ffmpegHardwareEncodersCompiledIn": [
+      "h264_nvenc",
+      "hevc_nvenc",
+      "av1_nvenc",
+      "h264_qsv",
+      "h264_amf"
+    ],
+    "chrome": {
+      "headlessShellPath": "~\\.cache\\hyperframes\\chrome\\chrome-headless-shell\\win64-152.0.7977.30\\chrome-headless-shell-win64\\chrome-headless-shell.exe",
+      "version": "HeadlessChrome/152.0.7977.30"
+    }
+  },
+  "host": {
+    "platform": "win32",
+    "arch": "x64",
+    "kernelRelease": "10.0.26200",
+    "os": {
+      "Caption": "Microsoft Windows 11 Home",
+      "Version": "10.0.26200",
+      "BuildNumber": "26200",
+      "OSArchitecture": "64-bit"
+    },
+    "cpu": {
+      "Name": "Intel(R) Core(TM) i7-14700K",
+      "NumberOfCores": 20,
+      "NumberOfLogicalProcessors": 28,
+      "MaxClockSpeed": 3400
+    },
+    "cpuModelNode": "Intel(R) Core(TM) i7-14700K",
+    "logicalCpus": 28,
+    "ramBytes": 102830084096,
+    "memoryModules": [
+      {
+        "Capacity": 51539607552,
+        "Speed": 5600,
+        "ConfiguredClockSpeed": 5600
+      },
+      {
+        "Capacity": 51539607552,
+        "Speed": 5600,
+        "ConfiguredClockSpeed": 5600
+      }
+    ],
+    "disks": {
+      "FriendlyName": "ADATA LEGEND 860",
+      "MediaType": "SSD",
+      "BusType": "NVMe",
+      "Size": 2000398934016
+    },
+    "powerScheme": "Power Scheme GUID: 111bb2d3-3b6a-425f-8855-5a7761229ac7  (Ultimate Performance)",
+    "gpu": [
+      {
+        "name": "NVIDIA GeForce RTX 5060 Ti",
+        "driver": "610.88",
+        "vram": "16311 MiB",
+        "pcieGen": "5",
+        "pcieWidth": "16",
+        "powerLimit": "180.00 W",
+        "maxClock": "3090 MHz",
+        "vbios": "98.06.39.80.63"
+      }
+    ]
+  },
+  "testedPlatforms": [
+    "windows-x64-d3d11-nvidia"
+  ],
+  "notTested": [
+    "macOS (Metal, Apple Silicon)",
+    "Linux with hardware GPU (NVENC/VAAPI)",
+    "Linux SwiftShader (headless/Docker)",
+    "Windows AMD or Intel GPU"
+  ]
+}

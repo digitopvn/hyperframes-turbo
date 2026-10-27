@@ -32,19 +32,23 @@ Both runs started their render workers without `windowsHide`, from a parent proc
   - Upstream logged `Auto-worker calibration failed` with error `Network.enable timed out` (protocolTimeout 30000) on **61 of 61** non-webm streaming runs.
   - In 21 of 24 SDR cells, the warm runs used two different pipelines.
   - `cli-local-default` resolved `--browser-gpu auto` to **SwiftShader** (`gpuRenderer: swiftshader/other`).
-- **Change.** The harness now gives every worker a hidden console (`windowsHide: true`). Chrome and FFmpeg inherit that console. The PID-tracked tree kill and the resource guards were added at the same time; *Host safety* in `docs/benchmark-protocol.md` describes them. Upstream, fixtures and settings are identical between the runs.
+- **Change.** Against the withdrawn `2026-10-26` run, the harness changed three things at once. Upstream, fixtures and settings stayed identical.
+  - Every worker now gets a hidden console (`windowsHide: true`), which Chrome and FFmpeg inherit.
+  - A settle wait and cooldown run before every run.
+  - The PID-tracked tree kill and the resource guards were added (*Host safety* in `docs/benchmark-protocol.md`).
+
+  The incomplete `2026-10-27` run and the visible-console diagnostic already had the settle wait, and both still failed. The diagnostic failed even in its fresh-process + settle mode, with no render child alive. Settle alone is therefore ruled out. Hiding the console and the tree kill were not separated: no run used one without the other.
 - **Result** (same host, same upstream SHA, same fixtures):
 
   | | Visible consoles (withdrawn) | Hidden consoles (this run) |
   |---|---|---|
   | Calibration failures | 61 of 126 SDR non-webm runs | **0 of 180** (`calibrationFailures`) |
-  | `0x800700e8` in worker stderr | on screen, many | **0** |
   | Cells with mixed capture path | 21 of 24 SDR | **0 of 24** (`mixedCellCount`) |
   | `cli-local-default` GPU | `swiftshader/other` | hardware: probe → hardware in 10 of 10 worker probes (6 Intel, 4 NVIDIA adapter strings); every run that records `gpuRenderer` shows `d3d11/intel` |
   | Disk-path warm wall | 24.3-37.8 s | **9.9-24.3 s** (`diskPathWallMs`) |
   | Calibration diagnostic, 4 modes × 6 renders (`diagnostics/`) | **11 of 24** failed, in every mode, including fresh process + settle wait + no render child alive (`sFsFsF`, `sFFFFs`, `FsssFs`, `sssFsF`) | **0 of 24** (`ssssss` in all four modes) |
 
-- **Conclusion.** The calibration timeouts, the per-run pipeline flips and the SwiftShader fallback of `--browser-gpu auto` were caused by the harness's process setup on this host, not by upstream. The A/B above, with everything else held fixed, shows this.
+- **Conclusion.** The calibration timeouts, the per-run pipeline flips and the SwiftShader fallback of `--browser-gpu auto` were caused by the harness's process setup on this host, not by upstream. The A/B above shows this. Upstream was held fixed; the harness changes are confounded with each other as described under *Change*. The most direct evidence for the console is the diagnostic. In it, the same procedure with settle on failed 11 of 24 runs with visible consoles and 0 of 24 with hidden consoles, while the tree kill had nothing to clean up.
 - **What is not proven.** The exact Windows-side mechanism is still a hypothesis. It is consistent with a new console (conhost) created per Chrome child process, slowing or breaking utility-process start-up until a 30 s CDP call times out. The A/B demonstrates the effect, not the mechanism.
 - **Upstream exposure.** This is still worth reporting upstream. Puppeteer launches Chrome without `windowsHide`, so a HyperFrames render started from a console-less parent on Windows (a service, a scheduler, a GUI app) can be exposed to the same failure.
 
@@ -62,7 +66,7 @@ Both runs started their render workers without `windowsHide`, from a parent proc
 4. **Stage overlap.**
    - On the disk path, capture → encode is serial (overlap 0). SDR encode is 0.10-6.4 s.
    - Self-encoding stages (`capture_streaming`, `capture_hdr_layered`) emit no `encode` event. Their encode interval is rebuilt from `stages.encodeMs`, aligned to the end of capture (`inferredPhases`).
-   - Concurrency is **1.00-1.98×** across all cells and **1.87-1.98×** among the 6 cells with an inferred encode.
+   - Concurrency is **1.00-1.98×** across all cells (n=20) and **1.87-1.98×** among the 6 cells with an inferred encode.
 5. **Throughput.**
    - SDR renders at **0.30-0.86×** real time (gsap-static-holds/producer-default, n=16).
    - HDR renders at **0.062-0.178×** real time (1.85-5.35 fps, n=4).

@@ -90,11 +90,22 @@ An earlier full baseline froze the benchmark desktop and needed a hard reset. Do
   | Consecutive failed runs (run error, worker death, or upstream calibration failure) | 3 | `--max-consecutive-failures` |
 
   The limits are checked once before any render starts. The run refuses to start on a host that is already over a limit.
+- **The guard fails closed.** The run aborts the same way if the sampler errors or exits, sends no first sample within 30 s, or goes silent for more than 3 intervals (6 s). A blind guard does not let the run continue.
+- **No sampler outlives the harness.** The guard sampler and the per-run process-tree sampler both take the PID of their owning Node process.
+  - Each loop exits as soon as that PID is gone. Node does not kill its children when it exits.
+  - The guard loop runs with `$ErrorActionPreference = 'Stop'`.
+  - A write to a closed stdout ends either loop.
+  - Every harness exit path runs one teardown: normal end, abort, `--strict-idle` refusal, a rejected `main()`, an uncaught exception or rejection, and SIGINT/SIGTERM/SIGHUP. The teardown kills live worker trees, sweeps tracked survivors, and stops the sampler.
 - **Worker stderr.** The full stderr of each worker is kept in `raw/<fixture>/<variant>/worker-stderr.log`. Upstream prints its GPU-mode probe result (`browserGpuMode probe → …`) and Chrome launch errors there, not through the job logger.
 
 `diag-calibration.ts` uses the same guard and kill paths.
 
-Fault-injection check: `--inject-worker-kill-ms <ms>` kills one worker process mid-run, in the last round. It kills the process only, not its tree. The killed cell must be recorded with `exitCode: 1`, the other cells must finish, and no `chrome-headless-shell`/`ffmpeg` may remain on the host afterwards. Run this check with one fixture and `--warm-runs 1` before every full baseline on a new host.
+Fault-injection checks (test only):
+
+- `--inject-worker-kill-ms <ms>` kills one worker process in the middle of a run in the last round. It kills the process only, not its tree. Expected: the killed cell is recorded with `exitCode: 1`, the other cells finish, and no `chrome-headless-shell` or `ffmpeg` process is left on the host.
+- `--inject-sampler-kill-ms <ms>` kills the guard sampler that many ms after the first render starts. Expected: the run aborts with `host-safety sampler exited`, exits with code 3, writes no report, and leaves no process behind.
+
+The recorded evidence is in `results/2026-10-27-1c4a1c1/diagnostics/fault-injection/`. Run this check with one fixture and `--warm-runs 1` before every full baseline on a new host.
 
 ## Fixtures
 
@@ -153,4 +164,5 @@ Every derived metric in `RunMetrics` (`report.ts`) is a pure function of one raw
 - Pixels that never cross CDP are visible only as process-tree disk I/O and `tmpPeakBytes`. The main example is the HDR layered path, where FFmpeg pre-extracts native HDR frames and Node composites them (`producer/src/services/renderOrchestrator.ts:4551-4555`).
 - Working set is sampled every 1 s, so short peaks can be missed. Upstream `peakRssMb` covers the Node process only.
 - `frameRpcResponseBytes` counts responses of `Page.captureScreenshot`, `HeadlessExperimental.beginFrame` and `Runtime.callFunctionOn`. The last of these also carries small non-frame replies; the per-method split is in `cdpTap.byMethod`.
+- The guard samples the process table every 2 s. A grandchild whose intermediate parent starts and dies between two samples is never linked to a worker, so the sweep cannot reach it. In this pipeline Chrome and FFmpeg are direct children of the worker or of the Chrome browser process, both of which live longer than one sample. The host-wide Chrome cap still counts such a process.
 - The inferred `encode` interval assumes upstream finalises encoding when the capture stage ends. Its start is derived from the reported duration, not observed.

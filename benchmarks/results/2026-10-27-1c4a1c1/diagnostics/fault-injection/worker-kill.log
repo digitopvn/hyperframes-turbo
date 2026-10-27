@@ -1,0 +1,13 @@
+[bench] 1 fixture(s) x 2 profile(s) x (1 cold + 1 warm) -> benchmarks/results/2026-10-27-1c4a1c1/diagnostics/fault-injection/worker-kill
+[bench] preflight idle: {"ok":true,"cpuBusyPct":9.05883857582368,"gpuUtilPct":0,"gpuEncPct":0,"attempts":1,"thresholds":{"cpuPct":20,"gpuPct":15}}
+[worker] gsap-static-holds/producer-default run 0 (cold): 17592 ms
+[worker] gsap-static-holds/cli-local-default run 0 (cold): 34272 ms
+[worker] gsap-static-holds/producer-default.control run 0 (cold): 22383 ms
+[worker] gsap-static-holds/cli-local-default run 1 (warm): 27457 ms
+[worker] gsap-static-holds/producer-default.control run 1 (warm): 25328 ms
+[bench] fault injection: killing worker 15492 (process only)
+[bench] gsap-static-holds/producer-default: worker exited (1) during run 1
+[bench] after gsap-static-holds: killed 13 leftover tracked process(es): conhost.exe#29980, conhost.exe#55316, conhost.exe#46792, conhost.exe#62088, conhost.exe#57764, conhost.exe#60892, conhost.exe#61176, conhost.exe#54312, conhost.exe#63932, conhost.exe#39900, conhost.exe#59276, conhost.exe#63032, conhost.exe#62964
+[bench] done: benchmarks\results\2026-10-27-1c4a1c1\diagnostics\fault-injection\worker-kill\report.md
+exit code: 0
+host after exit: chrome-headless-shell=0 ffmpeg=0 render-worker node=0

@@ -1,0 +1,2 @@
+fixture,profile,controlColdMs,instrumentedColdMs,coldOverheadPct,controlWarmMedianMs,instrumentedWarmMedianMs,warmMedianOverheadPct,controlWarmCv,instrumentedWarmCv
+gsap-static-holds,producer-default,22382.5707,17592.2738,-21.401907,25328.1597,,,0,

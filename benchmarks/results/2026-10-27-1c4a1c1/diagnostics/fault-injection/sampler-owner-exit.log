@@ -1,0 +1,7 @@
+kill-owner: alive before fault: true,true
+kill-owner: owner 31732, guard sampler 54436, tree sampler 53504, alive just after fault: false,false
+kill-owner: after 1193 ms alive: false,false
+close-pipe: alive before fault: true,true
+close-pipe: owner 41340, guard sampler 48952, tree sampler 27360, alive just after fault: true,true
+  owner: ABORT host-safety sampler silent for 6705 ms (> 3 intervals)
+close-pipe: after 32752 ms alive: true,true
