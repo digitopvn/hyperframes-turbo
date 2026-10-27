@@ -129,7 +129,9 @@ Fixtures are listed in `benchmarks/fixtures/manifest.json`. Local golden fixture
 benchmarks/results/<YYYY-MM-DD>-<upstreamSha7>/
   environment.json        turbo-bench-environment/1 (home dir replaced by ~)
   run-manifest.json       turbo-bench-manifest/1   (command, window, profiles, control, order rule, preflight, cell exit codes)
-  raw/<fixture>/<variant>/run-<n>.json   turbo-bench-run/1
+  raw/<fixture>/<variant>/run-<n>.json   turbo-bench-run/1, or /2 once a fidelity record is attached
+  outputs/<fixture>/<variant>/run-<n>.*  only with --keep-output (gitignored)
+  fidelity-report.{json,md}              only after run-fidelity.ts --results
   runs.csv                one row per run (RunMetrics in benchmarks/src/report.ts)
   summary.csv / summary.json   turbo-bench-summary/2 (per cell: cold, warm Distribution per metric; referenceRate; harnessOverhead; pathGroups + mixedPath per cell)
   overhead.csv            instrumented vs control wall time per fixture
@@ -156,7 +158,29 @@ benchmarks/results/<YYYY-MM-DD>-<upstreamSha7>/
 | `traceEvents` | Every upstream `[Render:trace]` event from the full logger stream, not the copy capped at 160 events |
 | `perfSummary` | Upstream `RenderPerfSummary`, unmodified |
 
-Every derived metric in `RunMetrics` (`report.ts`) is a pure function of one raw run. PR01 should add fidelity data under a new `fidelity` key in the raw run and bump that schema to `/2`, rather than change the existing fields.
+Every derived metric in `RunMetrics` (`report.ts`) is a pure function of one raw run.
+
+### `turbo-bench-run/2`
+
+`/2` is `/1` plus one optional `fidelity` key holding a `turbo-fidelity/1` record. Existing fields are unchanged. `run-fidelity.ts --results` attaches the record to each candidate run it gates, and `report.ts` reads both `/1` and `/2`. The record holds:
+
+- the verdict and reasons;
+- the reference and candidate files with their sha256;
+- the threshold path and file hash;
+- every check's details;
+- the gate's wall time and peak RSS.
+
+## Fidelity
+
+Speed numbers count only for output that passes the fidelity gate against the Chromium reference. The method, thresholds and commands are in [fidelity-protocol.md](fidelity-protocol.md).
+
+- `--fixture-set baseline|fidelity|all` (default `baseline`) adds the fidelity-only fixtures from `fixtures/fidelity-manifest.json`:
+  - `fps-ntsc-30000-1001`;
+  - `motion-blur`;
+  - `transition-crossfade`.
+
+  The baseline set and its results are unchanged.
+- `--keep-output` (opt-in) copies each output to `outputs/<fixture>/<cell>/run-<n>.<ext>` (gitignored), after wall time and probe are recorded. The raw run records the copy's path and sha256. The copy happens outside the timed region; see the PR01 evidence for its effect on wall time.
 
 ## Known measurement limits
 

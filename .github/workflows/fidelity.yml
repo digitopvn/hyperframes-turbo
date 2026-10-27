@@ -1,0 +1,116 @@
+# Fidelity gate (correctness only).
+#
+# Renders a fixture subset with the Chromium reference backend on SwiftShader
+# and runs the fail-closed gate against the committed Linux thresholds
+# (benchmarks/fidelity/thresholds/producer-default.linux.json). Timings from
+# this job are NOT benchmarks: shared runners, software GPU.
+#
+# Calibration: label a PR `fidelity-calibrate` to render the subset with
+# 1 cold + 5 warm runs, derive Linux thresholds and commit them (thresholds
+# plus raw pairs) to the PR branch. A commit pushed with GITHUB_TOKEN does not
+# trigger workflows, so re-run the check job (or push) afterwards.
+name: fidelity
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fidelity-${{ github.ref }}-${{ github.event.action == 'labeled' && github.event.label.name || 'check' }}
+  cancel-in-progress: true
+
+env:
+  FFMPEG_URL: https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-6.0.1-amd64-static.tar.xz
+  FFMPEG_SHA256: 28268bf402f1083833ea269331587f60a242848880073be8016501d864bd07a5
+  CHROME_HEADLESS_SHELL: "152.0.7977.30"
+  BUN_VERSION: "1.4.4" # upstream/hyperframes package.json engines.bun
+  FIXTURES: fps-ntsc-30000-1001,transition-crossfade,audio-mix,webm-transparency
+  TSX: ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs
+
+jobs:
+  check:
+    if: github.event.action != 'labeled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: ./.github/actions/fidelity-setup
+      - name: Typecheck and unit/gate tests
+        working-directory: benchmarks
+        run: |
+          ../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json
+          node --import $TSX --test --test-concurrency=1 test/fidelity/unit.test.ts test/fidelity/gate.test.ts
+      - name: Render reference subset (1 cold + 2 warm, SwiftShader)
+        run: >
+          node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts
+          --fixture-set all --fixtures "$FIXTURES" --profiles producer-default --no-control
+          --warm-runs 2 --keep-output --settle-ms 0 --out "$RUNNER_TEMP/fidelity-ci"
+      - name: Gate warm run 2 against warm run 1
+        working-directory: benchmarks
+        run: >
+          node --import $TSX src/fidelity/run-fidelity.ts --results "$RUNNER_TEMP/fidelity-ci"
+          --ref-cell producer-default --ref-run 1 --cand-cell producer-default --cand-run 2
+          --fixtures "$FIXTURES" --path producer-default.linux
+      - name: Fault injection (every applicable fault must be caught)
+        working-directory: benchmarks
+        run: >
+          node --import $TSX src/fidelity/inject-faults.ts --results "$RUNNER_TEMP/fidelity-ci"
+          --ref-run 1 --source-run 2 --fixtures "$FIXTURES" --path producer-default.linux
+          --out "$RUNNER_TEMP/fidelity-ci/negative-results"
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fidelity-check
+          path: |
+            ${{ runner.temp }}/fidelity-ci/**/*.json
+            ${{ runner.temp }}/fidelity-ci/**/*.md
+            ${{ runner.temp }}/fidelity-ci/**/*.csv
+          if-no-files-found: warn
+
+  calibrate:
+    if: github.event.action == 'labeled' && github.event.label.name == 'fidelity-calibrate'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: ./.github/actions/fidelity-setup
+      - name: Render reference subset (1 cold + 5 warm, SwiftShader)
+        run: >
+          node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts
+          --fixture-set all --fixtures "$FIXTURES" --profiles producer-default --no-control
+          --warm-runs 5 --keep-output --settle-ms 0 --out "$RUNNER_TEMP/fidelity-calibration"
+      - name: Calibrate Linux thresholds
+        working-directory: benchmarks
+        run: >
+          node --import $TSX src/fidelity/calibrate.ts --results "$RUNNER_TEMP/fidelity-calibration"
+          --fixtures "$FIXTURES" --path producer-default.linux
+      - name: Upload calibration
+        uses: actions/upload-artifact@v4
+        with:
+          name: fidelity-calibration
+          path: |
+            benchmarks/fidelity/
+            ${{ runner.temp }}/fidelity-calibration/**/*.json
+            ${{ runner.temp }}/fidelity-calibration/**/*.csv
+            ${{ runner.temp }}/fidelity-calibration/**/*.md
+      - name: Commit thresholds to the PR branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add benchmarks/fidelity/thresholds/producer-default.linux.json benchmarks/fidelity/calibration/producer-default.linux.pairs.json
+          git diff --cached --quiet && { echo "thresholds unchanged"; exit 0; }
+          git commit -m "chore(fidelity): calibrate producer-default.linux thresholds on ubuntu-24.04 SwiftShader"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
