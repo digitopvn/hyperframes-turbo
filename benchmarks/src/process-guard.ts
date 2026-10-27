@@ -52,16 +52,44 @@ export interface AbortInfo {
   sample: GuardSample | null;
 }
 
+/**
+ * PowerShell owner check shared by every sampler loop. A sampler must exit
+ * with the Node process that owns it (Node does not kill children when it
+ * exits). The owner is identified by PID *and* start time, captured once while
+ * the owner is certainly alive (it is the process starting the sampler), so a
+ * PID reused by an unrelated process does not keep the sampler alive.
+ * `$ownerStart` may be preset to a FILETIME (non-zero) by the caller.
+ */
+export const PS_OWNER_INIT = String.raw`
+if (-not $ownerStart) { $ownerStart = (Get-Process -Id $owner -ErrorAction Stop).StartTime.ToFileTimeUtc() }
+`;
+export const PS_OWNER_CHECK = String.raw`
+  $o = Get-Process -Id $owner -ErrorAction SilentlyContinue
+  if (-not $o) { exit 0 }
+  try { $os0 = $o.StartTime.ToFileTimeUtc() } catch { exit 0 }
+  if ($os0 -ne $ownerStart) { exit 0 }
+`;
+
 const PS_LOOP = String.raw`
-param([int]$interval, [int]$owner)
+param([int]$interval, [int]$owner, [int64]$ownerStart)
 $ErrorActionPreference = 'Stop'
+${PS_OWNER_INIT}
 while ($true) {
-  # Exit with the owning Node process: Node does not kill children when it exits.
-  if (-not (Get-Process -Id $owner -ErrorAction SilentlyContinue)) { exit 0 }
-  $p = Get-CimInstance Win32_Process -Property ProcessId,ParentProcessId,Name,CreationDate | ForEach-Object { ,@($_.ProcessId, $_.ParentProcessId, $_.Name, $(if ($_.CreationDate) { $_.CreationDate.ToFileTimeUtc() } else { 0 })) }
-  $os = Get-CimInstance Win32_OperatingSystem -Property FreePhysicalMemory,TotalVisibleMemorySize
-  $m = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -Property CommittedBytes,CommitLimit
-  [Console]::Out.WriteLine((ConvertTo-Json -Compress -Depth 3 -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); p = $p; free = [int64]$os.FreePhysicalMemory * 1024; total = [int64]$os.TotalVisibleMemorySize * 1024; commit = [int64]$m.CommittedBytes; limit = [int64]$m.CommitLimit }))
+  ${PS_OWNER_CHECK}
+  # A failed CIM query (WMI is transiently unavailable on a busy host) is
+  # reported and retried; it is not a sample, so persistent failure still
+  # trips the watchdog's silence limit.
+  try {
+    $q0 = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
+    $p = Get-CimInstance Win32_Process -Property ProcessId,ParentProcessId,Name,CreationDate | ForEach-Object { ,@($_.ProcessId, $_.ParentProcessId, $_.Name, $(if ($_.CreationDate) { $_.CreationDate.ToFileTimeUtc() } else { 0 })) }
+    $os = Get-CimInstance Win32_OperatingSystem -Property FreePhysicalMemory,TotalVisibleMemorySize
+    $m = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -Property CommittedBytes,CommitLimit
+    $now = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
+    $line = ConvertTo-Json -Compress -Depth 3 -InputObject @{ t = $now; q = $now - $q0; p = $p; free = [int64]$os.FreePhysicalMemory * 1024; total = [int64]$os.TotalVisibleMemorySize * 1024; commit = [int64]$m.CommittedBytes; limit = [int64]$m.CommitLimit }
+  } catch {
+    $line = ConvertTo-Json -Compress -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); err = [string]$_.Exception.Message }
+  }
+  [Console]::Out.WriteLine($line)
   [Console]::Out.Flush()
   Start-Sleep -Milliseconds $interval
 }
@@ -75,8 +103,9 @@ const START_TIMEOUT_MS = 30_000;
 /**
  * One sample cycle is the sleep interval plus the CIM queries, which took
  * ~0.8 s on an idle 500-process host and several seconds more while renders
- * saturate the CPU. Silence beyond 3 intervals plus this allowance means the
- * sampler is hung; an exited sampler aborts immediately via its exit event.
+ * saturate the CPU. The sampler reports each query's duration; silence beyond
+ * 3 cycles (interval + slowest recent query) plus this allowance means the
+ * sampler is hung. An exited sampler aborts immediately via its exit event.
  */
 const QUERY_ALLOWANCE_MS = 10_000;
 
@@ -86,13 +115,43 @@ const QUERY_ALLOWANCE_MS = 10_000;
  */
 const MAX_LOOP_LAG_MS = 60_000;
 
+/**
+ * `pid` and every descendant in a `ps -A -o pid=,ppid=` listing, parents
+ * before children. Pure, so the tree walk is testable on any platform.
+ */
+export function descendantsOf(pid: number, psOutput: string): number[] {
+  const kids = new Map<number, number[]>();
+  for (const line of psOutput.split("\n")) {
+    const [c, p] = line.trim().split(/\s+/).map(Number);
+    if (!Number.isInteger(c) || !Number.isInteger(p) || c === p) continue;
+    kids.set(p!, [...(kids.get(p!) ?? []), c!]);
+  }
+  const out: number[] = [];
+  const seen = new Set<number>();
+  for (const queue = [pid]; queue.length; ) {
+    const id = queue.shift()!;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    out.push(id);
+    queue.push(...(kids.get(id) ?? []));
+  }
+  return out;
+}
+
 /** Kill a process and all its live descendants. Never throws. */
 export function killTree(pid: number): void {
   if (process.platform === "win32") {
     spawnSync("taskkill", ["/T", "/F", "/PID", String(pid)], { stdio: "ignore", windowsHide: true });
-  } else {
+    return;
+  }
+  // Snapshot the tree first, then stop the root so it cannot spawn more while
+  // the rest is killed. Descendants that a dead parent leaves behind are
+  // re-parented, so they are only reachable through this snapshot.
+  const ps = spawnSync("ps", ["-A", "-o", "pid=,ppid="], { encoding: "utf8" });
+  const tree = ps.status === 0 && typeof ps.stdout === "string" ? descendantsOf(pid, ps.stdout) : [pid];
+  for (const id of tree) {
     try {
-      process.kill(pid, "SIGKILL");
+      process.kill(id, "SIGKILL");
     } catch {
       /* already gone */
     }
@@ -112,14 +171,26 @@ export class ProcessGuard {
   last: GuardSample | null = null;
   private lastSampleAt = 0;
   private watchdog: NodeJS.Timeout | null = null;
+  private startTimer: NodeJS.Timeout | null = null;
+  /** Test only: FILETIME the sampler is told its owner started at (0 = read it). */
+  private ownerStartOverride = 0;
+  /** CIM query time of recent samples, ms (the silence limit scales with the slowest). */
+  private readonly recentQueryMs: number[] = [];
   /** Largest observed event-loop lag (watchdog tick lateness), ms. */
   maxLoopLagMs = 0;
+  /** Largest CIM query time the sampler reported, ms. */
+  maxQueryMs = 0;
+  /** Sampler cycles whose CIM query failed (reported, retried, not counted as samples). */
+  samplerErrors = 0;
+  lastSamplerError: string | null = null;
 
   constructor(
     private readonly limits: GuardLimits,
     private readonly onAbort: (info: AbortInfo) => void,
     private readonly intervalMs = 2000,
     private readonly queryAllowanceMs = QUERY_ALLOWANCE_MS,
+    /** Process whose exit ends the sampler; the harness itself unless a diagnostic says otherwise. */
+    private readonly ownerPid = process.pid,
   ) {}
 
   get abortInfo(): AbortInfo | null {
@@ -129,14 +200,14 @@ export class ProcessGuard {
   /**
    * Start sampling; resolves after the first sample so limits are checked
    * before any render. Fails closed: if the sampler errors, exits, never
-   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals plus
-   * QUERY_ALLOWANCE_MS of listening time, or this process's event loop is
+   * reports within START_TIMEOUT_MS, or goes silent for longer than
+   * `silenceLimitMs` of listening time, or this process's event loop is
    * blocked longer than MAX_LOOP_LAG_MS, the guard aborts, because a blind
    * guard must not let the benchmark keep running.
    */
   start(): Promise<void> {
     if (process.platform !== "win32") return Promise.resolve();
-    const proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", `& { ${PS_LOOP} } ${this.intervalMs} ${process.pid}`], {
+    const proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", `& { ${PS_LOOP} } ${this.intervalMs} ${this.ownerPid} ${this.ownerStartOverride}`], {
       stdio: ["ignore", "pipe", "ignore"],
       windowsHide: true,
     });
@@ -151,6 +222,8 @@ export class ProcessGuard {
     proc.on("error", (err) => blind(`failed: ${err.message}`));
     proc.on("exit", (code, signal) => blind(`exited (${code ?? signal})`));
     const startTimer = setTimeout(() => blind(`sent no sample within ${START_TIMEOUT_MS} ms`), START_TIMEOUT_MS);
+    startTimer.unref();
+    this.startTimer = startTimer;
     let lastTickAt = Date.now();
     // Silence is measured in listening time since the last real sample, and
     // only a real sample resets it. A late tick means this process's event loop
@@ -174,9 +247,10 @@ export class ProcessGuard {
       // Before the first sample the start timeout is in charge.
       if (!this.lastSampleAt) return;
       listenedMs += elapsed > 1.5 * this.intervalMs ? this.intervalMs : elapsed;
-      const limit = 3 * this.intervalMs + this.queryAllowanceMs;
+      const limit = this.silenceLimitMs;
       if (listenedMs > limit) {
-        blind(`silent for ${listenedMs} ms of listening (> ${limit} ms: 3 intervals + query allowance; ${now - this.lastSampleAt} ms wall since the last sample, max loop lag ${this.maxLoopLagMs} ms)`);
+        const err = this.lastSamplerError ? `; ${this.samplerErrors} failed sampler queries, last: ${this.lastSamplerError}` : "";
+        blind(`silent for ${listenedMs} ms of listening (> ${limit} ms: 3 sample cycles + query allowance; ${now - this.lastSampleAt} ms wall since the last sample, max loop lag ${this.maxLoopLagMs} ms${err})`);
       }
     }, this.intervalMs);
     this.watchdog.unref();
@@ -198,7 +272,24 @@ export class ProcessGuard {
     return this.ready;
   }
 
+  /**
+   * Listening time without a sample after which the sampler counts as hung:
+   * 3 sample cycles (sleep + the slowest CIM query among the last 10 samples)
+   * plus the fixed query allowance. A busy host whose queries slow down
+   * therefore widens the limit instead of tripping it; a hung sampler reports
+   * no query time, so it cannot widen it.
+   */
+  get silenceLimitMs(): number {
+    const slowest = Math.max(0, ...this.recentQueryMs);
+    return 3 * (this.intervalMs + slowest) + this.queryAllowanceMs;
+  }
+
   private resetSilence: () => void = () => {};
+
+  /** Test only: tell the sampler its owner started at a different time, as if the owner PID had been reused. */
+  simulateOwnerPidReuse(): void {
+    this.ownerStartOverride = 1;
+  }
 
   /** Test only: stop reading samples while the sampler stays alive (a hung sampler, as seen from here). */
   simulateHungSampler(): void {
@@ -230,11 +321,22 @@ export class ProcessGuard {
   }
 
   private ingest(line: string): boolean {
-    let s: { t: number; p: RawProc[]; free: number; total: number; commit: number; limit: number };
+    let s: { t: number; q?: number; err?: string; p: RawProc[]; free: number; total: number; commit: number; limit: number };
     try {
       s = JSON.parse(line);
     } catch {
       return false;
+    }
+    if (typeof s.err === "string") {
+      this.samplerErrors++;
+      this.lastSamplerError = s.err.slice(0, 200);
+      return false;
+    }
+    if (!Array.isArray(s.p) || typeof s.free !== "number" || typeof s.total !== "number") return false;
+    if (typeof s.q === "number" && Number.isFinite(s.q) && s.q >= 0) {
+      this.recentQueryMs.push(s.q);
+      if (this.recentQueryMs.length > 10) this.recentQueryMs.shift();
+      if (s.q > this.maxQueryMs) this.maxQueryMs = s.q;
     }
     const procs = (s.p ?? []).filter((p) => Array.isArray(p) && typeof p[2] === "string");
     const kids = new Map<number, RawProc[]>();
@@ -296,6 +398,9 @@ export class ProcessGuard {
 
   stop(): void {
     if (this.watchdog) clearInterval(this.watchdog);
+    if (this.startTimer) clearTimeout(this.startTimer);
+    this.watchdog = null;
+    this.startTimer = null;
     const proc = this.proc;
     this.proc = null;
     proc?.kill();
