@@ -1,3 +1,6 @@
 
 # Benchmark media cache and scratch output
 benchmarks/.cache/
+
+# Fidelity gate: kept render outputs (never committed)
+benchmarks/results/*/outputs/

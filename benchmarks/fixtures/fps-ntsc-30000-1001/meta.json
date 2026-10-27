@@ -1,0 +1,8 @@
+{
+  "name": "NTSC rational frame rate (typography + SVG)",
+  "description": "HyperFrames Turbo fidelity fixture: the typography-svg composition rendered at the exact rational rate 30000/1001 (1920x1080, 8 s). Checks that accumulated PTS do not drift from frame_index * 1001/30000 s.",
+  "tags": ["typography", "svg", "fps-rational", "turbo-fidelity"],
+  "renderConfig": {
+    "fps": "30000/1001"
+  }
+}

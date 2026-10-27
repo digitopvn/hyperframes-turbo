@@ -1,0 +1,83 @@
+{
+  "$comment": "Fidelity-gate fixtures and per-fixture sampling hints. 'fixtures' lists fixtures that exist only for the fidelity gate (same layout as manifest.json); they are NOT part of the PR00 baseline benchmark, so the baseline set and its numbers stay unchanged. 'fidelity' holds, for every fixture the gate knows, what the output must carry (alpha, HDR transfer) and the timeline instants that need a pixel comparison and cannot be derived from the HTML (clip cut boundaries are derived automatically from data-start/data-duration by benchmarks/src/fidelity/sample-plan.ts). Times are seconds on the composition timeline, read from each fixture's src/index.html.",
+  "fixtures": [
+    { "id": "fps-ntsc-30000-1001", "source": "local", "category": "fps-rational", "vendor": ["gsap"], "media": [] },
+    { "id": "motion-blur", "source": "local", "category": "motion-blur", "vendor": ["gsap"], "media": [] },
+    { "id": "transition-crossfade", "source": "local", "category": "transition", "vendor": ["gsap"], "media": [] }
+  ],
+  "fidelity": {
+    "typography-svg": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 0.3 },
+        { "kind": "opacity-boundary", "t": 0.8 },
+        { "kind": "transition", "start": 1.2, "end": 2.2 },
+        { "kind": "rapid-motion", "t": 4.0 }
+      ]
+    },
+    "gsap-static-holds": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 0.2 },
+        { "kind": "static-hold", "start": 1.8, "end": 3.0 },
+        { "kind": "static-hold", "start": 4.0, "end": 6.5 },
+        { "kind": "static-hold", "start": 7.0, "end": 9.9 }
+      ]
+    },
+    "css-filters-blend": {
+      "probes": [
+        { "kind": "filter-heavy", "t": 0.0 },
+        { "kind": "filter-heavy", "t": 3.0 },
+        { "kind": "rapid-motion", "t": 1.5 },
+        { "kind": "filter-heavy", "t": 5.9 }
+      ]
+    },
+    "canvas-webgl": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 0.034 },
+        { "kind": "filter-heavy", "t": 3.0 }
+      ]
+    },
+    "video-heavy": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 0.4 },
+        { "kind": "rapid-motion", "t": 3.0 }
+      ]
+    },
+    "audio-mix": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 1.0 },
+        { "kind": "rapid-motion", "t": 3.5 },
+        { "kind": "rapid-motion", "t": 6.0 }
+      ]
+    },
+    "mixed-complex": {
+      "probes": [
+        { "kind": "transition", "start": 0.3, "end": 1.3 },
+        { "kind": "filter-heavy", "t": 3.0 },
+        { "kind": "transition", "start": 6.0, "end": 6.6 }
+      ]
+    },
+    "webm-transparency": { "alpha": true, "probes": [] },
+    "hdr-hlg-regression": { "hdr": "hlg", "probes": [] },
+    "hdr-regression": { "hdr": "pq", "probes": [] },
+    "fps-ntsc-30000-1001": {
+      "probes": [
+        { "kind": "rapid-motion", "t": 0.3 },
+        { "kind": "transition", "start": 1.2, "end": 2.2 }
+      ]
+    },
+    "motion-blur": {
+      "probes": [
+        { "kind": "motion-blur", "t": 1.45 },
+        { "kind": "motion-blur", "t": 1.55 },
+        { "kind": "rapid-motion", "t": 2.0 }
+      ]
+    },
+    "transition-crossfade": {
+      "probes": [
+        { "kind": "opacity-boundary", "t": 2.0 },
+        { "kind": "transition", "start": 2.0, "end": 3.0 },
+        { "kind": "opacity-boundary", "t": 3.0 }
+      ]
+    }
+  }
+}

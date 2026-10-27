@@ -1,0 +1,9 @@
+{
+  "name": "Engine sub-frame motion blur",
+  "description": "HyperFrames Turbo fidelity fixture (1920x1080, 30 fps, 3 s): fast translation + rotation rendered with upstream's engine motion blur (RenderConfig.motionBlur, 8 sub-frame samples per frame, 180 degree shutter).",
+  "tags": ["motion-blur", "turbo-fidelity"],
+  "renderConfig": {
+    "fps": 30,
+    "motionBlur": { "samplesPerFrame": 8, "shutterAngle": 180 }
+  }
+}

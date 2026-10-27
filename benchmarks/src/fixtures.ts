@@ -1,7 +1,7 @@
 /** Fixture discovery, generated media and per-run project preparation. */
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, type Dirent } from "node:fs";
+import { cpSync, createReadStream, existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, statSync, type Dirent } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -28,6 +28,8 @@ export interface FixtureMeta {
     workers?: number;
     hdr?: boolean;
     variables?: Record<string, unknown>;
+    /** Upstream engine sub-frame motion blur (`RenderConfig.motionBlur`); absent = off. */
+    motionBlur?: Record<string, unknown>;
   };
 }
 
@@ -36,9 +38,27 @@ export interface ResolvedFixture extends FixtureEntry {
   meta: FixtureMeta;
 }
 
-export function loadManifest(): FixtureEntry[] {
-  const raw = JSON.parse(readFileSync(join(BENCH_ROOT, "fixtures", "manifest.json"), "utf8"));
+/** Which fixture list to load: the PR00 baseline set, the fidelity-only set, or both. */
+export type FixtureSet = "baseline" | "fidelity" | "all";
+
+function readFixtureList(file: string): FixtureEntry[] {
+  const raw = JSON.parse(readFileSync(join(BENCH_ROOT, "fixtures", file), "utf8"));
+  if (!Array.isArray(raw.fixtures)) throw new Error(`${file}: 'fixtures' must be an array`);
   return raw.fixtures as FixtureEntry[];
+}
+
+/**
+ * Baseline benchmark fixtures (manifest.json) by default. The fidelity-only
+ * fixtures live in fidelity-manifest.json so the baseline set never changes
+ * when fidelity coverage grows.
+ */
+export function loadManifest(set: FixtureSet = "baseline"): FixtureEntry[] {
+  const baseline = set === "fidelity" ? [] : readFixtureList("manifest.json");
+  const fidelity = set === "baseline" ? [] : readFixtureList("fidelity-manifest.json");
+  const all = [...baseline, ...fidelity];
+  const dup = all.find((f, i) => all.findIndex((g) => g.id === f.id) !== i);
+  if (dup) throw new Error(`fixture id ${dup.id} is listed twice across manifests`);
+  return all;
 }
 
 export function resolveFixture(entry: FixtureEntry): ResolvedFixture {
@@ -56,6 +76,21 @@ const VENDOR_FILES: Record<string, { from: string; to: string }> = {
 
 function sha256File(path: string): string {
   return createHash("sha256").update(readFileSync(path)).digest("hex");
+}
+
+/** Streaming SHA-256 of a render output: a file, or a png-sequence directory's files in name order. */
+export async function sha256Output(path: string): Promise<string> {
+  const h = createHash("sha256");
+  const files = statSync(path).isDirectory()
+    ? readdirSync(path)
+        .sort()
+        .map((n) => join(path, n))
+    : [path];
+  for (const f of files) {
+    if (files.length > 1) h.update(f.slice(path.length));
+    for await (const chunk of createReadStream(f)) h.update(chunk as Buffer);
+  }
+  return h.digest("hex");
 }
 
 /** Generate (or reuse) a media file from its recipe; returns its path and hash. */

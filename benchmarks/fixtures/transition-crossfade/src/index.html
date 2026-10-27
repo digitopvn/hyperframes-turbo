@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo fidelity: crossfade transition</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      .scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font: 700 160px Georgia, serif; }
+      #a { background: linear-gradient(120deg, #1d3557, #457b9d); color: #f1faee; }
+      #b { background: radial-gradient(circle at 30% 40%, #e63946, #2b0a0d); color: #ffd166; }
+      .chip { position: absolute; width: 180px; height: 180px; border-radius: 50%; background: #f1faee; opacity: 0.8; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="transition-crossfade" data-width="1920" data-height="1080" data-duration="5">
+      <div class="scene clip" id="a" data-start="0" data-duration="3" data-track-index="0">Scene A<div class="chip" id="ca" style="left: 200px; top: 120px"></div></div>
+      <div class="scene clip" id="b" data-start="2" data-duration="3" data-track-index="1">Scene B<div class="chip" id="cb" style="left: 1500px; top: 760px"></div></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#ca", { x: 1200, duration: 3, ease: "none" }, 0);
+      tl.fromTo("#b", { opacity: 0 }, { opacity: 1, duration: 1, ease: "none" }, 2);
+      tl.to("#a", { opacity: 0, duration: 1, ease: "none" }, 2);
+      tl.to("#cb", { x: -1200, duration: 3, ease: "none" }, 2);
+      tl.to({}, { duration: 5 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["transition-crossfade"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo fidelity: motion blur</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #101418; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #101418; }
+      .bar { position: absolute; left: 0; width: 1920px; height: 6px; background: #2b3440; }
+      #box { position: absolute; left: 80px; top: 340px; width: 260px; height: 260px; border-radius: 24px; background: linear-gradient(135deg, #ff6b6b, #ffd166); }
+      #ring { position: absolute; left: 1400px; top: 640px; width: 280px; height: 280px; border: 26px solid #4ecdc4; border-right-color: #f0ebd8; border-radius: 50%; }
+      #label { position: absolute; left: 80px; top: 80px; font: 700 64px Georgia, serif; color: #f0ebd8; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="motion-blur" data-width="1920" data-height="1080" data-duration="3">
+      <div class="bar" style="top: 300px"></div>
+      <div class="bar" style="top: 640px"></div>
+      <div id="label">Motion blur</div>
+      <div id="box"></div>
+      <div id="ring"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.to("#box", { x: 1500, duration: 1.5, ease: "power2.in" }, 0);
+      tl.to("#box", { x: 0, rotation: 180, duration: 1.0, ease: "power3.out" }, 1.5);
+      tl.to("#ring", { rotation: 720, duration: 3, ease: "none" }, 0);
+      tl.to({}, { duration: 3 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["motion-blur"] = tl;
+    </script>
+  </body>
+</html>

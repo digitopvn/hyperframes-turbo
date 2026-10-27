@@ -1,0 +1,8 @@
+{
+  "name": "Two-scene opacity crossfade",
+  "description": "HyperFrames Turbo fidelity fixture (1920x1080, 30 fps, 5 s): scene A (0-3 s) crossfades into scene B (2-5 s) over 2.0-3.0 s with GSAP opacity tweens; clip boundaries at 2 s and 3 s.",
+  "tags": ["transition", "opacity", "turbo-fidelity"],
+  "renderConfig": {
+    "fps": 30
+  }
+}
