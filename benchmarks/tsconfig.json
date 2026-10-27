@@ -9,5 +9,5 @@
     "typeRoots": ["../upstream/hyperframes/node_modules/@types"],
     "types": ["node"]
   },
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"]
 }

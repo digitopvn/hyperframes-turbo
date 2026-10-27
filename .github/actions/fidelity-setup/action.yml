@@ -1,0 +1,45 @@
+name: fidelity-setup
+description: Pinned FFmpeg, Node 24, Bun, Chrome headless shell and an upstream build for the fidelity jobs.
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "24"
+    - uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: ${{ env.BUN_VERSION }}
+    - name: Cache FFmpeg, Chrome and Bun downloads
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/fidelity-ffmpeg
+          ~/.cache/puppeteer
+          ~/.bun/install/cache
+        key: fidelity-${{ runner.os }}-${{ env.FFMPEG_SHA256 }}-${{ env.CHROME_HEADLESS_SHELL }}-${{ hashFiles('upstream/hyperframes/bun.lock') }}
+    - name: Install pinned FFmpeg (sha256-verified)
+      shell: bash
+      run: |
+        set -euo pipefail
+        dir="$HOME/.cache/fidelity-ffmpeg"
+        mkdir -p "$dir"
+        if [ ! -x "$dir/bin/ffmpeg" ]; then
+          curl -sSfL -o "$RUNNER_TEMP/ffmpeg.tar.xz" "$FFMPEG_URL"
+          echo "$FFMPEG_SHA256  $RUNNER_TEMP/ffmpeg.tar.xz" | sha256sum -c -
+          mkdir -p "$dir/bin"
+          tar -xJf "$RUNNER_TEMP/ffmpeg.tar.xz" -C "$RUNNER_TEMP"
+          cp "$RUNNER_TEMP"/ffmpeg-*-static/ffmpeg "$RUNNER_TEMP"/ffmpeg-*-static/ffprobe "$dir/bin/"
+        fi
+        echo "$dir/bin" >> "$GITHUB_PATH"
+        "$dir/bin/ffmpeg" -hide_banner -version | head -1
+        filters="$("$dir/bin/ffmpeg" -hide_banner -filters)"
+        if ! grep -q libvmaf <<<"$filters"; then echo "::error::pinned FFmpeg has no libvmaf"; exit 1; fi
+    - name: Install Chrome headless shell
+      shell: bash
+      run: npx --yes @puppeteer/browsers@2 install "chrome-headless-shell@$CHROME_HEADLESS_SHELL" --path "$HOME/.cache/puppeteer"
+    - name: Build pinned upstream
+      shell: bash
+      working-directory: upstream/hyperframes
+      run: |
+        bun install --frozen-lockfile
+        bun run build

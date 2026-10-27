@@ -1,0 +1,389 @@
+{
+  "schema": "turbo-fidelity-thresholds/1",
+  "path": "producer-default.linux",
+  "calibration": {
+    "runs": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "createdAt": "2026-10-27T05:37:26.788Z",
+    "host": "AMD EPYC 9V74 80-Core Processor",
+    "platform": "linux",
+    "upstreamSha": "1c4a1c162033f22935c0c315efc5245b0cd6ac5d",
+    "ffmpeg": "ffmpeg version 6.0.1-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2023 the FFmpeg developers",
+    "resultsDir": "runner/work/_temp/fidelity-calibration",
+    "cell": "producer-default",
+    "rawPairsFile": "benchmarks/fidelity/calibration/producer-default.linux.pairs.json",
+    "command": "calibrate.ts --results /home/runner/work/_temp/fidelity-calibration --fixtures fps-ntsc-30000-1001,transition-crossfade,audio-mix,webm-transparency --path producer-default.linux"
+  },
+  "fixtures": {
+    "fps-ntsc-30000-1001": {
+      "runs": 5,
+      "pairs": 10,
+      "bitExact": true,
+      "pixels": {
+        "maxMse": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAbsDiff": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxDiffPixelPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAlphaMse": null
+      },
+      "temporal": {
+        "thumbMseTol": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "audio": null,
+      "encoded": {
+        "minPsnrDb": {
+          "limit": "inf",
+          "worst": "inf",
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minVmaf": {
+          "limit": 97.428293,
+          "worst": 97.428293,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxBitrateDropPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      }
+    },
+    "transition-crossfade": {
+      "runs": 5,
+      "pairs": 10,
+      "bitExact": true,
+      "pixels": {
+        "maxMse": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAbsDiff": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxDiffPixelPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAlphaMse": null
+      },
+      "temporal": {
+        "thumbMseTol": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "audio": null,
+      "encoded": {
+        "minPsnrDb": {
+          "limit": "inf",
+          "worst": "inf",
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minVmaf": {
+          "limit": 97.427962,
+          "worst": 97.427962,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxBitrateDropPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      }
+    },
+    "audio-mix": {
+      "runs": 5,
+      "pairs": 10,
+      "bitExact": true,
+      "pixels": {
+        "maxMse": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAbsDiff": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxDiffPixelPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAlphaMse": null
+      },
+      "temporal": {
+        "thumbMseTol": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "audio": {
+        "maxAvDriftMs": {
+          "limit": 21.333333333333332,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "floor",
+          "n": 10
+        },
+        "maxDurationDeltaMs": {
+          "limit": 21.333333333333332,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "floor",
+          "n": 10
+        },
+        "maxResidualDb": {
+          "limit": "-inf",
+          "worst": "-inf",
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "encoded": {
+        "minPsnrDb": {
+          "limit": "inf",
+          "worst": "inf",
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minVmaf": {
+          "limit": 97.428337,
+          "worst": 97.428337,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxBitrateDropPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      }
+    },
+    "webm-transparency": {
+      "runs": 5,
+      "pairs": 10,
+      "bitExact": true,
+      "pixels": {
+        "maxMse": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAbsDiff": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxDiffPixelPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "maxAlphaMse": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "temporal": {
+        "thumbMseTol": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      },
+      "audio": null,
+      "encoded": {
+        "minPsnrDb": {
+          "limit": "inf",
+          "worst": "inf",
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minSsim": {
+          "limit": 1,
+          "worst": 1,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        },
+        "minVmaf": null,
+        "maxBitrateDropPct": {
+          "limit": 0,
+          "worst": 0,
+          "mad": 0,
+          "margin": 0,
+          "rule": "exact",
+          "n": 10
+        }
+      }
+    }
+  }
+}

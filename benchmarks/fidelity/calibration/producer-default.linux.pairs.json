@@ -1,0 +1,7880 @@
+{
+  "schema": "turbo-fidelity-calibration-pairs/1",
+  "path": "producer-default.linux",
+  "calibration": {
+    "runs": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "createdAt": "2026-10-27T05:37:26.788Z",
+    "host": "AMD EPYC 9V74 80-Core Processor",
+    "platform": "linux",
+    "upstreamSha": "1c4a1c162033f22935c0c315efc5245b0cd6ac5d",
+    "ffmpeg": "ffmpeg version 6.0.1-static https://johnvansickle.com/ffmpeg/  Copyright (c) 2000-2023 the FFmpeg developers",
+    "resultsDir": "runner/work/_temp/fidelity-calibration",
+    "cell": "producer-default",
+    "rawPairsFile": "benchmarks/fidelity/calibration/producer-default.linux.pairs.json",
+    "command": "calibrate.ts --results /home/runner/work/_temp/fidelity-calibration --fixtures fps-ntsc-30000-1001,transition-crossfade,audio-mix,webm-transparency --path producer-default.linux"
+  },
+  "fixtures": {
+    "fps-ntsc-30000-1001": {
+      "runs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "warmPairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "coldPairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428293,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              7,
+              0,
+              1,
+              0
+            ],
+            [
+              9,
+              0,
+              1,
+              0
+            ],
+            [
+              10,
+              0,
+              1,
+              0
+            ],
+            [
+              26,
+              0,
+              1,
+              0
+            ],
+            [
+              36,
+              0,
+              1,
+              0
+            ],
+            [
+              51,
+              0,
+              1,
+              0
+            ],
+            [
+              66,
+              0,
+              1,
+              0
+            ],
+            [
+              73,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              136,
+              0,
+              1,
+              0
+            ],
+            [
+              154,
+              0,
+              1,
+              0
+            ],
+            [
+              209,
+              0,
+              1,
+              0
+            ],
+            [
+              219,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "thresholds": "written"
+    },
+    "transition-crossfade": {
+      "runs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "warmPairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 5,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 5,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "coldPairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "frames": [
+            150,
+            150
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.427962,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              5,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ],
+            [
+              60,
+              0,
+              1,
+              0
+            ],
+            [
+              61,
+              0,
+              1,
+              0
+            ],
+            [
+              75,
+              0,
+              1,
+              0
+            ],
+            [
+              76,
+              0,
+              1,
+              0
+            ],
+            [
+              89,
+              0,
+              1,
+              0
+            ],
+            [
+              90,
+              0,
+              1,
+              0
+            ],
+            [
+              91,
+              0,
+              1,
+              0
+            ],
+            [
+              135,
+              0,
+              1,
+              0
+            ],
+            [
+              137,
+              0,
+              1,
+              0
+            ],
+            [
+              143,
+              0,
+              1,
+              0
+            ],
+            [
+              149,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "thresholds": "written"
+    },
+    "audio-mix": {
+      "runs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "warmPairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "coldPairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "frames": [
+            240,
+            240
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": null,
+          "maxThumbMse": 0,
+          "avDriftMs": 0,
+          "durationDeltaMs": 0,
+          "residualDb": "-inf",
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": 97.428337,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              31,
+              0,
+              1,
+              0
+            ],
+            [
+              38,
+              0,
+              1,
+              0
+            ],
+            [
+              39,
+              0,
+              1,
+              0
+            ],
+            [
+              40,
+              0,
+              1,
+              0
+            ],
+            [
+              81,
+              0,
+              1,
+              0
+            ],
+            [
+              101,
+              0,
+              1,
+              0
+            ],
+            [
+              104,
+              0,
+              1,
+              0
+            ],
+            [
+              105,
+              0,
+              1,
+              0
+            ],
+            [
+              106,
+              0,
+              1,
+              0
+            ],
+            [
+              113,
+              0,
+              1,
+              0
+            ],
+            [
+              114,
+              0,
+              1,
+              0
+            ],
+            [
+              115,
+              0,
+              1,
+              0
+            ],
+            [
+              126,
+              0,
+              1,
+              0
+            ],
+            [
+              141,
+              0,
+              1,
+              0
+            ],
+            [
+              164,
+              0,
+              1,
+              0
+            ],
+            [
+              179,
+              0,
+              1,
+              0
+            ],
+            [
+              180,
+              0,
+              1,
+              0
+            ],
+            [
+              181,
+              0,
+              1,
+              0
+            ],
+            [
+              188,
+              0,
+              1,
+              0
+            ],
+            [
+              189,
+              0,
+              1,
+              0
+            ],
+            [
+              190,
+              0,
+              1,
+              0
+            ],
+            [
+              214,
+              0,
+              1,
+              0
+            ],
+            [
+              239,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "thresholds": "written"
+    },
+    "webm-transparency": {
+      "runs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "warmPairs": [
+        {
+          "a": 1,
+          "b": 2,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 4,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 1,
+          "b": 5,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 3,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 4,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 2,
+          "b": 5,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 4,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 3,
+          "b": 5,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 4,
+          "b": 5,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "coldPairs": [
+        {
+          "a": 0,
+          "b": 1,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 2,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 3,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "a": 0,
+          "b": 5,
+          "frames": [
+            60,
+            60
+          ],
+          "maxMse": 0,
+          "minSsim": 1,
+          "maxAbsDiff": 0,
+          "maxDiffPixelPct": 0,
+          "maxAlphaMse": 0,
+          "maxThumbMse": 0,
+          "avDriftMs": null,
+          "durationDeltaMs": null,
+          "residualDb": null,
+          "encodedPsnrMinDb": "inf",
+          "encodedSsimMin": 1,
+          "vmafMin": null,
+          "bitrateDropPct": 0,
+          "invariantProblems": [],
+          "errors": {},
+          "perFrame": [
+            [
+              0,
+              0,
+              1,
+              0
+            ],
+            [
+              6,
+              0,
+              1,
+              0
+            ],
+            [
+              8,
+              0,
+              1,
+              0
+            ],
+            [
+              14,
+              0,
+              1,
+              0
+            ],
+            [
+              15,
+              0,
+              1,
+              0
+            ],
+            [
+              16,
+              0,
+              1,
+              0
+            ],
+            [
+              18,
+              0,
+              1,
+              0
+            ],
+            [
+              29,
+              0,
+              1,
+              0
+            ],
+            [
+              30,
+              0,
+              1,
+              0
+            ],
+            [
+              43,
+              0,
+              1,
+              0
+            ],
+            [
+              49,
+              0,
+              1,
+              0
+            ],
+            [
+              58,
+              0,
+              1,
+              0
+            ],
+            [
+              59,
+              0,
+              1,
+              0
+            ]
+          ]
+        }
+      ],
+      "thresholds": "written"
+    }
+  }
+}

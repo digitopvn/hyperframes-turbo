@@ -11,6 +11,7 @@
  *   node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
  *     benchmarks/src/run-benchmark.ts [--warm-runs 5] [--profiles a,b] \
  *     [--fixtures id,id] [--out dir] [--strict-idle] [--control profile | --no-control]
+ *     [--fixture-set baseline|fidelity|all] [--keep-output]
  */
 import { spawn } from "node:child_process";
 import { copyFileSync, createWriteStream, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
@@ -18,7 +19,7 @@ import { homedir, tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { collectEnvironment } from "./collect-environment.js";
-import { BENCH_ROOT, loadManifest, REPO_ROOT, UPSTREAM_ROOT } from "./fixtures.js";
+import { BENCH_ROOT, loadManifest, REPO_ROOT, UPSTREAM_ROOT, type FixtureSet } from "./fixtures.js";
 import { PROFILES } from "./profiles.js";
 import { writeReport } from "./report.js";
 import { DEFAULT_LIMITS, killTree, ProcessGuard, type AbortInfo, type GuardLimits } from "./process-guard.js";
@@ -39,6 +40,10 @@ interface Args {
   injectKillMs: number | null;
   /** Test only: kill the host-safety sampler this many ms after the first render starts. */
   injectSamplerKillMs: number | null;
+  /** Fixture list: PR00 baseline (default), fidelity-only fixtures, or both. */
+  fixtureSet: FixtureSet;
+  /** Keep every run's output under <out>/outputs/<fixture>/<cell>/ for the fidelity gate. */
+  keepOutput: boolean;
 }
 
 /** Suffix of the result directory of an uninstrumented control cell. */
@@ -60,6 +65,8 @@ function parseArgs(): Args {
     control: a.includes("--no-control") ? null : (get("control") ?? "producer-default"),
     injectKillMs: get("inject-worker-kill-ms") ? Number(get("inject-worker-kill-ms")) : null,
     injectSamplerKillMs: get("inject-sampler-kill-ms") ? Number(get("inject-sampler-kill-ms")) : null,
+    fixtureSet: parseFixtureSet(get("fixture-set") ?? "baseline"),
+    keepOutput: a.includes("--keep-output"),
     limits: {
       maxChrome: Number(get("max-chrome") ?? DEFAULT_LIMITS.maxChrome),
       minFreeRamFraction: Number(get("min-free-ram-pct") ?? DEFAULT_LIMITS.minFreeRamFraction * 100) / 100,
@@ -68,6 +75,11 @@ function parseArgs(): Args {
       maxConsecutiveFailures: Number(get("max-consecutive-failures") ?? DEFAULT_LIMITS.maxConsecutiveFailures),
     },
   };
+}
+
+function parseFixtureSet(v: string): FixtureSet {
+  if (v === "baseline" || v === "fidelity" || v === "all") return v;
+  throw new Error(`--fixture-set must be baseline, fidelity or all (got ${v})`);
 }
 
 /** Must match the marker render-worker.ts writes after each served run. */
@@ -191,7 +203,11 @@ export function interleavedSchedule(variantCount: number, warmRuns: number, fixt
 async function main(): Promise<void> {
   const args = parseArgs();
   for (const p of args.profiles) if (!PROFILES[p]) throw new Error(`Unknown profile ${p}`);
-  const manifest = loadManifest().filter((f) => !args.fixtures || args.fixtures.includes(f.id));
+  const manifest = loadManifest(args.fixtureSet).filter((f) => !args.fixtures || args.fixtures.includes(f.id));
+  if (args.fixtures) {
+    const missing = args.fixtures.filter((id) => !manifest.some((f) => f.id === id));
+    if (missing.length) throw new Error(`Unknown fixture(s) for --fixture-set ${args.fixtureSet}: ${missing.join(", ")}`);
+  }
 
   const env = await collectEnvironment();
   const upstreamSha = String((env.upstream as { sha: string }).sha);
@@ -292,6 +308,7 @@ async function main(): Promise<void> {
       if (args.strictIdle) childArgs.push("--strict-idle");
       if (control) childArgs.push("--uninstrumented");
       childArgs.push("--settle-ms", String(args.settleMs));
+      if (args.keepOutput) childArgs.push("--keep-output", join(outDir, "outputs", fx.id, cellName));
       const rawDir = join(outDir, "raw", fx.id, cellName);
       mkdirSync(rawDir, { recursive: true });
       const worker = spawnWorker(childArgs, childEnv, join(rawDir, "worker-stderr.log"), guard);
@@ -343,6 +360,8 @@ async function main(): Promise<void> {
         finishedAt: new Date().toISOString(),
         command: `node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts ${process.argv.slice(2).join(" ")}`.trim(),
         warmRuns: args.warmRuns,
+        fixtureSet: args.fixtureSet,
+        keepOutput: args.keepOutput ? "outputs/<fixture>/<cell>/run-<n>.<ext> (not committed)" : null,
         profiles: Object.fromEntries(args.profiles.map((p) => [p, PROFILES[p]])),
         control: args.control ? { profile: args.control, cell: `${args.control}${CONTROL_SUFFIX}`, instrumentation: "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)" } : null,
         settle: args.settleMs > 0 ? `before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then ${args.settleMs} ms` : "none (back to back)",

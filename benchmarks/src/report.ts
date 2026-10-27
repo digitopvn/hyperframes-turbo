@@ -104,6 +104,8 @@ export interface RunMetrics {
   audioCodec: string | null;
 }
 
+const READABLE_RUN_SCHEMAS = ["turbo-bench-run/1", "turbo-bench-run/2"];
+
 const FRAME_METHODS = ["Page.captureScreenshot", "HeadlessExperimental.beginFrame", "Runtime.callFunctionOn"];
 
 function num(v: unknown): number | null {
@@ -118,7 +120,10 @@ function loadRuns(outDir: string): Run[] {
     for (const profile of readdirSync(join(raw, fixture))) {
       const dir = join(raw, fixture, profile);
       for (const f of readdirSync(dir).filter((n) => /^run-\d+\.json$/.test(n))) {
-        runs.push(JSON.parse(readFileSync(join(dir, f), "utf8")));
+        const run = JSON.parse(readFileSync(join(dir, f), "utf8"));
+        // /1 = PR00 baseline; /2 adds the optional `fidelity` record. Anything else is refused, not guessed.
+        if (run.schema !== undefined && !READABLE_RUN_SCHEMAS.includes(run.schema)) throw new Error(`${join(dir, f)}: unsupported run schema ${run.schema}`);
+        runs.push(run);
       }
     }
   }
@@ -515,6 +520,28 @@ export function writeReport(outDir: string): CellSummary[] {
     for (const o of overhead) {
       L.push(
         `| ${o.fixture} | ${o.profile} | ${fmt((o.controlColdMs ?? NaN) / 1000, 2)} | ${fmt((o.instrumentedColdMs ?? NaN) / 1000, 2)} | ${fmt(o.coldOverheadPct, 1)} | ${fmt((o.controlWarmMedianMs ?? NaN) / 1000, 2)} | ${fmt((o.instrumentedWarmMedianMs ?? NaN) / 1000, 2)} | ${fmt(o.warmMedianOverheadPct, 1)} | ${fmt((o.controlWarmCv ?? NaN) * 100, 1)} | ${fmt((o.instrumentedWarmCv ?? NaN) * 100, 1)} |`,
+      );
+    }
+    L.push("");
+  }
+
+  const withFidelity = runs.filter((r) => r.fidelity);
+  if (withFidelity.length) {
+    L.push(`## Fidelity`, "");
+    L.push(
+      `Gate records (\`turbo-fidelity/1\`) attached by \`fidelity/run-fidelity.ts\`. Verdicts are fail-closed: FALLBACK and FAIL never count as a pass. See \`fidelity-report.md\` for per-check detail.`,
+      "",
+    );
+    L.push(`| fixture | profile | run | vs reference | threshold path | verdict | reasons | checks not PASS | gate wall s | gate peak RSS MiB |`);
+    L.push(`|---|---|---:|---|---|---|---|---|---:|---:|`);
+    for (const r of withFidelity) {
+      const f = r.fidelity;
+      const notPass = Object.entries((f.checks ?? {}) as Record<string, { verdict?: string }>)
+        .filter(([, c]) => c.verdict !== "PASS")
+        .map(([k, c]) => `${k}=${c.verdict}`)
+        .join(", ");
+      L.push(
+        `| ${r.fixture} | ${r.profile} | ${r.run} | ${f.reference?.cell ?? "?"} run ${f.reference?.run ?? "?"} | ${f.thresholds?.path ?? "—"} | ${f.verdict} | ${(f.reasons ?? []).join(", ") || "—"} | ${f.checks ? notPass || "—" : "not run"} | ${fmt((num(f.wallMs) ?? NaN) / 1000, 1)} | ${mib(num(f.peakRssBytes))} |`,
       );
     }
     L.push("");

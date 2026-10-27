@@ -11,12 +11,12 @@
  */
 import { spawnSync } from "node:child_process";
 import { createInterface } from "node:readline";
-import { mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync, existsSync } from "node:fs";
+import { cpSync, mkdirSync, mkdtempSync, readdirSync, rmSync, statSync, writeFileSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { installCdpTap, resetCdpTap, snapshotCdpTap } from "./cdp-tap.js";
-import { hashFixtureSource, loadManifest, prepareProject, resolveFixture, UPSTREAM_ROOT } from "./fixtures.js";
+import { hashFixtureSource, loadManifest, prepareProject, resolveFixture, sha256Output, UPSTREAM_ROOT } from "./fixtures.js";
 import { GpuSampler, ProcessTreeSampler, hasNvidiaSmi, settleHost, summarizeGpu, waitForIdle, sampleGpu } from "./system-probes.js";
 import type { TraceEvent } from "./trace-analysis.js";
 
@@ -42,6 +42,12 @@ interface Args {
   serve: boolean;
   /** Cooldown after render children exit, before each run; 0 disables the settle wait. */
   settleMs: number;
+  /**
+   * Opt-in: move each run's output into this directory as `run-<n>.<ext>`
+   * instead of deleting it (fidelity gate input). Absent = PR00 behaviour.
+   * The move happens after wall time and output probing are recorded.
+   */
+  keepOutput: string | null;
 }
 
 function parseArgs(): Args {
@@ -59,6 +65,7 @@ function parseArgs(): Args {
     uninstrumented: a.includes("--uninstrumented"),
     serve: a.includes("--serve"),
     settleMs: Number(get("settle-ms") ?? 0),
+    keepOutput: get("keep-output") ?? null,
   };
 }
 
@@ -107,6 +114,19 @@ function ffprobe(path: string): unknown {
   };
 }
 
+/**
+ * Upstream's createRenderJob does not parse rational strings (its toFps only
+ * wraps numbers), so a meta.json fps like "30000/1001" goes through upstream's
+ * own parseFps first, exactly as the regression harness does.
+ */
+async function resolveFps(raw: number | string): Promise<number | { num: number; den: number }> {
+  if (typeof raw === "number") return raw;
+  const { parseFps } = await import(pathToFileURL(join(UPSTREAM_ROOT, "packages", "core", "src", "core.types.ts")).href);
+  const r = parseFps(raw);
+  if (!r.ok) throw new Error(`meta.json renderConfig.fps ${JSON.stringify(raw)} rejected by upstream parseFps: ${r.reason}`);
+  return r.value;
+}
+
 /** Upstream log metadata as plain JSON (errors become {name, message, stack}). */
 function safeMeta(meta: Record<string, unknown>): unknown {
   return JSON.parse(
@@ -143,7 +163,7 @@ interface FfprobeStream {
 
 async function main(): Promise<void> {
   const args = parseArgs();
-  const entry = loadManifest().find((f) => f.id === args.fixture);
+  const entry = loadManifest("all").find((f) => f.id === args.fixture);
   if (!entry) throw new Error(`Unknown fixture ${args.fixture}`);
   const fx = resolveFixture(entry);
   mkdirSync(args.outDir, { recursive: true });
@@ -162,7 +182,7 @@ async function main(): Promise<void> {
   const profileEnv = Object.fromEntries(
     Object.entries(process.env).filter(([k]) => /^(PRODUCER_|HF_|HYPERFRAMES_)/.test(k)),
   );
-  const fpsRaw = fx.meta.renderConfig.fps;
+  const fpsRaw = await resolveFps(fx.meta.renderConfig.fps);
   const format = fx.meta.renderConfig.format ?? "mp4";
   const sourceHash = hashFixtureSource(fx);
   const gpuAvailable = !args.uninstrumented && hasNvidiaSmi();
@@ -238,6 +258,7 @@ async function main(): Promise<void> {
       debug: false,
       hdrMode: fx.meta.renderConfig.hdr ? "force-hdr" : "force-sdr",
       variables: fx.meta.renderConfig.variables,
+      ...(fx.meta.renderConfig.motionBlur ? { motionBlur: fx.meta.renderConfig.motionBlur } : {}),
       logger,
     });
 
@@ -256,6 +277,15 @@ async function main(): Promise<void> {
 
     const output = !error && existsSync(outputPath) ? ffprobe(outputPath) : null;
     const extractCacheDir = process.env.HYPERFRAMES_EXTRACT_CACHE_DIR;
+    let kept: { path: string; sha256: string } | null = null;
+    if (args.keepOutput && !error && existsSync(outputPath)) {
+      mkdirSync(args.keepOutput, { recursive: true });
+      const dest = join(args.keepOutput, `run-${run}.${format === "png-sequence" ? "frames" : format}`);
+      rmSync(dest, { recursive: true, force: true });
+      // cp + rm instead of rename: the temp dir and the results dir may sit on different volumes.
+      cpSync(outputPath, dest, { recursive: true });
+      kept = { path: dest, sha256: await sha256Output(dest) };
+    }
     const result = {
       schema: "turbo-bench-run/1",
       fixture: fx.id,
@@ -280,6 +310,7 @@ async function main(): Promise<void> {
       processTreeTimeline: tree.samples.map((s) => [s.t, s.workingSetBytes, s.processCount]),
       extractCacheBytesAfter: extractCacheDir ? dirBytes(extractCacheDir) : null,
       output,
+      keptOutput: kept ? { file: kept.path.split(/[\\/]/).slice(-4).join("/"), sha256: kept.sha256 } : undefined,
       upstreamLog: { counts: logCounts, firstMessages: warnings.slice(0, 50), warnMeta },
       settle,
       traceEvents: events,
@@ -290,7 +321,7 @@ async function main(): Promise<void> {
     console.error(
       `[worker] ${fx.id}/${args.profile} run ${run} (${kind}): ${error ? "FAILED" : `${Math.round(wallMs)} ms`}`,
     );
-    rmSync(outputPath, { force: true });
+    rmSync(outputPath, { recursive: true, force: true });
   };
 
   if (args.serve) {

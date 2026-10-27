@@ -1,0 +1,1799 @@
+{
+  "schema": "turbo-fidelity-negative/1",
+  "path": "producer-default.win32",
+  "results": "benchmarks/results/2026-10-27-1c4a1c1-fidelity",
+  "cell": "producer-default",
+  "refRun": 1,
+  "sourceRun": 2,
+  "generatedAt": "2026-10-27T08:40:10.467Z",
+  "distinctFaultKindsCaught": 16,
+  "rows": [
+    {
+      "fixture": "audio-mix",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "dropped-frame",
+      "detail": "removed frame 112",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "duplicated-frame",
+      "detail": "frame 112 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "reordered-frames",
+      "detail": "frames 112 and 113 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "stale-frame",
+      "detail": "frame 112 replaced by frame 111",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 106",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 123",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "audio-offset",
+      "detail": "audio delayed by 40 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "missing-audio",
+      "detail": "audio stream removed (stream copy)",
+      "expected": [
+        "AUDIO_MISSING"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AUDIO_MISSING",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "dropped-frame",
+      "detail": "removed frame 90",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "duplicated-frame",
+      "detail": "frame 90 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "reordered-frames",
+      "detail": "frames 90 and 91 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "stale-frame",
+      "detail": "frame 90 replaced by frame 89",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 108",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 89",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "dropped-frame",
+      "detail": "removed frame 90",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "duplicated-frame",
+      "detail": "frame 90 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "reordered-frames",
+      "detail": "frames 90 and 91 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "stale-frame",
+      "detail": "frame 90 replaced by frame 89",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 72",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 91",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "dropped-frame",
+      "detail": "removed frame 131",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "duplicated-frame",
+      "detail": "frame 131 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "reordered-frames",
+      "detail": "frames 131 and 132 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "stale-frame",
+      "detail": "frame 131 replaced by frame 130",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 61",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 124",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30000/1001)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "dropped-frame",
+      "detail": "removed frame 108",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "duplicated-frame",
+      "detail": "frame 108 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "reordered-frames",
+      "detail": "frames 108 and 109 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "stale-frame",
+      "detail": "frame 108 replaced by frame 107",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 194",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 148",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "hdr-metadata-stripped",
+      "detail": "stream copy: prefix SEI NAL units removed, VUI and container colour description set to unspecified (container mastering/CLL boxes may survive)",
+      "expected": [
+        "HDR_TRANSFER_MISMATCH",
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "HDR_TRANSFER_MISMATCH",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "hdr-sei-stripped",
+      "detail": "8 in-band and 3 hvcC prefix-SEI NAL(s) retyped in place to reserved type 41 (byte-neutral); VUI, container colour tags, timestamps and slices identical",
+      "expected": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "hdr-max-cll-changed",
+      "detail": "byte patch of 3 content-light SEI payload(s): MaxCLL 1000 -> 1100 (MaxFALL 400 kept) on all 150 frames; nothing else changed",
+      "expected": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "hdr-metadata-stripped",
+      "detail": "stream copy: prefix SEI NAL units removed, VUI and container colour description set to unspecified (container mastering/CLL boxes may survive)",
+      "expected": [
+        "HDR_TRANSFER_MISMATCH",
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "HDR_TRANSFER_MISMATCH",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "hdr-sei-stripped",
+      "detail": "6 in-band and 3 hvcC prefix-SEI NAL(s) retyped in place to reserved type 41 (byte-neutral); VUI, container colour tags, timestamps and slices identical",
+      "expected": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "hdr-max-cll-changed",
+      "detail": "byte patch of 3 content-light SEI payload(s): MaxCLL 1000 -> 1100 (MaxFALL 400 kept) on all 180 frames; nothing else changed",
+      "expected": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "HDR_METADATA_MISMATCH"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "dropped-frame",
+      "detail": "removed frame 150",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "duplicated-frame",
+      "detail": "frame 150 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "reordered-frames",
+      "detail": "frames 150 and 151 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "stale-frame",
+      "detail": "frame 150 replaced by frame 149",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 181",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 147",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "audio-offset",
+      "detail": "audio delayed by 40 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "missing-audio",
+      "detail": "audio stream removed (stream copy)",
+      "expected": [
+        "AUDIO_MISSING"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AUDIO_MISSING",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "dropped-frame",
+      "detail": "removed frame 45",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "duplicated-frame",
+      "detail": "frame 45 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "reordered-frames",
+      "detail": "frames 45 and 46 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "stale-frame",
+      "detail": "frame 45 replaced by frame 44",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 45",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 42",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "dropped-frame",
+      "detail": "removed frame 75",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "duplicated-frame",
+      "detail": "frame 75 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "reordered-frames",
+      "detail": "frames 75 and 76 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "stale-frame",
+      "detail": "frame 75 replaced by frame 74",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 90",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 73",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "dropped-frame",
+      "detail": "removed frame 131",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "duplicated-frame",
+      "detail": "frame 131 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "reordered-frames",
+      "detail": "frames 131 and 132 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "stale-frame",
+      "detail": "frame 131 replaced by frame 130",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 111",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 123",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "dropped-frame",
+      "detail": "removed frame 120",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "duplicated-frame",
+      "detail": "frame 120 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "reordered-frames",
+      "detail": "frames 120 and 121 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "stale-frame",
+      "detail": "frame 120 replaced by frame 119",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 119",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 122",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "wrong-resolution",
+      "detail": "scaled to 1918x1080",
+      "expected": [
+        "DIMENSION_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "DIMENSION_CHANGED",
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "bitrate-drop",
+      "detail": "re-encoded at x264 crf 40",
+      "expected": [
+        "BITRATE_DROP"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD",
+        "BITRATE_DROP"
+      ],
+      "caught": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "control-unmodified",
+      "detail": "run 2 vs run 1, unmodified",
+      "expected": [],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "alpha-stripped",
+      "detail": "re-encoded VP9 lossless as yuv420p (alpha plane dropped)",
+      "expected": [
+        "ALPHA_MISSING"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "PIXEL_BELOW_THRESHOLD",
+        "ALPHA_MISSING"
+      ],
+      "caught": true
+    }
+  ]
+}

@@ -72,6 +72,20 @@ type RawProc = [number, number, string, number];
 /** PowerShell + CIM start-up takes a few seconds; past this the sampler is presumed broken. */
 const START_TIMEOUT_MS = 30_000;
 
+/**
+ * One sample cycle is the sleep interval plus the CIM queries, which took
+ * ~0.8 s on an idle 500-process host and several seconds more while renders
+ * saturate the CPU. Silence beyond 3 intervals plus this allowance means the
+ * sampler is hung; an exited sampler aborts immediately via its exit event.
+ */
+const QUERY_ALLOWANCE_MS = 10_000;
+
+/**
+ * A harness event loop blocked this long means nothing enforced the limits
+ * meanwhile (the sampler only reports; this process acts). Abort fail-closed.
+ */
+const MAX_LOOP_LAG_MS = 60_000;
+
 /** Kill a process and all its live descendants. Never throws. */
 export function killTree(pid: number): void {
   if (process.platform === "win32") {
@@ -98,11 +112,14 @@ export class ProcessGuard {
   last: GuardSample | null = null;
   private lastSampleAt = 0;
   private watchdog: NodeJS.Timeout | null = null;
+  /** Largest observed event-loop lag (watchdog tick lateness), ms. */
+  maxLoopLagMs = 0;
 
   constructor(
     private readonly limits: GuardLimits,
     private readonly onAbort: (info: AbortInfo) => void,
     private readonly intervalMs = 2000,
+    private readonly queryAllowanceMs = QUERY_ALLOWANCE_MS,
   ) {}
 
   get abortInfo(): AbortInfo | null {
@@ -112,8 +129,10 @@ export class ProcessGuard {
   /**
    * Start sampling; resolves after the first sample so limits are checked
    * before any render. Fails closed: if the sampler errors, exits, never
-   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals, the guard
-   * aborts, because a blind guard must not let the benchmark keep running.
+   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals plus
+   * QUERY_ALLOWANCE_MS of listening time, or this process's event loop is
+   * blocked longer than MAX_LOOP_LAG_MS, the guard aborts, because a blind
+   * guard must not let the benchmark keep running.
    */
   start(): Promise<void> {
     if (process.platform !== "win32") return Promise.resolve();
@@ -132,9 +151,32 @@ export class ProcessGuard {
     proc.on("error", (err) => blind(`failed: ${err.message}`));
     proc.on("exit", (code, signal) => blind(`exited (${code ?? signal})`));
     const startTimer = setTimeout(() => blind(`sent no sample within ${START_TIMEOUT_MS} ms`), START_TIMEOUT_MS);
+    let lastTickAt = Date.now();
+    // Silence is measured in listening time since the last real sample, and
+    // only a real sample resets it. A late tick means this process's event loop
+    // was blocked (for example by the synchronous sweep()): samples sent
+    // meanwhile may still be unread in the pipe (timers run before I/O), so
+    // such a tick credits one interval of listening, not the blocked time.
+    // Repeated stalls therefore still accumulate silence, so a hung sampler is
+    // always caught; the blocking itself is bounded by MAX_LOOP_LAG_MS.
+    let listenedMs = 0;
+    this.resetSilence = () => (listenedMs = 0);
     this.watchdog = setInterval(() => {
-      if (this.lastSampleAt && Date.now() - this.lastSampleAt > 3 * this.intervalMs) {
-        blind(`silent for ${Date.now() - this.lastSampleAt} ms (> 3 intervals)`);
+      const now = Date.now();
+      const elapsed = now - lastTickAt;
+      lastTickAt = now;
+      const lag = elapsed - this.intervalMs;
+      if (lag > this.maxLoopLagMs) this.maxLoopLagMs = lag;
+      if (lag > MAX_LOOP_LAG_MS) {
+        blind(`unwatched: harness event loop blocked for ${lag} ms (> ${MAX_LOOP_LAG_MS} ms)`);
+        return;
+      }
+      // Before the first sample the start timeout is in charge.
+      if (!this.lastSampleAt) return;
+      listenedMs += elapsed > 1.5 * this.intervalMs ? this.intervalMs : elapsed;
+      const limit = 3 * this.intervalMs + this.queryAllowanceMs;
+      if (listenedMs > limit) {
+        blind(`silent for ${listenedMs} ms of listening (> ${limit} ms: 3 intervals + query allowance; ${now - this.lastSampleAt} ms wall since the last sample, max loop lag ${this.maxLoopLagMs} ms)`);
       }
     }, this.intervalMs);
     this.watchdog.unref();
@@ -147,12 +189,21 @@ export class ProcessGuard {
         this.buf = this.buf.slice(nl + 1);
         if (line && this.ingest(line)) {
           this.lastSampleAt = Date.now();
+          this.resetSilence();
           clearTimeout(startTimer);
           first();
         }
       }
     });
     return this.ready;
+  }
+
+  private resetSilence: () => void = () => {};
+
+  /** Test only: stop reading samples while the sampler stays alive (a hung sampler, as seen from here). */
+  simulateHungSampler(): void {
+    this.proc?.stdout?.pause();
+    this.proc?.stdout?.removeAllListeners("data");
   }
 
   /** Test only: PID of the sampler process. */
