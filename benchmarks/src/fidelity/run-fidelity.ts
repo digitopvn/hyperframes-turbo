@@ -18,6 +18,7 @@ import { existsSync, mkdirSync, readdirSync, statSync, writeFileSync } from "nod
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { sha256Output } from "../fixtures.js";
+import { parseArgs, UsageError } from "./cli-args.js";
 import { judge, measure, type CompareContext } from "./compare.js";
 import { hasLibvmaf } from "./metrics/encoded.js";
 import type { MediaInput } from "./probe.js";
@@ -69,22 +70,8 @@ export function keptOutput(results: string, fixture: string, cell: string, run: 
   return hit ? join(dir, hit) : null;
 }
 
-class UsageError extends Error {}
-
-function parseArgs(argv: string[]) {
-  const get = (k: string) => {
-    const i = argv.indexOf(`--${k}`);
-    if (i < 0) return undefined;
-    const v = argv[i + 1];
-    if (v === undefined || v.startsWith("--")) throw new UsageError(`--${k} needs a value`);
-    return v;
-  };
-  const int = (k: string) => {
-    const v = get(k);
-    if (v === undefined) return undefined;
-    if (!/^\d+$/.test(v)) throw new UsageError(`--${k} must be a non-negative integer`);
-    return Number(v);
-  };
+function cliArgs(argv: string[]) {
+  const { get, int, list } = parseArgs(argv);
   return {
     fixture: get("fixture"),
     ref: get("ref"),
@@ -98,12 +85,12 @@ function parseArgs(argv: string[]) {
     refRun: int("ref-run"),
     candCell: get("cand-cell"),
     candRun: int("cand-run"),
-    fixtures: get("fixtures")?.split(","),
+    fixtures: list("fixtures"),
   };
 }
 
 async function main(): Promise<number> {
-  const a = parseArgs(process.argv.slice(2));
+  const a = cliArgs(process.argv.slice(2));
   const path = a.path ?? pathName(a.refCell.replace(/\.control$/, ""));
   const records: FidelityRecord[] = [];
   if (a.results) {

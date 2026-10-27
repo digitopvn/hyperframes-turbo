@@ -14,7 +14,7 @@ import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
 import { deriveFixtureThresholds, observe } from "../../src/fidelity/calibrate.js";
 import { measure, type CompareContext } from "../../src/fidelity/compare.js";
-import { applicableFaults, EXPECTED, faultCaught, injectFault, pickFaultFrame, type FaultKind } from "../../src/fidelity/inject-faults.js";
+import { applicableFaults, EXPECTED, faultCaught, injectFault, NEAR_THRESHOLD, nearThresholdRequirement, pickFaultFrame, pickSubtleStaleFrame, type FaultKind } from "../../src/fidelity/inject-faults.js";
 import { PNG_SEQUENCE_PATTERN, probeMedia } from "../../src/fidelity/probe.js";
 import { FFMPEG, liveProcessCount, runTool } from "../../src/fidelity/proc.js";
 import { rat } from "../../src/fidelity/rational.js";
@@ -43,14 +43,14 @@ const KINDS: Kind[] = [
     ext: ".mp4",
     spec: { probes: [] },
     args: ["-f", "lavfi", "-i", VIDEO, "-f", "lavfi", "-i", BURSTS, "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-threads", "1", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-shortest"],
-    faults: ["dropped-frame", "duplicated-frame", "reordered-frames", "stale-frame", "pixel-corruption-sampled", "pixel-corruption-unsampled", "wrong-resolution", "wrong-fps", "vfr-timestamps", "bitrate-drop", "audio-offset", "missing-audio"],
+    faults: ["dropped-frame", "duplicated-frame", "reordered-frames", "stale-frame", "stale-frame-subtle", "pixel-corruption-sampled", "pixel-corruption-unsampled", "pixel-subtle-sampled", "pixel-subtle-unsampled", "wrong-fps", "vfr-timestamps", "wrong-resolution", "bitrate-drop", "audio-offset", "audio-offset-22ms", "audio-offset-25ms", "audio-offset-30ms", "missing-audio"],
   },
   {
     id: "synthetic-alpha",
     ext: ".webm",
     spec: { alpha: true, probes: [] },
     args: ["-f", "lavfi", "-i", `${VIDEO.replace("d=4", "d=2")},format=rgba,colorchannelmixer=aa=0.5`, "-c:v", "libvpx-vp9", "-lossless", "1", "-threads", "1", "-row-mt", "0", "-pix_fmt", "yuva420p"],
-    faults: ["alpha-stripped"],
+    faults: ["alpha-stripped", "dropped-frame", "duplicated-frame", "reordered-frames", "stale-frame", "stale-frame-subtle", "pixel-corruption-sampled", "pixel-corruption-unsampled", "pixel-subtle-sampled", "pixel-subtle-unsampled", "wrong-fps", "vfr-timestamps"],
   },
   {
     id: "synthetic-hdr-pq",
@@ -62,7 +62,7 @@ const KINDS: Kind[] = [
       "-x265-params", "log-level=error:info=0:pools=1:frame-threads=1:colorprim=bt2020:transfer=smpte2084:colormatrix=bt2020nc:master-display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1):max-cll=1000,400",
       "-color_primaries", "bt2020", "-color_trc", "smpte2084", "-colorspace", "bt2020nc",
     ],
-    faults: ["hdr-metadata-stripped", "hdr-sei-stripped", "hdr-max-cll-changed"],
+    faults: ["hdr-metadata-stripped", "hdr-sei-stripped", "hdr-max-cll-changed", "dropped-frame", "duplicated-frame", "reordered-frames", "stale-frame", "stale-frame-subtle", "pixel-corruption-sampled", "pixel-corruption-unsampled", "pixel-subtle-sampled", "pixel-subtle-unsampled", "wrong-fps", "vfr-timestamps"],
   },
 ];
 
@@ -92,10 +92,8 @@ after(() => {
   rmSync(work, { recursive: true, force: true });
 });
 
-function thumbTolerance(id: string): number {
-  const file = JSON.parse(readFileSync(thresholdsFile, "utf8")) as ThresholdFile;
-  return toNum(file.fixtures[id]!.temporal.thumbMseTol.limit);
-}
+const fixtureThresholds = (id: string) => (JSON.parse(readFileSync(thresholdsFile, "utf8")) as ThresholdFile).fixtures[id]!;
+const thumbTolerance = (id: string): number => toNum(fixtureThresholds(id).temporal.thumbMseTol.limit);
 
 const run = (k: Kind, candidate: string, extra: Partial<Parameters<typeof evaluate>[0]> = {}) =>
   evaluate({ fixture: k.id, reference: out(k, 1), candidate, path: PATH, thresholdsFile, context: ctxFor(k), ...extra });
@@ -118,9 +116,16 @@ for (const k of KINDS) {
         const tol = thumbTolerance(k.id);
         const frame = await pickFaultFrame(src, tol);
         assert.notEqual(frame, null, "no distinct frame neighbourhood");
+        const subtle = fault === "stale-frame-subtle" ? await pickSubtleStaleFrame(src, tol) : null;
+        if (fault === "stale-frame-subtle") assert.notEqual(subtle, null, "no observable subtle stale frame");
+        if (NEAR_THRESHOLD.has(fault)) {
+          // The synthetic fixtures are deterministic, so every near-threshold fault must be required here.
+          const req = nearThresholdRequirement(fault, fixtureThresholds(k.id));
+          assert.ok(req.required, `${fault} not required: ${req.why}`);
+        }
         const target = join(work, `${k.id}-${fault}${k.ext}`);
         try {
-          await injectFault(fault, src, target, ctxFor(k), frame!);
+          await injectFault(fault, src, target, ctxFor(k), frame!, subtle?.k);
           const rec = await run(k, target);
           assert.equal(rec.verdict, "FAIL", `verdict ${rec.verdict} (${rec.reasons.join(",")})`);
           assert.ok(faultCaught(fault, rec), `reasons ${rec.reasons.join(",")} do not match ${EXPECTED[fault].join("/")}`);

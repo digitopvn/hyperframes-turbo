@@ -13,6 +13,10 @@ import { frameAtOrAfter, frameTicks, parseRational, ptsErrorTicks, rat, ratToNum
 import { buildSamplePlan, cutTimesFromHtml, loadFidelitySpec, parseFidelitySpec } from "../../src/fidelity/sample-plan.js";
 import { deriveLimit, MIN_RUNS, validateThresholds, within, type FixtureThresholds } from "../../src/fidelity/thresholds.js";
 import { aggregate } from "../../src/fidelity/verdict.js";
+import { parseArgs, UsageError } from "../../src/fidelity/cli-args.js";
+import { crossPairsOf } from "../../src/fidelity/calibrate.js";
+import { nearThresholdRequirement, x265HdrParams } from "../../src/fidelity/inject-faults.js";
+import type { MediaProbe } from "../../src/fidelity/probe.js";
 
 test("30000/1001 maps 10,000 frames to exact ticks with no drift", () => {
   const fps = parseRational("30000/1001");
@@ -203,4 +207,76 @@ test("silent reference: candidate noise fails against the absolute floor, silenc
   const noisy = judgeAudio(m(0.01), t, "");
   assert.deepEqual([noisy.verdict, noisy.reasons], ["FAIL", ["AUDIO_MISMATCH"]]);
   assert.equal(judgeAudio(m(null), t, "").verdict, "FALLBACK");
+});
+
+test("CLI numeric arguments are validated, never coerced", () => {
+  const a = parseArgs(["--ref-run", "3", "--runs", "1,2,5", "--fixtures", "a,b"]);
+  assert.equal(a.int("ref-run"), 3);
+  assert.equal(a.int("absent", 7), 7);
+  assert.deepEqual(a.intList("runs"), [1, 2, 5]);
+  assert.deepEqual(a.list("fixtures"), ["a", "b"]);
+  for (const bad of [["--n", "x"], ["--n", ""], ["--n", "-1"], ["--n", "1.5"], ["--n", "1e3"], ["--n", "99999999999999999999"]]) {
+    assert.throws(() => parseArgs(bad).int("n"), UsageError, JSON.stringify(bad));
+  }
+  assert.throws(() => parseArgs(["--n"]).get("n"), UsageError);
+  assert.throws(() => parseArgs(["--n", "--m", "1"]).get("n"), UsageError);
+  assert.throws(() => parseArgs(["--runs", "1,1"]).intList("runs"), UsageError);
+  assert.throws(() => parseArgs(["--runs", "1,,2"]).intList("runs"), UsageError);
+  assert.throws(() => parseArgs(["--fixtures", "a,"]).list("fixtures"), UsageError);
+});
+
+function thresholdFixture(over: Partial<FixtureThresholds> = {}): FixtureThresholds {
+  const lim = { limit: 0, worst: 0, mad: 0, margin: 0, rule: "exact" as const, n: 25 };
+  return {
+    runs: 5,
+    pairs: 10,
+    bitExact: true,
+    pixels: { maxMse: lim, minSsim: lim, maxAbsDiff: lim, maxDiffPixelPct: lim, maxAlphaMse: null },
+    temporal: { thumbMseTol: lim },
+    audio: { maxAvDriftMs: { ...lim, limit: 21.333, rule: "floor" }, maxDurationDeltaMs: lim, maxResidualDb: lim },
+    encoded: { minPsnrDb: lim, minSsim: lim, minVmaf: null, maxBitrateDropPct: lim },
+    ...over,
+  };
+}
+
+test("cross-reference calibration: pairs are runs x againstRuns and need a distinct second reference", () => {
+  assert.deepEqual(crossPairsOf([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]]);
+  const runs = [1, 2, 3, 4, 5];
+  const base = { schema: "turbo-fidelity-thresholds/1", path: "p.win32" };
+  const cross = { ...base, calibration: { runs, cell: "a", kind: "cross-reference", againstCell: "b", againstRuns: runs }, fixtures: { f: thresholdFixture({ againstRuns: 5, pairs: 25 }) } };
+  assert.deepEqual(validateThresholds(cross, "p.win32"), []);
+  const sameCell = { ...cross, calibration: { ...cross.calibration, againstCell: "a" } };
+  assert.ok(validateThresholds(sameCell, "p.win32").some((p) => p.includes("second reference cell")));
+  const fewAgainst = { ...cross, calibration: { ...cross.calibration, againstRuns: [1, 2] } };
+  assert.ok(validateThresholds(fewAgainst, "p.win32").some((p) => p.includes("second reference cell") || p.includes(`>= ${MIN_RUNS} runs`)));
+  const wrongPairs = { ...cross, fixtures: { f: thresholdFixture({ againstRuns: 5, pairs: 10 }) } };
+  assert.ok(validateThresholds(wrongPairs, "p.win32").some((p) => p.includes("cross-reference runs")));
+  const repeatWithAgainst = { ...base, calibration: { runs, cell: "a" }, fixtures: { f: thresholdFixture({ againstRuns: 5 }) } };
+  assert.ok(validateThresholds(repeatWithAgainst, "p.win32").some((p) => p.includes("againstRuns set on a repeat")));
+  const unknownKind = { ...base, calibration: { runs, cell: "a", kind: "loosened" }, fixtures: { f: thresholdFixture() } };
+  assert.ok(validateThresholds(unknownKind, "p.win32").some((p) => p.includes("unknown calibration kind")));
+});
+
+test("near-threshold faults are required only when they exceed the calibrated limit", () => {
+  const t = thresholdFixture();
+  assert.equal(nearThresholdRequirement("audio-offset-22ms", t).required, true); // 22 > 21.333 + 0.125
+  assert.equal(nearThresholdRequirement("audio-offset-30ms", t).required, true);
+  const loose = thresholdFixture({ audio: { ...t.audio!, maxAvDriftMs: { ...t.audio!.maxAvDriftMs, limit: 24 } } });
+  assert.equal(nearThresholdRequirement("audio-offset-22ms", loose).required, false);
+  assert.equal(nearThresholdRequirement("audio-offset-25ms", loose).required, true);
+  assert.equal(nearThresholdRequirement("pixel-subtle-sampled", t).required, true);
+  assert.equal(nearThresholdRequirement("stale-frame-subtle", thresholdFixture({ bitExact: false })).required, false);
+  assert.equal(nearThresholdRequirement("pixel-subtle-unsampled", null).required, true);
+  assert.equal(nearThresholdRequirement("audio-offset-25ms", thresholdFixture({ audio: null })).required, true);
+});
+
+test("x265 HDR parameters reproduce the source's mastering display and content light", () => {
+  const md = { side_data_type: "Mastering display metadata", red_x: "34000/50000", red_y: "16000/50000", green_x: "13250/50000", green_y: "34500/50000", blue_x: "7500/50000", blue_y: "3000/50000", white_point_x: "15635/50000", white_point_y: "16450/50000", min_luminance: "1/10000", max_luminance: "10000000/10000" };
+  const cll = { side_data_type: "Content light level metadata", max_content: 1000, max_average: 400 };
+  const p = { video: { frameSideData: [[md, cll]], streamSideData: [] } } as unknown as MediaProbe;
+  assert.deepEqual(x265HdrParams(p), ["master-display=G(13250,34500)B(7500,3000)R(34000,16000)WP(15635,16450)L(10000000,1)", "max-cll=1000,400"]);
+  const none = { video: { frameSideData: [[]], streamSideData: [] } } as unknown as MediaProbe;
+  assert.deepEqual(x265HdrParams(none), []);
+  const bad = { video: { frameSideData: [[{ ...md, red_x: "n/a" }]], streamSideData: [] } } as unknown as MediaProbe;
+  assert.throws(() => x265HdrParams(bad), /unparseable mastering display/);
 });

@@ -37,6 +37,8 @@ export interface Limit {
 
 export interface FixtureThresholds {
   runs: number;
+  /** Cross-reference calibration only: warm runs of the second reference cell (pairs = runs x againstRuns). */
+  againstRuns?: number;
   pairs: number;
   /** Every calibration pair was bit-exact on every sampled frame and on every frame thumbnail. */
   bitExact: boolean;
@@ -60,9 +62,19 @@ export interface ThresholdFile {
     cell: string;
     rawPairsFile: string;
     command: string;
-  };
+  } & CalibrationKind;
   fixtures: Record<string, FixtureThresholds>;
 }
+
+/**
+ * How the limits were derived. `repeat` (the default when absent, as in files
+ * written before this field existed): all pairs of >= MIN_RUNS renders of one
+ * reference cell. `cross-reference`: all pairs between >= MIN_RUNS renders of
+ * `cell` and >= MIN_RUNS renders of `againstCell`, a second accepted
+ * reference configuration; this is how candidate-backend tolerances are
+ * derived (docs/fidelity-protocol.md, *Candidate tolerances*).
+ */
+export type CalibrationKind = { kind?: "repeat" } | { kind: "cross-reference"; againstCell: string; againstRuns: number[] };
 
 export const toNum = (v: LimitValue): number => (v === "inf" ? Infinity : v === "-inf" ? -Infinity : v);
 export const fromNum = (v: number): LimitValue => (v === Infinity ? "inf" : v === -Infinity ? "-inf" : v);
@@ -133,10 +145,23 @@ export function validateThresholds(t: unknown, expectedPath: string): string[] {
   if (f.schema !== THRESHOLDS_SCHEMA) p.push(`schema is ${String(f.schema)}, expected ${THRESHOLDS_SCHEMA}`);
   if (f.path !== expectedPath) p.push(`path is ${String(f.path)}, expected ${expectedPath}`);
   if (!f.calibration || !Array.isArray(f.calibration.runs) || f.calibration.runs.length < MIN_RUNS) p.push(`calibration needs >= ${MIN_RUNS} reference runs`);
+  const kind = f.calibration?.kind ?? "repeat";
+  const cross = f.calibration?.kind === "cross-reference" ? f.calibration : null;
+  if (kind !== "repeat" && kind !== "cross-reference") p.push(`unknown calibration kind ${String(kind)}`);
+  if (cross) {
+    if (typeof cross.againstCell !== "string" || !cross.againstCell || cross.againstCell === f.calibration?.cell) p.push("cross-reference calibration needs a second reference cell different from cell");
+    if (!Array.isArray(cross.againstRuns) || cross.againstRuns.length < MIN_RUNS) p.push(`cross-reference calibration needs >= ${MIN_RUNS} runs of the second reference cell`);
+  }
   if (!f.fixtures || typeof f.fixtures !== "object") return [...p, "no fixtures"];
   for (const [id, fx] of Object.entries(f.fixtures)) {
     if (fx.runs < MIN_RUNS) p.push(`${id}: ${fx.runs} runs < ${MIN_RUNS}`);
-    if (fx.pairs !== (fx.runs * (fx.runs - 1)) / 2) p.push(`${id}: ${fx.pairs} pairs for ${fx.runs} runs`);
+    if (cross) {
+      if (typeof fx.againstRuns !== "number" || fx.againstRuns < MIN_RUNS) p.push(`${id}: ${String(fx.againstRuns)} runs of the second reference < ${MIN_RUNS}`);
+      else if (fx.pairs !== fx.runs * fx.againstRuns) p.push(`${id}: ${fx.pairs} pairs for ${fx.runs} x ${fx.againstRuns} cross-reference runs`);
+    } else {
+      if (fx.againstRuns !== undefined) p.push(`${id}: againstRuns set on a repeat calibration`);
+      if (fx.pairs !== (fx.runs * (fx.runs - 1)) / 2) p.push(`${id}: ${fx.pairs} pairs for ${fx.runs} runs`);
+    }
     const limits = [
       fx.pixels?.maxMse,
       fx.pixels?.minSsim,
