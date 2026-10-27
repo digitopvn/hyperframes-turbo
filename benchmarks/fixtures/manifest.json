@@ -1,5 +1,5 @@
 {
-  "$comment": "Golden benchmark fixtures. 'local' fixtures live in benchmarks/fixtures/<id> and use the upstream fixture layout (meta.json + src/index.html). 'upstream' fixtures are referenced in place from the pinned submodule at upstream/hyperframes/packages/producer/tests/<id>, never copied. Media listed under 'media' is generated deterministically by benchmarks/src/media.ts from the recipes in media-recipes.json; 'vendor' files are copied from the pinned upstream install.",
+  "$comment": "Golden benchmark fixtures. 'local' fixtures live in benchmarks/fixtures/<id> and use the upstream fixture layout (meta.json + src/index.html). 'upstream' fixtures are referenced in place from the pinned submodule at upstream/hyperframes/packages/producer/tests/<id>, never copied. Media listed under 'media' is generated deterministically on first use by ensureMedia() in benchmarks/src/fixtures.ts from the FFmpeg recipes in media-recipes.json, into benchmarks/.cache/media; 'vendor' files are copied from the pinned upstream install.",
   "fixtures": [
     { "id": "typography-svg", "source": "local", "category": "typography+svg", "vendor": ["gsap"], "media": [] },
     { "id": "gsap-static-holds", "source": "local", "category": "gsap-static-holds", "vendor": ["gsap"], "media": [] },
