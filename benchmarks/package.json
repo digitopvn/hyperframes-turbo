@@ -6,6 +6,10 @@
     "bench": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/run-benchmark.ts",
     "report": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/report.ts",
     "env": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/collect-environment.ts",
-    "typecheck": "../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json"
+    "fidelity": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/fidelity/run-fidelity.ts",
+    "calibrate": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/fidelity/calibrate.ts",
+    "faults": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs src/fidelity/inject-faults.ts",
+    "test": "node --import ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs --test --test-concurrency=1 test/fidelity/unit.test.ts test/fidelity/gate.test.ts",
+    "typecheck":"../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json"
   }
 }
