@@ -53,11 +53,15 @@ export interface AbortInfo {
 }
 
 const PS_LOOP = String.raw`
-param([int]$interval)
+param([int]$interval, [int]$owner)
+$ErrorActionPreference = 'Stop'
 while ($true) {
+  # Exit with the owning Node process: Node does not kill children when it exits.
+  if (-not (Get-Process -Id $owner -ErrorAction SilentlyContinue)) { exit 0 }
   $p = Get-CimInstance Win32_Process -Property ProcessId,ParentProcessId,Name,CreationDate | ForEach-Object { ,@($_.ProcessId, $_.ParentProcessId, $_.Name, $(if ($_.CreationDate) { $_.CreationDate.ToFileTimeUtc() } else { 0 })) }
   $os = Get-CimInstance Win32_OperatingSystem -Property FreePhysicalMemory,TotalVisibleMemorySize
   $m = Get-CimInstance Win32_PerfFormattedData_PerfOS_Memory -Property CommittedBytes,CommitLimit
+  # A closed stdout (owner gone) throws and, under Stop, ends the loop.
   [Console]::Out.WriteLine((ConvertTo-Json -Compress -Depth 3 -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); p = $p; free = [int64]$os.FreePhysicalMemory * 1024; total = [int64]$os.TotalVisibleMemorySize * 1024; commit = [int64]$m.CommittedBytes; limit = [int64]$m.CommitLimit }))
   [Console]::Out.Flush()
   Start-Sleep -Milliseconds $interval
@@ -65,6 +69,9 @@ while ($true) {
 `;
 
 type RawProc = [number, number, string, number];
+
+/** PowerShell + CIM start-up takes a few seconds; past this the sampler is presumed broken. */
+const START_TIMEOUT_MS = 30_000;
 
 /** Kill a process and all its live descendants. Never throws. */
 export function killTree(pid: number): void {
@@ -90,6 +97,8 @@ export class ProcessGuard {
   private ready!: Promise<void>;
   readonly samples: GuardSample[] = [];
   last: GuardSample | null = null;
+  private lastSampleAt = 0;
+  private watchdog: NodeJS.Timeout | null = null;
 
   constructor(
     private readonly limits: GuardLimits,
@@ -101,26 +110,55 @@ export class ProcessGuard {
     return this.aborted;
   }
 
-  /** Start sampling; resolves after the first sample so limits are checked before any render. */
+  /**
+   * Start sampling; resolves after the first sample so limits are checked
+   * before any render. Fails closed: if the sampler errors, exits, never
+   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals, the guard
+   * aborts, because a blind guard must not let the benchmark keep running.
+   */
   start(): Promise<void> {
     if (process.platform !== "win32") return Promise.resolve();
-    this.proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", `& { ${PS_LOOP} } ${this.intervalMs}`], {
+    const proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", `& { ${PS_LOOP} } ${this.intervalMs} ${process.pid}`], {
       stdio: ["ignore", "pipe", "ignore"],
       windowsHide: true,
     });
-    let first: () => void;
+    this.proc = proc;
+    let first!: () => void;
     this.ready = new Promise((r) => (first = r));
-    this.proc.stdout!.setEncoding("utf8");
-    this.proc.stdout!.on("data", (chunk: string) => {
+    const blind = (reason: string) => {
+      if (this.proc !== proc) return; // stopped on purpose
+      this.abort(`host-safety sampler ${reason}`);
+      first();
+    };
+    proc.on("error", (err) => blind(`failed: ${err.message}`));
+    proc.on("exit", (code, signal) => blind(`exited (${code ?? signal})`));
+    const startTimer = setTimeout(() => blind(`sent no sample within ${START_TIMEOUT_MS} ms`), START_TIMEOUT_MS);
+    this.watchdog = setInterval(() => {
+      if (this.lastSampleAt && Date.now() - this.lastSampleAt > 3 * this.intervalMs) {
+        blind(`silent for ${Date.now() - this.lastSampleAt} ms (> 3 intervals)`);
+      }
+    }, this.intervalMs);
+    this.watchdog.unref();
+    proc.stdout!.setEncoding("utf8");
+    proc.stdout!.on("data", (chunk: string) => {
       this.buf += chunk;
       let nl: number;
       while ((nl = this.buf.indexOf("\n")) >= 0) {
         const line = this.buf.slice(0, nl).trim();
         this.buf = this.buf.slice(nl + 1);
-        if (line && this.ingest(line)) first();
+        if (line && this.ingest(line)) {
+          this.lastSampleAt = Date.now();
+          clearTimeout(startTimer);
+          first();
+        }
       }
     });
     return this.ready;
+  }
+
+  /** Test only: PID of the sampler process. */
+  get samplerPid(): number | undefined {
+    return this.proc?.pid;
   }
 
   addRoot(pid: number | undefined): void {
@@ -207,7 +245,9 @@ export class ProcessGuard {
   }
 
   stop(): void {
-    this.proc?.kill();
+    if (this.watchdog) clearInterval(this.watchdog);
+    const proc = this.proc;
     this.proc = null;
+    proc?.kill();
   }
 }

@@ -42,6 +42,16 @@ const guard = new ProcessGuard(DEFAULT_LIMITS, (info) => {
   guard.sweep();
   process.exit(3);
 });
+process.on("exit", () => {
+  if (current) killTree(current);
+  guard.stop();
+});
+process.on("uncaughtException", (err) => {
+  console.error(err);
+  if (current) killTree(current);
+  guard.sweep();
+  process.exit(1);
+});
 for (const sig of ["SIGINT", "SIGTERM"] as const) {
   process.on(sig, () => {
     if (current) killTree(current);

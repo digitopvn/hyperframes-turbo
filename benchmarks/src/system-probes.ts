@@ -171,8 +171,10 @@ export interface ProcessTreeSummary {
 
 const PS_LOOP = `
 $ErrorActionPreference = 'SilentlyContinue'
-$root = [int]$args[0]; $interval = [int]$args[1]
+$root = [int]$args[0]; $interval = [int]$args[1]; $owner = [int]$args[2]
 while ($true) {
+  # Exit with the owning Node process: Node does not kill children when it exits.
+  if (-not (Get-Process -Id $owner -ErrorAction SilentlyContinue)) { exit 0 }
   $all = Get-CimInstance Win32_Process -Property ProcessId,ParentProcessId,Name,WorkingSetSize,UserModeTime,KernelModeTime,ReadTransferCount,WriteTransferCount
   $kids = @{}
   foreach ($p in $all) { $k = [int]$p.ParentProcessId; if (-not $kids.ContainsKey($k)) { $kids[$k] = New-Object System.Collections.ArrayList }; [void]$kids[$k].Add($p) }
@@ -184,8 +186,8 @@ while ($true) {
     $p = $byId[$id]; if ($p) { [void]$out.Add(@($p.ProcessId, $p.Name, $p.WorkingSetSize, ($p.UserModeTime + $p.KernelModeTime), $p.ReadTransferCount, $p.WriteTransferCount)) }
     if ($kids.ContainsKey($id)) { foreach ($c in $kids[$id]) { $queue.Enqueue([int]$c.ProcessId) } }
   }
-  [Console]::Out.WriteLine((ConvertTo-Json -Compress -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); p = $out }))
-  [Console]::Out.Flush()
+  # CIM reads stay tolerant (processes exit mid-query), but a closed stdout ends the loop.
+  try { [Console]::Out.WriteLine((ConvertTo-Json -Compress -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); p = $out })); [Console]::Out.Flush() } catch { exit 0 }
   Start-Sleep -Milliseconds $interval
 }
 `;
@@ -208,7 +210,7 @@ export class ProcessTreeSampler {
 
   start(): void {
     if (!this.supported) return;
-    const script = `& { ${PS_LOOP} } ${this.rootPid} ${this.intervalMs}`;
+    const script = `& { ${PS_LOOP} } ${this.rootPid} ${this.intervalMs} ${process.pid}`;
     this.proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", script], {
       stdio: ["ignore", "pipe", "ignore"],
       windowsHide: true,

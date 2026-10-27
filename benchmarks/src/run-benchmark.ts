@@ -37,6 +37,8 @@ interface Args {
   limits: GuardLimits;
   /** Test only: kill one worker process (not its tree) this many ms into the last round. */
   injectKillMs: number | null;
+  /** Test only: kill the host-safety sampler this many ms after the first render starts. */
+  injectSamplerKillMs: number | null;
 }
 
 /** Suffix of the result directory of an uninstrumented control cell. */
@@ -57,6 +59,7 @@ function parseArgs(): Args {
     settleMs: Number(get("settle-ms") ?? 5000),
     control: a.includes("--no-control") ? null : (get("control") ?? "producer-default"),
     injectKillMs: get("inject-worker-kill-ms") ? Number(get("inject-worker-kill-ms")) : null,
+    injectSamplerKillMs: get("inject-sampler-kill-ms") ? Number(get("inject-sampler-kill-ms")) : null,
     limits: {
       maxChrome: Number(get("max-chrome") ?? DEFAULT_LIMITS.maxChrome),
       minFreeRamFraction: Number(get("min-free-ram-pct") ?? DEFAULT_LIMITS.minFreeRamFraction * 100) / 100,
@@ -215,30 +218,54 @@ async function main(): Promise<void> {
     console.error(`[bench] ABORT: ${info.reason}`);
     for (const pid of live) killTree(pid);
   });
-  for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"] as const) {
-    process.on(sig, () => {
-      teardown(sig);
+  // Every way out of the harness (signal, uncaught error, refusal, abort,
+  // normal end) goes through this: kill live trees, sweep, stop the sampler.
+  let finished = false;
+  const finish = (code: number, why: string): never => {
+    if (!finished) {
+      finished = true;
+      teardown(why);
       guard.stop();
-      process.exit(130);
-    });
-  }
+    }
+    process.exit(code);
+  };
+  emergencyStop = (why) => finish(1, why);
+  for (const sig of ["SIGINT", "SIGTERM", "SIGHUP"] as const) process.on(sig, () => finish(130, sig));
+  process.on("uncaughtException", (err) => {
+    console.error(err);
+    finish(1, "uncaughtException");
+  });
+  process.on("unhandledRejection", (err) => {
+    console.error(err);
+    finish(1, "unhandledRejection");
+  });
   process.on("exit", () => {
-    for (const pid of live) killTree(pid);
+    // Last resort for paths that bypass finish(); synchronous only.
+    if (!finished) {
+      for (const pid of live) killTree(pid);
+      guard.stop();
+    }
   });
   await guard.start();
   if (guard.abortInfo) {
-    guard.stop();
-    throw new Error(`host already over a resource limit before start: ${guard.abortInfo.reason}`);
+    console.error(`[bench] refusing to start: ${guard.abortInfo.reason}`);
+    finish(3, "pre-start guard");
   }
 
   const preflight = await waitForIdle({ cpuPct: 20, gpuPct: 15, maxWaitMs: 300_000, windowMs: 10_000 });
   console.error(`[bench] preflight idle: ${JSON.stringify(preflight)}`);
   if (!preflight.ok && args.strictIdle) {
     console.error("[bench] host busy before benchmark start; refusing (--strict-idle)");
-    process.exit(2);
+    finish(2, "strict-idle refusal");
   }
 
   const startedAt = new Date().toISOString();
+  if (args.injectSamplerKillMs !== null) {
+    setTimeout(() => {
+      console.error(`[bench] fault injection: killing host-safety sampler ${guard.samplerPid}`);
+      if (guard.samplerPid) killTree(guard.samplerPid);
+    }, args.injectSamplerKillMs).unref();
+  }
   const cells: Array<{ fixture: string; profile: string; exitCode: number }> = [];
   const leftovers: Array<{ after: string; processes: Array<{ pid: number; name: string }> }> = [];
   delete process.env.HF_PROFILE_FALLBACK_CAPTURE;
@@ -340,15 +367,20 @@ async function main(): Promise<void> {
   );
   if (abort) {
     console.error(`[bench] aborted fail-closed: ${abort.reason}; no report written`);
-    process.exit(3);
+    finish(3, "abort");
   }
   writeReport(outDir);
   console.error(`[bench] done: ${join(outDir, "report.md")}`);
+  finish(0, "done");
 }
+
+/** Set by main() once the guard exists, so a rejected main() still tears down. */
+let emergencyStop: ((why: string) => never) | null = null;
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   main().catch((err) => {
     console.error(err);
+    if (emergencyStop) emergencyStop("main() rejected");
     process.exit(1);
   });
 }
