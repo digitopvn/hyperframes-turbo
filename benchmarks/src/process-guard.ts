@@ -72,6 +72,14 @@ type RawProc = [number, number, string, number];
 /** PowerShell + CIM start-up takes a few seconds; past this the sampler is presumed broken. */
 const START_TIMEOUT_MS = 30_000;
 
+/**
+ * One sample cycle is the sleep interval plus the CIM queries, which took
+ * ~0.8 s on an idle 500-process host and several seconds more while renders
+ * saturate the CPU. Silence beyond 3 intervals plus this allowance means the
+ * sampler is hung; an exited sampler aborts immediately via its exit event.
+ */
+const QUERY_ALLOWANCE_MS = 10_000;
+
 /** Kill a process and all its live descendants. Never throws. */
 export function killTree(pid: number): void {
   if (process.platform === "win32") {
@@ -112,7 +120,8 @@ export class ProcessGuard {
   /**
    * Start sampling; resolves after the first sample so limits are checked
    * before any render. Fails closed: if the sampler errors, exits, never
-   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals, the guard
+   * reports within START_TIMEOUT_MS, or goes silent for 3 intervals plus
+   * QUERY_ALLOWANCE_MS while this process was listening, the guard
    * aborts, because a blind guard must not let the benchmark keep running.
    */
   start(): Promise<void> {
@@ -145,8 +154,9 @@ export class ProcessGuard {
         if (this.lastSampleAt) this.lastSampleAt = Math.max(this.lastSampleAt, now - this.intervalMs);
         return;
       }
-      if (this.lastSampleAt && now - this.lastSampleAt > 3 * this.intervalMs) {
-        blind(`silent for ${now - this.lastSampleAt} ms (> 3 intervals)`);
+      const limit = 3 * this.intervalMs + QUERY_ALLOWANCE_MS;
+      if (this.lastSampleAt && now - this.lastSampleAt > limit) {
+        blind(`silent for ${now - this.lastSampleAt} ms (> ${limit} ms: 3 intervals + query allowance)`);
       }
     }, this.intervalMs);
     this.watchdog.unref();

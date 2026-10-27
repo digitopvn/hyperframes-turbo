@@ -90,7 +90,9 @@ An earlier full baseline froze the benchmark desktop and needed a hard reset. Do
   | Consecutive failed runs (run error, worker death, or upstream calibration failure) | 3 | `--max-consecutive-failures` |
 
   The limits are checked once before any render starts. The run refuses to start on a host that is already over a limit.
-- **The guard fails closed.** The run aborts the same way if the sampler errors or exits, sends no first sample within 30 s, or goes silent for more than 3 intervals (6 s). A blind guard does not let the run continue.
+- **The guard fails closed.** The run aborts the same way if the sampler errors or exits, sends no first sample within 30 s, or goes silent for more than 3 intervals plus a 10 s query allowance (16 s). A blind guard does not let the run continue.
+  - Why the allowance: one sample cycle is the 2 s sleep plus the CIM queries. Those queries took about 0.8 s on an idle host with about 500 processes, and longer while renders saturated the CPU. The earlier 6 s limit aborted a fidelity calibration run mid-render on this shared host.
+  - Silence is judged only while the harness is listening. A watchdog tick that is itself late, because the synchronous end-of-fixture sweep blocked the event loop, is skipped rather than counted. Before this change, two PR01 calibration attempts aborted right after the first fixture's sweep.
 - **No sampler outlives the harness.** The guard sampler and the per-run process-tree sampler both take the PID of their owning Node process.
   - Each loop exits as soon as that PID is gone. Node does not kill its children when it exits.
   - The guard loop runs with `$ErrorActionPreference = 'Stop'`.

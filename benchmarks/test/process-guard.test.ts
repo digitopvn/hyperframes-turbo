@@ -7,13 +7,13 @@ import { DEFAULT_LIMITS, killTree, ProcessGuard, type AbortInfo } from "../src/p
 const permissive = { ...DEFAULT_LIMITS, minFreeRamBytes: 0, minFreeRamFraction: 0, maxCommitFraction: 1, maxChrome: 10_000 };
 const win = process.platform === "win32";
 
-test("a harness event-loop stall longer than 3 sampler intervals is not a silent sampler", { skip: !win && "sampler is Windows-only" }, async () => {
+test("a harness event-loop stall longer than the silence limit is not a silent sampler", { skip: !win && "sampler is Windows-only" }, async () => {
   const aborts: AbortInfo[] = [];
   const guard = new ProcessGuard(permissive, (a) => aborts.push(a), 500);
   try {
     await guard.start();
-    // Block the event loop like the synchronous sweep() does (> 3 intervals).
-    const until = Date.now() + 2500;
+    // Block the event loop like the synchronous sweep() does, past 3 intervals + query allowance (11.5 s).
+    const until = Date.now() + 13_000;
     while (Date.now() < until) {
       /* busy */
     }
