@@ -52,15 +52,27 @@ function bucket(method: string): MethodTraffic {
   return b;
 }
 
-function patch(Connection: any): void {
+/** The private puppeteer-core `Callbacks` registry `_rawSend` receives. */
+interface Callbacks {
+  create(label: string, timeout: number | undefined, fn: (id: number) => void): unknown;
+}
+type RawSend = (this: object, callbacks: Callbacks, method: string, params: unknown, sessionId: unknown, options: unknown) => unknown;
+/** The private parts of puppeteer-core `Connection.prototype` the tap replaces. */
+interface ConnectionProto {
+  __turboTapped?: boolean;
+  _rawSend: RawSend;
+  onMessage: (this: object, message: string) => unknown;
+}
+
+function patch(Connection: { prototype: ConnectionProto }): void {
   const proto = Connection.prototype;
   if (proto.__turboTapped) return;
   proto.__turboTapped = true;
   const rawSend = proto._rawSend;
-  proto._rawSend = function (callbacks: any, method: string, params: unknown, sessionId: unknown, options: unknown) {
+  proto._rawSend = function (callbacks: Callbacks, method: string, params: unknown, sessionId: unknown, options: unknown) {
     const conn = this;
     const proxy = {
-      create: (label: string, timeout: number, fn: (id: number) => void) =>
+      create: (label: string, timeout: number | undefined, fn: (id: number) => void) =>
         callbacks.create(label, timeout, (id: number) => {
           let m = pending.get(conn);
           if (!m) pending.set(conn, (m = new Map()));

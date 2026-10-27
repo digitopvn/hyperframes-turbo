@@ -6,7 +6,7 @@
  *   node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
  *     benchmarks/src/adr-facts.ts benchmarks/results/<dir>
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { CellSummary } from "./report.js";
 
@@ -136,6 +136,28 @@ const facts = {
     for (const r of rows) {
       const k = `${r[ix("capturePath")] || "none"}/calibrationFailed=${r[ix("calibrationFailed")]}`;
       out[k] = (out[k] ?? 0) + 1;
+    }
+    return out;
+  })(),
+  // From raw runs: calibration failures split by kind, with upstream's error text.
+  calibrationFailures: (() => {
+    const out = { cold: 0, warm: 0, errors: {} as Record<string, number>, renderFailures: {} as Record<string, number> };
+    const raw = join(dir, "raw");
+    for (const f of readdirSync(raw)) {
+      for (const v of readdirSync(join(raw, f))) {
+        for (const file of readdirSync(join(raw, f, v)).filter((n) => n.endsWith(".json"))) {
+          const r = JSON.parse(readFileSync(join(raw, f, v, file), "utf8"));
+          if (r.error) {
+            const k = String(r.error).split("\n")[0]!;
+            out.renderFailures[k] = (out.renderFailures[k] ?? 0) + 1;
+          }
+          const w = (r.upstreamLog?.warnMeta ?? []).find((x: { message: string }) => x.message.includes("calibration failed"));
+          if (!w) continue;
+          out[r.kind === "cold" ? "cold" : "warm"]++;
+          const k = `${w.meta?.error ?? "?"} (protocolTimeout ${w.meta?.protocolTimeout ?? "?"})`;
+          out.errors[k] = (out.errors[k] ?? 0) + 1;
+        }
+      }
     }
     return out;
   })(),

@@ -18,7 +18,7 @@ export interface GpuSample {
 }
 
 export function hasNvidiaSmi(): boolean {
-  const r = spawnSync("nvidia-smi", ["-L"], { encoding: "utf8" });
+  const r = spawnSync("nvidia-smi", ["-L"], { encoding: "utf8", windowsHide: true });
   return r.status === 0;
 }
 
@@ -305,4 +305,44 @@ export function summarizeGpu(samples: GpuSample[], baselineMemMiB: number | null
     /** Device-level VRAM growth over the pre-run baseline (WDDM gives no reliable per-process figure). */
     peakVramDeltaMiB: baselineMemMiB === null ? null : peakMem - baselineMemMiB,
   };
+}
+
+/** Executables a render spawns; the settle wait watches these. */
+const RENDER_CHILD_IMAGES = ["chrome-headless-shell.exe", "ffmpeg.exe", "ffprobe.exe"];
+
+export interface SettleResult {
+  /** Render-child processes alive when the wait started. */
+  aliveAtStart: number;
+  /** Render-child processes still alive when the wait ended. */
+  aliveAtEnd: number;
+  waitedMs: number;
+  cooldownMs: number;
+}
+
+function countRenderChildren(): number {
+  const r = spawnSync("tasklist", ["/FO", "CSV", "/NH"], { encoding: "utf8", windowsHide: true });
+  if (r.status !== 0) return 0;
+  return r.stdout
+    .split("\n")
+    .map((l) => l.split(",")[0]?.replace(/"/g, "").trim().toLowerCase())
+    .filter((name) => name && RENDER_CHILD_IMAGES.includes(name)).length;
+}
+
+/**
+ * Wait until no Chrome/FFmpeg process of a previous render is still alive
+ * (up to `maxWaitMs`), then sleep a fixed `cooldownMs`. Host-wide by image
+ * name, so the benchmark host must not run other headless-shell/FFmpeg work.
+ * A desktop Chrome (`chrome.exe`) is deliberately not watched.
+ */
+export async function settleHost(cooldownMs: number, maxWaitMs = 60_000): Promise<SettleResult> {
+  const t0 = Date.now();
+  const aliveAtStart = countRenderChildren();
+  let alive = aliveAtStart;
+  while (alive > 0 && Date.now() - t0 < maxWaitMs) {
+    await new Promise((r) => setTimeout(r, 250));
+    alive = countRenderChildren();
+  }
+  const waitedMs = Date.now() - t0;
+  await new Promise((r) => setTimeout(r, cooldownMs));
+  return { aliveAtStart, aliveAtEnd: alive, waitedMs, cooldownMs };
 }

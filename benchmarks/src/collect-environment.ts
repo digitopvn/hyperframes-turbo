@@ -18,7 +18,7 @@ function run(cmd: string, args: string[], cwd?: string): string | null {
   return r.status === 0 ? r.stdout.split(String.fromCharCode(13)).join("").trim() : null;
 }
 
-function powershellJson(script: string): any {
+function powershellJson(script: string): Record<string, unknown> | null {
   const out = run("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", `${script} | ConvertTo-Json -Compress -Depth 4`]);
   try {
     return out ? JSON.parse(out) : null;

@@ -68,7 +68,7 @@ export function ensureMedia(name: string): { path: string; sha256: string; recip
   if (!existsSync(path)) {
     mkdirSync(dirname(path), { recursive: true });
     const tmp = `${path}.partial${name.slice(name.lastIndexOf("."))}`;
-    const r = spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-y", ...recipe, tmp], { encoding: "utf8" });
+    const r = spawnSync("ffmpeg", ["-hide_banner", "-loglevel", "error", "-y", ...recipe, tmp], { encoding: "utf8", windowsHide: true });
     if (r.status !== 0) throw new Error(`ffmpeg failed for ${name}: ${r.stderr}`);
     renameSync(tmp, path);
   }

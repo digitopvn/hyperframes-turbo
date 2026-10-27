@@ -17,7 +17,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { installCdpTap, resetCdpTap, snapshotCdpTap } from "./cdp-tap.js";
 import { hashFixtureSource, loadManifest, prepareProject, resolveFixture, UPSTREAM_ROOT } from "./fixtures.js";
-import { GpuSampler, ProcessTreeSampler, hasNvidiaSmi, summarizeGpu, waitForIdle, sampleGpu } from "./system-probes.js";
+import { GpuSampler, ProcessTreeSampler, hasNvidiaSmi, settleHost, summarizeGpu, waitForIdle, sampleGpu } from "./system-probes.js";
 import type { TraceEvent } from "./trace-analysis.js";
 
 /**
@@ -40,6 +40,8 @@ interface Args {
   uninstrumented: boolean;
   /** Wait for `run <n>` commands on stdin instead of running all runs. */
   serve: boolean;
+  /** Cooldown after render children exit, before each run; 0 disables the settle wait. */
+  settleMs: number;
 }
 
 function parseArgs(): Args {
@@ -56,6 +58,7 @@ function parseArgs(): Args {
     strictIdle: a.includes("--strict-idle"),
     uninstrumented: a.includes("--uninstrumented"),
     serve: a.includes("--serve"),
+    settleMs: Number(get("settle-ms") ?? 0),
   };
 }
 
@@ -73,7 +76,7 @@ function ffprobe(path: string): unknown {
   const r = spawnSync(
     "ffprobe",
     ["-v", "error", "-count_packets", "-show_format", "-show_streams", "-of", "json", path],
-    { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
+    { encoding: "utf8", maxBuffer: 64 * 1024 * 1024, windowsHide: true },
   );
   if (r.status !== 0) return { error: r.stderr };
   const j = JSON.parse(r.stdout);
@@ -82,7 +85,7 @@ function ffprobe(path: string): unknown {
     durationSec: Number(j.format?.duration),
     bitRate: Number(j.format?.bit_rate),
     formatName: j.format?.format_name,
-    streams: (j.streams ?? []).map((s: any) => ({
+    streams: (j.streams ?? []).map((s: FfprobeStream) => ({
       type: s.codec_type,
       codec: s.codec_name,
       profile: s.profile,
@@ -104,10 +107,38 @@ function ffprobe(path: string): unknown {
   };
 }
 
+/** Upstream log metadata as plain JSON (errors become {name, message, stack}). */
+function safeMeta(meta: Record<string, unknown>): unknown {
+  return JSON.parse(
+    JSON.stringify(meta, (_k, v: unknown) => (v instanceof Error ? { name: v.name, message: v.message, stack: v.stack } : v)),
+  );
+}
+
 /** Replace the host temp dir (which contains the user name on Windows) with `$TMP`. */
 function redactTmp(json: string): string {
   const t = tmpdir();
   return [JSON.stringify(t).slice(1, -1), JSON.stringify(t.replace(/\\/g, "/")).slice(1, -1)].reduce((acc, v) => acc.split(v).join("$TMP"), json);
+}
+
+interface FfprobeStream {
+  codec_type?: string;
+  codec_name?: string;
+  profile?: string;
+  pix_fmt?: string;
+  width?: number;
+  height?: number;
+  r_frame_rate?: string;
+  avg_frame_rate?: string;
+  nb_read_packets?: string;
+  nb_frames?: string;
+  bit_rate?: string;
+  duration?: string;
+  color_transfer?: string;
+  color_primaries?: string;
+  color_space?: string;
+  sample_rate?: string;
+  channels?: number;
+  tags?: Record<string, string>;
 }
 
 async function main(): Promise<void> {
@@ -145,6 +176,8 @@ async function main(): Promise<void> {
 
   const runOnce = async (run: number): Promise<void> => {
     const kind = run === 0 ? "cold" : "warm";
+    // Let Chrome/FFmpeg children of the previous render exit before the next one starts.
+    const settle = args.settleMs > 0 ? await settleHost(args.settleMs) : null;
     const idle = await waitForIdle({ cpuPct: IDLE_CPU_PCT, gpuPct: IDLE_GPU_PCT, maxWaitMs: 60_000, windowMs: 3000 });
     if (!idle.ok && args.strictIdle) {
       writeFileSync(
@@ -161,15 +194,17 @@ async function main(): Promise<void> {
     const events: TraceEvent[] = [];
     const logCounts = { error: 0, warn: 0, info: 0, debug: 0 };
     const warnings: string[] = [];
+    const warnMeta: Array<{ message: string; meta: unknown }> = [];
     const logger = {
       error: (m: string, meta?: Record<string, unknown>) => {
         logCounts.error++;
         warnings.push(`error: ${m}`);
         console.error(`[upstream:error] ${m}`, meta ?? "");
       },
-      warn: (m: string) => {
+      warn: (m: string, meta?: Record<string, unknown>) => {
         logCounts.warn++;
         if (warnings.length < 50) warnings.push(`warn: ${m}`);
+        if (warnMeta.length < 50 && meta) warnMeta.push({ message: m, meta: safeMeta(meta) });
       },
       info: (m: string, meta?: Record<string, unknown>) => {
         logCounts.info++;
@@ -245,7 +280,8 @@ async function main(): Promise<void> {
       processTreeTimeline: tree.samples.map((s) => [s.t, s.workingSetBytes, s.processCount]),
       extractCacheBytesAfter: extractCacheDir ? dirBytes(extractCacheDir) : null,
       output,
-      upstreamLog: { counts: logCounts, firstMessages: warnings.slice(0, 50) },
+      upstreamLog: { counts: logCounts, firstMessages: warnings.slice(0, 50), warnMeta },
+      settle,
       traceEvents: events,
       perfSummary: job.perfSummary ?? null,
       jobStatus: job.status,

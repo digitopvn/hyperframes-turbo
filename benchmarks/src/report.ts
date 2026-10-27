@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 import { describe, percentile, type Distribution } from "./stats.js";
 import { analyzeTrace, type TraceEvent } from "./trace-analysis.js";
 
+// Raw run JSON as written by render-worker.ts (several schema generations), read untyped.
 type Run = Record<string, any>;
 
 /**
@@ -131,8 +132,8 @@ function loadRuns(outDir: string): Run[] {
 export function runMetrics(r: Run): RunMetrics {
   const ps = r.perfSummary ?? {};
   const st = ps.stages ?? {};
-  const video = r.output?.streams?.find((s: any) => s.type === "video");
-  const audio = r.output?.streams?.find((s: any) => s.type === "audio");
+  const video = r.output?.streams?.find((s: { type?: string }) => s.type === "video");
+  const audio = r.output?.streams?.find((s: { type?: string }) => s.type === "audio");
   const frames = num(video?.packets) ?? num(ps.totalFrames);
   const trace =
     Array.isArray(r.traceEvents) && r.traceEvents.length ? analyzeTrace(r.traceEvents as TraceEvent[], r.wallMs, st) : null;
@@ -418,7 +419,7 @@ export function writeReport(outDir: string): CellSummary[] {
     L.push(`- Chrome: ${env.toolchain?.chrome?.version} · Node ${env.toolchain?.node} · ${env.toolchain?.ffmpeg}`);
     L.push(
       `- Host: ${host?.cpu?.Name ?? host?.cpuModelNode}, ${(host?.ramBytes / 2 ** 30).toFixed(0)} GiB RAM, ${(host?.gpu ?? [])
-        .map((g: any) => `${g.name} (driver ${g.driver})`)
+        .map((g: { name?: string; driver?: string }) => `${g.name} (driver ${g.driver})`)
         .join(", ")}, ${host?.os?.Caption} ${host?.os?.Version}`,
     );
     L.push(`- Not tested: ${(env.notTested ?? []).join("; ")}`);
