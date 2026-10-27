@@ -73,7 +73,7 @@ before(async () => {
   const file: ThresholdFile = {
     schema: THRESHOLDS_SCHEMA,
     path: PATH,
-    calibration: { runs: [...Array(RUNS).keys()].map((i) => i + 1), createdAt: new Date().toISOString(), host: "test", platform: process.platform, upstreamSha: null, ffmpeg: null, resultsDir: work, cell: "synthetic", rawPairsFile: "none", command: "gate.test.ts" },
+    calibration: { runs: [...Array(RUNS).keys()].map((i) => i + 1), createdAt: new Date().toISOString(), host: "test", platform: process.platform, upstreamSha: null, ffmpeg: null, resultsDir: work, cell: "producer-default", rawPairsFile: "none", command: "gate.test.ts" },
     fixtures: {},
   };
   for (const k of KINDS) {
@@ -176,11 +176,14 @@ const sdr = KINDS[0]!;
 
 describe("fail-closed behaviour", () => {
   test("a candidate cell that fed the calibration fails with THRESHOLD_INVALID", async () => {
-    const own = await run(sdr, out(sdr, 2), { refMeta: { cell: "other-reference", run: 1 }, candMeta: { cell: "synthetic.control", run: 2 } });
-    assert.equal(own.verdict, "FAIL");
-    assert.deepEqual(own.reasons, ["THRESHOLD_INVALID"]);
-    const repeat = await run(sdr, out(sdr, 2), { refMeta: { cell: "synthetic", run: 1 }, candMeta: { cell: "synthetic", run: 2 } });
-    assert.equal(repeat.verdict, "PASS", repeat.reasons.join(","));
+    const gate = (refCell: string, candCell: string) => run(sdr, out(sdr, 2), { refMeta: { cell: refCell, run: 1 }, candMeta: { cell: candCell, run: 2 } });
+    // A non-reference cell gated against itself has no reference at all.
+    const self = await gate("turbo-x", "turbo-x");
+    assert.equal(self.verdict, "FAIL");
+    assert.deepEqual(self.reasons, ["THRESHOLD_INVALID"]);
+    // The accepted reference repeated (CI determinism check), and an independent candidate, are gated normally.
+    assert.equal((await gate("producer-default", "producer-default.control")).verdict, "PASS");
+    assert.equal((await gate("producer-default", "turbo-x")).verdict, "PASS");
   });
 
   test("missing threshold entry fails with THRESHOLD_MISSING", async () => {

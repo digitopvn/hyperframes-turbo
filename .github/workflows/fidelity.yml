@@ -71,7 +71,7 @@ jobs:
           set +e
           src="$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-2.*)"
           ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v -c copy "$RUNNER_TEMP/red-no-audio.mp4" || exit 1
-          node --import $TSX src/fidelity/run-fidelity.ts --fixture audio-mix --path producer-default.linux \
+          node --import $TSX src/fidelity/run-fidelity.ts --fixture audio-mix --path producer-default.linux --ref-cell producer-default --cand-cell red-no-audio \
             --ref "$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-1.*)" --cand "$RUNNER_TEMP/red-no-audio.mp4" \
             --out "$RUNNER_TEMP/red-record.json"
           code=$?

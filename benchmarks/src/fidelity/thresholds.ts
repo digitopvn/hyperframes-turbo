@@ -79,18 +79,37 @@ export type CalibrationKind = { kind?: "repeat" } | { kind: "cross-reference"; a
 /** A `.control` cell is the same renderer configuration as its base cell (run-benchmark's control variant). */
 export const baseCell = (cell: string): string => cell.replace(/\.control$/, "");
 
+export const REFERENCE_CELLS_FILE = join(BENCH_ROOT, "fidelity", "reference-cells.json");
+
+/** Accepted reference cells (committed list). Throws when the list is missing or malformed: without it nothing can be a reference. */
+export function referenceCells(file = REFERENCE_CELLS_FILE): string[] {
+  const parsed = JSON.parse(readFileSync(file, "utf8")) as { schema?: unknown; cells?: unknown };
+  if (parsed.schema !== "turbo-fidelity-reference-cells/1" || !Array.isArray(parsed.cells) || !parsed.cells.length || !parsed.cells.every((c) => typeof c === "string" && c && !c.endsWith(".control"))) {
+    throw new Error(`malformed reference cell list ${file}`);
+  }
+  return parsed.cells as string[];
+}
+
+export const isReferenceCell = (cell: string, accepted = referenceCells()): boolean => accepted.includes(baseCell(cell));
+
+const calibratedCells = (file: ThresholdFile): string[] => [file.calibration.cell, ...(file.calibration.kind === "cross-reference" ? [file.calibration.againstCell] : [])].map(baseCell);
+
 /**
- * Why a candidate cell may not be gated with these limits, or null when it may.
- * A cell whose renders fed the calibration (`cell`, or `againstCell` of a
- * cross-reference file, `.control` aliases included) set its own limits, so it
- * is accepted only as a repeat of the reference cell it is compared with (the
- * CI determinism check: reference run 2 vs run 1).
+ * Why this reference/candidate pair may not be gated with these limits, or
+ * null when it may. The reference cell must be an accepted reference cell and
+ * one of the cells that fed the calibration. A candidate whose renders fed the
+ * calibration is accepted only when it is that same reference cell (a repeat,
+ * as in the CI determinism check), so a backend can never pass against limits
+ * derived from its own renders. `.control` aliases name the same cell.
  */
-export function candidateCellProblem(file: ThresholdFile, refCell: string, candCell: string): string | null {
+export function candidateCellProblem(file: ThresholdFile, refCell: string, candCell: string, accepted = referenceCells()): string | null {
+  const ref = baseCell(refCell);
   const cand = baseCell(candCell);
-  const calibrated = [file.calibration.cell, ...(file.calibration.kind === "cross-reference" ? [file.calibration.againstCell] : [])].map(baseCell);
-  if (!calibrated.includes(cand) || cand === baseCell(refCell)) return null;
-  return `candidate cell ${candCell} fed the calibration of ${file.path} (${calibrated.join(", ")}); a candidate may not be gated with limits derived from its own renders`;
+  const calibrated = calibratedCells(file);
+  if (!accepted.includes(ref)) return `reference cell ${refCell} is not an accepted reference cell (${accepted.join(", ")})`;
+  if (!calibrated.includes(ref)) return `reference cell ${refCell} did not feed the calibration of ${file.path} (${calibrated.join(", ")})`;
+  if (calibrated.includes(cand) && cand !== ref) return `candidate cell ${candCell} fed the calibration of ${file.path} (${calibrated.join(", ")}); a candidate may not be gated with limits derived from its own renders`;
+  return null;
 }
 
 export const toNum =(v: LimitValue): number => (v === "inf" ? Infinity : v === "-inf" ? -Infinity : v);
@@ -155,7 +174,7 @@ function isLimit(x: unknown): x is Limit {
 }
 
 /** Validate a parsed threshold file; returns a list of problems (empty = valid). */
-export function validateThresholds(t: unknown, expectedPath: string): string[] {
+export function validateThresholds(t: unknown, expectedPath: string, accepted: string[] = referenceCells()): string[] {
   const p: string[] = [];
   if (!t || typeof t !== "object") return ["not an object"];
   const f = t as Partial<ThresholdFile>;
@@ -169,6 +188,8 @@ export function validateThresholds(t: unknown, expectedPath: string): string[] {
     if (typeof cross.againstCell !== "string" || !cross.againstCell || baseCell(cross.againstCell) === baseCell(String(f.calibration?.cell))) p.push("cross-reference calibration needs a second reference cell different from cell (a .control alias is the same cell)");
     if (!Array.isArray(cross.againstRuns) || cross.againstRuns.length < MIN_RUNS) p.push(`cross-reference calibration needs >= ${MIN_RUNS} runs of the second reference cell`);
   }
+  if (typeof f.calibration?.cell !== "string" || !isReferenceCell(f.calibration.cell, accepted)) p.push(`calibration cell ${String(f.calibration?.cell)} is not an accepted reference cell (${accepted.join(", ")})`);
+  if (cross && typeof cross.againstCell === "string" && !isReferenceCell(cross.againstCell, accepted)) p.push(`againstCell ${cross.againstCell} is not an accepted reference cell (${accepted.join(", ")})`);
   if (!f.fixtures || typeof f.fixtures !== "object") return [...p, "no fixtures"];
   for (const [id, fx] of Object.entries(f.fixtures)) {
     if (fx.runs < MIN_RUNS) p.push(`${id}: ${fx.runs} runs < ${MIN_RUNS}`);
@@ -211,7 +232,12 @@ export function loadThresholds(path: string, file = thresholdFileFor(path)): Loa
   } catch (err) {
     return { error: `unparseable threshold file: ${(err as Error).message}`, file };
   }
-  const problems = validateThresholds(parsed, path);
+  let problems: string[];
+  try {
+    problems = validateThresholds(parsed, path);
+  } catch (err) {
+    problems = [(err as Error).message];
+  }
   if (problems.length) return { error: `invalid threshold file: ${problems.join("; ")}`, file };
   return { file, sha256: createHash("sha256").update(raw).digest("hex"), data: parsed as ThresholdFile };
 }

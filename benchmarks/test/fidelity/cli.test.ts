@@ -48,7 +48,7 @@ before(async () => {
   const file: ThresholdFile = {
     schema: THRESHOLDS_SCHEMA,
     path: PATH,
-    calibration: { runs: [1, 2, 3, 4, 5], createdAt: new Date().toISOString(), host: "test", platform: process.platform, upstreamSha: null, ffmpeg: null, resultsDir: work, cell: "synthetic", rawPairsFile: "none", command: "cli.test.ts" },
+    calibration: { runs: [1, 2, 3, 4, 5], createdAt: new Date().toISOString(), host: "test", platform: process.platform, upstreamSha: null, ffmpeg: null, resultsDir: work, cell: "producer-default", rawPairsFile: "none", command: "cli.test.ts" },
     fixtures: { [FIXTURE]: t },
   };
   writeFileSync(thresholdsFile, JSON.stringify(file));
@@ -62,7 +62,8 @@ function gate(args: string[], env: Record<string, string> = {}) {
   return { code: r.status, out: `${r.stdout}${r.stderr}` };
 }
 
-const pair = (cand: string) => ["--fixture", FIXTURE, "--ref", run(1), "--cand", cand, "--path", PATH, "--thresholds", thresholdsFile];
+const files = (cand: string) => ["--fixture", FIXTURE, "--ref", run(1), "--cand", cand, "--path", PATH, "--thresholds", thresholdsFile];
+const pair = (cand: string, refCell = "producer-default", candCell = "turbo-candidate") => [...files(cand), "--ref-cell", refCell, "--cand-cell", candCell];
 
 test("unmodified control exits 0 (PASS)", () => {
   const r = gate(pair(run(2)));
@@ -87,4 +88,16 @@ test("usage errors exit 2", () => {
   assert.equal(gate(["--fixture", FIXTURE]).code, 2);
   assert.equal(gate(["--results", work, "--ref-run", "one", "--cand-cell", "x", "--cand-run", "2"]).code, 2);
   assert.equal(gate(["--fixture"]).code, 2);
+});
+
+test("pair mode: a non-reference cell gated against itself exits 1 (THRESHOLD_INVALID)", () => {
+  const r = gate(pair(run(2), "turbo-candidate", "turbo-candidate"));
+  assert.equal(r.code, 1, r.out);
+  assert.match(r.out, /^audio-mix: FAIL \(THRESHOLD_INVALID\)$/m);
+});
+
+test("pair mode without cell names is a usage error (exit 2)", () => {
+  assert.equal(gate(files(run(2))).code, 2);
+  assert.equal(gate([...files(run(2)), "--ref-cell", "producer-default"]).code, 2);
+  assert.equal(gate([...files(run(2)), "--cand-cell", "turbo-candidate"]).code, 2);
 });

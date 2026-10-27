@@ -711,7 +711,7 @@ async function main(): Promise<number> {
       fixtureResults[fixture] = repoRelative(results);
       const { ctx } = fixtureContext(fixture);
       const src = await probeMedia({ path: srcPath });
-      const control = await evaluate({ fixture, reference: ref, candidate: srcPath, path });
+      const control = await evaluate({ fixture, reference: ref, candidate: srcPath, path, refMeta: { cell, run: refRun }, candMeta: { cell, run: srcRun } });
       const controlOk = control.verdict === "PASS" || (control.verdict === "FALLBACK" && control.reasons.every((r) => r === "TOOL_UNAVAILABLE"));
       rows.push({ fixture, fault: "control-unmodified", detail: `run ${srcRun} vs run ${refRun}, unmodified`, expected: [], verdict: control.verdict, reasons: control.reasons, caught: controlOk, required: true });
       console.error(`[faults] ${fixture} control: ${control.verdict} ${control.reasons.join(",")}`);
@@ -732,7 +732,7 @@ async function main(): Promise<number> {
           } else {
             row.detail = (await injectFault(fault, src, out, ctx, k ?? 2, subtle?.k)).detail;
             if (fault === "stale-frame-subtle") row.detail += `; thumbnail MSE to its predecessor ${subtle!.thumbMse.toFixed(4)} (match tolerance ${tol})`;
-            const rec = await evaluate({ fixture, reference: ref, candidate: out, path, backend: `fault:${fault}` });
+            const rec = await evaluate({ fixture, reference: ref, candidate: out, path, backend: `fault:${fault}`, refMeta: { cell, run: refRun }, candMeta: { cell, run: srcRun } });
             row.verdict = rec.verdict;
             row.reasons = rec.reasons;
             row.caught = faultCaught(fault, rec);

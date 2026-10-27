@@ -12,7 +12,7 @@ import { hdrStaticMetadata } from "../../src/fidelity/probe.js";
 import { comparePixels } from "../../src/fidelity/metrics/pixels.js";
 import { frameAtOrAfter, frameTicks, parseRational, ptsErrorTicks, rat, ratToNumber } from "../../src/fidelity/rational.js";
 import { buildSamplePlan, cutTimesFromHtml, loadFidelitySpec, parseFidelitySpec } from "../../src/fidelity/sample-plan.js";
-import { candidateCellProblem, deriveLimit, MIN_RUNS, validateThresholds, within, type FixtureThresholds, type ThresholdFile } from "../../src/fidelity/thresholds.js";
+import { candidateCellProblem, deriveLimit, referenceCells, MIN_RUNS, validateThresholds, within, type FixtureThresholds, type ThresholdFile } from "../../src/fidelity/thresholds.js";
 import { aggregate } from "../../src/fidelity/verdict.js";
 import { parseArgs, UsageError } from "../../src/fidelity/cli-args.js";
 import { crossPairsOf } from "../../src/fidelity/calibrate.js";
@@ -244,9 +244,11 @@ test("cross-reference calibration: pairs are runs x againstRuns and need a disti
   assert.deepEqual(crossPairsOf([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]]);
   const runs = [1, 2, 3, 4, 5];
   const base = { schema: "turbo-fidelity-thresholds/1", path: "p.win32" };
-  const cross = { ...base, calibration: { runs, cell: "a", kind: "cross-reference", againstCell: "b", againstRuns: runs }, fixtures: { f: thresholdFixture({ againstRuns: 5, pairs: 25 }) } };
-  assert.deepEqual(validateThresholds(cross, "p.win32"), []);
-  const sameCell = { ...cross, calibration: { ...cross.calibration, againstCell: "a" } };
+  const cross = { ...base, calibration: { runs, cell: "producer-default", kind: "cross-reference", againstCell: "producer-default-2", againstRuns: runs }, fixtures: { f: thresholdFixture({ againstRuns: 5, pairs: 25 }) } };
+  // Two accepted references are needed for a valid cross-reference file; only one is committed today.
+  const twoRefs = ["producer-default", "producer-default-2"];
+  assert.deepEqual(validateThresholds(cross, "p.win32", twoRefs), []);
+  const sameCell = { ...cross, calibration: { ...cross.calibration, againstCell: "producer-default.control" } };
   assert.ok(validateThresholds(sameCell, "p.win32").some((p) => p.includes("second reference cell")));
   const fewAgainst = { ...cross, calibration: { ...cross.calibration, againstRuns: [1, 2] } };
   assert.ok(validateThresholds(fewAgainst, "p.win32").some((p) => p.includes("second reference cell") || p.includes(`>= ${MIN_RUNS} runs`)));
@@ -287,20 +289,28 @@ test("a .control alias is the same cell: rejected as the second reference", () =
   assert.ok(validateThresholds(file, "p.win32").some((p) => p.includes("second reference cell")));
 });
 
-test("a candidate cell that fed the calibration may not be gated with it", () => {
+test("only accepted reference cells calibrate, and only they act as the reference", () => {
   const runs = [1, 2, 3, 4, 5];
+  const accepted = ["ref", "ref2"];
   const repeat = { schema: "turbo-fidelity-thresholds/1", path: "p", calibration: { runs, cell: "ref" }, fixtures: {} } as unknown as ThresholdFile;
   const cross = { ...repeat, calibration: { runs, cell: "ref", kind: "cross-reference", againstCell: "ref2", againstRuns: runs } } as unknown as ThresholdFile;
-  // A reference repeat (the CI determinism check) and an independent candidate are fine.
-  assert.equal(candidateCellProblem(repeat, "ref", "ref"), null);
-  assert.equal(candidateCellProblem(repeat, "ref", "ref.control"), null);
-  assert.equal(candidateCellProblem(cross, "ref", "turbo"), null);
-  // A calibration cell (or its .control alias) gated against another reference.
-  assert.match(candidateCellProblem(cross, "ref", "ref2")!, /fed the calibration/);
-  assert.match(candidateCellProblem(cross, "ref", "ref2.control")!, /fed the calibration/);
-  assert.match(candidateCellProblem(repeat, "other", "ref.control")!, /fed the calibration/);
+  assert.equal(candidateCellProblem(repeat, "ref", "ref", accepted), null);
+  assert.equal(candidateCellProblem(repeat, "ref.control", "ref", accepted), null);
+  assert.equal(candidateCellProblem(cross, "ref", "turbo", accepted), null);
+  // ref = cand = a non-reference cell, even with a file that cell calibrated itself.
+  const self = { ...repeat, calibration: { runs, cell: "turbo" } } as unknown as ThresholdFile;
+  assert.match(candidateCellProblem(self, "turbo", "turbo", accepted)!, /not an accepted reference cell/);
+  // An accepted reference that did not feed this calibration.
+  assert.match(candidateCellProblem(repeat, "ref2", "turbo", accepted)!, /did not feed the calibration/);
+  // A calibration cell (or alias) as candidate of the other reference.
+  assert.match(candidateCellProblem(cross, "ref", "ref2.control", accepted)!, /fed the calibration/);
+  // The committed list holds the Chromium reference only.
+  assert.deepEqual(referenceCells(), ["producer-default"]);
+  const selfFile = { schema: "turbo-fidelity-thresholds/1", path: "turbo-x.win32", calibration: { runs, cell: "turbo-x" }, fixtures: { f: thresholdFixture() } };
+  assert.ok(validateThresholds(selfFile, "turbo-x.win32").some((p) => p.includes("not an accepted reference cell")));
+  const crossToCandidate = { ...selfFile, calibration: { runs, cell: "producer-default", kind: "cross-reference", againstCell: "turbo-x", againstRuns: runs }, fixtures: { f: thresholdFixture({ againstRuns: 5, pairs: 25 }) } };
+  assert.ok(validateThresholds(crossToCandidate, "turbo-x.win32").some((p) => p.includes("againstCell turbo-x is not an accepted reference cell")));
 });
-
 test("fault injection skips aborted results dirs and reports differing environments", () => {
   const root = mkdtempSync(join(tmpdir(), "turbo-results-dirs-"));
   try {

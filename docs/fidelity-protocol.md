@@ -113,10 +113,21 @@ node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
   the first (a `.control` alias counts as the same cell; `calibrate.ts`
   refuses it too), has fewer than 5 runs, or whose pair count is not runs x
   againstRuns; a repeat file may not carry `againstRuns`.
-- In results mode the gate FAILs with `THRESHOLD_INVALID` when the candidate
-  cell (or its `.control` alias) is a cell whose renders fed the calibration,
-  unless it is the reference cell itself (a repeat, as in the CI determinism
-  check).
+- Accepted reference cells are listed in
+  `benchmarks/fidelity/reference-cells.json`; today that is only
+  `producer-default`, the Chromium reference backend. `.control` names the
+  same cell. Threshold validation and `calibrate.ts` reject a `cell` or
+  `againstCell` that is not on the list, so a candidate can never calibrate
+  its own limits. Adding a cell to the list is a reviewed decision.
+- Every gate run names its cells: results mode via `--ref-cell`/`--cand-cell`,
+  pair mode via the **required** `--ref-cell` and `--cand-cell` (missing =
+  usage error, exit 2). The gate FAILs with `THRESHOLD_INVALID` when the
+  reference cell is not an accepted reference cell, or did not feed the
+  threshold file's calibration, or when the candidate cell fed the
+  calibration without being that reference cell. Candidate = reference is
+  therefore accepted only for an accepted reference cell repeating itself
+  (the CI determinism check); a non-reference cell gated against itself
+  fails.
 - Hard invariants (frame count, geometry, codec, fps, timestamps, audio
   format) still have to agree on every cross pair, or the fixture gets no
   thresholds and fails closed. A backend whose output differs from the
@@ -133,6 +144,7 @@ validation and its tests are in place for the first candidate PR.
 # Pair mode
 node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
   benchmarks/src/fidelity/run-fidelity.ts --fixture <id> --ref <file|png dir> --cand <file|png dir> \
+  --ref-cell producer-default --cand-cell <cell> \
   [--path producer-default.win32] [--backend <name>] [--out record.json]
 
 # Results mode: outputs kept by run-benchmark --keep-output

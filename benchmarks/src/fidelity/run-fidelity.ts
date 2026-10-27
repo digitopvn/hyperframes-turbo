@@ -3,6 +3,7 @@
  *
  *   Pair mode:
  *     run-fidelity.ts --fixture <id> --ref <file|png dir> --cand <file|png dir>
+ *                     --ref-cell <accepted reference cell> --cand-cell <cell>
  *                     [--path <profile.platform>] [--thresholds <file>]
  *                     [--backend <name>] [--out <record.json>]
  *   Results mode (outputs kept by run-benchmark.ts --keep-output):
@@ -88,6 +89,7 @@ function cliArgs(argv: string[]) {
     backend: get("backend"),
     out: get("out"),
     results: get("results"),
+    refCellArg: get("ref-cell"),
     refCell: get("ref-cell") ?? "producer-default",
     refRun: int("ref-run"),
     candCell: get("cand-cell"),
@@ -137,7 +139,18 @@ async function main(): Promise<number> {
     return EXIT_CODE[verdict];
   }
   if (!a.fixture || !a.ref || !a.cand) throw new UsageError("pair mode needs --fixture, --ref and --cand (or use --results)");
-  const rec = await evaluate({ fixture: a.fixture, reference: resolve(a.ref), candidate: resolve(a.cand), path, thresholdsFile: a.thresholds, backend: a.backend });
+  // The cell names are what the reference/candidate checks run on, so pair mode cannot default them.
+  if (!a.refCellArg || !a.candCell) throw new UsageError("pair mode needs --ref-cell and --cand-cell (the benchmark cells that produced --ref and --cand)");
+  const rec = await evaluate({
+    fixture: a.fixture,
+    reference: resolve(a.ref),
+    candidate: resolve(a.cand),
+    path,
+    thresholdsFile: a.thresholds,
+    backend: a.backend,
+    refMeta: { cell: a.refCellArg },
+    candMeta: { cell: a.candCell },
+  });
   if (a.out) {
     mkdirSync(dirname(resolve(a.out)), { recursive: true });
     writeFileSync(a.out, toJson(rec));
