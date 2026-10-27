@@ -132,9 +132,21 @@ export class ProcessGuard {
     proc.on("error", (err) => blind(`failed: ${err.message}`));
     proc.on("exit", (code, signal) => blind(`exited (${code ?? signal})`));
     const startTimer = setTimeout(() => blind(`sent no sample within ${START_TIMEOUT_MS} ms`), START_TIMEOUT_MS);
+    let lastTickAt = Date.now();
     this.watchdog = setInterval(() => {
-      if (this.lastSampleAt && Date.now() - this.lastSampleAt > 3 * this.intervalMs) {
-        blind(`silent for ${Date.now() - this.lastSampleAt} ms (> 3 intervals)`);
+      const now = Date.now();
+      // A late tick means this process's event loop was blocked (for example by
+      // the synchronous sweep()); samples sent meanwhile are still unread in the
+      // pipe and timers run before I/O, so judge silence only after listening again.
+      const stalled = now - lastTickAt > 1.5 * this.intervalMs;
+      lastTickAt = now;
+      if (stalled) {
+        // Before the first sample the start timeout is in charge; leave it alone.
+        if (this.lastSampleAt) this.lastSampleAt = Math.max(this.lastSampleAt, now - this.intervalMs);
+        return;
+      }
+      if (this.lastSampleAt && now - this.lastSampleAt > 3 * this.intervalMs) {
+        blind(`silent for ${now - this.lastSampleAt} ms (> 3 intervals)`);
       }
     }, this.intervalMs);
     this.watchdog.unref();
