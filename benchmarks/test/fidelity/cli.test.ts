@@ -73,7 +73,8 @@ test("unmodified control exits 0 (PASS)", () => {
 test("candidate without audio exits 1 (FAIL)", () => {
   const r = gate(pair(silent));
   assert.equal(r.code, 1, r.out);
-  assert.match(r.out, /FAIL/);
+  // A crash also exits 1: require the gate's own verdict line with the expected reason.
+  assert.match(r.out, /^audio-mix: FAIL \(.*AUDIO_MISSING.*\)$/m);
 });
 
 test("TURBO_FIDELITY=off exits 3 (FALLBACK), never 0", () => {

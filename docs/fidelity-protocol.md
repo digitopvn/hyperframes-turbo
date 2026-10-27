@@ -110,8 +110,13 @@ node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
   threshold file records `calibration.kind: "cross-reference"`, the second
   cell and its runs, and each fixture records `againstRuns`.
   `validateThresholds` rejects a cross-reference file whose second cell equals
-  the first, has fewer than 5 runs, or whose pair count is not runs x
+  the first (a `.control` alias counts as the same cell; `calibrate.ts`
+  refuses it too), has fewer than 5 runs, or whose pair count is not runs x
   againstRuns; a repeat file may not carry `againstRuns`.
+- In results mode the gate FAILs with `THRESHOLD_INVALID` when the candidate
+  cell (or its `.control` alias) is a cell whose renders fed the calibration,
+  unless it is the reference cell itself (a repeat, as in the CI determinism
+  check).
 - Hard invariants (frame count, geometry, codec, fps, timestamps, audio
   format) still have to agree on every cross pair, or the fixture gets no
   thresholds and fails closed. A backend whose output differs from the
@@ -179,9 +184,10 @@ Near-threshold faults measure sensitivity next to the large ones:
 - a stale frame at the least distinct neighbour pair that is still observable
   (thumbnail difference above twice the match tolerance).
 
-A near-threshold row is **required** when the fault exceeds the fixture's
-calibrated limit: an A/V offset above the limit plus the 0.125 ms lag
-resolution, or any pixel/temporal change on a bit-exact fixture. On a
+A near-threshold row is **required** when it is an A/V offset above the
+calibrated A/V limit plus the 0.125 ms lag resolution, or any pixel/temporal
+change on a bit-exact fixture. The magnitude of a pixel or temporal fault is
+not compared with the limit. On a
 non-deterministic fixture a +/-2 change can sit inside the calibrated reference
 noise, so the row is recorded as **informational**, with what the gate
 measured, and is never dropped. Only required misses (and errors) make the run

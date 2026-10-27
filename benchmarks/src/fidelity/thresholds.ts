@@ -76,7 +76,24 @@ export interface ThresholdFile {
  */
 export type CalibrationKind = { kind?: "repeat" } | { kind: "cross-reference"; againstCell: string; againstRuns: number[] };
 
-export const toNum = (v: LimitValue): number => (v === "inf" ? Infinity : v === "-inf" ? -Infinity : v);
+/** A `.control` cell is the same renderer configuration as its base cell (run-benchmark's control variant). */
+export const baseCell = (cell: string): string => cell.replace(/\.control$/, "");
+
+/**
+ * Why a candidate cell may not be gated with these limits, or null when it may.
+ * A cell whose renders fed the calibration (`cell`, or `againstCell` of a
+ * cross-reference file, `.control` aliases included) set its own limits, so it
+ * is accepted only as a repeat of the reference cell it is compared with (the
+ * CI determinism check: reference run 2 vs run 1).
+ */
+export function candidateCellProblem(file: ThresholdFile, refCell: string, candCell: string): string | null {
+  const cand = baseCell(candCell);
+  const calibrated = [file.calibration.cell, ...(file.calibration.kind === "cross-reference" ? [file.calibration.againstCell] : [])].map(baseCell);
+  if (!calibrated.includes(cand) || cand === baseCell(refCell)) return null;
+  return `candidate cell ${candCell} fed the calibration of ${file.path} (${calibrated.join(", ")}); a candidate may not be gated with limits derived from its own renders`;
+}
+
+export const toNum =(v: LimitValue): number => (v === "inf" ? Infinity : v === "-inf" ? -Infinity : v);
 export const fromNum = (v: number): LimitValue => (v === Infinity ? "inf" : v === -Infinity ? "-inf" : v);
 
 const median = (v: number[]): number => {
@@ -149,7 +166,7 @@ export function validateThresholds(t: unknown, expectedPath: string): string[] {
   const cross = f.calibration?.kind === "cross-reference" ? f.calibration : null;
   if (kind !== "repeat" && kind !== "cross-reference") p.push(`unknown calibration kind ${String(kind)}`);
   if (cross) {
-    if (typeof cross.againstCell !== "string" || !cross.againstCell || cross.againstCell === f.calibration?.cell) p.push("cross-reference calibration needs a second reference cell different from cell");
+    if (typeof cross.againstCell !== "string" || !cross.againstCell || baseCell(cross.againstCell) === baseCell(String(f.calibration?.cell))) p.push("cross-reference calibration needs a second reference cell different from cell (a .control alias is the same cell)");
     if (!Array.isArray(cross.againstRuns) || cross.againstRuns.length < MIN_RUNS) p.push(`cross-reference calibration needs >= ${MIN_RUNS} runs of the second reference cell`);
   }
   if (!f.fixtures || typeof f.fixtures !== "object") return [...p, "no fixtures"];

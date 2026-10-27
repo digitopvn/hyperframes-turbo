@@ -20,6 +20,19 @@ warm run 1.
   the same command and fixture subset flag. `inject-faults.ts` accepts both
   dirs and records which dir each fixture came from (`fixtureResults` in the
   JSON).
+- **Provenance caveats.** `-faults-b` was rendered from a dirty working tree
+  (`environment.json` -> `repo.turboDirty: true`, same `turboSha` 9837149):
+  the uncommitted changes were the fidelity tooling of this change, not the
+  render path; every other `environment.json` field except `generatedAt`
+  matches `-faults`. `inject-faults.ts` now skips a results dir whose manifest
+  records an `abort` unless `--allow-aborted` is given, and reports a dirty
+  tree or differing environments in the output. The committed table was
+  generated before that check existed; reproducing it now needs
+  `--results benchmarks/results/2026-10-27-1c4a1c1-faults,benchmarks/results/2026-10-27-1c4a1c1-faults-b --allow-aborted --ref-run 1 --source-run 2 --path producer-default.win32`.
+  Its near-threshold paragraph also predates the corrected wording: the
+  requirement rule is the one in `docs/fidelity-protocol.md` (A/V offset above
+  limit + 0.125 ms; pixel/temporal faults required only on bit-exact fixtures,
+  magnitude not compared with the limit).
 - **Result:** 193 rows, 22 distinct fault kinds caught, 1 miss, 7
   near-threshold rows not caught where not required (informational), 0 errors
   (`producer-default.win32.json`).

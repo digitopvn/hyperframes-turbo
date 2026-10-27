@@ -2,7 +2,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { setTimeout as delay } from "node:timers/promises";
-import { DEFAULT_LIMITS, descendantsOf, killTree, ProcessGuard, type AbortInfo } from "../src/process-guard.js";
+import { DEFAULT_LIMITS, descendantsOf, killTree, MAX_SILENCE_LIMIT_MS, ProcessGuard, type AbortInfo } from "../src/process-guard.js";
 
 const permissive = { ...DEFAULT_LIMITS, minFreeRamBytes: 0, minFreeRamFraction: 0, maxCommitFraction: 1, maxChrome: 10_000 };
 const win = process.platform === "win32";
@@ -69,6 +69,10 @@ test("sampler query time widens the silence limit; failed queries are counted, n
   // A slow query ages out after 10 newer samples.
   for (let i = 0; i < 10; i++) ingest(sample(100));
   assert.equal(guard.silenceLimitMs, 3 * (2000 + 100) + 10_000);
+  // One pathologically slow query cannot widen the limit past the cap.
+  ingest(sample(10 * 60_000));
+  assert.equal(guard.silenceLimitMs, MAX_SILENCE_LIMIT_MS);
+  assert.equal(MAX_SILENCE_LIMIT_MS, 60_000);
 });
 
 test("a reused owner PID (same PID, different start time) ends the sampler", { skip: !win && "sampler is Windows-only" }, async () => {

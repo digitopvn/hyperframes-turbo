@@ -72,10 +72,13 @@ jobs:
           src="$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-2.*)"
           ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v -c copy "$RUNNER_TEMP/red-no-audio.mp4" || exit 1
           node --import $TSX src/fidelity/run-fidelity.ts --fixture audio-mix --path producer-default.linux \
-            --ref "$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-1.*)" --cand "$RUNNER_TEMP/red-no-audio.mp4"
+            --ref "$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-1.*)" --cand "$RUNNER_TEMP/red-no-audio.mp4" \
+            --out "$RUNNER_TEMP/red-record.json"
           code=$?
           if [ "$code" -ne 1 ]; then echo "::error::gate exited $code on a candidate without audio, expected 1"; exit 1; fi
-          echo "gate went red as required (exit 1)"
+          # Exit 1 alone is also what a crash returns: require the recorded FAIL reason.
+          node -e 'const r=require(process.argv[1]); if (r.verdict !== "FAIL" || !r.reasons.includes("AUDIO_MISSING")) { console.error(`::error::red check: verdict ${r.verdict}, reasons ${r.reasons}`); process.exit(1); }' "$RUNNER_TEMP/red-record.json" || exit 1
+          echo "gate went red as required (exit 1, FAIL with AUDIO_MISSING)"
       - name: Fault injection (every applicable fault must be caught)
         working-directory: benchmarks
         run: >

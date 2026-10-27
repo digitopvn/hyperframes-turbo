@@ -18,7 +18,7 @@
  * Writes <out>/<path>.json and .md (default benchmarks/fidelity/negative-results).
  * Exit 1 if any fault is missed or the unmodified control does not pass.
  */
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -97,9 +97,8 @@ export const SUBTLE_BLOCK = 64;
 /**
  * Near-threshold faults: magnitudes chosen just above what a bit-exact path
  * can tolerate, to measure sensitivity rather than to break things visibly.
- * Each is required to be caught when it exceeds the fixture's calibrated
- * limit (see `nearThresholdRequirement`); otherwise its outcome is recorded
- * as informational, never silently dropped.
+ * Whether each must be caught is decided by `nearThresholdRequirement`;
+ * otherwise its outcome is recorded as informational, never silently dropped.
  */
 export const NEAR_THRESHOLD = new Set<FaultKind>(["stale-frame-subtle", "pixel-subtle-sampled", "pixel-subtle-unsampled", "audio-offset-22ms", "audio-offset-25ms", "audio-offset-30ms"]);
 
@@ -638,15 +637,59 @@ function measuredFor(fault: FaultKind, rec: FidelityRecord): string {
   return notes.length ? notes.join("; ") : "no check exceeded its limit";
 }
 
-const USAGE = "usage: inject-faults.ts --results <dir>[,<dir>...] [--cell c] [--ref-run 1] [--source-run 2] [--path p] [--fixtures a,b] [--out dir]";
+/** environment.json fields that must agree between results dirs combined into one fault-injection run (timestamps excluded). */
+const ENV_KEYS = ["repo", "upstream", "toolchain", "host", "testedPlatforms"] as const;
+
+/**
+ * Results dirs that may feed fault injection, plus provenance warnings.
+ * A dir whose run-manifest records a fail-closed `abort` is skipped unless
+ * `allowAborted` (its completed fixtures are still whole renders, but the
+ * caller has to opt in and the choice is recorded). Environments that differ
+ * between dirs (including a dirty working tree) are reported, never hidden.
+ */
+export function usableResultsDirs(dirs: string[], allowAborted: boolean): { dirs: string[]; notes: string[] } {
+  const notes: string[] = [];
+  const readJson = (file: string): Record<string, unknown> | null => {
+    if (!existsSync(file)) return null;
+    try {
+      return JSON.parse(readFileSync(file, "utf8")) as Record<string, unknown>;
+    } catch (e) {
+      throw new Error(`unparseable ${file}: ${(e as Error).message}`);
+    }
+  };
+  const usable = dirs.filter((d) => {
+    const abort = readJson(join(d, "run-manifest.json"))?.abort as { reason?: string } | undefined;
+    if (!abort) return true;
+    notes.push(`${repoRelative(d)} aborted fail-closed (${abort.reason ?? "no reason"}): ${allowAborted ? "used because --allow-aborted was given" : "skipped (pass --allow-aborted to use its completed fixtures)"}`);
+    return allowAborted;
+  });
+  const envs = usable.map((d) => ({ d, env: readJson(join(d, "environment.json")) }));
+  for (const { d, env } of envs) {
+    if (!env) notes.push(`${repoRelative(d)} has no environment.json`);
+    else if ((env.repo as { turboDirty?: boolean } | undefined)?.turboDirty) notes.push(`${repoRelative(d)} was rendered from a dirty working tree (turboDirty: true)`);
+  }
+  const first = envs.find((e) => e.env);
+  for (const { d, env } of envs) {
+    if (!env || !first || env === first.env) continue;
+    const differ = ENV_KEYS.filter((k) => JSON.stringify(env[k]) !== JSON.stringify(first.env![k]));
+    if (differ.length) notes.push(`${repoRelative(d)} environment differs from ${repoRelative(first.d)} in: ${differ.join(", ")}`);
+  }
+  return { dirs: usable, notes };
+}
+
+const USAGE ="usage: inject-faults.ts --results <dir>[,<dir>...] [--cell c] [--ref-run 1] [--source-run 2] [--path p] [--fixtures a,b] [--out dir]";
 
 async function main(): Promise<number> {
   const argv = process.argv.slice(2);
   const args = parseArgs(argv);
   // Several results dirs are allowed (for example a render resumed after a
   // fail-closed abort); each fixture is taken from the first dir that kept it.
-  const resultsDirs = args.list("results")?.map((d) => resolve(d));
-  if (!resultsDirs) throw new UsageError(USAGE);
+  const requestedDirs = args.list("results")?.map((d) => resolve(d));
+  if (!requestedDirs) throw new UsageError(USAGE);
+  const allowAborted = argv.includes("--allow-aborted");
+  const { dirs: resultsDirs, notes: provenanceNotes } = usableResultsDirs(requestedDirs, allowAborted);
+  for (const n of provenanceNotes) console.error(`[faults] warning: ${n}`);
+  if (!resultsDirs.length) throw new Error(`no usable results dir among ${requestedDirs.join(", ")}`);
   const cell = args.get("cell") ?? "producer-default";
   const refRun = args.int("ref-run", 1)!;
   const srcRun = args.int("source-run", 2)!;
@@ -714,7 +757,7 @@ async function main(): Promise<number> {
   const kinds = new Set(rows.filter((r) => r.fault !== "control-unmodified" && r.caught).map((r) => r.fault));
   writeFileSync(
     join(outDir, `${path}.json`),
-    toJson({ schema: "turbo-fidelity-negative/2", path, results: resultsDirs.map(repoRelative), fixtureResults, cell, refRun, sourceRun: srcRun, generatedAt: new Date().toISOString(), distinctFaultKindsCaught: kinds.size, missed: missed.length, informationalNotCaught: informational.length, rows }),
+    toJson({ schema: "turbo-fidelity-negative/2", path, results: resultsDirs.map(repoRelative), fixtureResults, provenanceNotes, cell, refRun, sourceRun: srcRun, generatedAt: new Date().toISOString(), distinctFaultKindsCaught: kinds.size, missed: missed.length, informationalNotCaught: informational.length, rows }),
   );
   const status = (r: FaultResult) => (r.caught ? "yes" : r.required || r.error ? "**NO**" : "no (informational)");
   const L = [
@@ -724,6 +767,7 @@ async function main(): Promise<number> {
     "",
     `- Distinct fault kinds caught: ${kinds.size}`,
     `- Missed or errored: ${missed.length}`,
+    ...provenanceNotes.map((n) => `- Provenance: ${n}`),
     `- Near-threshold faults not caught where not required (informational): ${informational.length}`,
     "",
     "| fixture | fault | injected | expected reason | verdict | reasons | caught |",
@@ -735,7 +779,7 @@ async function main(): Promise<number> {
     "",
     "## Near-threshold faults",
     "",
-    `Magnitudes: A/V offsets of ${Object.entries(AUDIO_OFFSET_MS).filter(([f]) => NEAR_THRESHOLD.has(f as FaultKind)).map(([, ms]) => `${ms} ms`).join(", ")} against a limit floored at one audio codec frame; luma ±${SUBTLE_LUMA_DELTA} code values (8-bit scale) in a ${SUBTLE_BLOCK}x${SUBTLE_BLOCK} block; a stale frame at the least distinct observable neighbour pair. A row is required when the fault exceeds the fixture's calibrated limit; otherwise its outcome is informational.`,
+    `Magnitudes: A/V offsets of ${Object.entries(AUDIO_OFFSET_MS).filter(([f]) => NEAR_THRESHOLD.has(f as FaultKind)).map(([, ms]) => `${ms} ms`).join(", ")} against a limit floored at one audio codec frame; luma ±${SUBTLE_LUMA_DELTA} code values (8-bit scale) in a ${SUBTLE_BLOCK}x${SUBTLE_BLOCK} block; a stale frame at the least distinct observable neighbour pair. A row is required when it is an A/V offset larger than the calibrated A/V limit plus the 0.125 ms lag resolution, or a pixel or temporal fault on a bit-exact fixture (every limit there is the exact reference value). The magnitude of a pixel or temporal fault is not compared with the limit; on a non-deterministic fixture its outcome is informational.`,
     "",
     "| fixture | fault | required | why | gate measured | caught |",
     "|---|---|---|---|---|---|",

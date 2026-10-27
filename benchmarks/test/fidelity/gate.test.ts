@@ -175,6 +175,14 @@ describe("pre-encode tier: lossless PNG sequence (upstream format png-sequence)"
 const sdr = KINDS[0]!;
 
 describe("fail-closed behaviour", () => {
+  test("a candidate cell that fed the calibration fails with THRESHOLD_INVALID", async () => {
+    const own = await run(sdr, out(sdr, 2), { refMeta: { cell: "other-reference", run: 1 }, candMeta: { cell: "synthetic.control", run: 2 } });
+    assert.equal(own.verdict, "FAIL");
+    assert.deepEqual(own.reasons, ["THRESHOLD_INVALID"]);
+    const repeat = await run(sdr, out(sdr, 2), { refMeta: { cell: "synthetic", run: 1 }, candMeta: { cell: "synthetic", run: 2 } });
+    assert.equal(repeat.verdict, "PASS", repeat.reasons.join(","));
+  });
+
   test("missing threshold entry fails with THRESHOLD_MISSING", async () => {
     const rec = await run(sdr, out(sdr, 2), { fixture: "not-calibrated", context: { ...ctxFor(sdr), fixture: "not-calibrated" } });
     assert.equal(rec.verdict, "FAIL");

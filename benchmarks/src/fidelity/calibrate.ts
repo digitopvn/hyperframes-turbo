@@ -32,7 +32,7 @@ import { ANALYSIS_RATE } from "./metrics/audio.js";
 import { probeMedia } from "./probe.js";
 import { keptOutput } from "./run-fidelity.js";
 import { fixtureContext, repoRelative, toJson, toolVersion } from "./schema.js";
-import { CALIBRATION_DIR, deriveLimit, MIN_RUNS, pathName, THRESHOLDS_DIR, THRESHOLDS_SCHEMA, thresholdFileFor, type FixtureThresholds, type ThresholdFile } from "./thresholds.js";
+import { baseCell, CALIBRATION_DIR, deriveLimit, MIN_RUNS, pathName, THRESHOLDS_DIR, THRESHOLDS_SCHEMA, thresholdFileFor, type FixtureThresholds, type ThresholdFile } from "./thresholds.js";
 
 export interface PairObservation {
   a: number;
@@ -200,7 +200,7 @@ async function main(): Promise<void> {
   const against = args.get("against-cell");
   // A cross-reference file is a deliberate, named tolerance set: no default path.
   if (against && !args.get("path")) throw new UsageError(`--against-cell needs an explicit --path. ${USAGE}`);
-  if (against === cell) throw new UsageError("--against-cell must differ from --cell");
+  if (against && baseCell(against) === baseCell(cell)) throw new UsageError("--against-cell must differ from --cell (a .control alias is the same cell)");
   const path = args.get("path") ?? pathName(cell.replace(/\.control$/, ""));
   const fixtures = args.list("fixtures") ?? readdirSync(join(results, "outputs")).sort();
   const runsArg = args.intList("runs");

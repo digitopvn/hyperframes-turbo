@@ -108,6 +108,8 @@ const START_TIMEOUT_MS = 30_000;
  * sampler is hung. An exited sampler aborts immediately via its exit event.
  */
 const QUERY_ALLOWANCE_MS = 10_000;
+/** Upper bound of the scaled silence limit: 60 s of listening time without a sample is a hung sampler, however slow recent queries were. */
+export const MAX_SILENCE_LIMIT_MS = 60_000;
 
 /**
  * A harness event loop blocked this long means nothing enforced the limits
@@ -281,7 +283,8 @@ export class ProcessGuard {
    */
   get silenceLimitMs(): number {
     const slowest = Math.max(0, ...this.recentQueryMs);
-    return 3 * (this.intervalMs + slowest) + this.queryAllowanceMs;
+    // Capped: one pathologically slow query must not blind the guard for minutes.
+    return Math.min(MAX_SILENCE_LIMIT_MS, 3 * (this.intervalMs + slowest) + this.queryAllowanceMs);
   }
 
   private resetSilence: () => void = () => {};

@@ -24,7 +24,7 @@ import { hasLibvmaf } from "./metrics/encoded.js";
 import type { MediaInput } from "./probe.js";
 import { liveProcessCount } from "./proc.js";
 import { attachToRun, buildRecord, fixtureContext, renderMarkdown, repoRelative, toJson, toolVersion, type FidelityRecord } from "./schema.js";
-import { loadThresholds, pathName, type LoadedThresholds } from "./thresholds.js";
+import { candidateCellProblem, loadThresholds, pathName, type LoadedThresholds } from "./thresholds.js";
 import { aggregate, EXIT_CODE, EXIT_USAGE, type Verdict } from "./verdict.js";
 
 export interface EvaluateOptions {
@@ -53,6 +53,13 @@ export async function evaluate(o: EvaluateOptions): Promise<FidelityRecord> {
   const thresholds = { path: o.path, loaded };
   if (process.env.TURBO_FIDELITY === "off") {
     return buildRecord({ fixture: o.fixture, judgement: null, measurements: null, reference, candidate, thresholds, tools, overrideVerdict: { verdict: "FALLBACK", reasons: ["DISABLED"] } });
+  }
+  if ("data" in loaded && o.candMeta?.cell && o.refMeta?.cell) {
+    const problem = candidateCellProblem(loaded.data, o.refMeta.cell, o.candMeta.cell);
+    if (problem) {
+      console.error(`[fidelity] ${o.fixture}: ${problem}`);
+      return buildRecord({ fixture: o.fixture, judgement: null, measurements: null, reference, candidate, thresholds, tools, overrideVerdict: { verdict: "FAIL", reasons: ["THRESHOLD_INVALID"] } });
+    }
   }
   const ctx = o.context ?? fixtureContext(o.fixture).ctx;
   const m = await measure(mediaInput(o.reference, ctx.fps), mediaInput(o.candidate, ctx.fps), ctx);
