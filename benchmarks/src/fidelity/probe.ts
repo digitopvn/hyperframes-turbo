@@ -217,7 +217,9 @@ export async function probeMedia(input: MediaInput): Promise<MediaProbe> {
     isImageSequence: isDir,
     formatName: String(format.format_name ?? "unknown"),
     sizeBytes,
-    bitRate: num(format.bit_rate),
+    // An image sequence has no container bitrate; its total bytes over its duration is the equivalent
+    // (a backend silently writing 8-bit instead of 16-bit PNGs shows up as a bitrate drop).
+    bitRate: num(format.bit_rate) ?? (isDir && num(format.duration) ? Math.round((sizeBytes * 8) / num(format.duration)!) : null),
     durationSec: num(format.duration),
     video,
     audio,

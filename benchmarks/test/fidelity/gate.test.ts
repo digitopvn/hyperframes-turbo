@@ -8,14 +8,14 @@
  * runner in proc.ts and none may be left alive.
  */
 import assert from "node:assert/strict";
-import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, describe, test } from "node:test";
 import { deriveFixtureThresholds, observe } from "../../src/fidelity/calibrate.js";
 import { measure, type CompareContext } from "../../src/fidelity/compare.js";
 import { applicableFaults, EXPECTED, injectFault, pickFaultFrame, type FaultKind } from "../../src/fidelity/inject-faults.js";
-import { probeMedia } from "../../src/fidelity/probe.js";
+import { PNG_SEQUENCE_PATTERN, probeMedia } from "../../src/fidelity/probe.js";
 import { FFMPEG, liveProcessCount, runTool } from "../../src/fidelity/proc.js";
 import { rat } from "../../src/fidelity/rational.js";
 import { evaluate } from "../../src/fidelity/run-fidelity.js";
@@ -131,6 +131,41 @@ for (const k of KINDS) {
     }
   });
 }
+
+describe("pre-encode tier: lossless PNG sequence (upstream format png-sequence)", () => {
+  const k: Kind = { id: "synthetic-png", ext: "", spec: { probes: [] }, args: [], faults: [] };
+  const dir = (run: number) => join(work, `png-run-${run}`);
+  const ctx = ctxFor(k);
+  const seq = (p: string) => ({ path: p, imageSequenceFps: ctx.fps });
+
+  before(async () => {
+    for (let r = 1; r <= RUNS; r++) {
+      mkdirSync(dir(r));
+      await runTool(FFMPEG, ["-hide_banner", "-loglevel", "error", "-y", "-f", "lavfi", "-i", "testsrc2=s=160x90:r=30:d=1", "-start_number", "1", join(dir(r), PNG_SEQUENCE_PATTERN)]);
+    }
+    const obs = [];
+    for (let a = 1; a <= RUNS; a++) for (let b = a + 1; b <= RUNS; b++) obs.push(observe(a, b, await measure(seq(dir(a)), seq(dir(b)), ctx)));
+    const t = deriveFixtureThresholds(RUNS, obs, null);
+    assert.ok(t, obs.flatMap((o) => o.invariantProblems).join("; "));
+    const file = JSON.parse(readFileSync(thresholdsFile, "utf8")) as ThresholdFile;
+    file.fixtures[k.id] = t;
+    writeFileSync(thresholdsFile, JSON.stringify(file));
+  });
+
+  test("identical lossless frames pass bit-exact", async () => {
+    const rec = await evaluate({ fixture: k.id, reference: dir(1), candidate: dir(2), path: PATH, thresholdsFile, context: ctx });
+    assert.equal(rec.verdict, "PASS", rec.reasons.join(","));
+  });
+
+  test("a missing frame file fails", async () => {
+    const names = readdirSync(dir(3)).sort();
+    // Shift every frame after #10 down by one: same naming scheme, one frame fewer.
+    for (let i = 10; i < names.length; i++) renameSync(join(dir(3), names[i]!), join(dir(3), names[i - 1]!));
+    const rec = await evaluate({ fixture: k.id, reference: dir(1), candidate: dir(3), path: PATH, thresholdsFile, context: ctx });
+    assert.equal(rec.verdict, "FAIL");
+    assert.ok(rec.reasons.includes("FRAME_COUNT_MISMATCH") && rec.reasons.includes("FRAME_DROPPED"), rec.reasons.join(","));
+  });
+});
 
 const sdr = KINDS[0]!;
 
