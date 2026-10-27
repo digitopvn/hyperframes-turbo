@@ -1,0 +1,626 @@
+{
+  "schema": "turbo-fidelity/1",
+  "generatedAt": "2026-10-27T11:25:37.596Z",
+  "fixture": "motion-blur",
+  "verdict": "FAIL",
+  "reasons": [
+    "PIXEL_BELOW_THRESHOLD"
+  ],
+  "reference": {
+    "file": "benchmarks/results/2026-10-27-1c4a1c1-faults-b/outputs/motion-blur/producer-default/run-1.mp4",
+    "sha256": "8c681d1727f9c587caca7a5cfb177bdce37194dcef43823a3883dd8e65188177",
+    "backend": "chromium-reference"
+  },
+  "candidate": {
+    "file": "benchmarks/results/2026-10-27-1c4a1c1-faults-b/outputs/motion-blur/producer-default/run-2.mp4",
+    "sha256": "c96309e173750182b82b54cefb624287de76f1bd386ae9eda9381754512011c9",
+    "backend": "chromium-reference"
+  },
+  "thresholds": {
+    "path": "producer-default.win32",
+    "file": "benchmarks/fidelity/thresholds/producer-default.win32.json",
+    "sha256": "65bd2f7c7157f2290acaa8a8114dc2af550a6921ef0417b5e210fe856f1cc2ec",
+    "error": null,
+    "calibration": {
+      "runs": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "createdAt": "2026-10-27T07:12:02.383Z",
+      "host": "Intel(R) Core(TM) i7-14700K",
+      "platform": "win32",
+      "upstreamSha": "1c4a1c162033f22935c0c315efc5245b0cd6ac5d",
+      "ffmpeg": "ffmpeg version 8.0-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+      "resultsDir": "benchmarks/results/2026-10-27-1c4a1c1-fidelity",
+      "cell": "producer-default",
+      "rawPairsFile": "benchmarks/fidelity/calibration/producer-default.win32.pairs.json",
+      "command": "calibrate.ts --results benchmarks/results/2026-10-27-1c4a1c1-fidelity --path producer-default.win32"
+    }
+  },
+  "tools": {
+    "ffmpeg": "ffmpeg version 8.0-essentials_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers",
+    "libvmaf": true
+  },
+  "sampling": {
+    "seed": "256c1212a32a0e6855c7b10d3c07df31c045113fd6392eabce4b1f10cff7160d",
+    "frames": [
+      {
+        "index": 0,
+        "reasons": [
+          "first"
+        ]
+      },
+      {
+        "index": 13,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 14,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 19,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 33,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 39,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 43,
+        "reasons": [
+          "motion-blur-neighbour"
+        ]
+      },
+      {
+        "index": 44,
+        "reasons": [
+          "motion-blur"
+        ]
+      },
+      {
+        "index": 45,
+        "reasons": [
+          "motion-blur-neighbour",
+          "random"
+        ]
+      },
+      {
+        "index": 46,
+        "reasons": [
+          "motion-blur-neighbour"
+        ]
+      },
+      {
+        "index": 47,
+        "reasons": [
+          "motion-blur"
+        ]
+      },
+      {
+        "index": 48,
+        "reasons": [
+          "motion-blur-neighbour"
+        ]
+      },
+      {
+        "index": 50,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 60,
+        "reasons": [
+          "rapid-motion"
+        ]
+      },
+      {
+        "index": 61,
+        "reasons": [
+          "rapid-motion"
+        ]
+      },
+      {
+        "index": 80,
+        "reasons": [
+          "random"
+        ]
+      },
+      {
+        "index": 89,
+        "reasons": [
+          "last"
+        ]
+      }
+    ]
+  },
+  "streams": {
+    "reference": {
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "width": 1920,
+      "height": 1080,
+      "sar": null,
+      "rFrameRate": "30/1",
+      "frames": 90,
+      "colorRange": "tv",
+      "colorSpace": "bt709",
+      "colorTransfer": "bt709",
+      "colorPrimaries": "bt709",
+      "alpha": false,
+      "hdrStream": [],
+      "hdrFrames": [
+        {
+          "from": 0,
+          "count": 90,
+          "value": ""
+        }
+      ],
+      "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
+      "sizeBytes": 257289,
+      "bitRate": 686104,
+      "audio": null
+    },
+    "candidate": {
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "width": 1920,
+      "height": 1080,
+      "sar": null,
+      "rFrameRate": "30/1",
+      "frames": 90,
+      "colorRange": "tv",
+      "colorSpace": "bt709",
+      "colorTransfer": "bt709",
+      "colorPrimaries": "bt709",
+      "alpha": false,
+      "hdrStream": [],
+      "hdrFrames": [
+        {
+          "from": 0,
+          "count": 90,
+          "value": ""
+        }
+      ],
+      "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
+      "sizeBytes": 257470,
+      "bitRate": 686586,
+      "audio": null
+    }
+  },
+  "checks": {
+    "dimensions": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "reference": {
+          "width": 1920,
+          "height": 1080,
+          "sar": null,
+          "codec": "h264",
+          "profile": "High",
+          "pixFmt": "yuv420p"
+        },
+        "candidate": {
+          "width": 1920,
+          "height": 1080,
+          "sar": null,
+          "codec": "h264",
+          "profile": "High",
+          "pixFmt": "yuv420p"
+        }
+      }
+    },
+    "frameCount": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "reference": 90,
+        "candidate": 90
+      }
+    },
+    "timestamps": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "declaredFps": "30/1",
+        "reference": {
+          "frames": 90,
+          "timeBase": "1/15360",
+          "rFrameRate": "30/1",
+          "avgFrameRate": "30/1",
+          "maxPtsErrorTicks": 0,
+          "maxPtsErrorFrame": 0,
+          "nonMonotonicPts": 0,
+          "missingPts": 0,
+          "dtsGreaterThanPts": 0,
+          "nonMonotonicDts": 0,
+          "distinctIntervals": 1,
+          "vfr": false,
+          "spanSec": 3
+        },
+        "candidate": {
+          "frames": 90,
+          "timeBase": "1/15360",
+          "rFrameRate": "30/1",
+          "avgFrameRate": "30/1",
+          "maxPtsErrorTicks": 0,
+          "maxPtsErrorFrame": 0,
+          "nonMonotonicPts": 0,
+          "missingPts": 0,
+          "dtsGreaterThanPts": 0,
+          "nonMonotonicDts": 0,
+          "distinctIntervals": 1,
+          "vfr": false,
+          "spanSec": 3
+        }
+      }
+    },
+    "temporal": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "thumbMseTol": 0.029965277777777778,
+        "referenceFrames": 90,
+        "candidateFrames": 90,
+        "events": [],
+        "contentMismatchFrames": 0,
+        "maxMatchedThumbMse": 0.006076388888888889,
+        "maxSameIndexThumbMse": 0.006076388888888889
+      }
+    },
+    "pixels": {
+      "verdict": "FAIL",
+      "reasons": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "notes": [
+        "frame 89 (last): max|diff| 54"
+      ],
+      "details": {
+        "pixFmt": "rgb24",
+        "limits": {
+          "maxMse": 0.1746801054526749,
+          "minSsim": 0.999522772995499,
+          "maxAbsDiff": 53,
+          "maxDiffPixelPct": 4.137622299382716
+        },
+        "sampled": 17,
+        "compared": 17,
+        "frames": [
+          {
+            "index": 0,
+            "reasons": [
+              "first"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 13,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 14,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 19,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 33,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 39,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 43,
+            "reasons": [
+              "motion-blur-neighbour"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 44,
+            "reasons": [
+              "motion-blur"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 45,
+            "reasons": [
+              "motion-blur-neighbour",
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 46,
+            "reasons": [
+              "motion-blur-neighbour"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 47,
+            "reasons": [
+              "motion-blur"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 48,
+            "reasons": [
+              "motion-blur-neighbour"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 50,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 60,
+            "reasons": [
+              "rapid-motion"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 61,
+            "reasons": [
+              "rapid-motion"
+            ],
+            "mse": 0,
+            "psnrDb": "inf",
+            "ssim": 1,
+            "maxAbsDiff": 0,
+            "diffPixelPct": 0,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 80,
+            "reasons": [
+              "random"
+            ],
+            "mse": 0.024896154835390948,
+            "psnrDb": 64.1694808456431,
+            "ssim": 0.9999305702323915,
+            "maxAbsDiff": 14,
+            "diffPixelPct": 0.83179012345679,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          },
+          {
+            "index": 89,
+            "reasons": [
+              "last"
+            ],
+            "mse": 0.054773501800411524,
+            "psnrDb": 60.74509853571044,
+            "ssim": 0.9999030227617287,
+            "maxAbsDiff": 54,
+            "diffPixelPct": 1.1325713734567902,
+            "alphaMse": null,
+            "alphaPsnrDb": null
+          }
+        ]
+      }
+    },
+    "audio": {
+      "verdict": "NOT_APPLICABLE",
+      "reasons": [],
+      "notes": [
+        "neither output has audio"
+      ],
+      "details": {}
+    },
+    "alpha": {
+      "verdict": "NOT_APPLICABLE",
+      "reasons": [],
+      "notes": [
+        "fixture declares no alpha and neither output has an alpha plane"
+      ],
+      "details": {}
+    },
+    "color": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "declaredHdr": null,
+        "reference": {
+          "transfer": "bt709",
+          "primaries": "bt709",
+          "matrix": "bt709",
+          "range": "tv",
+          "pixFmt": "yuv420p",
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 90,
+              "value": ""
+            }
+          ]
+        },
+        "candidate": {
+          "transfer": "bt709",
+          "primaries": "bt709",
+          "matrix": "bt709",
+          "range": "tv",
+          "pixFmt": "yuv420p",
+          "hdrStream": [],
+          "hdrFrames": [
+            {
+              "from": 0,
+              "count": 90,
+              "value": ""
+            }
+          ]
+        }
+      }
+    },
+    "encoded": {
+      "verdict": "PASS",
+      "reasons": [],
+      "notes": [],
+      "details": {
+        "frames": 90,
+        "psnrMeanDb": 69.27,
+        "psnrMinDb": 65.97,
+        "ssimMean": 0.9999896444444443,
+        "ssimMin": 0.999928,
+        "vmaf": {
+          "mean": 98.559495,
+          "min": 97.353003,
+          "p5": 97.392095,
+          "model": "libvmaf 2b2cf9c1 default model"
+        },
+        "vmafSkipped": null,
+        "referenceBitRate": 686104,
+        "candidateBitRate": 686586,
+        "bitRateDeltaPct": 0.0702517402609517,
+        "limits": {
+          "minPsnrDb": 60.63,
+          "minSsim": 0.999642,
+          "minVmaf": 97.30662699999999,
+          "maxBitrateDropPct": 0.2096617767940054
+        }
+      }
+    }
+  },
+  "measurementErrors": {},
+  "peakRssBytes": 278482944,
+  "wallMs": 2183.3396
+}

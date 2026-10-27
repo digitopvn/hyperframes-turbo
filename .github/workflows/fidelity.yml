@@ -28,6 +28,8 @@ env:
   FFMPEG_URL: https://www.johnvansickle.com/ffmpeg/old-releases/ffmpeg-6.0.1-amd64-static.tar.xz
   FFMPEG_SHA256: 28268bf402f1083833ea269331587f60a242848880073be8016501d864bd07a5
   CHROME_HEADLESS_SHELL: "152.0.7977.30"
+  # sha256 of the linux64 chrome-headless-shell binary (zip sha256 1b150320178ecabe39726bcf3198ebb896ba2b7a07d870db1710914c42d55221)
+  CHROME_HEADLESS_SHELL_SHA256: 6642ab58861e8dedcd195e1fe090f76dae4cff8476f971911a11781e7ec7d2da
   BUN_VERSION: "1.4.4" # upstream/hyperframes package.json engines.bun
   FIXTURES: fps-ntsc-30000-1001,transition-crossfade,audio-mix,webm-transparency
   TSX: ../upstream/hyperframes/node_modules/tsx/dist/loader.mjs
@@ -38,7 +40,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           submodules: recursive
       - uses: ./.github/actions/fidelity-setup
@@ -46,18 +48,37 @@ jobs:
         working-directory: benchmarks
         run: |
           ../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json
-          node --import $TSX --test --test-concurrency=1 test/process-guard.test.ts test/fidelity/unit.test.ts test/fidelity/gate.test.ts
+          node --import $TSX --test --test-concurrency=1 test/process-guard.test.ts test/fidelity/unit.test.ts test/fidelity/gate.test.ts test/fidelity/cli.test.ts
       - name: Render reference subset (1 cold + 2 warm, SwiftShader)
         run: >
           node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts
           --fixture-set all --fixtures "$FIXTURES" --profiles producer-default --no-control
           --warm-runs 2 --keep-output --settle-ms 0 --out "$RUNNER_TEMP/fidelity-ci"
+      # This is a determinism check of the CI path, not a comparison with a
+      # golden reference: warm run 2 is gated against warm run 1 of the same
+      # job, against the committed Linux thresholds.
       - name: Gate warm run 2 against warm run 1
         working-directory: benchmarks
         run: >
           node --import $TSX src/fidelity/run-fidelity.ts --results "$RUNNER_TEMP/fidelity-ci"
           --ref-cell producer-default --ref-run 1 --cand-cell producer-default --cand-run 2
           --fixtures "$FIXTURES" --path producer-default.linux
+      # Intentionally red: the same gate on a candidate with its audio removed
+      # must exit 1. A gate that cannot go red would otherwise pass silently.
+      - name: Intentionally red gate (audio stripped from audio-mix run 2 must exit 1)
+        working-directory: benchmarks
+        run: |
+          set +e
+          src="$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-2.*)"
+          ffmpeg -hide_banner -loglevel error -y -i "$src" -map 0:v -c copy "$RUNNER_TEMP/red-no-audio.mp4" || exit 1
+          node --import $TSX src/fidelity/run-fidelity.ts --fixture audio-mix --path producer-default.linux --ref-cell producer-default --cand-cell red-no-audio \
+            --ref "$(ls "$RUNNER_TEMP"/fidelity-ci/outputs/audio-mix/producer-default/run-1.*)" --cand "$RUNNER_TEMP/red-no-audio.mp4" \
+            --out "$RUNNER_TEMP/red-record.json"
+          code=$?
+          if [ "$code" -ne 1 ]; then echo "::error::gate exited $code on a candidate without audio, expected 1"; exit 1; fi
+          # Exit 1 alone is also what a crash returns: require the recorded FAIL reason.
+          node -e 'const r=require(process.argv[1]); if (r.verdict !== "FAIL" || !r.reasons.includes("AUDIO_MISSING")) { console.error(`::error::red check: verdict ${r.verdict}, reasons ${r.reasons}`); process.exit(1); }' "$RUNNER_TEMP/red-record.json" || exit 1
+          echo "gate went red as required (exit 1, FAIL with AUDIO_MISSING)"
       - name: Fault injection (every applicable fault must be caught)
         working-directory: benchmarks
         run: >
@@ -66,7 +87,7 @@ jobs:
           --out "$RUNNER_TEMP/fidelity-ci/negative-results"
       - name: Upload reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: fidelity-check
           path: |
@@ -84,7 +105,7 @@ jobs:
     steps:
       # The write token is never persisted in .git/config: only the push step
       # below receives it, so rendering and calibration code cannot push.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           submodules: recursive
           ref: ${{ github.event.pull_request.head.ref }}
@@ -101,7 +122,7 @@ jobs:
           node --import $TSX src/fidelity/calibrate.ts --results "$RUNNER_TEMP/fidelity-calibration"
           --fixtures "$FIXTURES" --path producer-default.linux
       - name: Upload calibration
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: fidelity-calibration
           path: |

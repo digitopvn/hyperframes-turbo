@@ -1,0 +1,6499 @@
+{
+  "schema": "turbo-bench-summary/2",
+  "generatedAt": "2026-10-27T10:58:15.877Z",
+  "refusedRuns": 0,
+  "referenceRate": {
+    "usdPerVcpuHour": 0.0446,
+    "source": "AWS EC2 c7i.xlarge on-demand Linux, us-east-1, $0.1785/h for 4 vCPU = $0.0446 per vCPU-hour; public list price as known to the authors in 2025, not re-verified on the run date. Override with BENCH_USD_PER_VCPU_HOUR."
+  },
+  "cells": [
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "category": "fps-rational",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "fps-ntsc-30000-1001",
+        "category": "fps-rational",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 12,
+        "wallMs": 34040.175299999995,
+        "frames": 240,
+        "outputDurationSec": 8.008,
+        "fps": 7.0504924808656915,
+        "renderFactor": 0.23525143244488522,
+        "compileMs": 31,
+        "videoExtractMs": 0,
+        "audioProcessMs": 0,
+        "captureMs": 33683,
+        "captureSetupMs": 9441,
+        "captureFrameMs": 24242,
+        "encodeMs": 146,
+        "assembleMs": 77,
+        "captureAvgMs": 101,
+        "captureP50Ms": 50,
+        "captureCalibrationP95Ms": 51,
+        "captureRpcP50Ms": 46.40189999999711,
+        "captureRpcP95Ms": 63.868700000006356,
+        "criticalPathTop": "capture_disk (24242 ms)",
+        "concurrencyFactor": 1,
+        "overlapMs": 0,
+        "inferredPhases": null,
+        "traceWarnings": null,
+        "untracedMs": 144.17529999999533,
+        "cdpInboundBytes": 68763066,
+        "cdpOutboundBytes": 994665,
+        "frameRpcResponseBytes": 68578500,
+        "frameRpcResponseBytesPerFrame": 285743.75,
+        "peakTreeWorkingSetMb": 2978.83203125,
+        "peakNodeRssMb": 200,
+        "cpuSeconds": 24.4375,
+        "cpuSecondsPerOutputMin": 183.09815184815187,
+        "wallSecondsPerOutputMin": 255.04626848151847,
+        "estUsdPerOutputMin": 0.0022683826590076594,
+        "ioReadBytes": 150544379,
+        "ioWriteBytes": 126828616,
+        "tmpPeakBytes": 51554939,
+        "peakVramDeltaMiB": 25,
+        "gpuUtilMeanPct": 0.05952380952380952,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "captureMode": "screenshot",
+        "capturePath": "disk",
+        "calibrationFailed": false,
+        "drawElementClampReason": "software_gpu",
+        "workers": 5,
+        "staticDedupReused": 0,
+        "outputBytes": 1182019,
+        "outputBitRate": 1180838,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 0,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 27788.98199999999,
+          "max": 59565.44529999999,
+          "mean": 43677.21364999999,
+          "median": 43677.21364999999,
+          "p95": 59565.44529999999,
+          "stdev": 22469.35268155546,
+          "cv": 0.5144410735906791,
+          "mad": 15888.231650000002
+        },
+        "fps": {
+          "n": 2,
+          "min": 4.029181663819443,
+          "max": 8.636516443819355,
+          "mean": 6.332849053819399,
+          "median": 6.332849053819399,
+          "p95": 8.636516443819355,
+          "stdev": 3.2578776661345676,
+          "cv": 0.514441073590679,
+          "mad": 2.303667389999956
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.13444036151610875,
+          "max": 0.2881717653421058,
+          "mean": 0.2113060634291073,
+          "median": 0.2113060634291073,
+          "p95": 0.2881717653421058,
+          "stdev": 0.10870451812669008,
+          "cv": 0.514441073590679,
+          "mad": 0.07686570191299853
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 27470,
+          "max": 59404,
+          "mean": 43437,
+          "median": 43437,
+          "p95": 59404,
+          "stdev": 22580.74795041121,
+          "cv": 0.5198505410228885,
+          "mad": 15967
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 9019,
+          "max": 35149,
+          "mean": 22084,
+          "median": 22084,
+          "p95": 35149,
+          "stdev": 18476.700192404485,
+          "cv": 0.8366555059049305,
+          "mad": 13065
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 18451,
+          "max": 24255,
+          "mean": 21353,
+          "median": 21353,
+          "p95": 24255,
+          "stdev": 4104.047758006722,
+          "cv": 0.19220005423157036,
+          "mad": 2902
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 146,
+          "max": 24249,
+          "mean": 12197.5,
+          "median": 12197.5,
+          "p95": 24249,
+          "stdev": 17043.394746939353,
+          "cv": 1.3972858984988197,
+          "mad": 12051.5
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureCalibrationP95Ms": {
+          "n": 1,
+          "min": 51,
+          "max": 51,
+          "mean": 51,
+          "median": 51,
+          "p95": 51,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 47.000499999994645,
+          "max": 47.62329999997746,
+          "mean": 47.31189999998605,
+          "median": 47.31189999998605,
+          "p95": 47.62329999997746,
+          "stdev": 0.44038610331083167,
+          "cv": 0.009308146646212928,
+          "mad": 0.31139999999140855
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 65.21760000000359,
+          "max": 65.6588000000047,
+          "mean": 65.43820000000414,
+          "median": 65.43820000000414,
+          "p95": 65.6588000000047,
+          "stdev": 0.31197551186029504,
+          "cv": 0.004767483088781098,
+          "mad": 0.2206000000005588
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 0,
+          "max": 24249,
+          "mean": 12124.5,
+          "median": 12124.5,
+          "p95": 24249,
+          "stdev": 17146.632336992592,
+          "cv": 1.4142135623730951,
+          "mad": 12124.5
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 67316831,
+          "max": 68763925,
+          "mean": 68040378,
+          "median": 68040378,
+          "p95": 68763925,
+          "stdev": 1023249.9804143658,
+          "cv": 0.0150388638407383,
+          "mad": 723547
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 881737,
+          "max": 994665,
+          "mean": 938201,
+          "median": 938201,
+          "p95": 994665,
+          "stdev": 79852.15458583443,
+          "cv": 0.08511199048587076,
+          "mad": 56464
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 67277979,
+          "max": 68578500,
+          "mean": 67928239.5,
+          "median": 67928239.5,
+          "p95": 68578500,
+          "stdev": 919607.21817551,
+          "cv": 0.013537922150558752,
+          "mad": 650260.5
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 1666.07421875,
+          "max": 2885.375,
+          "mean": 2275.724609375,
+          "median": 2275.724609375,
+          "p95": 2885.375,
+          "stdev": 862.1758507279302,
+          "cv": 0.3788577260957407,
+          "mad": 609.650390625
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 8,
+          "max": 25,
+          "mean": 16.5,
+          "median": 16.5,
+          "p95": 25,
+          "stdev": 12.020815280171307,
+          "cv": 0.7285342594043217,
+          "mad": 8.5
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 20.28125,
+          "max": 30.328125,
+          "mean": 25.3046875,
+          "median": 25.3046875,
+          "p95": 30.328125,
+          "stdev": 7.104213442233594,
+          "cv": 0.28074693442602655,
+          "mad": 5.0234375
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 151.9574175824176,
+          "max": 227.23370379620383,
+          "mean": 189.59556068931073,
+          "median": 189.59556068931073,
+          "p95": 227.23370379620383,
+          "stdev": 53.22837244430766,
+          "cv": 0.28074693442602655,
+          "mad": 37.63814310689311
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 208.2091558441558,
+          "max": 446.2945452047952,
+          "mean": 327.2518505244755,
+          "median": 327.2518505244755,
+          "p95": 446.2945452047952,
+          "stdev": 168.35179331834763,
+          "cv": 0.5144410735906791,
+          "mad": 119.04269468031971
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.0018825835622710628,
+          "max": 0.002815173108141858,
+          "mean": 0.0023488783352064602,
+          "median": 0.0023488783352064602,
+          "p95": 0.002815173108141858,
+          "stdev": 0.0006594403919489223,
+          "cv": 0.28074693442602644,
+          "mad": 0.00046629477293539767
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 165483533,
+          "max": 280917109,
+          "mean": 223200321,
+          "median": 223200321,
+          "p95": 280917109,
+          "stdev": 81623864.36621271,
+          "cv": 0.36569779111658496,
+          "mad": 57716788
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 1185198,
+          "max": 51554939,
+          "mean": 26370068.5,
+          "median": 26370068.5,
+          "p95": 51554939,
+          "stdev": 35616785.42771007,
+          "cv": 1.3506519874117913,
+          "mad": 25184870.5
+        },
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "outputBytes": {
+          "n": 2,
+          "min": 1179975,
+          "max": 1182019,
+          "mean": 1180997,
+          "median": 1180997,
+          "p95": 1182019,
+          "stdev": 1445.3262607453032,
+          "cv": 0.0012238187402214427,
+          "mad": 1022
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 1178796,
+          "max": 1180838,
+          "mean": 1179817,
+          "median": 1179817,
+          "p95": 1180838,
+          "stdev": 1443.91204718293,
+          "cv": 0.0012238440768211766,
+          "mad": 1021
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 59565.44529999999,
+              "max": 59565.44529999999,
+              "mean": 59565.44529999999,
+              "median": 59565.44529999999,
+              "p95": 59565.44529999999,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 4.029181663819443,
+              "max": 4.029181663819443,
+              "mean": 4.029181663819443,
+              "median": 4.029181663819443,
+              "p95": 4.029181663819443,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.13444036151610875,
+              "max": 0.13444036151610875,
+              "mean": 0.13444036151610875,
+              "median": 0.13444036151610875,
+              "p95": 0.13444036151610875,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 59404,
+              "max": 59404,
+              "mean": 59404,
+              "median": 59404,
+              "p95": 59404,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 35149,
+              "max": 35149,
+              "mean": 35149,
+              "median": 35149,
+              "p95": 35149,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 24255,
+              "max": 24255,
+              "mean": 24255,
+              "median": 24255,
+              "p95": 24255,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 24249,
+              "max": 24249,
+              "mean": 24249,
+              "median": 24249,
+              "p95": 24249,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 47.62329999997746,
+              "max": 47.62329999997746,
+              "mean": 47.62329999997746,
+              "median": 47.62329999997746,
+              "p95": 47.62329999997746,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 65.21760000000359,
+              "max": 65.21760000000359,
+              "mean": 65.21760000000359,
+              "median": 65.21760000000359,
+              "p95": 65.21760000000359,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 24249,
+              "max": 24249,
+              "mean": 24249,
+              "median": 24249,
+              "p95": 24249,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 67316831,
+              "max": 67316831,
+              "mean": 67316831,
+              "median": 67316831,
+              "p95": 67316831,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 881737,
+              "max": 881737,
+              "mean": 881737,
+              "median": 881737,
+              "p95": 881737,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 67277979,
+              "max": 67277979,
+              "mean": 67277979,
+              "median": 67277979,
+              "p95": 67277979,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 1666.07421875,
+              "max": 1666.07421875,
+              "mean": 1666.07421875,
+              "median": 1666.07421875,
+              "p95": 1666.07421875,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 8,
+              "max": 8,
+              "mean": 8,
+              "median": 8,
+              "p95": 8,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 20.28125,
+              "max": 20.28125,
+              "mean": 20.28125,
+              "median": 20.28125,
+              "p95": 20.28125,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 151.9574175824176,
+              "max": 151.9574175824176,
+              "mean": 151.9574175824176,
+              "median": 151.9574175824176,
+              "p95": 151.9574175824176,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 446.2945452047952,
+              "max": 446.2945452047952,
+              "mean": 446.2945452047952,
+              "median": 446.2945452047952,
+              "p95": 446.2945452047952,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.0018825835622710628,
+              "max": 0.0018825835622710628,
+              "mean": 0.0018825835622710628,
+              "median": 0.0018825835622710628,
+              "p95": 0.0018825835622710628,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 165483533,
+              "max": 165483533,
+              "mean": 165483533,
+              "median": 165483533,
+              "p95": 165483533,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 1185198,
+              "max": 1185198,
+              "mean": 1185198,
+              "median": 1185198,
+              "p95": 1185198,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 1,
+              "min": 1179975,
+              "max": 1179975,
+              "mean": 1179975,
+              "median": 1179975,
+              "p95": 1179975,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 1178796,
+              "max": 1178796,
+              "mean": 1178796,
+              "median": 1178796,
+              "p95": 1178796,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        },
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 27788.98199999999,
+              "max": 27788.98199999999,
+              "mean": 27788.98199999999,
+              "median": 27788.98199999999,
+              "p95": 27788.98199999999,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 8.636516443819355,
+              "max": 8.636516443819355,
+              "mean": 8.636516443819355,
+              "median": 8.636516443819355,
+              "p95": 8.636516443819355,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.2881717653421058,
+              "max": 0.2881717653421058,
+              "mean": 0.2881717653421058,
+              "median": 0.2881717653421058,
+              "p95": 0.2881717653421058,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 27470,
+              "max": 27470,
+              "mean": 27470,
+              "median": 27470,
+              "p95": 27470,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 9019,
+              "max": 9019,
+              "mean": 9019,
+              "median": 9019,
+              "p95": 9019,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 18451,
+              "max": 18451,
+              "mean": 18451,
+              "median": 18451,
+              "p95": 18451,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 146,
+              "max": 146,
+              "mean": 146,
+              "median": 146,
+              "p95": 146,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": {
+              "n": 1,
+              "min": 51,
+              "max": 51,
+              "mean": 51,
+              "median": 51,
+              "p95": 51,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 47.000499999994645,
+              "max": 47.000499999994645,
+              "mean": 47.000499999994645,
+              "median": 47.000499999994645,
+              "p95": 47.000499999994645,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 65.6588000000047,
+              "max": 65.6588000000047,
+              "mean": 65.6588000000047,
+              "median": 65.6588000000047,
+              "p95": 65.6588000000047,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 68763925,
+              "max": 68763925,
+              "mean": 68763925,
+              "median": 68763925,
+              "p95": 68763925,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 994665,
+              "max": 994665,
+              "mean": 994665,
+              "median": 994665,
+              "p95": 994665,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 68578500,
+              "max": 68578500,
+              "mean": 68578500,
+              "median": 68578500,
+              "p95": 68578500,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 2885.375,
+              "max": 2885.375,
+              "mean": 2885.375,
+              "median": 2885.375,
+              "p95": 2885.375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 25,
+              "max": 25,
+              "mean": 25,
+              "median": 25,
+              "p95": 25,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 30.328125,
+              "max": 30.328125,
+              "mean": 30.328125,
+              "median": 30.328125,
+              "p95": 30.328125,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 227.23370379620383,
+              "max": 227.23370379620383,
+              "mean": 227.23370379620383,
+              "median": 227.23370379620383,
+              "p95": 227.23370379620383,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 208.2091558441558,
+              "max": 208.2091558441558,
+              "mean": 208.2091558441558,
+              "median": 208.2091558441558,
+              "p95": 208.2091558441558,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.002815173108141858,
+              "max": 0.002815173108141858,
+              "mean": 0.002815173108141858,
+              "median": 0.002815173108141858,
+              "p95": 0.002815173108141858,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 280917109,
+              "max": 280917109,
+              "mean": 280917109,
+              "median": 280917109,
+              "p95": 280917109,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 51554939,
+              "max": 51554939,
+              "mean": 51554939,
+              "median": 51554939,
+              "p95": 51554939,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 1,
+              "min": 1182019,
+              "max": 1182019,
+              "mean": 1182019,
+              "median": 1182019,
+              "p95": 1182019,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 1180838,
+              "max": 1180838,
+              "mean": 1180838,
+              "median": 1180838,
+              "p95": 1180838,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": true,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 22
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 22,
+            "endMs": 26
+          },
+          {
+            "phase": "file_server",
+            "startMs": 28,
+            "endMs": 33
+          },
+          {
+            "phase": "capture_calibration",
+            "startMs": 34,
+            "endMs": 35175
+          },
+          {
+            "phase": "capture_streaming",
+            "startMs": 35177,
+            "endMs": 59432
+          },
+          {
+            "phase": "encode",
+            "startMs": 35183,
+            "endMs": 59432
+          },
+          {
+            "phase": "assemble",
+            "startMs": 59433,
+            "endMs": 59508
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_calibration",
+            "activeMs": 35141,
+            "exclusiveMs": 35141,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 35141,
+            "firstStartMs": 34,
+            "lastEndMs": 35175
+          },
+          {
+            "phase": "capture_streaming",
+            "activeMs": 24255,
+            "exclusiveMs": 6,
+            "overlappedMs": 24249,
+            "sharedAttributionMs": 12130.5,
+            "firstStartMs": 35177,
+            "lastEndMs": 59432
+          },
+          {
+            "phase": "encode",
+            "activeMs": 24249,
+            "exclusiveMs": 0,
+            "overlappedMs": 24249,
+            "sharedAttributionMs": 12124.5,
+            "firstStartMs": 35183,
+            "lastEndMs": 59432
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 75,
+            "exclusiveMs": 75,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 75,
+            "firstStartMs": 59433,
+            "lastEndMs": 59508
+          },
+          {
+            "phase": "compile",
+            "activeMs": 20,
+            "exclusiveMs": 20,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 20,
+            "firstStartMs": 2,
+            "lastEndMs": 22
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 5,
+            "exclusiveMs": 5,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 5,
+            "firstStartMs": 28,
+            "lastEndMs": 33
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 4,
+            "exclusiveMs": 4,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 4,
+            "firstStartMs": 22,
+            "lastEndMs": 26
+          }
+        ],
+        "coveredMs": 59500,
+        "overlapMs": 24249,
+        "untracedMs": 65.44529999999213,
+        "concurrencyFactor": 1.407546218487395,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 20
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 4
+          },
+          {
+            "phase": "file_server",
+            "ms": 5
+          },
+          {
+            "phase": "capture_calibration",
+            "ms": 35141
+          },
+          {
+            "phase": "capture_streaming",
+            "ms": 24255
+          },
+          {
+            "phase": "assemble",
+            "ms": 75
+          }
+        ],
+        "inferredPhases": [
+          "encode"
+        ],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "mixed",
+        "drawElementClampReason": "software_gpu",
+        "workers": null,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null,
+        "frames": 240
+      }
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "category": "hdr-hlg",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "hdr-hlg-regression",
+        "category": "hdr-hlg",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 2,
+        "wallMs": 34828.3277,
+        "frames": 150,
+        "outputDurationSec": 5,
+        "fps": 4.306838998761344,
+        "renderFactor": 0.14356129995871147,
+        "compileMs": 387,
+        "videoExtractMs": 351,
+        "audioProcessMs": 0,
+        "captureMs": 33838,
+        "captureSetupMs": 96,
+        "captureFrameMs": 33838,
+        "encodeMs": 25916,
+        "assembleMs": 74,
+        "captureAvgMs": 226,
+        "captureP50Ms": null,
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": 51.76020000000426,
+        "captureRpcP95Ms": 66.62390000000596,
+        "criticalPathTop": "capture_hdr_layered (33920 ms)",
+        "concurrencyFactor": 1.7460632754699599,
+        "overlapMs": 25916,
+        "inferredPhases": "encode",
+        "traceWarnings": null,
+        "untracedMs": 91.32770000000164,
+        "cdpInboundBytes": 6121295,
+        "cdpOutboundBytes": 34707427,
+        "frameRpcResponseBytes": 4836019,
+        "frameRpcResponseBytesPerFrame": 32240.126666666667,
+        "peakTreeWorkingSetMb": 3296.0546875,
+        "peakNodeRssMb": 328,
+        "cpuSeconds": 298.453125,
+        "cpuSecondsPerOutputMin": 3581.4375,
+        "wallSecondsPerOutputMin": 417.93993240000003,
+        "estUsdPerOutputMin": 0.044370031250000004,
+        "ioReadBytes": 3834720713,
+        "ioWriteBytes": 1919681544,
+        "tmpPeakBytes": 29209960,
+        "peakVramDeltaMiB": 25,
+        "gpuUtilMeanPct": 0.18604651162790697,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": 0,
+        "extractCacheMisses": 1,
+        "captureMode": "screenshot",
+        "capturePath": "hdr_layered",
+        "calibrationFailed": false,
+        "drawElementClampReason": null,
+        "workers": 1,
+        "staticDedupReused": null,
+        "outputBytes": 6164609,
+        "outputBitRate": 9863374,
+        "videoCodec": "hevc",
+        "pixFmt": "yuv420p10le",
+        "colorTransfer": "arib-std-b67",
+        "alphaMode": null,
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 0,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 32107.877500000002,
+          "max": 33972.211100000015,
+          "mean": 33040.04430000001,
+          "median": 33040.04430000001,
+          "p95": 33972.211100000015,
+          "stdev": 1318.2829309539375,
+          "cv": 0.03989955095047912,
+          "mad": 932.1668000000063
+        },
+        "fps": {
+          "n": 2,
+          "min": 4.415373481533556,
+          "max": 4.671750725347697,
+          "mean": 4.543562103440626,
+          "median": 4.543562103440626,
+          "p95": 4.671750725347697,
+          "stdev": 0.18128608764289592,
+          "cv": 0.03989955095047924,
+          "mad": 0.12818862190707048
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.14717911605111855,
+          "max": 0.15572502417825657,
+          "mean": 0.15145207011468756,
+          "median": 0.15145207011468756,
+          "p95": 0.15572502417825657,
+          "stdev": 0.006042869588096517,
+          "cv": 0.03989955095047915,
+          "mad": 0.004272954063569007
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 31590,
+          "max": 33499,
+          "mean": 32544.5,
+          "median": 32544.5,
+          "p95": 33499,
+          "stdev": 1349.8668452851193,
+          "cv": 0.04147757210235583,
+          "mad": 954.5
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 89,
+          "max": 89,
+          "mean": 89,
+          "median": 89,
+          "p95": 89,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 31590,
+          "max": 33499,
+          "mean": 32544.5,
+          "median": 32544.5,
+          "p95": 33499,
+          "stdev": 1349.8668452851193,
+          "cv": 0.04147757210235583,
+          "mad": 954.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 26200,
+          "max": 28112,
+          "mean": 27156,
+          "median": 27156,
+          "p95": 28112,
+          "stdev": 1351.9881656286789,
+          "cv": 0.049785983415402815,
+          "mad": 956
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 5,
+          "max": 7,
+          "mean": 6,
+          "median": 6,
+          "p95": 7,
+          "stdev": 1.4142135623730951,
+          "cv": 0.23570226039551587,
+          "mad": 1
+        },
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 53.59910000000673,
+          "max": 57.52960000000894,
+          "mean": 55.564350000007835,
+          "median": 55.564350000007835,
+          "p95": 57.52960000000894,
+          "stdev": 2.779283203455289,
+          "cv": 0.050019179626053345,
+          "mad": 1.965250000001106
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 69.94920000000275,
+          "max": 71.09210000000894,
+          "mean": 70.52065000000584,
+          "median": 70.52065000000584,
+          "p95": 71.09210000000894,
+          "stdev": 0.8081523402224845,
+          "cv": 0.011459797098047416,
+          "mad": 0.5714500000030966
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 26200,
+          "max": 28112,
+          "mean": 27156,
+          "median": 27156,
+          "p95": 28112,
+          "stdev": 1351.9881656286789,
+          "cv": 0.049785983415402815,
+          "mad": 956
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 6121641,
+          "max": 6122503,
+          "mean": 6122072,
+          "median": 6122072,
+          "p95": 6122503,
+          "stdev": 609.526045382804,
+          "cv": 0.00009956205111321854,
+          "mad": 431
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 34707427,
+          "max": 34707427,
+          "mean": 34707427,
+          "median": 34707427,
+          "p95": 34707427,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 4836019,
+          "max": 4836019,
+          "mean": 4836019,
+          "median": 4836019,
+          "p95": 4836019,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 3042.12109375,
+          "max": 3073.3984375,
+          "mean": 3057.759765625,
+          "median": 3057.759765625,
+          "p95": 3073.3984375,
+          "stdev": 22.11642186312768,
+          "cv": 0.007232884058374392,
+          "mad": 15.638671875
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 11,
+          "max": 19,
+          "mean": 15,
+          "median": 15,
+          "p95": 19,
+          "stdev": 5.656854249492381,
+          "cv": 0.3771236166328254,
+          "mad": 4
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 302.625,
+          "max": 327.15625,
+          "mean": 314.890625,
+          "median": 314.890625,
+          "p95": 327.15625,
+          "stdev": 17.346213225982495,
+          "cv": 0.055086470821360575,
+          "mad": 12.265625
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 3631.5,
+          "max": 3925.875,
+          "mean": 3778.6875,
+          "median": 3778.6875,
+          "p95": 3925.875,
+          "stdev": 208.15455871178992,
+          "cv": 0.05508647082136057,
+          "mad": 147.1875
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 385.29453,
+          "max": 407.66653320000023,
+          "mean": 396.4805316000001,
+          "median": 396.4805316000001,
+          "p95": 407.66653320000023,
+          "stdev": 15.819395171447297,
+          "cv": 0.039899550950479236,
+          "mad": 11.186001600000111
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.04499025,
+          "max": 0.04863722916666667,
+          "mean": 0.04681373958333333,
+          "median": 0.04681373958333333,
+          "p95": 0.04863722916666667,
+          "stdev": 0.0025788036995960653,
+          "cv": 0.055086470821360596,
+          "mad": 0.001823489583333334
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 3875073716,
+          "max": 5664712070,
+          "mean": 4769892893,
+          "median": 4769892893,
+          "p95": 5664712070,
+          "stdev": 1265465415.984931,
+          "cv": 0.26530269009646945,
+          "mad": 894819177
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 29209960,
+          "max": 29209960,
+          "mean": 29209960,
+          "median": 29209960,
+          "p95": 29209960,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheHits": {
+          "n": 2,
+          "min": 1,
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "p95": 1,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheMisses": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBytes": {
+          "n": 2,
+          "min": 6164609,
+          "max": 6164609,
+          "mean": 6164609,
+          "median": 6164609,
+          "p95": 6164609,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 9863374,
+          "max": 9863374,
+          "mean": 9863374,
+          "median": 9863374,
+          "p95": 9863374,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "hdr_layered",
+          "workers": 1,
+          "runs": [
+            1,
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 2,
+              "min": 32107.877500000002,
+              "max": 33972.211100000015,
+              "mean": 33040.04430000001,
+              "median": 33040.04430000001,
+              "p95": 33972.211100000015,
+              "stdev": 1318.2829309539375,
+              "cv": 0.03989955095047912,
+              "mad": 932.1668000000063
+            },
+            "fps": {
+              "n": 2,
+              "min": 4.415373481533556,
+              "max": 4.671750725347697,
+              "mean": 4.543562103440626,
+              "median": 4.543562103440626,
+              "p95": 4.671750725347697,
+              "stdev": 0.18128608764289592,
+              "cv": 0.03989955095047924,
+              "mad": 0.12818862190707048
+            },
+            "renderFactor": {
+              "n": 2,
+              "min": 0.14717911605111855,
+              "max": 0.15572502417825657,
+              "mean": 0.15145207011468756,
+              "median": 0.15145207011468756,
+              "p95": 0.15572502417825657,
+              "stdev": 0.006042869588096517,
+              "cv": 0.03989955095047915,
+              "mad": 0.004272954063569007
+            },
+            "captureMs": {
+              "n": 2,
+              "min": 31590,
+              "max": 33499,
+              "mean": 32544.5,
+              "median": 32544.5,
+              "p95": 33499,
+              "stdev": 1349.8668452851193,
+              "cv": 0.04147757210235583,
+              "mad": 954.5
+            },
+            "captureSetupMs": {
+              "n": 2,
+              "min": 89,
+              "max": 89,
+              "mean": 89,
+              "median": 89,
+              "p95": 89,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 2,
+              "min": 31590,
+              "max": 33499,
+              "mean": 32544.5,
+              "median": 32544.5,
+              "p95": 33499,
+              "stdev": 1349.8668452851193,
+              "cv": 0.04147757210235583,
+              "mad": 954.5
+            },
+            "encodeMs": {
+              "n": 2,
+              "min": 26200,
+              "max": 28112,
+              "mean": 27156,
+              "median": 27156,
+              "p95": 28112,
+              "stdev": 1351.9881656286789,
+              "cv": 0.049785983415402815,
+              "mad": 956
+            },
+            "videoExtractMs": {
+              "n": 2,
+              "min": 5,
+              "max": 7,
+              "mean": 6,
+              "median": 6,
+              "p95": 7,
+              "stdev": 1.4142135623730951,
+              "cv": 0.23570226039551587,
+              "mad": 1
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 2,
+              "min": 53.59910000000673,
+              "max": 57.52960000000894,
+              "mean": 55.564350000007835,
+              "median": 55.564350000007835,
+              "p95": 57.52960000000894,
+              "stdev": 2.779283203455289,
+              "cv": 0.050019179626053345,
+              "mad": 1.965250000001106
+            },
+            "captureRpcP95Ms": {
+              "n": 2,
+              "min": 69.94920000000275,
+              "max": 71.09210000000894,
+              "mean": 70.52065000000584,
+              "median": 70.52065000000584,
+              "p95": 71.09210000000894,
+              "stdev": 0.8081523402224845,
+              "cv": 0.011459797098047416,
+              "mad": 0.5714500000030966
+            },
+            "overlapMs": {
+              "n": 2,
+              "min": 26200,
+              "max": 28112,
+              "mean": 27156,
+              "median": 27156,
+              "p95": 28112,
+              "stdev": 1351.9881656286789,
+              "cv": 0.049785983415402815,
+              "mad": 956
+            },
+            "cdpInboundBytes": {
+              "n": 2,
+              "min": 6121641,
+              "max": 6122503,
+              "mean": 6122072,
+              "median": 6122072,
+              "p95": 6122503,
+              "stdev": 609.526045382804,
+              "cv": 0.00009956205111321854,
+              "mad": 431
+            },
+            "cdpOutboundBytes": {
+              "n": 2,
+              "min": 34707427,
+              "max": 34707427,
+              "mean": 34707427,
+              "median": 34707427,
+              "p95": 34707427,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 2,
+              "min": 4836019,
+              "max": 4836019,
+              "mean": 4836019,
+              "median": 4836019,
+              "p95": 4836019,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 2,
+              "min": 3042.12109375,
+              "max": 3073.3984375,
+              "mean": 3057.759765625,
+              "median": 3057.759765625,
+              "p95": 3073.3984375,
+              "stdev": 22.11642186312768,
+              "cv": 0.007232884058374392,
+              "mad": 15.638671875
+            },
+            "peakVramDeltaMiB": {
+              "n": 2,
+              "min": 11,
+              "max": 19,
+              "mean": 15,
+              "median": 15,
+              "p95": 19,
+              "stdev": 5.656854249492381,
+              "cv": 0.3771236166328254,
+              "mad": 4
+            },
+            "cpuSeconds": {
+              "n": 2,
+              "min": 302.625,
+              "max": 327.15625,
+              "mean": 314.890625,
+              "median": 314.890625,
+              "p95": 327.15625,
+              "stdev": 17.346213225982495,
+              "cv": 0.055086470821360575,
+              "mad": 12.265625
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 2,
+              "min": 3631.5,
+              "max": 3925.875,
+              "mean": 3778.6875,
+              "median": 3778.6875,
+              "p95": 3925.875,
+              "stdev": 208.15455871178992,
+              "cv": 0.05508647082136057,
+              "mad": 147.1875
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 2,
+              "min": 385.29453,
+              "max": 407.66653320000023,
+              "mean": 396.4805316000001,
+              "median": 396.4805316000001,
+              "p95": 407.66653320000023,
+              "stdev": 15.819395171447297,
+              "cv": 0.039899550950479236,
+              "mad": 11.186001600000111
+            },
+            "estUsdPerOutputMin": {
+              "n": 2,
+              "min": 0.04499025,
+              "max": 0.04863722916666667,
+              "mean": 0.04681373958333333,
+              "median": 0.04681373958333333,
+              "p95": 0.04863722916666667,
+              "stdev": 0.0025788036995960653,
+              "cv": 0.055086470821360596,
+              "mad": 0.001823489583333334
+            },
+            "ioWriteBytes": {
+              "n": 2,
+              "min": 3875073716,
+              "max": 5664712070,
+              "mean": 4769892893,
+              "median": 4769892893,
+              "p95": 5664712070,
+              "stdev": 1265465415.984931,
+              "cv": 0.26530269009646945,
+              "mad": 894819177
+            },
+            "tmpPeakBytes": {
+              "n": 2,
+              "min": 29209960,
+              "max": 29209960,
+              "mean": 29209960,
+              "median": 29209960,
+              "p95": 29209960,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": {
+              "n": 2,
+              "min": 1,
+              "max": 1,
+              "mean": 1,
+              "median": 1,
+              "p95": 1,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheMisses": {
+              "n": 2,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBytes": {
+              "n": 2,
+              "min": 6164609,
+              "max": 6164609,
+              "mean": 6164609,
+              "median": 6164609,
+              "p95": 6164609,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 2,
+              "min": 9863374,
+              "max": 9863374,
+              "mean": 9863374,
+              "median": 9863374,
+              "p95": 9863374,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": false,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 208
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 209,
+            "endMs": 262
+          },
+          {
+            "phase": "video_extract",
+            "startMs": 263,
+            "endMs": 268
+          },
+          {
+            "phase": "file_server",
+            "startMs": 271,
+            "endMs": 277
+          },
+          {
+            "phase": "capture_hdr_layered",
+            "startMs": 283,
+            "endMs": 31950
+          },
+          {
+            "phase": "encode",
+            "startMs": 5750,
+            "endMs": 31950
+          },
+          {
+            "phase": "assemble",
+            "startMs": 31950,
+            "endMs": 32026
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_hdr_layered",
+            "activeMs": 31667,
+            "exclusiveMs": 5467,
+            "overlappedMs": 26200,
+            "sharedAttributionMs": 18567,
+            "firstStartMs": 283,
+            "lastEndMs": 31950
+          },
+          {
+            "phase": "encode",
+            "activeMs": 26200,
+            "exclusiveMs": 0,
+            "overlappedMs": 26200,
+            "sharedAttributionMs": 13100,
+            "firstStartMs": 5750,
+            "lastEndMs": 31950
+          },
+          {
+            "phase": "compile",
+            "activeMs": 206,
+            "exclusiveMs": 206,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 206,
+            "firstStartMs": 2,
+            "lastEndMs": 208
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 76,
+            "exclusiveMs": 76,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 76,
+            "firstStartMs": 31950,
+            "lastEndMs": 32026
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 53,
+            "exclusiveMs": 53,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 53,
+            "firstStartMs": 209,
+            "lastEndMs": 262
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 6,
+            "exclusiveMs": 6,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 6,
+            "firstStartMs": 271,
+            "lastEndMs": 277
+          },
+          {
+            "phase": "video_extract",
+            "activeMs": 5,
+            "exclusiveMs": 5,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 5,
+            "firstStartMs": 263,
+            "lastEndMs": 268
+          }
+        ],
+        "coveredMs": 32013,
+        "overlapMs": 26200,
+        "untracedMs": 94.87750000000233,
+        "concurrencyFactor": 1.81841751788336,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 206
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 53
+          },
+          {
+            "phase": "video_extract",
+            "ms": 5
+          },
+          {
+            "phase": "file_server",
+            "ms": 6
+          },
+          {
+            "phase": "capture_hdr_layered",
+            "ms": 31667
+          },
+          {
+            "phase": "assemble",
+            "ms": 76
+          }
+        ],
+        "inferredPhases": [
+          "encode"
+        ],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "hdr_layered",
+        "drawElementClampReason": null,
+        "workers": 1,
+        "videoCodec": "hevc",
+        "pixFmt": "yuv420p10le",
+        "colorTransfer": "arib-std-b67",
+        "alphaMode": null,
+        "audioCodec": null,
+        "frames": 150
+      }
+    },
+    {
+      "fixture": "hdr-regression",
+      "category": "hdr-pq",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "hdr-regression",
+        "category": "hdr-pq",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 3,
+        "wallMs": 109006.4321,
+        "frames": 180,
+        "outputDurationSec": 6,
+        "fps": 1.651278704681134,
+        "renderFactor": 0.05504262348937113,
+        "compileMs": 515,
+        "videoExtractMs": 244,
+        "audioProcessMs": 0,
+        "captureMs": 108038,
+        "captureSetupMs": 77,
+        "captureFrameMs": 108038,
+        "encodeMs": 102237,
+        "assembleMs": 70,
+        "captureAvgMs": 600,
+        "captureP50Ms": null,
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": 49.619000000006054,
+        "captureRpcP95Ms": 79.65739999999641,
+        "criticalPathTop": "capture_hdr_layered (108100 ms)",
+        "concurrencyFactor": 1.9385310236567432,
+        "overlapMs": 102237,
+        "inferredPhases": "encode",
+        "traceWarnings": null,
+        "untracedMs": 73.43210000000545,
+        "cdpInboundBytes": 9067730,
+        "cdpOutboundBytes": 37905236,
+        "frameRpcResponseBytes": 7611296,
+        "frameRpcResponseBytesPerFrame": 42284.97777777778,
+        "peakTreeWorkingSetMb": 3395.6640625,
+        "peakNodeRssMb": 512,
+        "cpuSeconds": 333.484375,
+        "cpuSecondsPerOutputMin": 3334.84375,
+        "wallSecondsPerOutputMin": 1090.064321,
+        "estUsdPerOutputMin": 0.04131500868055556,
+        "ioReadBytes": 4336819193,
+        "ioWriteBytes": 2648868837,
+        "tmpPeakBytes": 26425954,
+        "peakVramDeltaMiB": 29,
+        "gpuUtilMeanPct": 0.11359404096834265,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": 0,
+        "extractCacheMisses": 1,
+        "captureMode": "screenshot",
+        "capturePath": "hdr_layered",
+        "calibrationFailed": false,
+        "drawElementClampReason": null,
+        "workers": 1,
+        "staticDedupReused": null,
+        "outputBytes": 3730868,
+        "outputBitRate": 4974490,
+        "videoCodec": "hevc",
+        "pixFmt": "yuv420p10le",
+        "colorTransfer": "smpte2084",
+        "alphaMode": null,
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 0,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 108293.50880000001,
+          "max": 110439.17370000001,
+          "mean": 109366.34125000001,
+          "median": 109366.34125000001,
+          "p95": 110439.17370000001,
+          "stdev": 1517.2142009439578,
+          "cv": 0.013872770942165515,
+          "mad": 1072.8324500000017
+        },
+        "fps": {
+          "n": 2,
+          "min": 1.629856453734043,
+          "max": 1.6621494861010542,
+          "mean": 1.6460029699175487,
+          "median": 1.6460029699175487,
+          "p95": 1.6621494861010542,
+          "stdev": 0.022834622171790286,
+          "cv": 0.013872770942165501,
+          "mad": 0.0161465161835056
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.05432854845780143,
+          "max": 0.05540498287003514,
+          "mean": 0.054866765663918286,
+          "median": 0.054866765663918286,
+          "p95": 0.05540498287003514,
+          "stdev": 0.0007611540723930094,
+          "cv": 0.013872770942165501,
+          "mad": 0.0005382172061168533
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 107854,
+          "max": 109955,
+          "mean": 108904.5,
+          "median": 108904.5,
+          "p95": 109955,
+          "stdev": 1485.6313472729364,
+          "cv": 0.013641597429609763,
+          "mad": 1050.5
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 53,
+          "max": 70,
+          "mean": 61.5,
+          "median": 61.5,
+          "p95": 70,
+          "stdev": 12.020815280171307,
+          "cv": 0.19546041105969605,
+          "mad": 8.5
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 107854,
+          "max": 109955,
+          "mean": 108904.5,
+          "median": 108904.5,
+          "p95": 109955,
+          "stdev": 1485.6313472729364,
+          "cv": 0.013641597429609763,
+          "mad": 1050.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 101619,
+          "max": 101927,
+          "mean": 101773,
+          "median": 101773,
+          "p95": 101927,
+          "stdev": 217.78888860545663,
+          "cv": 0.002139947614843393,
+          "mad": 154
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "median": 3,
+          "p95": 3,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 48.95219999999972,
+          "max": 49.77530000000843,
+          "mean": 49.363750000004075,
+          "median": 49.363750000004075,
+          "p95": 49.77530000000843,
+          "stdev": 0.5820195916008046,
+          "cv": 0.011790424990013048,
+          "mad": 0.41155000000435393
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 74.16759999998612,
+          "max": 88.27350000001024,
+          "mean": 81.22054999999818,
+          "median": 81.22054999999818,
+          "p95": 88.27350000001024,
+          "stdev": 9.974377544756377,
+          "cv": 0.12280608226312922,
+          "mad": 7.052950000012061
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 101619,
+          "max": 101927,
+          "mean": 101773,
+          "median": 101773,
+          "p95": 101927,
+          "stdev": 217.78888860545663,
+          "cv": 0.002139947614843393,
+          "mad": 154
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 9068440,
+          "max": 9068765,
+          "mean": 9068602.5,
+          "median": 9068602.5,
+          "p95": 9068765,
+          "stdev": 229.80970388562795,
+          "cv": 0.000025341247880875575,
+          "mad": 162.5
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 37905236,
+          "max": 37905236,
+          "mean": 37905236,
+          "median": 37905236,
+          "p95": 37905236,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 7611293,
+          "max": 7611293,
+          "mean": 7611293,
+          "median": 7611293,
+          "p95": 7611293,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 3390.76953125,
+          "max": 3399.74609375,
+          "mean": 3395.2578125,
+          "median": 3395.2578125,
+          "p95": 3399.74609375,
+          "stdev": 6.347388215494868,
+          "cv": 0.0018694863736492375,
+          "mad": 4.48828125
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 2,
+          "max": 13,
+          "mean": 7.5,
+          "median": 7.5,
+          "p95": 13,
+          "stdev": 7.7781745930520225,
+          "cv": 1.0370899457402696,
+          "mad": 5.5
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 412.328125,
+          "max": 496.5,
+          "mean": 454.4140625,
+          "median": 454.4140625,
+          "p95": 496.5,
+          "stdev": 59.51850359768643,
+          "cv": 0.13097856890748497,
+          "mad": 42.0859375
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 4123.28125,
+          "max": 4965,
+          "mean": 4544.140625,
+          "median": 4544.140625,
+          "p95": 4965,
+          "stdev": 595.1850359768644,
+          "cv": 0.13097856890748497,
+          "mad": 420.859375
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 1082.935088,
+          "max": 1104.3917370000001,
+          "mean": 1093.6634125,
+          "median": 1093.6634125,
+          "p95": 1104.3917370000001,
+          "stdev": 15.172142009439694,
+          "cv": 0.013872770942165621,
+          "mad": 10.728324500000099
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.05108287326388889,
+          "max": 0.061510833333333334,
+          "mean": 0.056296853298611116,
+          "median": 0.056296853298611116,
+          "p95": 0.061510833333333334,
+          "stdev": 0.007373681279046707,
+          "cv": 0.13097856890748494,
+          "mad": 0.005213980034722222
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 4552355094,
+          "max": 6795818519,
+          "mean": 5674086806.5,
+          "median": 5674086806.5,
+          "p95": 6795818519,
+          "stdev": 1586368201.1614976,
+          "cv": 0.27958123575836374,
+          "mad": 1121731712.5
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 26425954,
+          "max": 26425954,
+          "mean": 26425954,
+          "median": 26425954,
+          "p95": 26425954,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheHits": {
+          "n": 2,
+          "min": 1,
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "p95": 1,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheMisses": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBytes": {
+          "n": 2,
+          "min": 3730868,
+          "max": 3730868,
+          "mean": 3730868,
+          "median": 3730868,
+          "p95": 3730868,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 4974490,
+          "max": 4974490,
+          "mean": 4974490,
+          "median": 4974490,
+          "p95": 4974490,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "hdr_layered",
+          "workers": 1,
+          "runs": [
+            1,
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 2,
+              "min": 108293.50880000001,
+              "max": 110439.17370000001,
+              "mean": 109366.34125000001,
+              "median": 109366.34125000001,
+              "p95": 110439.17370000001,
+              "stdev": 1517.2142009439578,
+              "cv": 0.013872770942165515,
+              "mad": 1072.8324500000017
+            },
+            "fps": {
+              "n": 2,
+              "min": 1.629856453734043,
+              "max": 1.6621494861010542,
+              "mean": 1.6460029699175487,
+              "median": 1.6460029699175487,
+              "p95": 1.6621494861010542,
+              "stdev": 0.022834622171790286,
+              "cv": 0.013872770942165501,
+              "mad": 0.0161465161835056
+            },
+            "renderFactor": {
+              "n": 2,
+              "min": 0.05432854845780143,
+              "max": 0.05540498287003514,
+              "mean": 0.054866765663918286,
+              "median": 0.054866765663918286,
+              "p95": 0.05540498287003514,
+              "stdev": 0.0007611540723930094,
+              "cv": 0.013872770942165501,
+              "mad": 0.0005382172061168533
+            },
+            "captureMs": {
+              "n": 2,
+              "min": 107854,
+              "max": 109955,
+              "mean": 108904.5,
+              "median": 108904.5,
+              "p95": 109955,
+              "stdev": 1485.6313472729364,
+              "cv": 0.013641597429609763,
+              "mad": 1050.5
+            },
+            "captureSetupMs": {
+              "n": 2,
+              "min": 53,
+              "max": 70,
+              "mean": 61.5,
+              "median": 61.5,
+              "p95": 70,
+              "stdev": 12.020815280171307,
+              "cv": 0.19546041105969605,
+              "mad": 8.5
+            },
+            "captureFrameMs": {
+              "n": 2,
+              "min": 107854,
+              "max": 109955,
+              "mean": 108904.5,
+              "median": 108904.5,
+              "p95": 109955,
+              "stdev": 1485.6313472729364,
+              "cv": 0.013641597429609763,
+              "mad": 1050.5
+            },
+            "encodeMs": {
+              "n": 2,
+              "min": 101619,
+              "max": 101927,
+              "mean": 101773,
+              "median": 101773,
+              "p95": 101927,
+              "stdev": 217.78888860545663,
+              "cv": 0.002139947614843393,
+              "mad": 154
+            },
+            "videoExtractMs": {
+              "n": 2,
+              "min": 3,
+              "max": 3,
+              "mean": 3,
+              "median": 3,
+              "p95": 3,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 2,
+              "min": 48.95219999999972,
+              "max": 49.77530000000843,
+              "mean": 49.363750000004075,
+              "median": 49.363750000004075,
+              "p95": 49.77530000000843,
+              "stdev": 0.5820195916008046,
+              "cv": 0.011790424990013048,
+              "mad": 0.41155000000435393
+            },
+            "captureRpcP95Ms": {
+              "n": 2,
+              "min": 74.16759999998612,
+              "max": 88.27350000001024,
+              "mean": 81.22054999999818,
+              "median": 81.22054999999818,
+              "p95": 88.27350000001024,
+              "stdev": 9.974377544756377,
+              "cv": 0.12280608226312922,
+              "mad": 7.052950000012061
+            },
+            "overlapMs": {
+              "n": 2,
+              "min": 101619,
+              "max": 101927,
+              "mean": 101773,
+              "median": 101773,
+              "p95": 101927,
+              "stdev": 217.78888860545663,
+              "cv": 0.002139947614843393,
+              "mad": 154
+            },
+            "cdpInboundBytes": {
+              "n": 2,
+              "min": 9068440,
+              "max": 9068765,
+              "mean": 9068602.5,
+              "median": 9068602.5,
+              "p95": 9068765,
+              "stdev": 229.80970388562795,
+              "cv": 0.000025341247880875575,
+              "mad": 162.5
+            },
+            "cdpOutboundBytes": {
+              "n": 2,
+              "min": 37905236,
+              "max": 37905236,
+              "mean": 37905236,
+              "median": 37905236,
+              "p95": 37905236,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 2,
+              "min": 7611293,
+              "max": 7611293,
+              "mean": 7611293,
+              "median": 7611293,
+              "p95": 7611293,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 2,
+              "min": 3390.76953125,
+              "max": 3399.74609375,
+              "mean": 3395.2578125,
+              "median": 3395.2578125,
+              "p95": 3399.74609375,
+              "stdev": 6.347388215494868,
+              "cv": 0.0018694863736492375,
+              "mad": 4.48828125
+            },
+            "peakVramDeltaMiB": {
+              "n": 2,
+              "min": 2,
+              "max": 13,
+              "mean": 7.5,
+              "median": 7.5,
+              "p95": 13,
+              "stdev": 7.7781745930520225,
+              "cv": 1.0370899457402696,
+              "mad": 5.5
+            },
+            "cpuSeconds": {
+              "n": 2,
+              "min": 412.328125,
+              "max": 496.5,
+              "mean": 454.4140625,
+              "median": 454.4140625,
+              "p95": 496.5,
+              "stdev": 59.51850359768643,
+              "cv": 0.13097856890748497,
+              "mad": 42.0859375
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 2,
+              "min": 4123.28125,
+              "max": 4965,
+              "mean": 4544.140625,
+              "median": 4544.140625,
+              "p95": 4965,
+              "stdev": 595.1850359768644,
+              "cv": 0.13097856890748497,
+              "mad": 420.859375
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 2,
+              "min": 1082.935088,
+              "max": 1104.3917370000001,
+              "mean": 1093.6634125,
+              "median": 1093.6634125,
+              "p95": 1104.3917370000001,
+              "stdev": 15.172142009439694,
+              "cv": 0.013872770942165621,
+              "mad": 10.728324500000099
+            },
+            "estUsdPerOutputMin": {
+              "n": 2,
+              "min": 0.05108287326388889,
+              "max": 0.061510833333333334,
+              "mean": 0.056296853298611116,
+              "median": 0.056296853298611116,
+              "p95": 0.061510833333333334,
+              "stdev": 0.007373681279046707,
+              "cv": 0.13097856890748494,
+              "mad": 0.005213980034722222
+            },
+            "ioWriteBytes": {
+              "n": 2,
+              "min": 4552355094,
+              "max": 6795818519,
+              "mean": 5674086806.5,
+              "median": 5674086806.5,
+              "p95": 6795818519,
+              "stdev": 1586368201.1614976,
+              "cv": 0.27958123575836374,
+              "mad": 1121731712.5
+            },
+            "tmpPeakBytes": {
+              "n": 2,
+              "min": 26425954,
+              "max": 26425954,
+              "mean": 26425954,
+              "median": 26425954,
+              "p95": 26425954,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": {
+              "n": 2,
+              "min": 1,
+              "max": 1,
+              "mean": 1,
+              "median": 1,
+              "p95": 1,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheMisses": {
+              "n": 2,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBytes": {
+              "n": 2,
+              "min": 3730868,
+              "max": 3730868,
+              "mean": 3730868,
+              "median": 3730868,
+              "p95": 3730868,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 2,
+              "min": 4974490,
+              "max": 4974490,
+              "mean": 4974490,
+              "median": 4974490,
+              "p95": 4974490,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": false,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 228
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 228,
+            "endMs": 277
+          },
+          {
+            "phase": "video_extract",
+            "startMs": 278,
+            "endMs": 281
+          },
+          {
+            "phase": "file_server",
+            "startMs": 283,
+            "endMs": 289
+          },
+          {
+            "phase": "capture_hdr_layered",
+            "startMs": 297,
+            "endMs": 110308
+          },
+          {
+            "phase": "encode",
+            "startMs": 8689,
+            "endMs": 110308
+          },
+          {
+            "phase": "assemble",
+            "startMs": 110309,
+            "endMs": 110380
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_hdr_layered",
+            "activeMs": 110011,
+            "exclusiveMs": 8392,
+            "overlappedMs": 101619,
+            "sharedAttributionMs": 59201.5,
+            "firstStartMs": 297,
+            "lastEndMs": 110308
+          },
+          {
+            "phase": "encode",
+            "activeMs": 101619,
+            "exclusiveMs": 0,
+            "overlappedMs": 101619,
+            "sharedAttributionMs": 50809.5,
+            "firstStartMs": 8689,
+            "lastEndMs": 110308
+          },
+          {
+            "phase": "compile",
+            "activeMs": 226,
+            "exclusiveMs": 226,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 226,
+            "firstStartMs": 2,
+            "lastEndMs": 228
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 71,
+            "exclusiveMs": 71,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 71,
+            "firstStartMs": 110309,
+            "lastEndMs": 110380
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 49,
+            "exclusiveMs": 49,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 49,
+            "firstStartMs": 228,
+            "lastEndMs": 277
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 6,
+            "exclusiveMs": 6,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 6,
+            "firstStartMs": 283,
+            "lastEndMs": 289
+          },
+          {
+            "phase": "video_extract",
+            "activeMs": 3,
+            "exclusiveMs": 3,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 3,
+            "firstStartMs": 278,
+            "lastEndMs": 281
+          }
+        ],
+        "coveredMs": 110366,
+        "overlapMs": 101619,
+        "untracedMs": 73.17370000001392,
+        "concurrencyFactor": 1.9207455194534548,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 226
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 49
+          },
+          {
+            "phase": "video_extract",
+            "ms": 3
+          },
+          {
+            "phase": "file_server",
+            "ms": 6
+          },
+          {
+            "phase": "capture_hdr_layered",
+            "ms": 110011
+          },
+          {
+            "phase": "assemble",
+            "ms": 71
+          }
+        ],
+        "inferredPhases": [
+          "encode"
+        ],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "hdr_layered",
+        "drawElementClampReason": null,
+        "workers": 1,
+        "videoCodec": "hevc",
+        "pixFmt": "yuv420p10le",
+        "colorTransfer": "smpte2084",
+        "alphaMode": null,
+        "audioCodec": null,
+        "frames": 180
+      }
+    },
+    {
+      "fixture": "mixed-complex",
+      "category": "mixed",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "mixed-complex",
+        "category": "mixed",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 8,
+        "wallMs": 47458.26009999999,
+        "frames": 300,
+        "outputDurationSec": 10,
+        "fps": 6.321344258467665,
+        "renderFactor": 0.2107114752822555,
+        "compileMs": 309,
+        "videoExtractMs": 471,
+        "audioProcessMs": 858,
+        "captureMs": 45071,
+        "captureSetupMs": 10333,
+        "captureFrameMs": 34738,
+        "encodeMs": 146,
+        "assembleMs": 457,
+        "captureAvgMs": 116,
+        "captureP50Ms": 101,
+        "captureCalibrationP95Ms": 105,
+        "captureRpcP50Ms": 79.7216000000044,
+        "captureRpcP95Ms": 110.69700000000012,
+        "criticalPathTop": "capture_disk (34737 ms)",
+        "concurrencyFactor": 1,
+        "overlapMs": 0,
+        "inferredPhases": null,
+        "traceWarnings": null,
+        "untracedMs": 160.26009999999224,
+        "cdpInboundBytes": 131515561,
+        "cdpOutboundBytes": 30497089,
+        "frameRpcResponseBytes": 130518587,
+        "frameRpcResponseBytesPerFrame": 435061.95666666667,
+        "peakTreeWorkingSetMb": 4136.1328125,
+        "peakNodeRssMb": 260,
+        "cpuSeconds": 81.09375,
+        "cpuSecondsPerOutputMin": 486.5625,
+        "wallSecondsPerOutputMin": 284.74956059999994,
+        "estUsdPerOutputMin": 0.00602796875,
+        "ioReadBytes": 320084069,
+        "ioWriteBytes": 283047927,
+        "tmpPeakBytes": 128149222,
+        "peakVramDeltaMiB": 17,
+        "gpuUtilMeanPct": 0.04721030042918455,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": 0,
+        "extractCacheMisses": 1,
+        "captureMode": "screenshot",
+        "capturePath": "disk",
+        "calibrationFailed": false,
+        "drawElementClampReason": "software_gpu",
+        "workers": 5,
+        "staticDedupReused": 0,
+        "outputBytes": 11320686,
+        "outputBitRate": 9056548,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": "aac"
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 0,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 36987.61539999998,
+          "max": 83566.73390000002,
+          "mean": 60277.17465,
+          "median": 60277.17465,
+          "p95": 83566.73390000002,
+          "stdev": 32936.410553041795,
+          "cv": 0.5464159649865373,
+          "mad": 23289.55925000002
+        },
+        "fps": {
+          "n": 2,
+          "min": 3.5899452569128103,
+          "max": 8.110822953998817,
+          "mean": 5.850384105455813,
+          "median": 5.850384105455813,
+          "p95": 8.110822953998817,
+          "stdev": 3.1967432765245376,
+          "cv": 0.5464159649865372,
+          "mad": 2.260438848543003
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.11966484189709367,
+          "max": 0.27036076513329393,
+          "mean": 0.1950128035151938,
+          "median": 0.1950128035151938,
+          "p95": 0.27036076513329393,
+          "stdev": 0.10655810921748463,
+          "cv": 0.5464159649865374,
+          "mad": 0.07534796161810013
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 31279,
+          "max": 82252,
+          "mean": 56765.5,
+          "median": 56765.5,
+          "p95": 82252,
+          "stdev": 36043.35395742189,
+          "cv": 0.6349517569196411,
+          "mad": 25486.5
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 10889,
+          "max": 35143,
+          "mean": 23016,
+          "median": 23016,
+          "p95": 35143,
+          "stdev": 17150.167870898524,
+          "cv": 0.7451411136122056,
+          "mad": 12127
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 20390,
+          "max": 47109,
+          "mean": 33749.5,
+          "median": 33749.5,
+          "p95": 47109,
+          "stdev": 18893.186086523365,
+          "cv": 0.5598063996955026,
+          "mad": 13359.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 158,
+          "max": 47104,
+          "mean": 23631,
+          "median": 23631,
+          "p95": 47104,
+          "stdev": 33195.83494958366,
+          "cv": 1.4047579429386678,
+          "mad": 23473
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 2,
+          "max": 6,
+          "mean": 4,
+          "median": 4,
+          "p95": 6,
+          "stdev": 2.8284271247461903,
+          "cv": 0.7071067811865476,
+          "mad": 2
+        },
+        "captureCalibrationP95Ms": {
+          "n": 1,
+          "min": 138,
+          "max": 138,
+          "mean": 138,
+          "median": 138,
+          "p95": 138,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 62.8179999999702,
+          "max": 74.91149999998743,
+          "mean": 68.86474999997881,
+          "median": 68.86474999997881,
+          "p95": 74.91149999998743,
+          "stdev": 8.551395858291695,
+          "cv": 0.12417667759331626,
+          "mad": 6.046750000008615
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 84.90109999995911,
+          "max": 110.32280000002356,
+          "mean": 97.61194999999134,
+          "median": 97.61194999999134,
+          "p95": 110.32280000002356,
+          "stdev": 17.975856459335628,
+          "cv": 0.18415630933853103,
+          "mad": 12.710850000032224
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 0,
+          "max": 47104,
+          "mean": 23552,
+          "median": 23552,
+          "p95": 47104,
+          "stdev": 33307.557821011134,
+          "cv": 1.4142135623730951,
+          "mad": 23552
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 129165368,
+          "max": 131518333,
+          "mean": 130341850.5,
+          "median": 130341850.5,
+          "p95": 131518333,
+          "stdev": 1663797.5073946049,
+          "cv": 0.01276487560221193,
+          "mad": 1176482.5
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 29909301,
+          "max": 30499118,
+          "mean": 30204209.5,
+          "median": 30204209.5,
+          "p95": 30499118,
+          "stdev": 417063.6003591059,
+          "cv": 0.013808128312681248,
+          "mad": 294908.5
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 128436364,
+          "max": 130518590,
+          "mean": 129477477,
+          "median": 129477477,
+          "p95": 130518590,
+          "stdev": 1472356.12456294,
+          "cv": 0.011371523130335171,
+          "mad": 1041113
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 2312.40234375,
+          "max": 4351.34375,
+          "mean": 3331.873046875,
+          "median": 3331.873046875,
+          "p95": 4351.34375,
+          "stdev": 1441.7492948014103,
+          "cv": 0.4327143545140901,
+          "mad": 1019.470703125
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 5,
+          "max": 8,
+          "mean": 6.5,
+          "median": 6.5,
+          "p95": 8,
+          "stdev": 2.1213203435596424,
+          "cv": 0.32635697593225266,
+          "mad": 1.5
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 68.5,
+          "max": 86.875,
+          "mean": 77.6875,
+          "median": 77.6875,
+          "p95": 86.875,
+          "stdev": 12.99308710430281,
+          "cv": 0.16724810431926385,
+          "mad": 9.1875
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 411,
+          "max": 521.25,
+          "mean": 466.125,
+          "median": 466.125,
+          "p95": 521.25,
+          "stdev": 77.95852262581687,
+          "cv": 0.16724810431926387,
+          "mad": 55.125
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 221.9256923999999,
+          "max": 501.40040340000013,
+          "mean": 361.66304790000004,
+          "median": 361.66304790000004,
+          "p95": 501.40040340000013,
+          "stdev": 197.61846331825078,
+          "cv": 0.5464159649865373,
+          "mad": 139.73735550000012
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.005091833333333334,
+          "max": 0.006457708333333334,
+          "mean": 0.005774770833333334,
+          "median": 0.005774770833333334,
+          "p95": 0.006457708333333334,
+          "stdev": 0.0009658194747531761,
+          "cv": 0.16724810431926393,
+          "mad": 0.0006829375000000004
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 485785839,
+          "max": 578276217,
+          "mean": 532031028,
+          "median": 532031028,
+          "p95": 578276217,
+          "stdev": 65400573.47830707,
+          "cv": 0.12292623932885935,
+          "mad": 46245189
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 31982739,
+          "max": 128149222,
+          "mean": 80065980.5,
+          "median": 80065980.5,
+          "p95": 128149222,
+          "stdev": 67999972.25216083,
+          "cv": 0.8492991883383084,
+          "mad": 48083241.5
+        },
+        "extractCacheHits": {
+          "n": 2,
+          "min": 1,
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "p95": 1,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheMisses": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBytes": {
+          "n": 2,
+          "min": 11320686,
+          "max": 11320686,
+          "mean": 11320686,
+          "median": 11320686,
+          "p95": 11320686,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 9056548,
+          "max": 9056548,
+          "mean": 9056548,
+          "median": 9056548,
+          "p95": 9056548,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 36987.61539999998,
+              "max": 36987.61539999998,
+              "mean": 36987.61539999998,
+              "median": 36987.61539999998,
+              "p95": 36987.61539999998,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 8.110822953998817,
+              "max": 8.110822953998817,
+              "mean": 8.110822953998817,
+              "median": 8.110822953998817,
+              "p95": 8.110822953998817,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.27036076513329393,
+              "max": 0.27036076513329393,
+              "mean": 0.27036076513329393,
+              "median": 0.27036076513329393,
+              "p95": 0.27036076513329393,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 31279,
+              "max": 31279,
+              "mean": 31279,
+              "median": 31279,
+              "p95": 31279,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 10889,
+              "max": 10889,
+              "mean": 10889,
+              "median": 10889,
+              "p95": 10889,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 20390,
+              "max": 20390,
+              "mean": 20390,
+              "median": 20390,
+              "p95": 20390,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 158,
+              "max": 158,
+              "mean": 158,
+              "median": 158,
+              "p95": 158,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 6,
+              "max": 6,
+              "mean": 6,
+              "median": 6,
+              "p95": 6,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": {
+              "n": 1,
+              "min": 138,
+              "max": 138,
+              "mean": 138,
+              "median": 138,
+              "p95": 138,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 74.91149999998743,
+              "max": 74.91149999998743,
+              "mean": 74.91149999998743,
+              "median": 74.91149999998743,
+              "p95": 74.91149999998743,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 110.32280000002356,
+              "max": 110.32280000002356,
+              "mean": 110.32280000002356,
+              "median": 110.32280000002356,
+              "p95": 110.32280000002356,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 131518333,
+              "max": 131518333,
+              "mean": 131518333,
+              "median": 131518333,
+              "p95": 131518333,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 30499118,
+              "max": 30499118,
+              "mean": 30499118,
+              "median": 30499118,
+              "p95": 30499118,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 130518590,
+              "max": 130518590,
+              "mean": 130518590,
+              "median": 130518590,
+              "p95": 130518590,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 4351.34375,
+              "max": 4351.34375,
+              "mean": 4351.34375,
+              "median": 4351.34375,
+              "p95": 4351.34375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 5,
+              "max": 5,
+              "mean": 5,
+              "median": 5,
+              "p95": 5,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 86.875,
+              "max": 86.875,
+              "mean": 86.875,
+              "median": 86.875,
+              "p95": 86.875,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 521.25,
+              "max": 521.25,
+              "mean": 521.25,
+              "median": 521.25,
+              "p95": 521.25,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 221.9256923999999,
+              "max": 221.9256923999999,
+              "mean": 221.9256923999999,
+              "median": 221.9256923999999,
+              "p95": 221.9256923999999,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.006457708333333334,
+              "max": 0.006457708333333334,
+              "mean": 0.006457708333333334,
+              "median": 0.006457708333333334,
+              "p95": 0.006457708333333334,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 485785839,
+              "max": 485785839,
+              "mean": 485785839,
+              "median": 485785839,
+              "p95": 485785839,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 128149222,
+              "max": 128149222,
+              "mean": 128149222,
+              "median": 128149222,
+              "p95": 128149222,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": {
+              "n": 1,
+              "min": 1,
+              "max": 1,
+              "mean": 1,
+              "median": 1,
+              "p95": 1,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheMisses": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBytes": {
+              "n": 1,
+              "min": 11320686,
+              "max": 11320686,
+              "mean": 11320686,
+              "median": 11320686,
+              "p95": 11320686,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 9056548,
+              "max": 9056548,
+              "mean": 9056548,
+              "median": 9056548,
+              "p95": 9056548,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 83566.73390000002,
+              "max": 83566.73390000002,
+              "mean": 83566.73390000002,
+              "median": 83566.73390000002,
+              "p95": 83566.73390000002,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 3.5899452569128103,
+              "max": 3.5899452569128103,
+              "mean": 3.5899452569128103,
+              "median": 3.5899452569128103,
+              "p95": 3.5899452569128103,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.11966484189709367,
+              "max": 0.11966484189709367,
+              "mean": 0.11966484189709367,
+              "median": 0.11966484189709367,
+              "p95": 0.11966484189709367,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 82252,
+              "max": 82252,
+              "mean": 82252,
+              "median": 82252,
+              "p95": 82252,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 35143,
+              "max": 35143,
+              "mean": 35143,
+              "median": 35143,
+              "p95": 35143,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 47109,
+              "max": 47109,
+              "mean": 47109,
+              "median": 47109,
+              "p95": 47109,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 47104,
+              "max": 47104,
+              "mean": 47104,
+              "median": 47104,
+              "p95": 47104,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 2,
+              "max": 2,
+              "mean": 2,
+              "median": 2,
+              "p95": 2,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 62.8179999999702,
+              "max": 62.8179999999702,
+              "mean": 62.8179999999702,
+              "median": 62.8179999999702,
+              "p95": 62.8179999999702,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 84.90109999995911,
+              "max": 84.90109999995911,
+              "mean": 84.90109999995911,
+              "median": 84.90109999995911,
+              "p95": 84.90109999995911,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 47104,
+              "max": 47104,
+              "mean": 47104,
+              "median": 47104,
+              "p95": 47104,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 129165368,
+              "max": 129165368,
+              "mean": 129165368,
+              "median": 129165368,
+              "p95": 129165368,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 29909301,
+              "max": 29909301,
+              "mean": 29909301,
+              "median": 29909301,
+              "p95": 29909301,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 128436364,
+              "max": 128436364,
+              "mean": 128436364,
+              "median": 128436364,
+              "p95": 128436364,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 2312.40234375,
+              "max": 2312.40234375,
+              "mean": 2312.40234375,
+              "median": 2312.40234375,
+              "p95": 2312.40234375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 8,
+              "max": 8,
+              "mean": 8,
+              "median": 8,
+              "p95": 8,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 68.5,
+              "max": 68.5,
+              "mean": 68.5,
+              "median": 68.5,
+              "p95": 68.5,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 411,
+              "max": 411,
+              "mean": 411,
+              "median": 411,
+              "p95": 411,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 501.40040340000013,
+              "max": 501.40040340000013,
+              "mean": 501.40040340000013,
+              "median": 501.40040340000013,
+              "p95": 501.40040340000013,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.005091833333333334,
+              "max": 0.005091833333333334,
+              "mean": 0.005091833333333334,
+              "median": 0.005091833333333334,
+              "p95": 0.005091833333333334,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 578276217,
+              "max": 578276217,
+              "mean": 578276217,
+              "median": 578276217,
+              "p95": 578276217,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 31982739,
+              "max": 31982739,
+              "mean": 31982739,
+              "median": 31982739,
+              "p95": 31982739,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": {
+              "n": 1,
+              "min": 1,
+              "max": 1,
+              "mean": 1,
+              "median": 1,
+              "p95": 1,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheMisses": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBytes": {
+              "n": 1,
+              "min": 11320686,
+              "max": 11320686,
+              "mean": 11320686,
+              "median": 11320686,
+              "p95": 11320686,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 9056548,
+              "max": 9056548,
+              "mean": 9056548,
+              "median": 9056548,
+              "p95": 9056548,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": true,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 3950
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 3951,
+            "endMs": 3955
+          },
+          {
+            "phase": "video_extract",
+            "startMs": 3955,
+            "endMs": 3961
+          },
+          {
+            "phase": "audio_process",
+            "startMs": 3963,
+            "endMs": 4934
+          },
+          {
+            "phase": "file_server",
+            "startMs": 4934,
+            "endMs": 4941
+          },
+          {
+            "phase": "capture_calibration",
+            "startMs": 4943,
+            "endMs": 15814
+          },
+          {
+            "phase": "capture_disk",
+            "startMs": 15824,
+            "endMs": 36213
+          },
+          {
+            "phase": "encode",
+            "startMs": 36213,
+            "endMs": 36371
+          },
+          {
+            "phase": "assemble",
+            "startMs": 36372,
+            "endMs": 36852
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_disk",
+            "activeMs": 20389,
+            "exclusiveMs": 20389,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 20389,
+            "firstStartMs": 15824,
+            "lastEndMs": 36213
+          },
+          {
+            "phase": "capture_calibration",
+            "activeMs": 10871,
+            "exclusiveMs": 10871,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 10871,
+            "firstStartMs": 4943,
+            "lastEndMs": 15814
+          },
+          {
+            "phase": "compile",
+            "activeMs": 3948,
+            "exclusiveMs": 3948,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 3948,
+            "firstStartMs": 2,
+            "lastEndMs": 3950
+          },
+          {
+            "phase": "audio_process",
+            "activeMs": 971,
+            "exclusiveMs": 971,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 971,
+            "firstStartMs": 3963,
+            "lastEndMs": 4934
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 480,
+            "exclusiveMs": 480,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 480,
+            "firstStartMs": 36372,
+            "lastEndMs": 36852
+          },
+          {
+            "phase": "encode",
+            "activeMs": 158,
+            "exclusiveMs": 158,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 158,
+            "firstStartMs": 36213,
+            "lastEndMs": 36371
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 7,
+            "exclusiveMs": 7,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 7,
+            "firstStartMs": 4934,
+            "lastEndMs": 4941
+          },
+          {
+            "phase": "video_extract",
+            "activeMs": 6,
+            "exclusiveMs": 6,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 6,
+            "firstStartMs": 3955,
+            "lastEndMs": 3961
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 4,
+            "exclusiveMs": 4,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 4,
+            "firstStartMs": 3951,
+            "lastEndMs": 3955
+          }
+        ],
+        "coveredMs": 36834,
+        "overlapMs": 0,
+        "untracedMs": 153.61539999998058,
+        "concurrencyFactor": 1,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 3948
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 4
+          },
+          {
+            "phase": "video_extract",
+            "ms": 6
+          },
+          {
+            "phase": "audio_process",
+            "ms": 971
+          },
+          {
+            "phase": "file_server",
+            "ms": 7
+          },
+          {
+            "phase": "capture_calibration",
+            "ms": 10871
+          },
+          {
+            "phase": "capture_disk",
+            "ms": 20389
+          },
+          {
+            "phase": "encode",
+            "ms": 158
+          },
+          {
+            "phase": "assemble",
+            "ms": 480
+          }
+        ],
+        "inferredPhases": [],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "mixed",
+        "drawElementClampReason": "software_gpu",
+        "workers": null,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": "aac",
+        "frames": 300
+      }
+    },
+    {
+      "fixture": "motion-blur",
+      "category": "motion-blur",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "motion-blur",
+        "category": "motion-blur",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 1,
+        "wallMs": 106057.27119999999,
+        "frames": 90,
+        "outputDurationSec": 3,
+        "fps": 0.8485981110175878,
+        "renderFactor": 0.028286603700586256,
+        "compileMs": 39,
+        "videoExtractMs": 0,
+        "audioProcessMs": 0,
+        "captureMs": 105851,
+        "captureSetupMs": 34155,
+        "captureFrameMs": 71696,
+        "encodeMs": 71669,
+        "assembleMs": 79,
+        "captureAvgMs": 797,
+        "captureP50Ms": 714,
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": 56.76539999999659,
+        "captureRpcP95Ms": 66.63700000000244,
+        "criticalPathTop": "capture_streaming (71696 ms)",
+        "concurrencyFactor": 1.6763714951727522,
+        "overlapMs": 71669,
+        "inferredPhases": "encode",
+        "traceWarnings": null,
+        "untracedMs": 96.27119999998831,
+        "cdpInboundBytes": 51224783,
+        "cdpOutboundBytes": 2739956,
+        "frameRpcResponseBytes": 51175235,
+        "frameRpcResponseBytesPerFrame": 568613.7222222222,
+        "peakTreeWorkingSetMb": 1637.86328125,
+        "peakNodeRssMb": 284,
+        "cpuSeconds": 83.9375,
+        "cpuSecondsPerOutputMin": 1678.75,
+        "wallSecondsPerOutputMin": 2121.145424,
+        "estUsdPerOutputMin": 0.020797847222222225,
+        "ioReadBytes": 69876724,
+        "ioWriteBytes": 48257486,
+        "tmpPeakBytes": 260551,
+        "peakVramDeltaMiB": 19,
+        "gpuUtilMeanPct": 0.009560229445506692,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "captureMode": "screenshot",
+        "capturePath": "streaming",
+        "calibrationFailed": true,
+        "drawElementClampReason": "software_gpu",
+        "workers": 1,
+        "staticDedupReused": 0,
+        "outputBytes": 257426,
+        "outputBitRate": 686469,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 0,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 65404.69970000001,
+          "max": 72155.04519999996,
+          "mean": 68779.87245,
+          "median": 68779.87245,
+          "p95": 72155.04519999996,
+          "stdev": 4773.215078402062,
+          "cv": 0.06939842876085564,
+          "mad": 3375.172749999976
+        },
+        "fps": {
+          "n": 2,
+          "min": 1.2473140270446403,
+          "max": 1.3760479050101042,
+          "mean": 1.3116809660273723,
+          "median": 1.3116809660273723,
+          "p95": 1.3760479050101042,
+          "stdev": 0.09102859807782097,
+          "cv": 0.0693984287608557,
+          "mad": 0.06436693898273194
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.041577134234821345,
+          "max": 0.045868263500336806,
+          "mean": 0.043722698867579075,
+          "median": 0.043722698867579075,
+          "p95": 0.045868263500336806,
+          "stdev": 0.0030342866025940317,
+          "cv": 0.06939842876085568,
+          "mad": 0.0021455646327577307
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 64387,
+          "max": 71125,
+          "mean": 67756,
+          "median": 67756,
+          "p95": 71125,
+          "stdev": 4764.485491634957,
+          "cv": 0.07031828165232536,
+          "mad": 3369
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 10902,
+          "max": 14237,
+          "mean": 12569.5,
+          "median": 12569.5,
+          "p95": 14237,
+          "stdev": 2358.201115257136,
+          "cv": 0.1876129611565405,
+          "mad": 1667.5
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 53485,
+          "max": 56888,
+          "mean": 55186.5,
+          "median": 55186.5,
+          "p95": 56888,
+          "stdev": 2406.2843763778214,
+          "cv": 0.04360277198912454,
+          "mad": 1701.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 866,
+          "max": 866,
+          "mean": 866,
+          "median": 866,
+          "p95": 866,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureCalibrationP95Ms": {
+          "n": 2,
+          "min": 729,
+          "max": 740,
+          "mean": 734.5,
+          "median": 734.5,
+          "p95": 740,
+          "stdev": 7.7781745930520225,
+          "cv": 0.010589754381282537,
+          "mad": 5.5
+        },
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 68.86190000001807,
+          "max": 69.12449999997625,
+          "mean": 68.99319999999716,
+          "median": 68.99319999999716,
+          "p95": 69.12449999997625,
+          "stdev": 0.18568624071001874,
+          "cv": 0.0026913701743074155,
+          "mad": 0.1312999999790918
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 107.62839999998687,
+          "max": 108.60019999998622,
+          "mean": 108.11429999998654,
+          "median": 108.11429999998654,
+          "p95": 108.60019999998622,
+          "stdev": 0.6871663699566258,
+          "cv": 0.006355924886501706,
+          "mad": 0.48589999999967404
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 54167565,
+          "max": 54167749,
+          "mean": 54167657,
+          "median": 54167657,
+          "p95": 54167749,
+          "stdev": 130.10764773832474,
+          "cv": 0.000002401943427944922,
+          "mad": 92
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 2948964,
+          "max": 2949471,
+          "mean": 2949217.5,
+          "median": 2949217.5,
+          "p95": 2949471,
+          "stdev": 358.5031380615796,
+          "cv": 0.00012155873144709727,
+          "mad": 253.5
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 54031314,
+          "max": 54031386,
+          "mean": 54031350,
+          "median": 54031350,
+          "p95": 54031386,
+          "stdev": 50.91168824543142,
+          "cv": 9.422620061396101e-7,
+          "mad": 36
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 1612.9296875,
+          "max": 1653.6796875,
+          "mean": 1633.3046875,
+          "median": 1633.3046875,
+          "p95": 1653.6796875,
+          "stdev": 28.814601333351813,
+          "cv": 0.017641902061431396,
+          "mad": 20.375
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 8,
+          "max": 39,
+          "mean": 23.5,
+          "median": 23.5,
+          "p95": 39,
+          "stdev": 21.920310216782973,
+          "cv": 0.9327791581609776,
+          "mad": 15.5
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 126.640625,
+          "max": 167.875,
+          "mean": 147.2578125,
+          "median": 147.2578125,
+          "p95": 167.875,
+          "stdev": 29.157106180489045,
+          "cv": 0.19800040273237826,
+          "mad": 20.6171875
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 2532.8125,
+          "max": 3357.5,
+          "mean": 2945.15625,
+          "median": 2945.15625,
+          "p95": 3357.5,
+          "stdev": 583.1421236097809,
+          "cv": 0.19800040273237826,
+          "mad": 412.34375
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 1308.093994,
+          "max": 1443.1009039999992,
+          "mean": 1375.5974489999996,
+          "median": 1375.5974489999996,
+          "p95": 1443.1009039999992,
+          "stdev": 95.46430156804131,
+          "cv": 0.0693984287608557,
+          "mad": 67.50345499999958
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.03137873263888889,
+          "max": 0.04159569444444445,
+          "mean": 0.036487213541666674,
+          "median": 0.036487213541666674,
+          "p95": 0.04159569444444445,
+          "stdev": 0.0072244829758322865,
+          "cv": 0.19800040273237823,
+          "mad": 0.005108480902777778
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 70557922,
+          "max": 81508582,
+          "mean": 76033252,
+          "median": 76033252,
+          "p95": 81508582,
+          "stdev": 7743285.944468278,
+          "cv": 0.10184078335184557,
+          "mad": 5475330
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 11217484,
+          "max": 11217636,
+          "mean": 11217560,
+          "median": 11217560,
+          "p95": 11217636,
+          "stdev": 107.48023074035522,
+          "cv": 0.000009581426864697424,
+          "mad": 76
+        },
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "outputBytes": {
+          "n": 2,
+          "min": 257289,
+          "max": 257470,
+          "mean": 257379.5,
+          "median": 257379.5,
+          "p95": 257470,
+          "stdev": 127.9863273947651,
+          "cv": 0.0004972669827813214,
+          "mad": 90.5
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 686104,
+          "max": 686586,
+          "mean": 686345,
+          "median": 686345,
+          "p95": 686586,
+          "stdev": 340.82546853191593,
+          "cv": 0.000496580391103477,
+          "mad": 241
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "disk",
+          "workers": 3,
+          "runs": [
+            1,
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 2,
+              "min": 65404.69970000001,
+              "max": 72155.04519999996,
+              "mean": 68779.87245,
+              "median": 68779.87245,
+              "p95": 72155.04519999996,
+              "stdev": 4773.215078402062,
+              "cv": 0.06939842876085564,
+              "mad": 3375.172749999976
+            },
+            "fps": {
+              "n": 2,
+              "min": 1.2473140270446403,
+              "max": 1.3760479050101042,
+              "mean": 1.3116809660273723,
+              "median": 1.3116809660273723,
+              "p95": 1.3760479050101042,
+              "stdev": 0.09102859807782097,
+              "cv": 0.0693984287608557,
+              "mad": 0.06436693898273194
+            },
+            "renderFactor": {
+              "n": 2,
+              "min": 0.041577134234821345,
+              "max": 0.045868263500336806,
+              "mean": 0.043722698867579075,
+              "median": 0.043722698867579075,
+              "p95": 0.045868263500336806,
+              "stdev": 0.0030342866025940317,
+              "cv": 0.06939842876085568,
+              "mad": 0.0021455646327577307
+            },
+            "captureMs": {
+              "n": 2,
+              "min": 64387,
+              "max": 71125,
+              "mean": 67756,
+              "median": 67756,
+              "p95": 71125,
+              "stdev": 4764.485491634957,
+              "cv": 0.07031828165232536,
+              "mad": 3369
+            },
+            "captureSetupMs": {
+              "n": 2,
+              "min": 10902,
+              "max": 14237,
+              "mean": 12569.5,
+              "median": 12569.5,
+              "p95": 14237,
+              "stdev": 2358.201115257136,
+              "cv": 0.1876129611565405,
+              "mad": 1667.5
+            },
+            "captureFrameMs": {
+              "n": 2,
+              "min": 53485,
+              "max": 56888,
+              "mean": 55186.5,
+              "median": 55186.5,
+              "p95": 56888,
+              "stdev": 2406.2843763778214,
+              "cv": 0.04360277198912454,
+              "mad": 1701.5
+            },
+            "encodeMs": {
+              "n": 2,
+              "min": 866,
+              "max": 866,
+              "mean": 866,
+              "median": 866,
+              "p95": 866,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 2,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": {
+              "n": 2,
+              "min": 729,
+              "max": 740,
+              "mean": 734.5,
+              "median": 734.5,
+              "p95": 740,
+              "stdev": 7.7781745930520225,
+              "cv": 0.010589754381282537,
+              "mad": 5.5
+            },
+            "captureRpcP50Ms": {
+              "n": 2,
+              "min": 68.86190000001807,
+              "max": 69.12449999997625,
+              "mean": 68.99319999999716,
+              "median": 68.99319999999716,
+              "p95": 69.12449999997625,
+              "stdev": 0.18568624071001874,
+              "cv": 0.0026913701743074155,
+              "mad": 0.1312999999790918
+            },
+            "captureRpcP95Ms": {
+              "n": 2,
+              "min": 107.62839999998687,
+              "max": 108.60019999998622,
+              "mean": 108.11429999998654,
+              "median": 108.11429999998654,
+              "p95": 108.60019999998622,
+              "stdev": 0.6871663699566258,
+              "cv": 0.006355924886501706,
+              "mad": 0.48589999999967404
+            },
+            "overlapMs": {
+              "n": 2,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 2,
+              "min": 54167565,
+              "max": 54167749,
+              "mean": 54167657,
+              "median": 54167657,
+              "p95": 54167749,
+              "stdev": 130.10764773832474,
+              "cv": 0.000002401943427944922,
+              "mad": 92
+            },
+            "cdpOutboundBytes": {
+              "n": 2,
+              "min": 2948964,
+              "max": 2949471,
+              "mean": 2949217.5,
+              "median": 2949217.5,
+              "p95": 2949471,
+              "stdev": 358.5031380615796,
+              "cv": 0.00012155873144709727,
+              "mad": 253.5
+            },
+            "frameRpcResponseBytes": {
+              "n": 2,
+              "min": 54031314,
+              "max": 54031386,
+              "mean": 54031350,
+              "median": 54031350,
+              "p95": 54031386,
+              "stdev": 50.91168824543142,
+              "cv": 9.422620061396101e-7,
+              "mad": 36
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 2,
+              "min": 1612.9296875,
+              "max": 1653.6796875,
+              "mean": 1633.3046875,
+              "median": 1633.3046875,
+              "p95": 1653.6796875,
+              "stdev": 28.814601333351813,
+              "cv": 0.017641902061431396,
+              "mad": 20.375
+            },
+            "peakVramDeltaMiB": {
+              "n": 2,
+              "min": 8,
+              "max": 39,
+              "mean": 23.5,
+              "median": 23.5,
+              "p95": 39,
+              "stdev": 21.920310216782973,
+              "cv": 0.9327791581609776,
+              "mad": 15.5
+            },
+            "cpuSeconds": {
+              "n": 2,
+              "min": 126.640625,
+              "max": 167.875,
+              "mean": 147.2578125,
+              "median": 147.2578125,
+              "p95": 167.875,
+              "stdev": 29.157106180489045,
+              "cv": 0.19800040273237826,
+              "mad": 20.6171875
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 2,
+              "min": 2532.8125,
+              "max": 3357.5,
+              "mean": 2945.15625,
+              "median": 2945.15625,
+              "p95": 3357.5,
+              "stdev": 583.1421236097809,
+              "cv": 0.19800040273237826,
+              "mad": 412.34375
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 2,
+              "min": 1308.093994,
+              "max": 1443.1009039999992,
+              "mean": 1375.5974489999996,
+              "median": 1375.5974489999996,
+              "p95": 1443.1009039999992,
+              "stdev": 95.46430156804131,
+              "cv": 0.0693984287608557,
+              "mad": 67.50345499999958
+            },
+            "estUsdPerOutputMin": {
+              "n": 2,
+              "min": 0.03137873263888889,
+              "max": 0.04159569444444445,
+              "mean": 0.036487213541666674,
+              "median": 0.036487213541666674,
+              "p95": 0.04159569444444445,
+              "stdev": 0.0072244829758322865,
+              "cv": 0.19800040273237823,
+              "mad": 0.005108480902777778
+            },
+            "ioWriteBytes": {
+              "n": 2,
+              "min": 70557922,
+              "max": 81508582,
+              "mean": 76033252,
+              "median": 76033252,
+              "p95": 81508582,
+              "stdev": 7743285.944468278,
+              "cv": 0.10184078335184557,
+              "mad": 5475330
+            },
+            "tmpPeakBytes": {
+              "n": 2,
+              "min": 11217484,
+              "max": 11217636,
+              "mean": 11217560,
+              "median": 11217560,
+              "p95": 11217636,
+              "stdev": 107.48023074035522,
+              "cv": 0.000009581426864697424,
+              "mad": 76
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 2,
+              "min": 257289,
+              "max": 257470,
+              "mean": 257379.5,
+              "median": 257379.5,
+              "p95": 257470,
+              "stdev": 127.9863273947651,
+              "cv": 0.0004972669827813214,
+              "mad": 90.5
+            },
+            "outputBitRate": {
+              "n": 2,
+              "min": 686104,
+              "max": 686586,
+              "mean": 686345,
+              "median": 686345,
+              "p95": 686586,
+              "stdev": 340.82546853191593,
+              "cv": 0.000496580391103477,
+              "mad": 241
+            }
+          }
+        }
+      ],
+      "mixedPath": false,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 14
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 14,
+            "endMs": 17
+          },
+          {
+            "phase": "file_server",
+            "startMs": 17,
+            "endMs": 21
+          },
+          {
+            "phase": "capture_calibration",
+            "startMs": 23,
+            "endMs": 14250
+          },
+          {
+            "phase": "capture_disk",
+            "startMs": 14254,
+            "endMs": 71142
+          },
+          {
+            "phase": "encode",
+            "startMs": 71143,
+            "endMs": 72009
+          },
+          {
+            "phase": "assemble",
+            "startMs": 72010,
+            "endMs": 72080
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_disk",
+            "activeMs": 56888,
+            "exclusiveMs": 56888,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 56888,
+            "firstStartMs": 14254,
+            "lastEndMs": 71142
+          },
+          {
+            "phase": "capture_calibration",
+            "activeMs": 14227,
+            "exclusiveMs": 14227,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 14227,
+            "firstStartMs": 23,
+            "lastEndMs": 14250
+          },
+          {
+            "phase": "encode",
+            "activeMs": 866,
+            "exclusiveMs": 866,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 866,
+            "firstStartMs": 71143,
+            "lastEndMs": 72009
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 70,
+            "exclusiveMs": 70,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 70,
+            "firstStartMs": 72010,
+            "lastEndMs": 72080
+          },
+          {
+            "phase": "compile",
+            "activeMs": 12,
+            "exclusiveMs": 12,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 12,
+            "firstStartMs": 2,
+            "lastEndMs": 14
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 4,
+            "exclusiveMs": 4,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 4,
+            "firstStartMs": 17,
+            "lastEndMs": 21
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 3,
+            "exclusiveMs": 3,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 3,
+            "firstStartMs": 14,
+            "lastEndMs": 17
+          }
+        ],
+        "coveredMs": 72070,
+        "overlapMs": 0,
+        "untracedMs": 85.0451999999641,
+        "concurrencyFactor": 1,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 12
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 3
+          },
+          {
+            "phase": "file_server",
+            "ms": 4
+          },
+          {
+            "phase": "capture_calibration",
+            "ms": 14227
+          },
+          {
+            "phase": "capture_disk",
+            "ms": 56888
+          },
+          {
+            "phase": "encode",
+            "ms": 866
+          },
+          {
+            "phase": "assemble",
+            "ms": 70
+          }
+        ],
+        "inferredPhases": [],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "disk",
+        "drawElementClampReason": "software_gpu",
+        "workers": 3,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null,
+        "frames": 90
+      }
+    },
+    {
+      "fixture": "transition-crossfade",
+      "category": "transition",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "transition-crossfade",
+        "category": "transition",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 1,
+        "wallMs": 50270.2374,
+        "frames": 150,
+        "outputDurationSec": 5,
+        "fps": 2.9838729188098085,
+        "renderFactor": 0.09946243062699361,
+        "compileMs": 31,
+        "videoExtractMs": 0,
+        "audioProcessMs": 0,
+        "captureMs": 49860,
+        "captureSetupMs": 18803,
+        "captureFrameMs": 31057,
+        "encodeMs": 179,
+        "assembleMs": 85,
+        "captureAvgMs": 207,
+        "captureP50Ms": 63,
+        "captureCalibrationP95Ms": 53,
+        "captureRpcP50Ms": 58.96899999999732,
+        "captureRpcP95Ms": 65.94360000000597,
+        "criticalPathTop": "capture_disk (31057 ms)",
+        "concurrencyFactor": 1,
+        "overlapMs": 0,
+        "inferredPhases": null,
+        "traceWarnings": null,
+        "untracedMs": 157.23739999999816,
+        "cdpInboundBytes": 74957684,
+        "cdpOutboundBytes": 673858,
+        "frameRpcResponseBytes": 74774684,
+        "frameRpcResponseBytesPerFrame": 498497.8933333333,
+        "peakTreeWorkingSetMb": 3195.125,
+        "peakNodeRssMb": 184,
+        "cpuSeconds": 27.734375,
+        "cpuSecondsPerOutputMin": 332.8125,
+        "wallSecondsPerOutputMin": 603.2428488,
+        "estUsdPerOutputMin": 0.004123177083333334,
+        "ioReadBytes": 158863291,
+        "ioWriteBytes": 134667968,
+        "tmpPeakBytes": 55451737,
+        "peakVramDeltaMiB": 8,
+        "gpuUtilMeanPct": 0.06477732793522267,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "captureMode": "screenshot",
+        "capturePath": "disk",
+        "calibrationFailed": false,
+        "drawElementClampReason": "software_gpu",
+        "workers": 5,
+        "staticDedupReused": 0,
+        "outputBytes": 1236624,
+        "outputBitRate": 1978598,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 1,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 30596.459300000002,
+          "max": 72236.80410000001,
+          "mean": 51416.631700000005,
+          "median": 51416.631700000005,
+          "p95": 72236.80410000001,
+          "stdev": 29444.170179025998,
+          "cv": 0.5726584804470184,
+          "mad": 20820.172400000003
+        },
+        "fps": {
+          "n": 2,
+          "min": 2.0765038247310827,
+          "max": 4.902528051669037,
+          "mean": 3.48951593820006,
+          "median": 3.48951593820006,
+          "p95": 4.902528051669037,
+          "stdev": 1.9983008946652983,
+          "cv": 0.5726584804470185,
+          "mad": 1.4130121134689773
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.06921679415770277,
+          "max": 0.16341760172230124,
+          "mean": 0.116317197940002,
+          "median": 0.116317197940002,
+          "p95": 0.16341760172230124,
+          "stdev": 0.0666100298221766,
+          "cv": 0.5726584804470184,
+          "mad": 0.04710040378229924
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 30199,
+          "max": 72063,
+          "mean": 51131,
+          "median": 51131,
+          "p95": 72063,
+          "stdev": 29602.318287593625,
+          "cv": 0.5789505053215002,
+          "mad": 20932
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 12709,
+          "max": 35158,
+          "mean": 23933.5,
+          "median": 23933.5,
+          "p95": 35158,
+          "stdev": 15873.840130856805,
+          "cv": 0.6632477544386238,
+          "mad": 11224.5
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 17490,
+          "max": 36905,
+          "mean": 27197.5,
+          "median": 27197.5,
+          "p95": 36905,
+          "stdev": 13728.47815673682,
+          "cv": 0.5047698559329652,
+          "mad": 9707.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 175,
+          "max": 36898,
+          "mean": 18536.5,
+          "median": 18536.5,
+          "p95": 36898,
+          "stdev": 25967.082325513584,
+          "cv": 1.400862208373403,
+          "mad": 18361.5
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureCalibrationP95Ms": {
+          "n": 1,
+          "min": 72,
+          "max": 72,
+          "mean": 72,
+          "median": 72,
+          "p95": 72,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 47.84869999997318,
+          "max": 49.820699999982025,
+          "mean": 48.8346999999776,
+          "median": 48.8346999999776,
+          "p95": 49.820699999982025,
+          "stdev": 1.3944145725061279,
+          "cv": 0.028553765509090206,
+          "mad": 0.9860000000044238
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 64.44229999999516,
+          "max": 64.95019999999204,
+          "mean": 64.6962499999936,
+          "median": 64.6962499999936,
+          "p95": 64.95019999999204,
+          "stdev": 0.3591395341624414,
+          "cv": 0.005551164621789933,
+          "mad": 0.25394999999844003
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 0,
+          "max": 36898,
+          "mean": 18449,
+          "median": 18449,
+          "p95": 36898,
+          "stdev": 26090.82601222123,
+          "cv": 1.4142135623730951,
+          "mad": 18449
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 72394618,
+          "max": 74957785,
+          "mean": 73676201.5,
+          "median": 73676201.5,
+          "p95": 74957785,
+          "stdev": 1812432.7670135794,
+          "cv": 0.024599975706043685,
+          "mad": 1281583.5
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 558719,
+          "max": 674365,
+          "mean": 616542,
+          "median": 616542,
+          "p95": 674365,
+          "stdev": 81774.07081709948,
+          "cv": 0.13263341478293364,
+          "mad": 57823
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 72357046,
+          "max": 74774685,
+          "mean": 73565865.5,
+          "median": 73565865.5,
+          "p95": 74774685,
+          "stdev": 1709528.9313610636,
+          "cv": 0.023238072708613257,
+          "mad": 1208819.5
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 1705.97265625,
+          "max": 3265.84375,
+          "mean": 2485.908203125,
+          "median": 2485.908203125,
+          "p95": 3265.84375,
+          "stdev": 1102.9954281675018,
+          "cv": 0.4436991787472047,
+          "mad": 779.935546875
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 11,
+          "max": 25,
+          "mean": 18,
+          "median": 18,
+          "p95": 25,
+          "stdev": 9.899494936611665,
+          "cv": 0.5499719409228703,
+          "mad": 7
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 24.9375,
+          "max": 29.796875,
+          "mean": 27.3671875,
+          "median": 27.3671875,
+          "p95": 29.796875,
+          "stdev": 3.4360970148283796,
+          "cv": 0.12555535766429707,
+          "mad": 2.4296875
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 299.25,
+          "max": 357.5625,
+          "mean": 328.40625,
+          "median": 328.40625,
+          "p95": 357.5625,
+          "stdev": 41.23316417794055,
+          "cv": 0.12555535766429704,
+          "mad": 29.15625
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 367.1575116000001,
+          "max": 866.8416492000002,
+          "mean": 616.9995804000001,
+          "median": 616.9995804000001,
+          "p95": 866.8416492000002,
+          "stdev": 353.33004214831203,
+          "cv": 0.5726584804470184,
+          "mad": 249.84206880000008
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.003707375,
+          "max": 0.004429802083333333,
+          "mean": 0.004068588541666667,
+          "median": 0.004068588541666667,
+          "p95": 0.004429802083333333,
+          "stdev": 0.0005108330895378189,
+          "cv": 0.125555357664297,
+          "mad": 0.0003612135416666666
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 243772728,
+          "max": 284716741,
+          "mean": 264244734.5,
+          "median": 264244734.5,
+          "p95": 284716741,
+          "stdev": 28951789.241290156,
+          "cv": 0.10956429953494554,
+          "mad": 20472006.5
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 1239872,
+          "max": 55451737,
+          "mean": 28345804.5,
+          "median": 28345804.5,
+          "p95": 55451737,
+          "stdev": 38333577.362269655,
+          "cv": 1.3523545384739266,
+          "mad": 27105932.5
+        },
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "outputBytes": {
+          "n": 2,
+          "min": 1236624,
+          "max": 1236624,
+          "mean": 1236624,
+          "median": 1236624,
+          "p95": 1236624,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 1978598,
+          "max": 1978598,
+          "mean": 1978598,
+          "median": 1978598,
+          "p95": 1978598,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "disk",
+          "workers": 5,
+          "runs": [
+            1
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 30596.459300000002,
+              "max": 30596.459300000002,
+              "mean": 30596.459300000002,
+              "median": 30596.459300000002,
+              "p95": 30596.459300000002,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 4.902528051669037,
+              "max": 4.902528051669037,
+              "mean": 4.902528051669037,
+              "median": 4.902528051669037,
+              "p95": 4.902528051669037,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.16341760172230124,
+              "max": 0.16341760172230124,
+              "mean": 0.16341760172230124,
+              "median": 0.16341760172230124,
+              "p95": 0.16341760172230124,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 30199,
+              "max": 30199,
+              "mean": 30199,
+              "median": 30199,
+              "p95": 30199,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 12709,
+              "max": 12709,
+              "mean": 12709,
+              "median": 12709,
+              "p95": 12709,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 17490,
+              "max": 17490,
+              "mean": 17490,
+              "median": 17490,
+              "p95": 17490,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 175,
+              "max": 175,
+              "mean": 175,
+              "median": 175,
+              "p95": 175,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": {
+              "n": 1,
+              "min": 72,
+              "max": 72,
+              "mean": 72,
+              "median": 72,
+              "p95": 72,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 49.820699999982025,
+              "max": 49.820699999982025,
+              "mean": 49.820699999982025,
+              "median": 49.820699999982025,
+              "p95": 49.820699999982025,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 64.95019999999204,
+              "max": 64.95019999999204,
+              "mean": 64.95019999999204,
+              "median": 64.95019999999204,
+              "p95": 64.95019999999204,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 74957785,
+              "max": 74957785,
+              "mean": 74957785,
+              "median": 74957785,
+              "p95": 74957785,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 674365,
+              "max": 674365,
+              "mean": 674365,
+              "median": 674365,
+              "p95": 674365,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 74774685,
+              "max": 74774685,
+              "mean": 74774685,
+              "median": 74774685,
+              "p95": 74774685,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 3265.84375,
+              "max": 3265.84375,
+              "mean": 3265.84375,
+              "median": 3265.84375,
+              "p95": 3265.84375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 25,
+              "max": 25,
+              "mean": 25,
+              "median": 25,
+              "p95": 25,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 29.796875,
+              "max": 29.796875,
+              "mean": 29.796875,
+              "median": 29.796875,
+              "p95": 29.796875,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 357.5625,
+              "max": 357.5625,
+              "mean": 357.5625,
+              "median": 357.5625,
+              "p95": 357.5625,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 367.1575116000001,
+              "max": 367.1575116000001,
+              "mean": 367.1575116000001,
+              "median": 367.1575116000001,
+              "p95": 367.1575116000001,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.004429802083333333,
+              "max": 0.004429802083333333,
+              "mean": 0.004429802083333333,
+              "median": 0.004429802083333333,
+              "p95": 0.004429802083333333,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 243772728,
+              "max": 243772728,
+              "mean": 243772728,
+              "median": 243772728,
+              "p95": 243772728,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 55451737,
+              "max": 55451737,
+              "mean": 55451737,
+              "median": 55451737,
+              "p95": 55451737,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 1,
+              "min": 1236624,
+              "max": 1236624,
+              "mean": 1236624,
+              "median": 1236624,
+              "p95": 1236624,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 1978598,
+              "max": 1978598,
+              "mean": 1978598,
+              "median": 1978598,
+              "p95": 1978598,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        },
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 1,
+              "min": 72236.80410000001,
+              "max": 72236.80410000001,
+              "mean": 72236.80410000001,
+              "median": 72236.80410000001,
+              "p95": 72236.80410000001,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "fps": {
+              "n": 1,
+              "min": 2.0765038247310827,
+              "max": 2.0765038247310827,
+              "mean": 2.0765038247310827,
+              "median": 2.0765038247310827,
+              "p95": 2.0765038247310827,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "renderFactor": {
+              "n": 1,
+              "min": 0.06921679415770277,
+              "max": 0.06921679415770277,
+              "mean": 0.06921679415770277,
+              "median": 0.06921679415770277,
+              "p95": 0.06921679415770277,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureMs": {
+              "n": 1,
+              "min": 72063,
+              "max": 72063,
+              "mean": 72063,
+              "median": 72063,
+              "p95": 72063,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureSetupMs": {
+              "n": 1,
+              "min": 35158,
+              "max": 35158,
+              "mean": 35158,
+              "median": 35158,
+              "p95": 35158,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 1,
+              "min": 36905,
+              "max": 36905,
+              "mean": 36905,
+              "median": 36905,
+              "p95": 36905,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "encodeMs": {
+              "n": 1,
+              "min": 36898,
+              "max": 36898,
+              "mean": 36898,
+              "median": 36898,
+              "p95": 36898,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "videoExtractMs": {
+              "n": 1,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 1,
+              "min": 47.84869999997318,
+              "max": 47.84869999997318,
+              "mean": 47.84869999997318,
+              "median": 47.84869999997318,
+              "p95": 47.84869999997318,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureRpcP95Ms": {
+              "n": 1,
+              "min": 64.44229999999516,
+              "max": 64.44229999999516,
+              "mean": 64.44229999999516,
+              "median": 64.44229999999516,
+              "p95": 64.44229999999516,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "overlapMs": {
+              "n": 1,
+              "min": 36898,
+              "max": 36898,
+              "mean": 36898,
+              "median": 36898,
+              "p95": 36898,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpInboundBytes": {
+              "n": 1,
+              "min": 72394618,
+              "max": 72394618,
+              "mean": 72394618,
+              "median": 72394618,
+              "p95": 72394618,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cdpOutboundBytes": {
+              "n": 1,
+              "min": 558719,
+              "max": 558719,
+              "mean": 558719,
+              "median": 558719,
+              "p95": 558719,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 1,
+              "min": 72357046,
+              "max": 72357046,
+              "mean": 72357046,
+              "median": 72357046,
+              "p95": 72357046,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 1,
+              "min": 1705.97265625,
+              "max": 1705.97265625,
+              "mean": 1705.97265625,
+              "median": 1705.97265625,
+              "p95": 1705.97265625,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakVramDeltaMiB": {
+              "n": 1,
+              "min": 11,
+              "max": 11,
+              "mean": 11,
+              "median": 11,
+              "p95": 11,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSeconds": {
+              "n": 1,
+              "min": 24.9375,
+              "max": 24.9375,
+              "mean": 24.9375,
+              "median": 24.9375,
+              "p95": 24.9375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 1,
+              "min": 299.25,
+              "max": 299.25,
+              "mean": 299.25,
+              "median": 299.25,
+              "p95": 299.25,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 1,
+              "min": 866.8416492000002,
+              "max": 866.8416492000002,
+              "mean": 866.8416492000002,
+              "median": 866.8416492000002,
+              "p95": 866.8416492000002,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "estUsdPerOutputMin": {
+              "n": 1,
+              "min": 0.003707375,
+              "max": 0.003707375,
+              "mean": 0.003707375,
+              "median": 0.003707375,
+              "p95": 0.003707375,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "ioWriteBytes": {
+              "n": 1,
+              "min": 284716741,
+              "max": 284716741,
+              "mean": 284716741,
+              "median": 284716741,
+              "p95": 284716741,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "tmpPeakBytes": {
+              "n": 1,
+              "min": 1239872,
+              "max": 1239872,
+              "mean": 1239872,
+              "median": 1239872,
+              "p95": 1239872,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 1,
+              "min": 1236624,
+              "max": 1236624,
+              "mean": 1236624,
+              "median": 1236624,
+              "p95": 1236624,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 1,
+              "min": 1978598,
+              "max": 1978598,
+              "mean": 1978598,
+              "median": 1978598,
+              "p95": 1978598,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": true,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 2,
+            "endMs": 18
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 19,
+            "endMs": 23
+          },
+          {
+            "phase": "file_server",
+            "startMs": 25,
+            "endMs": 32
+          },
+          {
+            "phase": "capture_calibration",
+            "startMs": 34,
+            "endMs": 12725
+          },
+          {
+            "phase": "capture_disk",
+            "startMs": 12734,
+            "endMs": 30224
+          },
+          {
+            "phase": "encode",
+            "startMs": 30224,
+            "endMs": 30399
+          },
+          {
+            "phase": "assemble",
+            "startMs": 30400,
+            "endMs": 30491
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_disk",
+            "activeMs": 17490,
+            "exclusiveMs": 17490,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 17490,
+            "firstStartMs": 12734,
+            "lastEndMs": 30224
+          },
+          {
+            "phase": "capture_calibration",
+            "activeMs": 12691,
+            "exclusiveMs": 12691,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 12691,
+            "firstStartMs": 34,
+            "lastEndMs": 12725
+          },
+          {
+            "phase": "encode",
+            "activeMs": 175,
+            "exclusiveMs": 175,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 175,
+            "firstStartMs": 30224,
+            "lastEndMs": 30399
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 91,
+            "exclusiveMs": 91,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 91,
+            "firstStartMs": 30400,
+            "lastEndMs": 30491
+          },
+          {
+            "phase": "compile",
+            "activeMs": 16,
+            "exclusiveMs": 16,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 16,
+            "firstStartMs": 2,
+            "lastEndMs": 18
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 7,
+            "exclusiveMs": 7,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 7,
+            "firstStartMs": 25,
+            "lastEndMs": 32
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 4,
+            "exclusiveMs": 4,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 4,
+            "firstStartMs": 19,
+            "lastEndMs": 23
+          }
+        ],
+        "coveredMs": 30474,
+        "overlapMs": 0,
+        "untracedMs": 122.45930000000226,
+        "concurrencyFactor": 1,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 16
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 4
+          },
+          {
+            "phase": "file_server",
+            "ms": 7
+          },
+          {
+            "phase": "capture_calibration",
+            "ms": 12691
+          },
+          {
+            "phase": "capture_disk",
+            "ms": 17490
+          },
+          {
+            "phase": "encode",
+            "ms": 175
+          },
+          {
+            "phase": "assemble",
+            "ms": 91
+          }
+        ],
+        "inferredPhases": [],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "mixed",
+        "drawElementClampReason": "software_gpu",
+        "workers": null,
+        "videoCodec": "h264",
+        "pixFmt": "yuv420p",
+        "colorTransfer": "bt709",
+        "alphaMode": null,
+        "audioCodec": null,
+        "frames": 150
+      }
+    },
+    {
+      "fixture": "webm-transparency",
+      "category": "transparent-alpha",
+      "profile": "producer-default",
+      "instrumented": true,
+      "cold": {
+        "fixture": "webm-transparency",
+        "category": "transparent-alpha",
+        "profile": "producer-default",
+        "instrumented": true,
+        "run": 0,
+        "kind": "cold",
+        "ok": true,
+        "idleOk": true,
+        "idleAttempts": 1,
+        "wallMs": 12281.641099999999,
+        "frames": 60,
+        "outputDurationSec": 2,
+        "fps": 4.88534060810489,
+        "renderFactor": 0.16284468693682966,
+        "compileMs": 277,
+        "videoExtractMs": 0,
+        "audioProcessMs": 0,
+        "captureMs": 11898,
+        "captureSetupMs": 12,
+        "captureFrameMs": 11886,
+        "encodeMs": 11852,
+        "assembleMs": 1,
+        "captureAvgMs": 198,
+        "captureP50Ms": 34,
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": 31.989799999999377,
+        "captureRpcP95Ms": 48.64740000000165,
+        "criticalPathTop": "capture_streaming (11886 ms)",
+        "concurrencyFactor": 1.9739502013312515,
+        "overlapMs": 11852,
+        "inferredPhases": "encode",
+        "traceWarnings": null,
+        "untracedMs": 112.64109999999891,
+        "cdpInboundBytes": 1140289,
+        "cdpOutboundBytes": 234765,
+        "frameRpcResponseBytes": 765036,
+        "frameRpcResponseBytesPerFrame": 12750.6,
+        "peakTreeWorkingSetMb": 603.703125,
+        "peakNodeRssMb": 183,
+        "cpuSeconds": 3.875,
+        "cpuSecondsPerOutputMin": 116.25,
+        "wallSecondsPerOutputMin": 368.44923299999994,
+        "estUsdPerOutputMin": 0.0014402083333333335,
+        "ioReadBytes": 25327196,
+        "ioWriteBytes": 4463438,
+        "tmpPeakBytes": 275267,
+        "peakVramDeltaMiB": 1,
+        "gpuUtilMeanPct": 0.06557377049180328,
+        "encUtilMeanPct": 0,
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "captureMode": "screenshot",
+        "capturePath": "streaming",
+        "calibrationFailed": false,
+        "drawElementClampReason": "software_gpu",
+        "workers": 1,
+        "staticDedupReused": 0,
+        "outputBytes": 27293,
+        "outputBitRate": 109172,
+        "videoCodec": "vp9",
+        "pixFmt": "yuv420p",
+        "colorTransfer": null,
+        "alphaMode": "1",
+        "audioCodec": null
+      },
+      "warmRuns": 2,
+      "warmFailed": 0,
+      "idleFlagged": 2,
+      "warm": {
+        "wallMs": {
+          "n": 2,
+          "min": 11856.02900000001,
+          "max": 12060.033200000005,
+          "mean": 11958.031100000007,
+          "median": 11958.031100000007,
+          "p95": 12060.033200000005,
+          "stdev": 144.25275321053368,
+          "cv": 0.012063252888724599,
+          "mad": 102.00209999999788
+        },
+        "fps": {
+          "n": 2,
+          "min": 4.9751106821165285,
+          "max": 5.0607163663314205,
+          "mean": 5.0179135242239745,
+          "median": 5.0179135242239745,
+          "p95": 5.0607163663314205,
+          "stdev": 0.06053235981646433,
+          "cv": 0.012063252888724446,
+          "mad": 0.042802842107446004
+        },
+        "renderFactor": {
+          "n": 2,
+          "min": 0.1658370227372176,
+          "max": 0.1686905455443807,
+          "mean": 0.16726378414079915,
+          "median": 0.16726378414079915,
+          "p95": 0.1686905455443807,
+          "stdev": 0.002017745327215509,
+          "cv": 0.012063252888724636,
+          "mad": 0.0014267614035815557
+        },
+        "captureMs": {
+          "n": 2,
+          "min": 11554,
+          "max": 11759,
+          "mean": 11656.5,
+          "median": 11656.5,
+          "p95": 11759,
+          "stdev": 144.95689014324225,
+          "cv": 0.012435713133723008,
+          "mad": 102.5
+        },
+        "captureSetupMs": {
+          "n": 2,
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureFrameMs": {
+          "n": 2,
+          "min": 11546,
+          "max": 11751,
+          "mean": 11648.5,
+          "median": 11648.5,
+          "p95": 11751,
+          "stdev": 144.95689014324225,
+          "cv": 0.012444253778876443,
+          "mad": 102.5
+        },
+        "encodeMs": {
+          "n": 2,
+          "min": 11539,
+          "max": 11745,
+          "mean": 11642,
+          "median": 11642,
+          "p95": 11745,
+          "stdev": 145.6639969244288,
+          "cv": 0.012511939265111561,
+          "mad": 103
+        },
+        "videoExtractMs": {
+          "n": 2,
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "captureCalibrationP95Ms": null,
+        "captureRpcP50Ms": {
+          "n": 2,
+          "min": 32.30869999999413,
+          "max": 32.700499999991735,
+          "mean": 32.504599999992934,
+          "median": 32.504599999992934,
+          "p95": 32.700499999991735,
+          "stdev": 0.27704443686719354,
+          "cv": 0.008523237845328161,
+          "mad": 0.19589999999880092
+        },
+        "captureRpcP95Ms": {
+          "n": 2,
+          "min": 48.23320000001695,
+          "max": 48.421000000002095,
+          "mean": 48.32710000000952,
+          "median": 48.32710000000952,
+          "p95": 48.421000000002095,
+          "stdev": 0.13279465349632982,
+          "cv": 0.00274782996489141,
+          "mad": 0.0938999999925727
+        },
+        "overlapMs": {
+          "n": 2,
+          "min": 11539,
+          "max": 11745,
+          "mean": 11642,
+          "median": 11642,
+          "p95": 11745,
+          "stdev": 145.6639969244288,
+          "cv": 0.012511939265111561,
+          "mad": 103
+        },
+        "cdpInboundBytes": {
+          "n": 2,
+          "min": 1139859,
+          "max": 1140065,
+          "mean": 1139962,
+          "median": 1139962,
+          "p95": 1140065,
+          "stdev": 145.6639969244288,
+          "cv": 0.0001277796952217958,
+          "mad": 103
+        },
+        "cdpOutboundBytes": {
+          "n": 2,
+          "min": 234765,
+          "max": 234765,
+          "mean": 234765,
+          "median": 234765,
+          "p95": 234765,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "frameRpcResponseBytes": {
+          "n": 2,
+          "min": 765036,
+          "max": 765036,
+          "mean": 765036,
+          "median": 765036,
+          "p95": 765036,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "peakTreeWorkingSetMb": {
+          "n": 2,
+          "min": 725.1640625,
+          "max": 730.78515625,
+          "mean": 727.974609375,
+          "median": 727.974609375,
+          "p95": 730.78515625,
+          "stdev": 3.97471350831032,
+          "cv": 0.005459961730976849,
+          "mad": 2.810546875
+        },
+        "peakVramDeltaMiB": {
+          "n": 2,
+          "min": 0,
+          "max": 107,
+          "mean": 53.5,
+          "median": 53.5,
+          "p95": 107,
+          "stdev": 75.66042558696059,
+          "cv": 1.4142135623730951,
+          "mad": 53.5
+        },
+        "cpuSeconds": {
+          "n": 2,
+          "min": 4.921875,
+          "max": 5.5625,
+          "mean": 5.2421875,
+          "median": 5.2421875,
+          "p95": 5.5625,
+          "stdev": 0.452990281697632,
+          "cv": 0.08641245314053189,
+          "mad": 0.3203125
+        },
+        "cpuSecondsPerOutputMin": {
+          "n": 2,
+          "min": 147.65625,
+          "max": 166.875,
+          "mean": 157.265625,
+          "median": 157.265625,
+          "p95": 166.875,
+          "stdev": 13.58970845092896,
+          "cv": 0.08641245314053189,
+          "mad": 9.609375
+        },
+        "wallSecondsPerOutputMin": {
+          "n": 2,
+          "min": 355.6808700000003,
+          "max": 361.80099600000017,
+          "mean": 358.74093300000027,
+          "median": 358.74093300000027,
+          "p95": 361.80099600000017,
+          "stdev": 4.327582596315999,
+          "cv": 0.012063252888724564,
+          "mad": 3.0600629999999285
+        },
+        "estUsdPerOutputMin": {
+          "n": 2,
+          "min": 0.001829296875,
+          "max": 0.0020673958333333334,
+          "mean": 0.0019483463541666666,
+          "median": 0.0019483463541666666,
+          "p95": 0.0020673958333333334,
+          "stdev": 0.0001683613880309533,
+          "cv": 0.08641245314053193,
+          "mad": 0.00011904947916666672
+        },
+        "ioWriteBytes": {
+          "n": 2,
+          "min": 5362275,
+          "max": 6246726,
+          "mean": 5804500.5,
+          "median": 5804500.5,
+          "p95": 6246726,
+          "stdev": 625401.2997272231,
+          "cv": 0.10774420636663277,
+          "mad": 442225.5
+        },
+        "tmpPeakBytes": {
+          "n": 2,
+          "min": 275267,
+          "max": 275267,
+          "mean": 275267,
+          "median": 275267,
+          "p95": 275267,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "extractCacheHits": null,
+        "extractCacheMisses": null,
+        "outputBytes": {
+          "n": 2,
+          "min": 27293,
+          "max": 27293,
+          "mean": 27293,
+          "median": 27293,
+          "p95": 27293,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        },
+        "outputBitRate": {
+          "n": 2,
+          "min": 109172,
+          "max": 109172,
+          "mean": 109172,
+          "median": 109172,
+          "p95": 109172,
+          "stdev": 0,
+          "cv": 0,
+          "mad": 0
+        }
+      },
+      "pathGroups": [
+        {
+          "capturePath": "streaming",
+          "workers": 1,
+          "runs": [
+            1,
+            2
+          ],
+          "warm": {
+            "wallMs": {
+              "n": 2,
+              "min": 11856.02900000001,
+              "max": 12060.033200000005,
+              "mean": 11958.031100000007,
+              "median": 11958.031100000007,
+              "p95": 12060.033200000005,
+              "stdev": 144.25275321053368,
+              "cv": 0.012063252888724599,
+              "mad": 102.00209999999788
+            },
+            "fps": {
+              "n": 2,
+              "min": 4.9751106821165285,
+              "max": 5.0607163663314205,
+              "mean": 5.0179135242239745,
+              "median": 5.0179135242239745,
+              "p95": 5.0607163663314205,
+              "stdev": 0.06053235981646433,
+              "cv": 0.012063252888724446,
+              "mad": 0.042802842107446004
+            },
+            "renderFactor": {
+              "n": 2,
+              "min": 0.1658370227372176,
+              "max": 0.1686905455443807,
+              "mean": 0.16726378414079915,
+              "median": 0.16726378414079915,
+              "p95": 0.1686905455443807,
+              "stdev": 0.002017745327215509,
+              "cv": 0.012063252888724636,
+              "mad": 0.0014267614035815557
+            },
+            "captureMs": {
+              "n": 2,
+              "min": 11554,
+              "max": 11759,
+              "mean": 11656.5,
+              "median": 11656.5,
+              "p95": 11759,
+              "stdev": 144.95689014324225,
+              "cv": 0.012435713133723008,
+              "mad": 102.5
+            },
+            "captureSetupMs": {
+              "n": 2,
+              "min": 8,
+              "max": 8,
+              "mean": 8,
+              "median": 8,
+              "p95": 8,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureFrameMs": {
+              "n": 2,
+              "min": 11546,
+              "max": 11751,
+              "mean": 11648.5,
+              "median": 11648.5,
+              "p95": 11751,
+              "stdev": 144.95689014324225,
+              "cv": 0.012444253778876443,
+              "mad": 102.5
+            },
+            "encodeMs": {
+              "n": 2,
+              "min": 11539,
+              "max": 11745,
+              "mean": 11642,
+              "median": 11642,
+              "p95": 11745,
+              "stdev": 145.6639969244288,
+              "cv": 0.012511939265111561,
+              "mad": 103
+            },
+            "videoExtractMs": {
+              "n": 2,
+              "min": 0,
+              "max": 0,
+              "mean": 0,
+              "median": 0,
+              "p95": 0,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "captureCalibrationP95Ms": null,
+            "captureRpcP50Ms": {
+              "n": 2,
+              "min": 32.30869999999413,
+              "max": 32.700499999991735,
+              "mean": 32.504599999992934,
+              "median": 32.504599999992934,
+              "p95": 32.700499999991735,
+              "stdev": 0.27704443686719354,
+              "cv": 0.008523237845328161,
+              "mad": 0.19589999999880092
+            },
+            "captureRpcP95Ms": {
+              "n": 2,
+              "min": 48.23320000001695,
+              "max": 48.421000000002095,
+              "mean": 48.32710000000952,
+              "median": 48.32710000000952,
+              "p95": 48.421000000002095,
+              "stdev": 0.13279465349632982,
+              "cv": 0.00274782996489141,
+              "mad": 0.0938999999925727
+            },
+            "overlapMs": {
+              "n": 2,
+              "min": 11539,
+              "max": 11745,
+              "mean": 11642,
+              "median": 11642,
+              "p95": 11745,
+              "stdev": 145.6639969244288,
+              "cv": 0.012511939265111561,
+              "mad": 103
+            },
+            "cdpInboundBytes": {
+              "n": 2,
+              "min": 1139859,
+              "max": 1140065,
+              "mean": 1139962,
+              "median": 1139962,
+              "p95": 1140065,
+              "stdev": 145.6639969244288,
+              "cv": 0.0001277796952217958,
+              "mad": 103
+            },
+            "cdpOutboundBytes": {
+              "n": 2,
+              "min": 234765,
+              "max": 234765,
+              "mean": 234765,
+              "median": 234765,
+              "p95": 234765,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "frameRpcResponseBytes": {
+              "n": 2,
+              "min": 765036,
+              "max": 765036,
+              "mean": 765036,
+              "median": 765036,
+              "p95": 765036,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "peakTreeWorkingSetMb": {
+              "n": 2,
+              "min": 725.1640625,
+              "max": 730.78515625,
+              "mean": 727.974609375,
+              "median": 727.974609375,
+              "p95": 730.78515625,
+              "stdev": 3.97471350831032,
+              "cv": 0.005459961730976849,
+              "mad": 2.810546875
+            },
+            "peakVramDeltaMiB": {
+              "n": 2,
+              "min": 0,
+              "max": 107,
+              "mean": 53.5,
+              "median": 53.5,
+              "p95": 107,
+              "stdev": 75.66042558696059,
+              "cv": 1.4142135623730951,
+              "mad": 53.5
+            },
+            "cpuSeconds": {
+              "n": 2,
+              "min": 4.921875,
+              "max": 5.5625,
+              "mean": 5.2421875,
+              "median": 5.2421875,
+              "p95": 5.5625,
+              "stdev": 0.452990281697632,
+              "cv": 0.08641245314053189,
+              "mad": 0.3203125
+            },
+            "cpuSecondsPerOutputMin": {
+              "n": 2,
+              "min": 147.65625,
+              "max": 166.875,
+              "mean": 157.265625,
+              "median": 157.265625,
+              "p95": 166.875,
+              "stdev": 13.58970845092896,
+              "cv": 0.08641245314053189,
+              "mad": 9.609375
+            },
+            "wallSecondsPerOutputMin": {
+              "n": 2,
+              "min": 355.6808700000003,
+              "max": 361.80099600000017,
+              "mean": 358.74093300000027,
+              "median": 358.74093300000027,
+              "p95": 361.80099600000017,
+              "stdev": 4.327582596315999,
+              "cv": 0.012063252888724564,
+              "mad": 3.0600629999999285
+            },
+            "estUsdPerOutputMin": {
+              "n": 2,
+              "min": 0.001829296875,
+              "max": 0.0020673958333333334,
+              "mean": 0.0019483463541666666,
+              "median": 0.0019483463541666666,
+              "p95": 0.0020673958333333334,
+              "stdev": 0.0001683613880309533,
+              "cv": 0.08641245314053193,
+              "mad": 0.00011904947916666672
+            },
+            "ioWriteBytes": {
+              "n": 2,
+              "min": 5362275,
+              "max": 6246726,
+              "mean": 5804500.5,
+              "median": 5804500.5,
+              "p95": 6246726,
+              "stdev": 625401.2997272231,
+              "cv": 0.10774420636663277,
+              "mad": 442225.5
+            },
+            "tmpPeakBytes": {
+              "n": 2,
+              "min": 275267,
+              "max": 275267,
+              "mean": 275267,
+              "median": 275267,
+              "p95": 275267,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "extractCacheHits": null,
+            "extractCacheMisses": null,
+            "outputBytes": {
+              "n": 2,
+              "min": 27293,
+              "max": 27293,
+              "mean": 27293,
+              "median": 27293,
+              "p95": 27293,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            },
+            "outputBitRate": {
+              "n": 2,
+              "min": 109172,
+              "max": 109172,
+              "mean": 109172,
+              "median": 109172,
+              "p95": 109172,
+              "stdev": 0,
+              "cv": 0,
+              "mad": 0
+            }
+          }
+        }
+      ],
+      "mixedPath": false,
+      "representativeTrace": {
+        "intervals": [
+          {
+            "phase": "compile",
+            "startMs": 1,
+            "endMs": 178
+          },
+          {
+            "phase": "browser_probe",
+            "startMs": 178,
+            "endMs": 220
+          },
+          {
+            "phase": "file_server",
+            "startMs": 225,
+            "endMs": 229
+          },
+          {
+            "phase": "capture_streaming",
+            "startMs": 234,
+            "endMs": 11779
+          },
+          {
+            "phase": "encode",
+            "startMs": 240,
+            "endMs": 11779
+          },
+          {
+            "phase": "assemble",
+            "startMs": 11779,
+            "endMs": 11780
+          }
+        ],
+        "stages": [
+          {
+            "phase": "capture_streaming",
+            "activeMs": 11545,
+            "exclusiveMs": 6,
+            "overlappedMs": 11539,
+            "sharedAttributionMs": 5775.5,
+            "firstStartMs": 234,
+            "lastEndMs": 11779
+          },
+          {
+            "phase": "encode",
+            "activeMs": 11539,
+            "exclusiveMs": 0,
+            "overlappedMs": 11539,
+            "sharedAttributionMs": 5769.5,
+            "firstStartMs": 240,
+            "lastEndMs": 11779
+          },
+          {
+            "phase": "compile",
+            "activeMs": 177,
+            "exclusiveMs": 177,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 177,
+            "firstStartMs": 1,
+            "lastEndMs": 178
+          },
+          {
+            "phase": "browser_probe",
+            "activeMs": 42,
+            "exclusiveMs": 42,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 42,
+            "firstStartMs": 178,
+            "lastEndMs": 220
+          },
+          {
+            "phase": "file_server",
+            "activeMs": 4,
+            "exclusiveMs": 4,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 4,
+            "firstStartMs": 225,
+            "lastEndMs": 229
+          },
+          {
+            "phase": "assemble",
+            "activeMs": 1,
+            "exclusiveMs": 1,
+            "overlappedMs": 0,
+            "sharedAttributionMs": 1,
+            "firstStartMs": 11779,
+            "lastEndMs": 11780
+          }
+        ],
+        "coveredMs": 11769,
+        "overlapMs": 11539,
+        "untracedMs": 87.02900000000955,
+        "concurrencyFactor": 1.9804571331464016,
+        "criticalPath": [
+          {
+            "phase": "compile",
+            "ms": 177
+          },
+          {
+            "phase": "browser_probe",
+            "ms": 42
+          },
+          {
+            "phase": "file_server",
+            "ms": 4
+          },
+          {
+            "phase": "capture_streaming",
+            "ms": 11545
+          },
+          {
+            "phase": "assemble",
+            "ms": 1
+          }
+        ],
+        "inferredPhases": [
+          "encode"
+        ],
+        "warnings": []
+      },
+      "facts": {
+        "captureMode": "screenshot",
+        "capturePath": "streaming",
+        "drawElementClampReason": "software_gpu",
+        "workers": 1,
+        "videoCodec": "vp9",
+        "pixFmt": "yuv420p",
+        "colorTransfer": null,
+        "alphaMode": "1",
+        "audioCodec": null,
+        "frames": 60
+      }
+    }
+  ],
+  "harnessOverhead": []
+}

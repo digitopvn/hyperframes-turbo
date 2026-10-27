@@ -1,0 +1,380 @@
+{
+  "schema": "turbo-bench-manifest/1",
+  "startedAt": "2026-10-27T09:38:54.576Z",
+  "finishedAt": "2026-10-27T10:22:43.709Z",
+  "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --fixture-set all --profiles producer-default --no-control --warm-runs 2 --keep-output --out benchmarks/results/2026-10-27-1c4a1c1-faults",
+  "warmRuns": 2,
+  "fixtureSet": "all",
+  "keepOutput": "outputs/<fixture>/<cell>/run-<n>.<ext> (not committed)",
+  "profiles": {
+    "producer-default": {
+      "description": "Producer API defaults (what packages/producer/src/benchmark.ts and the regression harness exercise): browserGpuMode=software (SwiftShader), which also clamps capture to Page.captureScreenshot.",
+      "env": {},
+      "evidence": "upstream packages/engine/src/config.ts:295 (browserGpuMode: \"software\")"
+    }
+  },
+  "control": null,
+  "settle": "before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then 5000 ms",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
+  "preflight": {
+    "ok": false,
+    "cpuBusyPct": 36.26198423407428,
+    "gpuUtilPct": 1,
+    "gpuEncPct": 0,
+    "attempts": 30,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "guard": {
+    "limits": {
+      "maxChrome": 80,
+      "minFreeRamFraction": 0.15,
+      "minFreeRamBytes": 4294967296,
+      "maxCommitFraction": 0.9,
+      "maxConsecutiveFailures": 3
+    },
+    "peak": {
+      "chrome": 40,
+      "tracked": 62,
+      "minFreeRamBytes": 21827002368,
+      "maxCommittedBytes": 124657725440
+    },
+    "leftovers": [
+      {
+        "after": "typography-svg",
+        "processes": [
+          {
+            "pid": 58328,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 100048,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 107196,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 103140,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 102568,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 104200,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99820,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 62928,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 98912,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 3416,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 77872,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "gsap-static-holds",
+        "processes": [
+          {
+            "pid": 93876,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 105972,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 103768,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 105060,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 93856,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 79068,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 106716,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 102044,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 78384,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "css-filters-blend",
+        "processes": [
+          {
+            "pid": 88512,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 103868,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 101628,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 100528,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 100064,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 103588,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 105960,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 6512,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 91652,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 108984,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 48156,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "canvas-webgl",
+        "processes": [
+          {
+            "pid": 99352,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 107464,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 77828,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 108792,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 104456,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 89292,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99544,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 108604,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 79288,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 56132,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "video-heavy",
+        "processes": [
+          {
+            "pid": 103708,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 89908,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 56984,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 82472,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 104368,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 92628,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 107700,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 75964,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 94956,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 105340,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 98904,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 106292,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "audio-mix",
+        "processes": [
+          {
+            "pid": 99496,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 104400,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99180,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 105264,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99780,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 98416,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 106860,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88948,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 101488,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 67340,
+            "name": "conhost.exe"
+          }
+        ]
+      }
+    ]
+  },
+  "abort": {
+    "reason": "commit charge 116.1 GiB > 90% of limit 127.8 GiB",
+    "at": "2026-10-27T10:22:38.868Z",
+    "sample": {
+      "t": 1793096558865,
+      "chrome": 40,
+      "ffmpeg": 2,
+      "tracked": 31,
+      "freeRamBytes": 21827002368,
+      "totalRamBytes": 102830084096,
+      "committedBytes": 124657725440,
+      "commitLimitBytes": 137189822464
+    }
+  },
+  "cells": [
+    {
+      "fixture": "typography-svg",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "canvas-webgl",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "mixed-complex",
+      "profile": "producer-default",
+      "exitCode": 1
+    }
+  ]
+}

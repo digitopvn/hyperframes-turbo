@@ -1,0 +1,42 @@
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (387ms)
+[initSession:screenshot] GSAP proxy flush complete (399ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (539ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (541ms)
+[initSession:screenshot] applyVideoMetadataHints complete (541ms)
+[initSession:screenshot] media + fonts + tailwind ready (542ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (548ms)
+[worker] webm-transparency/producer-default run 0 (cold): 12282 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (401ms)
+[initSession:screenshot] GSAP proxy flush complete (416ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (569ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (570ms)
+[initSession:screenshot] applyVideoMetadataHints complete (570ms)
+[initSession:screenshot] media + fonts + tailwind ready (571ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (574ms)
+[worker] webm-transparency/producer-default run 1 (warm): 11856 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (407ms)
+[initSession:screenshot] GSAP proxy flush complete (421ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (575ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (576ms)
+[initSession:screenshot] applyVideoMetadataHints complete (576ms)
+[initSession:screenshot] media + fonts + tailwind ready (577ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (582ms)
+[worker] webm-transparency/producer-default run 2 (warm): 12060 ms

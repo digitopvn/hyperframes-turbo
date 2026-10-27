@@ -14,17 +14,25 @@
  * A fixture whose reference renders disagree on a hard invariant (frame
  * count, geometry, codec, timestamps) gets no thresholds at all, so the gate
  * then fails closed with THRESHOLD_MISSING for it.
+ *
+ * Cross-reference calibration (`--against-cell <c2> --path <p>`): the pairs
+ * are every (run of --cell, run of --against-cell), two cells that are both
+ * accepted Chromium reference configurations. The limits then describe how
+ * far two correct references are allowed to differ, which is the tolerance a
+ * candidate backend is held to (docs/fidelity-protocol.md, *Candidate
+ * tolerances*). The candidate itself never feeds its own limits.
  */
 import { mkdirSync, readdirSync, readFileSync, writeFileSync, existsSync } from "node:fs";
 import { hostname } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseArgs, UsageError } from "./cli-args.js";
 import { audioFrameMs, measure, type Measurements } from "./compare.js";
 import { ANALYSIS_RATE } from "./metrics/audio.js";
 import { probeMedia } from "./probe.js";
 import { keptOutput } from "./run-fidelity.js";
 import { fixtureContext, repoRelative, toJson, toolVersion } from "./schema.js";
-import { CALIBRATION_DIR, deriveLimit, MIN_RUNS, pathName, THRESHOLDS_DIR, THRESHOLDS_SCHEMA, thresholdFileFor, type FixtureThresholds, type ThresholdFile } from "./thresholds.js";
+import { baseCell, CALIBRATION_DIR, deriveLimit, isReferenceCell, referenceCells, MIN_RUNS, pathName, THRESHOLDS_DIR, THRESHOLDS_SCHEMA, thresholdFileFor, type FixtureThresholds, type ThresholdFile } from "./thresholds.js";
 
 export interface PairObservation {
   a: number;
@@ -100,8 +108,12 @@ export function observe(a: number, b: number, m: Measurements): PairObservation 
 
 const vals = (obs: PairObservation[], k: keyof PairObservation): number[] => obs.map((o) => o[k]).filter((v): v is number => typeof v === "number");
 
-/** Derive one fixture's thresholds from its warm pairs; null when the references disagree on an invariant. */
-export function deriveFixtureThresholds(runs: number, obs: PairObservation[], audio: { codec: string; sampleRate: number } | null): FixtureThresholds | null {
+/**
+ * Derive one fixture's thresholds from its warm pairs; null when the references
+ * disagree on an invariant. `againstRuns` marks a cross-reference calibration
+ * (pairs = runs x againstRuns between two accepted reference cells).
+ */
+export function deriveFixtureThresholds(runs: number, obs: PairObservation[], audio: { codec: string; sampleRate: number } | null, againstRuns?: number): FixtureThresholds | null {
   if (obs.length === 0 || obs.some((o) => o.invariantProblems.length)) return null;
   const alpha = vals(obs, "maxAlphaMse");
   const vmaf = vals(obs, "vmafMin");
@@ -112,6 +124,7 @@ export function deriveFixtureThresholds(runs: number, obs: PairObservation[], au
   if (psnr.length !== obs.length || encSsim.length !== obs.length || drop.length !== obs.length) return null;
   return {
     runs,
+    ...(againstRuns !== undefined ? { againstRuns } : {}),
     pairs: obs.length,
     bitExact: obs.every((o) => o.maxMse === 0 && o.maxThumbMse === 0 && o.encodedPsnrMinDb === Infinity),
     pixels: {
@@ -144,16 +157,21 @@ function pairsOf(runs: number[]): Array<[number, number]> {
   return out;
 }
 
-async function measurePairs(results: string, fixture: string, cell: string, pairs: Array<[number, number]>): Promise<PairObservation[]> {
+/** Every (run of cell A, run of cell B) pair: the cross-reference calibration set. */
+export function crossPairsOf(a: number[], b: number[]): Array<[number, number]> {
+  return a.flatMap((x) => b.map((y) => [x, y] as [number, number]));
+}
+
+async function measurePairs(results: string, fixture: string, cells: [string, string], pairs: Array<[number, number]>): Promise<PairObservation[]> {
   const { ctx } = fixtureContext(fixture);
   const out: PairObservation[] = [];
   const queue = [...pairs];
   const worker = async () => {
     for (let p = queue.shift(); p; p = queue.shift()) {
       const [a, b] = p;
-      const ra = keptOutput(results, fixture, cell, a);
-      const rb = keptOutput(results, fixture, cell, b);
-      if (!ra || !rb) throw new Error(`${fixture}/${cell}: missing kept output for run ${ra ? b : a}`);
+      const ra = keptOutput(results, fixture, cells[0], a);
+      const rb = keptOutput(results, fixture, cells[1], b);
+      if (!ra || !rb) throw new Error(`${fixture}: missing kept output for ${ra ? `${cells[1]} run ${b}` : `${cells[0]} run ${a}`}`);
       const m = await measure({ path: ra }, { path: rb }, ctx);
       out.push(observe(a, b, m));
       console.error(`[calibrate] ${fixture} ${a}-${b}: mse ${out.at(-1)!.maxMse.toFixed(4)} thumb ${out.at(-1)!.maxThumbMse.toFixed(4)}${out.at(-1)!.invariantProblems.length ? ` PROBLEMS ${out.at(-1)!.invariantProblems.join("; ")}` : ""}`);
@@ -163,19 +181,32 @@ async function measurePairs(results: string, fixture: string, cell: string, pair
   return out.sort((x, y) => x.a - y.a || x.b - y.b);
 }
 
+/** Warm runs of `cell` with a kept output, optionally restricted to `wanted`. */
+function warmRuns(results: string, fixture: string, cell: string, wanted: number[] | undefined): { available: number[]; warm: number[] } {
+  const dir = join(results, "outputs", fixture, cell);
+  const available = existsSync(dir) ? readdirSync(dir).map((n) => /^run-(\d+)\./.exec(n)?.[1]).filter(Boolean).map(Number).sort((a, b) => a - b) : [];
+  return { available, warm: (wanted ?? available.filter((r) => r > 0)).filter((r) => available.includes(r)) };
+}
+
+const USAGE = "usage: calibrate.ts --results <dir> [--cell c] [--runs 1,2,3,4,5] [--path p] [--fixtures a,b] [--against-cell c2 --path p [--against-runs 1,2,3,4,5]]";
+
 async function main(): Promise<void> {
   const argv = process.argv.slice(2);
-  const get = (k: string) => {
-    const i = argv.indexOf(`--${k}`);
-    return i >= 0 ? argv[i + 1] : undefined;
-  };
-  const resultsArg = get("results");
-  if (!resultsArg) throw new Error("usage: calibrate.ts --results <dir> [--cell c] [--runs 1,2,3,4,5] [--path p] [--fixtures a,b]");
+  const args = parseArgs(argv);
+  const resultsArg = args.get("results");
+  if (!resultsArg) throw new UsageError(USAGE);
   const results = resolve(resultsArg);
-  const cell = get("cell") ?? "producer-default";
-  const path = get("path") ?? pathName(cell.replace(/\.control$/, ""));
-  const fixtures = get("fixtures")?.split(",") ?? readdirSync(join(results, "outputs")).sort();
-  const runsArg = get("runs")?.split(",").map(Number);
+  const cell = args.get("cell") ?? "producer-default";
+  const against = args.get("against-cell");
+  // A cross-reference file is a deliberate, named tolerance set: no default path.
+  if (against && !args.get("path")) throw new UsageError(`--against-cell needs an explicit --path. ${USAGE}`);
+  for (const c of [cell, ...(against ? [against] : [])]) if (!isReferenceCell(c)) throw new UsageError(`${c} is not an accepted reference cell (benchmarks/fidelity/reference-cells.json: ${referenceCells().join(", ")}); a candidate never calibrates its own limits`);
+  if (against && baseCell(against) === baseCell(cell)) throw new UsageError("--against-cell must differ from --cell (a .control alias is the same cell)");
+  const path = args.get("path") ?? pathName(cell.replace(/\.control$/, ""));
+  const fixtures = args.list("fixtures") ?? readdirSync(join(results, "outputs")).sort();
+  const runsArg = args.intList("runs");
+  const againstRunsArg = args.intList("against-runs");
+  if (!against && againstRunsArg) throw new UsageError("--against-runs needs --against-cell");
   const env = existsSync(join(results, "environment.json")) ? JSON.parse(readFileSync(join(results, "environment.json"), "utf8")) : null;
   const thresholds: ThresholdFile = {
     schema: THRESHOLDS_SCHEMA,
@@ -191,28 +222,38 @@ async function main(): Promise<void> {
       cell,
       rawPairsFile: repoRelative(join(CALIBRATION_DIR, `${path}.pairs.json`)),
       command: `calibrate.ts ${argv.join(" ")}`,
+      ...(against ? { kind: "cross-reference" as const, againstCell: against, againstRuns: [] } : { kind: "repeat" as const }),
     },
     fixtures: {},
   };
-  const raw: Record<string, { runs: number[]; warmPairs: PairObservation[]; coldPairs: PairObservation[]; thresholds: "written" | string }> = {};
+  const raw: Record<string, { runs: number[]; againstRuns?: number[]; warmPairs: PairObservation[]; coldPairs: PairObservation[]; thresholds: "written" | string }> = {};
   for (const fixture of fixtures) {
-    const dir = join(results, "outputs", fixture, cell);
-    const available = existsSync(dir) ? readdirSync(dir).map((n) => /^run-(\d+)\./.exec(n)?.[1]).filter(Boolean).map(Number).sort((a, b) => a - b) : [];
-    const warm = (runsArg ?? available.filter((r) => r > 0)).filter((r) => available.includes(r));
-    if (warm.length < MIN_RUNS) {
-      raw[fixture] = { runs: warm, warmPairs: [], coldPairs: [], thresholds: `skipped: ${warm.length} warm runs < ${MIN_RUNS}` };
-      console.error(`[calibrate] ${fixture}: only ${warm.length} warm outputs; no thresholds`);
+    const { available, warm } = warmRuns(results, fixture, cell, runsArg);
+    const other = against ? warmRuns(results, fixture, against, againstRunsArg).warm : null;
+    if (warm.length < MIN_RUNS || (other && other.length < MIN_RUNS)) {
+      const why = `skipped: ${warm.length} warm runs of ${cell}${other ? ` and ${other.length} of ${against}` : ""} (need >= ${MIN_RUNS} each)`;
+      raw[fixture] = { runs: warm, ...(other ? { againstRuns: other } : {}), warmPairs: [], coldPairs: [], thresholds: why };
+      console.error(`[calibrate] ${fixture}: ${why}; no thresholds`);
       continue;
     }
-    const warmPairs = await measurePairs(results, fixture, cell, pairsOf(warm));
-    const coldPairs = available.includes(0) ? await measurePairs(results, fixture, cell, warm.map((w) => [0, w] as [number, number])) : [];
+    // Repeat: every pair of one reference cell. Cross-reference: every pair of
+    // (reference cell run, second accepted reference cell run); cold runs never feed either.
+    const warmPairs = other ? await measurePairs(results, fixture, [cell, against!], crossPairsOf(warm, other)) : await measurePairs(results, fixture, [cell, cell], pairsOf(warm));
+    const coldPairs = !other && available.includes(0) ? await measurePairs(results, fixture, [cell, cell], warm.map((w) => [0, w] as [number, number])) : [];
     const p = await probeMedia({ path: keptOutput(results, fixture, cell, warm[0]!)! });
-    const t = deriveFixtureThresholds(warm.length, warmPairs, p.audio ? { codec: p.audio.codec, sampleRate: p.audio.sampleRate } : null);
+    const t = deriveFixtureThresholds(warm.length, warmPairs, p.audio ? { codec: p.audio.codec, sampleRate: p.audio.sampleRate } : null, other?.length);
     if (t) {
       thresholds.fixtures[fixture] = t;
       thresholds.calibration.runs = warm;
+      if (other && thresholds.calibration.kind === "cross-reference") thresholds.calibration.againstRuns = other;
     }
-    raw[fixture] = { runs: warm, warmPairs, coldPairs, thresholds: t ? "written" : "withheld: reference renders disagree on a hard invariant or a measurement failed (see invariantProblems)" };
+    raw[fixture] = {
+      runs: warm,
+      ...(other ? { againstRuns: other } : {}),
+      warmPairs,
+      coldPairs,
+      thresholds: t ? "written" : `withheld: ${other ? "the two references" : "reference renders"} disagree on a hard invariant or a measurement failed (see invariantProblems)`,
+    };
     console.error(`[calibrate] ${fixture}: ${t ? (t.bitExact ? "bit-exact" : "non-deterministic, worst+margin") : "NO THRESHOLDS"}`);
   }
   mkdirSync(THRESHOLDS_DIR, { recursive: true });
@@ -226,8 +267,8 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1
   main().then(
     () => process.exit(0),
     (err) => {
-      console.error(err);
-      process.exit(1);
+      console.error(err instanceof UsageError ? `[calibrate] usage: ${err.message}` : err);
+      process.exit(err instanceof UsageError ? 2 : 1);
     },
   );
 }

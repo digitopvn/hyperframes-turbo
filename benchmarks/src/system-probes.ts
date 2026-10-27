@@ -7,6 +7,7 @@
  */
 import { spawn, spawnSync, type ChildProcess } from "node:child_process";
 import { cpus } from "node:os";
+import { PS_OWNER_CHECK, PS_OWNER_INIT } from "./process-guard.js";
 
 export interface GpuSample {
   t: number;
@@ -171,10 +172,10 @@ export interface ProcessTreeSummary {
 
 const PS_LOOP = `
 $ErrorActionPreference = 'SilentlyContinue'
-$root = [int]$args[0]; $interval = [int]$args[1]; $owner = [int]$args[2]
+$root = [int]$args[0]; $interval = [int]$args[1]; $owner = [int]$args[2]; $ownerStart = [int64]0
+${PS_OWNER_INIT}
 while ($true) {
-  # Exit with the owning Node process: Node does not kill children when it exits.
-  if (-not (Get-Process -Id $owner -ErrorAction SilentlyContinue)) { exit 0 }
+  ${PS_OWNER_CHECK}
   $all = Get-CimInstance Win32_Process -Property ProcessId,ParentProcessId,Name,WorkingSetSize,UserModeTime,KernelModeTime,ReadTransferCount,WriteTransferCount
   $kids = @{}
   foreach ($p in $all) { $k = [int]$p.ParentProcessId; if (-not $kids.ContainsKey($k)) { $kids[$k] = New-Object System.Collections.ArrayList }; [void]$kids[$k].Add($p) }
@@ -202,15 +203,22 @@ export class ProcessTreeSampler {
   constructor(
     private readonly rootPid: number,
     private readonly intervalMs = 1000,
+    /** Process whose exit ends the sampler; this process unless a diagnostic says otherwise. */
+    private readonly ownerPid = process.pid,
   ) {}
 
   get supported(): boolean {
     return process.platform === "win32";
   }
 
+  /** PID of the PowerShell sampler process (fault-injection diagnostics). */
+  get pid(): number | undefined {
+    return this.proc?.pid;
+  }
+
   start(): void {
     if (!this.supported) return;
-    const script = `& { ${PS_LOOP} } ${this.rootPid} ${this.intervalMs} ${process.pid}`;
+    const script = `& { ${PS_LOOP} } ${this.rootPid} ${this.intervalMs} ${this.ownerPid}`;
     this.proc = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-Command", script], {
       stdio: ["ignore", "pipe", "ignore"],
       windowsHide: true,

@@ -1,0 +1,5 @@
+{
+  "schema": "turbo-fidelity-reference-cells/1",
+  "description": "Benchmark cells accepted as the fidelity reference: unmodified upstream rendering through the Chromium reference backend. Only these cells may feed a threshold calibration or act as the reference of a gate run. A `.control` suffix names the same cell. Adding a cell is a reviewed decision (docs/fidelity-protocol.md, Candidate tolerances).",
+  "cells": ["producer-default"]
+}
