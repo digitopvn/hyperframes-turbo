@@ -1,12 +1,32 @@
 {
-  "schema": "turbo-fidelity-negative/1",
+  "schema": "turbo-fidelity-negative/2",
   "path": "producer-default.win32",
-  "results": "benchmarks/results/2026-10-27-1c4a1c1-fidelity",
+  "results": [
+    "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "benchmarks/results/2026-10-27-1c4a1c1-faults-b"
+  ],
+  "fixtureResults": {
+    "audio-mix": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "canvas-webgl": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "css-filters-blend": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "fps-ntsc-30000-1001": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "gsap-static-holds": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "hdr-hlg-regression": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "hdr-regression": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "mixed-complex": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "motion-blur": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "transition-crossfade": "benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+    "typography-svg": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "video-heavy": "benchmarks/results/2026-10-27-1c4a1c1-faults",
+    "webm-transparency": "benchmarks/results/2026-10-27-1c4a1c1-faults-b"
+  },
   "cell": "producer-default",
   "refRun": 1,
   "sourceRun": 2,
-  "generatedAt": "2026-10-27T08:40:10.467Z",
-  "distinctFaultKindsCaught": 16,
+  "generatedAt": "2026-10-27T11:25:19.558Z",
+  "distinctFaultKindsCaught": 22,
+  "missed": 1,
+  "informationalNotCaught": 7,
   "rows": [
     {
       "fixture": "audio-mix",
@@ -15,7 +35,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -31,7 +52,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -47,7 +69,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -62,7 +85,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -76,7 +100,26 @@
         "STALE_FRAME",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 39 replaced by frame 38 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 1.2461 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 39 shows reference frame 38 (stale)"
     },
     {
       "fixture": "audio-mix",
@@ -91,7 +134,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -105,7 +149,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 106",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 106 (cut-after,rapid-motion): mse 0.0079, ssim 0.999989, max|diff| 2, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999993 < 1"
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 123",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1; encoded: worst-frame VMAF 97.424 < 97.428344"
     },
     {
       "fixture": "audio-mix",
@@ -120,7 +200,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -136,7 +217,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -150,7 +232,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -166,7 +249,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "audio-mix",
@@ -181,7 +265,62 @@
         "AUDIO_MISMATCH",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "audio-offset-22ms",
+      "detail": "audio delayed by 22 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "22 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 22.000 ms"
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "audio-offset-25ms",
+      "detail": "audio delayed by 25 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "25 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 25.000 ms"
+    },
+    {
+      "fixture": "audio-mix",
+      "fault": "audio-offset-30ms",
+      "detail": "audio delayed by 30 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "30 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 30.000 ms"
     },
     {
       "fixture": "audio-mix",
@@ -195,7 +334,8 @@
         "AUDIO_MISSING",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -204,7 +344,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -220,7 +361,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -236,7 +378,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -251,7 +394,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -266,7 +410,25 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 119 replaced by frame 118 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 17.3707 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 119 shows reference frame 118 (stale)"
     },
     {
       "fixture": "canvas-webgl",
@@ -281,7 +443,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -295,7 +458,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 108",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 108 (random): mse 0.0118, ssim 0.999985, max|diff| 3, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999995 < 1"
+    },
+    {
+      "fixture": "canvas-webgl",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 89",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
     },
     {
       "fixture": "canvas-webgl",
@@ -310,7 +509,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -326,7 +526,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -340,7 +541,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "canvas-webgl",
@@ -356,7 +558,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -365,7 +568,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -381,7 +585,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -397,7 +602,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -412,7 +618,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -427,7 +634,25 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 3 replaced by frame 2 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.7474 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 3 shows reference frame 2 (stale)"
     },
     {
       "fixture": "css-filters-blend",
@@ -442,7 +667,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -456,7 +682,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 72",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 72 (random): mse 0.0113, ssim 0.999984, max|diff| 3, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999995 < 1"
+    },
+    {
+      "fixture": "css-filters-blend",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 91",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
     },
     {
       "fixture": "css-filters-blend",
@@ -471,7 +733,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -487,7 +750,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -501,7 +765,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "css-filters-blend",
@@ -517,7 +782,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -526,12 +792,13 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
       "fault": "dropped-frame",
-      "detail": "removed frame 131",
+      "detail": "removed frame 130",
       "expected": [
         "FRAME_DROPPED"
       ],
@@ -542,12 +809,13 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
       "fault": "duplicated-frame",
-      "detail": "frame 131 written twice",
+      "detail": "frame 130 written twice",
       "expected": [
         "FRAME_DUPLICATED"
       ],
@@ -558,12 +826,13 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
       "fault": "reordered-frames",
-      "detail": "frames 131 and 132 swapped",
+      "detail": "frames 130 and 131 swapped",
       "expected": [
         "FRAME_REORDERED"
       ],
@@ -572,12 +841,13 @@
         "FRAME_REORDERED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
       "fault": "stale-frame",
-      "detail": "frame 131 replaced by frame 130",
+      "detail": "frame 130 replaced by frame 129",
       "expected": [
         "STALE_FRAME"
       ],
@@ -586,7 +856,25 @@
         "STALE_FRAME",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 210 replaced by frame 209 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.3806 (match tolerance 0.02388888888888889)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: candidate frame 210 shows reference frame 209 (stale)"
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -601,7 +889,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -615,7 +904,40 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 61",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.02388888888888889)"
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 124",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.02388888888888889)"
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -630,7 +952,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -646,7 +969,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -660,7 +984,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "fps-ntsc-30000-1001",
@@ -676,7 +1001,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -685,7 +1011,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -701,7 +1028,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -714,10 +1042,10 @@
       "reasons": [
         "FRAME_COUNT_MISMATCH",
         "FRAME_DUPLICATED",
-        "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -731,7 +1059,8 @@
         "FRAME_REORDERED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -745,7 +1074,25 @@
         "STALE_FRAME",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 96 replaced by frame 95 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.1649 (match tolerance 0.07987847222222222)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: candidate frame 96 shows reference frame 95 (stale)"
     },
     {
       "fixture": "gsap-static-holds",
@@ -760,7 +1107,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -774,7 +1122,36 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 194",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "no check exceeded its limit"
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 148",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "PASS",
+      "reasons": [],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "no check exceeded its limit"
     },
     {
       "fixture": "gsap-static-holds",
@@ -789,7 +1166,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -805,7 +1183,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -816,10 +1195,10 @@
       ],
       "verdict": "FAIL",
       "reasons": [
-        "DIMENSION_CHANGED",
-        "FRAME_CONTENT_UNIDENTIFIED"
+        "DIMENSION_CHANGED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "gsap-static-holds",
@@ -835,7 +1214,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-hlg-regression",
@@ -844,7 +1224,190 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "dropped-frame",
+      "detail": "removed frame 75",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "duplicated-frame",
+      "detail": "frame 75 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "reordered-frames",
+      "detail": "frames 75 and 76 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "stale-frame",
+      "detail": "frame 75 replaced by frame 74",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 115 replaced by frame 114 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 9.1311 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 115 shows reference frame 114 (stale)"
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 76",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 72",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 76",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 76 (cut-after): mse 702.1407, ssim 0.999985, max|diff| 597, diff px 0.1975 %; encoded: worst-frame PSNR 70.94 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 72",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.94 dB < inf; encoded: worst-frame SSIM 0.999996 < 1"
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-hlg-regression",
@@ -862,7 +1425,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-hlg-regression",
@@ -875,7 +1439,8 @@
       "reasons": [
         "HDR_METADATA_MISMATCH"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-hlg-regression",
@@ -888,7 +1453,8 @@
       "reasons": [
         "HDR_METADATA_MISMATCH"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-regression",
@@ -897,7 +1463,191 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "dropped-frame",
+      "detail": "removed frame 91",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "duplicated-frame",
+      "detail": "frame 91 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "reordered-frames",
+      "detail": "frames 91 and 92 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "stale-frame",
+      "detail": "frame 91 replaced by frame 90",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 70 replaced by frame 69 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.0130 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 70 shows reference frame 69 (stale)"
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 89",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 93",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 89",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 89 (cut-before): mse 702.0868, ssim 0.999989, max|diff| 597, diff px 0.1975 %; encoded: worst-frame PSNR 70.94 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 93",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.94 dB < inf; encoded: worst-frame SSIM 0.999996 < 1"
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "hdr-regression",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-regression",
@@ -915,7 +1665,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-regression",
@@ -928,7 +1679,8 @@
       "reasons": [
         "HDR_METADATA_MISMATCH"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "hdr-regression",
@@ -941,7 +1693,8 @@
       "reasons": [
         "HDR_METADATA_MISMATCH"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -950,7 +1703,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -966,7 +1720,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -982,7 +1737,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -996,7 +1752,8 @@
         "FRAME_REORDERED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1010,7 +1767,25 @@
         "STALE_FRAME",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 204 replaced by frame 203 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.0009 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 204 shows reference frame 203 (stale)"
     },
     {
       "fixture": "mixed-complex",
@@ -1025,7 +1800,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1039,7 +1815,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 181",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 181 (cut-after): mse 0.0125, ssim 0.999964, max|diff| 3, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999993 < 1"
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 147",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
     },
     {
       "fixture": "mixed-complex",
@@ -1054,7 +1866,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1070,7 +1883,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1084,7 +1898,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1100,7 +1915,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "mixed-complex",
@@ -1115,7 +1931,62 @@
         "AUDIO_MISMATCH",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "audio-offset-22ms",
+      "detail": "audio delayed by 22 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "22 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 22.000 ms"
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "audio-offset-25ms",
+      "detail": "audio delayed by 25 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "25 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 25.000 ms"
+    },
+    {
+      "fixture": "mixed-complex",
+      "fault": "audio-offset-30ms",
+      "detail": "audio delayed by 30 ms (re-encoded, same length)",
+      "expected": [
+        "AV_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "AV_DRIFT",
+        "AUDIO_MISMATCH",
+        "BITRATE_DROP"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "30 ms > A/V limit 21.33 ms + 0.125 ms resolution",
+      "measured": "A/V drift 30.000 ms"
     },
     {
       "fixture": "mixed-complex",
@@ -1129,16 +2000,20 @@
         "AUDIO_MISSING",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
       "fault": "control-unmodified",
       "detail": "run 2 vs run 1, unmodified",
       "expected": [],
-      "verdict": "PASS",
-      "reasons": [],
-      "caught": true
+      "verdict": "FAIL",
+      "reasons": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "caught": false,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1154,7 +2029,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1170,7 +2046,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1185,7 +2062,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1200,7 +2078,26 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 79 replaced by frame 78 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.3841 (match tolerance 0.029965277777777778)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: candidate frame 79 shows reference frame 78 (stale)"
     },
     {
       "fixture": "motion-blur",
@@ -1215,7 +2112,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1227,9 +2125,45 @@
       "verdict": "FAIL",
       "reasons": [
         "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 45",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.029965277777777778); pixels: frame 89 (last): max|diff| 54"
+    },
+    {
+      "fixture": "motion-blur",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 42",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.029965277777777778); pixels: frame 89 (last): max|diff| 54"
     },
     {
       "fixture": "motion-blur",
@@ -1242,9 +2176,11 @@
       "reasons": [
         "FPS_CHANGED",
         "PTS_DRIFT",
+        "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1258,9 +2194,11 @@
       "reasons": [
         "FPS_CHANGED",
         "VFR_DETECTED",
-        "PTS_DRIFT"
+        "PTS_DRIFT",
+        "PIXEL_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1273,7 +2211,8 @@
       "reasons": [
         "DIMENSION_CHANGED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "motion-blur",
@@ -1289,7 +2228,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1298,7 +2238,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1314,7 +2255,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1330,7 +2272,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1345,7 +2288,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1360,7 +2304,25 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 76 replaced by frame 75 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 8.2635 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 76 shows reference frame 75 (stale)"
     },
     {
       "fixture": "transition-crossfade",
@@ -1375,7 +2337,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1389,7 +2352,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 90",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 90 (cut,opacity-boundary,random,transition-end): mse 0.0112, ssim 0.999991, max|diff| 3, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999996 < 1"
+    },
+    {
+      "fixture": "transition-crossfade",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 73",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999996 < 1"
     },
     {
       "fixture": "transition-crossfade",
@@ -1404,7 +2403,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1420,7 +2420,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1434,7 +2435,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "transition-crossfade",
@@ -1450,7 +2452,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1459,7 +2462,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1475,7 +2479,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1491,7 +2496,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1505,7 +2511,8 @@
         "FRAME_REORDERED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1519,7 +2526,25 @@
         "STALE_FRAME",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 191 replaced by frame 190 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.4071 (match tolerance 0.023020833333333334)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: candidate frame 191 shows reference frame 190 (stale)"
     },
     {
       "fixture": "typography-svg",
@@ -1534,7 +2559,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1548,7 +2574,40 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 111",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.023020833333333334)"
+    },
+    {
+      "fixture": "typography-svg",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 123",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED"
+      ],
+      "caught": false,
+      "required": false,
+      "requirement": "non-deterministic fixture: change may lie within calibrated reference noise",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0.023020833333333334)"
     },
     {
       "fixture": "typography-svg",
@@ -1563,7 +2622,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1579,7 +2639,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1593,7 +2654,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "typography-svg",
@@ -1609,7 +2671,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1618,7 +2681,8 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1634,7 +2698,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1650,7 +2715,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1665,7 +2731,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1680,7 +2747,25 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 53 replaced by frame 52 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 15.6484 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 53 shows reference frame 52 (stale)"
     },
     {
       "fixture": "video-heavy",
@@ -1695,7 +2780,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1709,7 +2795,43 @@
         "FRAME_CONTENT_UNIDENTIFIED",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 119",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 119 (cut-before): mse 0.0101, ssim 0.999987, max|diff| 3, diff px 0.1975 %; encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
+    },
+    {
+      "fixture": "video-heavy",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 122",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 70.91 dB < inf; encoded: worst-frame SSIM 0.999994 < 1"
     },
     {
       "fixture": "video-heavy",
@@ -1724,7 +2846,8 @@
         "PTS_DRIFT",
         "ENCODED_QUALITY_BELOW_THRESHOLD"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1740,7 +2863,8 @@
         "VFR_DETECTED",
         "PTS_DRIFT"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1754,7 +2878,8 @@
         "DIMENSION_CHANGED",
         "FRAME_CONTENT_UNIDENTIFIED"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "video-heavy",
@@ -1770,7 +2895,8 @@
         "ENCODED_QUALITY_BELOW_THRESHOLD",
         "BITRATE_DROP"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "webm-transparency",
@@ -1779,7 +2905,190 @@
       "expected": [],
       "verdict": "PASS",
       "reasons": [],
-      "caught": true
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "dropped-frame",
+      "detail": "removed frame 30",
+      "expected": [
+        "FRAME_DROPPED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DROPPED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ALPHA_MISMATCH",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "duplicated-frame",
+      "detail": "frame 30 written twice",
+      "expected": [
+        "FRAME_DUPLICATED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_COUNT_MISMATCH",
+        "FRAME_DUPLICATED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ALPHA_MISMATCH",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "reordered-frames",
+      "detail": "frames 30 and 31 swapped",
+      "expected": [
+        "FRAME_REORDERED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_REORDERED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "stale-frame",
+      "detail": "frame 30 replaced by frame 29",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "stale-frame-subtle",
+      "detail": "frame 8 replaced by frame 7 (least distinct observable neighbour pair); thumbnail MSE to its predecessor 0.5464 (match tolerance 0)",
+      "expected": [
+        "STALE_FRAME"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "STALE_FRAME",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: candidate frame 8 shows reference frame 7 (stale)"
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "pixel-corruption-sampled",
+      "detail": "white block painted into sampled frame 28",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "pixel-corruption-unsampled",
+      "detail": "white block painted into unsampled frame 30",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "pixel-subtle-sampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of sampled frame 28",
+      "expected": [
+        "PIXEL_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "PIXEL_BELOW_THRESHOLD",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); pixels: frame 28 (random): mse 0.0358, ssim 0.999394, max|diff| 3, diff px 1.7778 %; encoded: worst-frame PSNR 61.37 dB < inf; encoded: worst-frame SSIM 0.999941 < 1"
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "pixel-subtle-unsampled",
+      "detail": "luma ±2 code values (8-bit scale) in a 64x64 block of unsampled frame 30",
+      "expected": [
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FRAME_CONTENT_UNIDENTIFIED",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true,
+      "requirement": "bit-exact fixture: every limit is exact",
+      "measured": "temporal: 1 candidate frame(s) match no reference frame within +/-3 (thumbnail tolerance 0); encoded: worst-frame PSNR 61.37 dB < inf; encoded: worst-frame SSIM 0.999946 < 1"
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "wrong-fps",
+      "detail": "same frames re-timed to 25/1 (declared 30/1)",
+      "expected": [
+        "FPS_CHANGED"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "FPS_CHANGED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
+    },
+    {
+      "fixture": "webm-transparency",
+      "fault": "vfr-timestamps",
+      "detail": "every 7th frame (n mod 7 = 3) shifted by 0.4 frame interval",
+      "expected": [
+        "VFR_DETECTED",
+        "PTS_DRIFT"
+      ],
+      "verdict": "FAIL",
+      "reasons": [
+        "VFR_DETECTED",
+        "PTS_DRIFT",
+        "ENCODED_QUALITY_BELOW_THRESHOLD"
+      ],
+      "caught": true,
+      "required": true
     },
     {
       "fixture": "webm-transparency",
@@ -1793,7 +3102,8 @@
         "PIXEL_BELOW_THRESHOLD",
         "ALPHA_MISSING"
       ],
-      "caught": true
+      "caught": true,
+      "required": true
     }
   ]
 }

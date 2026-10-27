@@ -1,0 +1,147 @@
+{
+  "schema": "turbo-bench-manifest/1",
+  "startedAt": "2026-10-27T10:28:56.706Z",
+  "finishedAt": "2026-10-27T10:58:15.827Z",
+  "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --fixture-set all --fixtures fps-ntsc-30000-1001,hdr-hlg-regression,hdr-regression,mixed-complex,motion-blur,transition-crossfade,webm-transparency --profiles producer-default --no-control --warm-runs 2 --keep-output --out benchmarks/results/2026-10-27-1c4a1c1-faults-b",
+  "warmRuns": 2,
+  "fixtureSet": "all",
+  "keepOutput": "outputs/<fixture>/<cell>/run-<n>.<ext> (not committed)",
+  "profiles": {
+    "producer-default": {
+      "description": "Producer API defaults (what packages/producer/src/benchmark.ts and the regression harness exercise): browserGpuMode=software (SwiftShader), which also clamps capture to Page.captureScreenshot.",
+      "env": {},
+      "evidence": "upstream packages/engine/src/config.ts:295 (browserGpuMode: \"software\")"
+    }
+  },
+  "control": null,
+  "settle": "before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then 5000 ms",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
+  "preflight": {
+    "ok": false,
+    "cpuBusyPct": 59.70218821394143,
+    "gpuUtilPct": 0,
+    "gpuEncPct": 0,
+    "attempts": 30,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "guard": {
+    "limits": {
+      "maxChrome": 80,
+      "minFreeRamFraction": 0.15,
+      "minFreeRamBytes": 4294967296,
+      "maxCommitFraction": 0.9,
+      "maxConsecutiveFailures": 3
+    },
+    "peak": {
+      "chrome": 30,
+      "tracked": 59,
+      "minFreeRamBytes": 23418974208,
+      "maxCommittedBytes": 122359758848
+    },
+    "leftovers": [
+      {
+        "after": "fps-ntsc-30000-1001",
+        "processes": [
+          {
+            "pid": 28800,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99288,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 53216,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 95896,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 91504,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 102312,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 33472,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 20380,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 58796,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 86572,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 64760,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 64624,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "transition-crossfade",
+        "processes": [
+          {
+            "pid": 77056,
+            "name": "conhost.exe"
+          }
+        ]
+      }
+    ]
+  },
+  "abort": null,
+  "cells": [
+    {
+      "fixture": "mixed-complex",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "motion-blur",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "transition-crossfade",
+      "profile": "producer-default",
+      "exitCode": 0
+    }
+  ]
+}

@@ -89,6 +89,39 @@ A fixture whose reference renders disagree on a hard invariant (frame count,
 geometry, codec, fps, timestamps, audio format) gets **no** thresholds. The
 gate then fails closed for that fixture with `THRESHOLD_MISSING`.
 
+## Candidate tolerances
+
+A candidate backend (anything other than the reference cell) is gated against
+limits that were never derived from the candidate itself. Its tolerances come
+from a **cross-reference calibration**, and are never loosened by hand:
+
+```bash
+node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs \
+  benchmarks/src/fidelity/calibrate.ts --results <dir> --cell producer-default \
+  --against-cell <second-reference-cell> --path <candidate-path>
+```
+
+- `--against-cell` names a **second accepted reference configuration**: the
+  unmodified upstream Chromium pipeline under a different but legitimate
+  setting (for example another GPU mode or another host image). It must never
+  be the candidate under test, which would let a backend set its own limits.
+- Both cells need >= 5 warm runs. Every cross pair is measured (5 x 5 = 25
+  pairs), with the same code and limit rule as a repeat calibration. The
+  threshold file records `calibration.kind: "cross-reference"`, the second
+  cell and its runs, and each fixture records `againstRuns`.
+  `validateThresholds` rejects a cross-reference file whose second cell equals
+  the first, has fewer than 5 runs, or whose pair count is not runs x
+  againstRuns; a repeat file may not carry `againstRuns`.
+- Hard invariants (frame count, geometry, codec, fps, timestamps, audio
+  format) still have to agree on every cross pair, or the fixture gets no
+  thresholds and fails closed. A backend whose output differs from the
+  reference by more than two reference configurations differ from each other
+  fails the gate; that is the intended behaviour.
+
+No cross-reference threshold file is committed yet: the only accepted
+reference configuration so far is `producer-default`. The mechanism, its
+validation and its tests are in place for the first candidate PR.
+
 ## Running the gate
 
 ```bash
@@ -131,9 +164,37 @@ into a copy and requires a FAIL carrying the expected reason:
 - alpha stripped and HDR metadata stripped;
 - audio offset of 40 ms and missing audio.
 
+Frame faults are re-encoded losslessly in the source's own codec: x264 qp 0
+for H.264, x265 lossless for HEVC 10-bit (with the source's mastering-display
+and content-light SEI re-emitted, so only the injected defect differs) and
+libvpx-vp9 lossless with the alpha plane for VP9 alpha. Resolution and bitrate
+faults remain H.264-only.
+
+Near-threshold faults measure sensitivity next to the large ones:
+
+- A/V offsets of 22, 25 and 30 ms against a limit floored at one AAC frame
+  (21.333 ms at 48 kHz);
+- a +/-2 code-value (8-bit scale) luma change in a 64x64 block, on a sampled
+  and on an unsampled frame;
+- a stale frame at the least distinct neighbour pair that is still observable
+  (thumbnail difference above twice the match tolerance).
+
+A near-threshold row is **required** when the fault exceeds the fixture's
+calibrated limit: an A/V offset above the limit plus the 0.125 ms lag
+resolution, or any pixel/temporal change on a bit-exact fixture. On a
+non-deterministic fixture a +/-2 change can sit inside the calibrated reference
+noise, so the row is recorded as **informational**, with what the gate
+measured, and is never dropped. Only required misses (and errors) make the run
+fail.
+
 Every row is written to `benchmarks/fidelity/negative-results/<path>.{json,md}`,
 misses included. The gate test (`gate.test.ts`) runs the same faults on
 synthetic SDR, VP9-alpha and HEVC-PQ media, so CI covers them without Chrome.
+`cli.test.ts` runs `run-fidelity.ts` as a child process and asserts the exit
+codes: 0 for an unmodified control, 1 for a candidate without audio, 3 with
+`TURBO_FIDELITY=off`, 2 for malformed arguments. Numeric arguments of all
+three CLIs are validated; a malformed value is a usage error (exit 2), never a
+coerced number.
 
 ## CI
 
@@ -141,17 +202,24 @@ synthetic SDR, VP9-alpha and HEVC-PQ media, so CI covers them without Chrome.
 **correctness only**. Shared runners and a software GPU make its timings
 meaningless as benchmarks. It pins:
 
-- FFmpeg 6.0.1 static (sha256-verified);
-- Chrome headless shell;
-- Bun and Node.
+- FFmpeg 6.0.1 static: the tarball is kept in the cache and its sha256 is
+  verified, and the binaries re-extracted, on every run, cache hit included;
+- Chrome headless shell 152.0.7977.30: the installed binary's sha256 is
+  verified on every run;
+- Bun and Node;
+- every GitHub action by full commit SHA.
 
 The job:
 
 1. runs the tests;
 2. renders a fixture subset (1 cold + 2 warm);
 3. gates warm run 2 against warm run 1 with the committed
-   `producer-default.linux` thresholds;
-4. runs fault injection.
+   `producer-default.linux` thresholds. This is a determinism check of the CI
+   path, **not** a comparison with a golden reference: both runs come from the
+   same job, so a change that alters both renders the same way passes it;
+4. runs an intentionally red check: the same gate on audio-mix run 2 with its
+   audio stripped must exit 1, so a gate that cannot fail is caught;
+5. runs fault injection.
 
 Adding the PR label `fidelity-calibrate` re-derives the Linux thresholds from
 5 warm renders and commits them to the PR branch.

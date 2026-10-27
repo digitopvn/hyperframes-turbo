@@ -101,8 +101,13 @@ All numbers come from committed artefacts. Platforms not listed are not tested.
 
 These are tracked in a follow-up issue and are not solved by this ADR:
 
-- Candidate backends have no tolerance source of their own yet. Thresholds come from reference-vs-reference spread, and a new backend needs its own calibrated path.
-- No near-threshold drift faults: injected faults are well beyond the limits, so sensitivity right at a limit is unproven.
-- No temporal faults on HDR or alpha outputs: frame-rewrite faults cover H.264 yuv420p only.
-- No CLI exit-code test, and no note on a frozen "golden" reference for cross-version comparisons.
+
 - Container-level HDR metadata (MP4 `mdcv`/`clli`) is compared but was absent from every output here. Only the per-frame SEI branch has been exercised by a real fault; the container branch is covered by a unit test only.
+
+## Addendum: gate hardening (issue #5)
+
+- **Candidate tolerances.** Decision: a candidate backend's limits come from a cross-reference calibration between two accepted reference configurations (`calibrate.ts --against-cell`), never from the candidate's own runs and never from hand-loosening. The threshold schema records `calibration.kind` (`repeat` or `cross-reference`) and the second cell's runs, and validation rejects a self-referencing or under-sampled file. No cross-reference file exists yet because there is only one accepted reference configuration. See `docs/fidelity-protocol.md`, *Candidate tolerances*.
+- **Near-threshold faults.** A/V offsets of 22, 25 and 30 ms, a +/-2 code-value luma block on a sampled and an unsampled frame, and the least distinct observable stale frame. A row is required when the fault exceeds the fixture's calibrated limit and informational otherwise; results are in `benchmarks/fidelity/negative-results/`.
+- **HDR and alpha frame faults.** Frame-rewrite faults now re-encode losslessly in HEVC 10-bit (HDR SEI re-emitted) and VP9 alpha, as well as H.264.
+- **CLI and CI.** `cli.test.ts` asserts exit codes 0/1/3/2. CI gates warm run 2 against warm run 1 of the same job: a determinism check, not a golden reference. A frozen golden reference for cross-version comparison is still not kept. An intentionally red step (audio stripped) must exit 1. FFmpeg and Chrome headless shell binaries are sha256-verified on every run and actions are pinned by commit SHA.
+- **Measured (Windows, producer-default.win32).** 193 rows, 22 fault kinds caught, 0 errors, 7 near-threshold rows informational, and 1 miss: the unmodified motion-blur control failed on a max|diff| of 54 against a calibrated limit of 53, a false positive from a 5-run calibration that did not see the full reference spread. It is published, not loosened (`benchmarks/fidelity/negative-results/README.md`).
