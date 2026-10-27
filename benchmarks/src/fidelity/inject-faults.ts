@@ -125,7 +125,16 @@ async function rewriteFrames(src: MediaProbe, out: string, seq: number[], opts: 
   // A raw pipe carries neither SAR nor a fine time base: restore the source SAR
   // so only the injected fault differs, and move to the source time base before
   // any timestamp expression so sub-frame shifts are not rounded away.
+  // Raw frames are also untagged: give them the source's exact colour
+  // description first, so FFmpeg neither converts them nor drops the tags.
+  const colour = [
+    v.colorRange ? `range=${v.colorRange}` : null,
+    v.colorPrimaries ? `color_primaries=${v.colorPrimaries}` : null,
+    v.colorTransfer ? `color_trc=${v.colorTransfer}` : null,
+    v.colorSpace ? `colorspace=${v.colorSpace}` : null,
+  ].filter(Boolean);
   const filters = [
+    ...(colour.length ? [`setparams=${colour.join(":")}`] : []),
     ...(opts.vf ? [`settb=1/${v.timeBase.den}`, opts.vf] : []),
     ...(v.sar && /^\d+:\d+$/.test(v.sar) && v.sar !== "0:1" ? [`setsar=${v.sar.replace(":", "/")}`] : []),
   ];

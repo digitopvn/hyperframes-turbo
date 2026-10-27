@@ -1,0 +1,332 @@
+{
+  "schema": "turbo-bench-manifest/1",
+  "startedAt": "2026-10-27T05:57:49.738Z",
+  "finishedAt": "2026-10-27T07:11:47.284Z",
+  "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --fixture-set all --profiles producer-default --no-control --warm-runs 5 --keep-output --out benchmarks/results/2026-10-27-1c4a1c1-fidelity",
+  "warmRuns": 5,
+  "fixtureSet": "all",
+  "keepOutput": "outputs/<fixture>/<cell>/run-<n>.<ext> (not committed)",
+  "profiles": {
+    "producer-default": {
+      "description": "Producer API defaults (what packages/producer/src/benchmark.ts and the regression harness exercise): browserGpuMode=software (SwiftShader), which also clamps capture to Page.captureScreenshot.",
+      "env": {},
+      "evidence": "upstream packages/engine/src/config.ts:295 (browserGpuMode: \"software\")"
+    }
+  },
+  "control": null,
+  "settle": "before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then 5000 ms",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
+  "preflight": {
+    "ok": true,
+    "cpuBusyPct": 17.943254577651725,
+    "gpuUtilPct": 1.1282051282051282,
+    "gpuEncPct": 0,
+    "attempts": 1,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "guard": {
+    "limits": {
+      "maxChrome": 80,
+      "minFreeRamFraction": 0.15,
+      "minFreeRamBytes": 4294967296,
+      "maxCommitFraction": 0.9,
+      "maxConsecutiveFailures": 3
+    },
+    "peak": {
+      "chrome": 25,
+      "tracked": 62,
+      "minFreeRamBytes": 41650180096,
+      "maxCommittedBytes": 100308561920
+    },
+    "leftovers": [
+      {
+        "after": "typography-svg",
+        "processes": [
+          {
+            "pid": 79184,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 83816,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 83932,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 45160,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 29948,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 53284,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 77996,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 77212,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 84828,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 34028,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 78760,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 82876,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 81280,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "gsap-static-holds",
+        "processes": [
+          {
+            "pid": 81336,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 81528,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 75916,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88412,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88588,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 85400,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88988,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88416,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88452,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 80956,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88828,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88364,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 88484,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 26860,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 39624,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "css-filters-blend",
+        "processes": [
+          {
+            "pid": 60468,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "mixed-complex",
+        "processes": [
+          {
+            "pid": 58452,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 90512,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 62088,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99856,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 91424,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 91296,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 76672,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 100736,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 93392,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 98912,
+            "name": "conhost.exe"
+          }
+        ]
+      },
+      {
+        "after": "fps-ntsc-30000-1001",
+        "processes": [
+          {
+            "pid": 70144,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99684,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 95804,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 60804,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 77332,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 75560,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 100052,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 99476,
+            "name": "conhost.exe"
+          },
+          {
+            "pid": 91056,
+            "name": "conhost.exe"
+          }
+        ]
+      }
+    ]
+  },
+  "abort": null,
+  "cells": [
+    {
+      "fixture": "typography-svg",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "canvas-webgl",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "mixed-complex",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "fps-ntsc-30000-1001",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "motion-blur",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "transition-crossfade",
+      "profile": "producer-default",
+      "exitCode": 0
+    }
+  ]
+}

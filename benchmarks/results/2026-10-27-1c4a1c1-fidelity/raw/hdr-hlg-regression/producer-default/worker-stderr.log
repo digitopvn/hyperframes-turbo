@@ -1,0 +1,96 @@
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (417ms)
+[initSession:screenshot] GSAP proxy flush complete (430ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (546ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (548ms)
+[initSession:screenshot] applyVideoMetadataHints complete (552ms)
+[initSession:screenshot] media + fonts + tailwind ready (554ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (557ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (557ms)
+[worker] hdr-hlg-regression/producer-default run 0 (cold): 31638 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (407ms)
+[initSession:screenshot] GSAP proxy flush complete (421ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (560ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (562ms)
+[initSession:screenshot] applyVideoMetadataHints complete (565ms)
+[initSession:screenshot] media + fonts + tailwind ready (566ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (568ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (568ms)
+[worker] hdr-hlg-regression/producer-default run 1 (warm): 30778 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (416ms)
+[initSession:screenshot] GSAP proxy flush complete (430ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (561ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (562ms)
+[initSession:screenshot] applyVideoMetadataHints complete (564ms)
+[initSession:screenshot] media + fonts + tailwind ready (565ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (568ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (568ms)
+[worker] hdr-hlg-regression/producer-default run 2 (warm): 30653 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (416ms)
+[initSession:screenshot] GSAP proxy flush complete (432ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (554ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (555ms)
+[initSession:screenshot] applyVideoMetadataHints complete (557ms)
+[initSession:screenshot] media + fonts + tailwind ready (559ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (561ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (562ms)
+[worker] hdr-hlg-regression/producer-default run 3 (warm): 30556 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (421ms)
+[initSession:screenshot] GSAP proxy flush complete (434ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (539ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (540ms)
+[initSession:screenshot] applyVideoMetadataHints complete (542ms)
+[initSession:screenshot] media + fonts + tailwind ready (543ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (545ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (545ms)
+[worker] hdr-hlg-regression/producer-default run 4 (warm): 30409 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (401ms)
+[initSession:screenshot] GSAP proxy flush complete (417ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (558ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (560ms)
+[initSession:screenshot] applyVideoMetadataHints complete (563ms)
+[initSession:screenshot] media + fonts + tailwind ready (564ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (566ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (566ms)
+[worker] hdr-hlg-regression/producer-default run 5 (warm): 30588 ms
