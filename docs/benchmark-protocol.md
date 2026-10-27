@@ -94,7 +94,7 @@ An earlier full baseline froze the benchmark desktop and needed a hard reset. Do
 - **No sampler outlives the harness.** The guard sampler and the per-run process-tree sampler both take the PID of their owning Node process.
   - Each loop exits as soon as that PID is gone. Node does not kill its children when it exits.
   - The guard loop runs with `$ErrorActionPreference = 'Stop'`.
-  - A write to a closed stdout ends either loop.
+  - Closing only the pipe does not end either loop: in `sampler-owner-exit.log` both samplers were still alive 32 s after the pipe closed, and exited once the owner died. The guard catches the silence and aborts.
   - Every harness exit path runs one teardown: normal end, abort, `--strict-idle` refusal, a rejected `main()`, an uncaught exception or rejection, and SIGINT/SIGTERM/SIGHUP. The teardown kills live worker trees, sweeps tracked survivors, and stops the sampler.
 - **Worker stderr.** The full stderr of each worker is kept in `raw/<fixture>/<variant>/worker-stderr.log`. Upstream prints its GPU-mode probe result (`browserGpuMode probe → …`) and Chrome launch errors there, not through the job logger.
 

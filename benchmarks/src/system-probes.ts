@@ -186,7 +186,7 @@ while ($true) {
     $p = $byId[$id]; if ($p) { [void]$out.Add(@($p.ProcessId, $p.Name, $p.WorkingSetSize, ($p.UserModeTime + $p.KernelModeTime), $p.ReadTransferCount, $p.WriteTransferCount)) }
     if ($kids.ContainsKey($id)) { foreach ($c in $kids[$id]) { $queue.Enqueue([int]$c.ProcessId) } }
   }
-  # CIM reads stay tolerant (processes exit mid-query), but a closed stdout ends the loop.
+  # CIM reads stay tolerant: processes exit mid-query.
   try { [Console]::Out.WriteLine((ConvertTo-Json -Compress -InputObject @{ t = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); p = $out })); [Console]::Out.Flush() } catch { exit 0 }
   Start-Sleep -Milliseconds $interval
 }
