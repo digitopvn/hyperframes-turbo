@@ -1,0 +1,909 @@
+{
+  "schema": "turbo-bench-run/1",
+  "fixture": "mixed-complex",
+  "category": "mixed",
+  "source": "local",
+  "fixtureSourceSha256": "fe80f1684c3de6c6da2f3586e3feff7430ad606e250400f12bab57e3ab313b25",
+  "inputs": {
+    "media": {
+      "h264-1080p30.mp4": {
+        "sha256": "651c85bfaa4fb5c165e19c07b55145d812409b332266e9f19a0285dff0043860",
+        "recipe": [
+          "-f",
+          "lavfi",
+          "-i",
+          "testsrc2=size=1920x1080:rate=30:duration=8",
+          "-c:v",
+          "libx264",
+          "-preset",
+          "medium",
+          "-crf",
+          "20",
+          "-pix_fmt",
+          "yuv420p",
+          "-g",
+          "30",
+          "-threads",
+          "1",
+          "-an"
+        ]
+      },
+      "music-bed.wav": {
+        "sha256": "32f3297a6b13001359e11ae6504ba3964e99c98dff6810d5a2b3094d3d76f15e",
+        "recipe": [
+          "-f",
+          "lavfi",
+          "-i",
+          "sine=frequency=220:sample_rate=48000:duration=8",
+          "-f",
+          "lavfi",
+          "-i",
+          "sine=frequency=330:sample_rate=48000:duration=8",
+          "-filter_complex",
+          "[0][1]amix=inputs=2:normalize=0,volume=0.4,afade=t=in:d=1,afade=t=out:st=6.5:d=1.5,aformat=channel_layouts=stereo",
+          "-c:a",
+          "pcm_s16le"
+        ]
+      },
+      "sfx-blip.wav": {
+        "sha256": "4fc43e593199c3e41415b7d49063005649169f5da3238c96817f5f30ea7ce59e",
+        "recipe": [
+          "-f",
+          "lavfi",
+          "-i",
+          "sine=frequency=1000:sample_rate=48000:duration=0.3",
+          "-af",
+          "volume=0.8,afade=t=out:st=0.1:d=0.2,aformat=channel_layouts=stereo",
+          "-c:a",
+          "pcm_s16le"
+        ]
+      }
+    },
+    "vendor": {
+      "gsap": {
+        "sha256": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb",
+        "from": "upstream\\hyperframes\\node_modules\\.bun\\gsap@3.15.0\\node_modules\\gsap\\dist\\gsap.min.js"
+      }
+    }
+  },
+  "profile": "producer-default.control",
+  "instrumented": false,
+  "profileEnv": {
+    "HYPERFRAMES_EXTRACT_CACHE_DIR": "$TMP\\turbo-bench-xcache-Ccfy9I"
+  },
+  "run": 3,
+  "kind": "warm",
+  "startedAt": "2026-10-27T02:50:37.411Z",
+  "wallMs": 22010.34149999998,
+  "error": null,
+  "idle": {
+    "ok": true,
+    "cpuBusyPct": 15.07694142908267,
+    "gpuUtilPct": 0,
+    "gpuEncPct": 0,
+    "attempts": 1,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "cdpTap": null,
+  "gpu": null,
+  "gpuTimeline": [],
+  "processTree": null,
+  "processTreeTimeline": [],
+  "extractCacheBytesAfter": 20462161,
+  "output": {
+    "sizeBytes": 11320686,
+    "durationSec": 10,
+    "bitRate": 9056548,
+    "formatName": "mov,mp4,m4a,3gp,3g2,mj2",
+    "streams": [
+      {
+        "type": "video",
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "width": 1920,
+        "height": 1080,
+        "rFrameRate": "30/1",
+        "avgFrameRate": "30/1",
+        "packets": 300,
+        "durationSec": 10,
+        "bitRate": 8890155,
+        "colorSpace": "bt709",
+        "colorTransfer": "bt709",
+        "colorPrimaries": "bt709"
+      },
+      {
+        "type": "audio",
+        "codec": "aac",
+        "profile": "LC",
+        "rFrameRate": "0/0",
+        "avgFrameRate": "0/0",
+        "packets": 470,
+        "durationSec": 10,
+        "bitRate": 157750,
+        "sampleRate": 48000,
+        "channels": 2
+      }
+    ]
+  },
+  "upstreamLog": {
+    "counts": {
+      "error": 0,
+      "warn": 0,
+      "info": 44,
+      "debug": 1
+    },
+    "firstMessages": [],
+    "warnMeta": []
+  },
+  "settle": {
+    "aliveAtStart": 0,
+    "aliveAtEnd": 0,
+    "waitedMs": 602,
+    "cooldownMs": 5000
+  },
+  "traceEvents": [
+    {
+      "phase": "pipeline",
+      "status": "checkpoint",
+      "elapsedMs": 1
+    },
+    {
+      "phase": "compile",
+      "status": "start",
+      "elapsedMs": 1
+    },
+    {
+      "phase": "compile",
+      "status": "end",
+      "elapsedMs": 20,
+      "durationMs": 19
+    },
+    {
+      "phase": "compile",
+      "status": "checkpoint",
+      "elapsedMs": 21
+    },
+    {
+      "phase": "browser_probe",
+      "status": "start",
+      "elapsedMs": 21
+    },
+    {
+      "phase": "browser_probe",
+      "status": "end",
+      "elapsedMs": 24,
+      "durationMs": 3
+    },
+    {
+      "phase": "browser_probe",
+      "status": "checkpoint",
+      "elapsedMs": 24
+    },
+    {
+      "phase": "video_extract",
+      "status": "start",
+      "elapsedMs": 24
+    },
+    {
+      "phase": "video_extract",
+      "status": "end",
+      "elapsedMs": 27,
+      "durationMs": 3
+    },
+    {
+      "phase": "video_extract",
+      "status": "checkpoint",
+      "elapsedMs": 27
+    },
+    {
+      "phase": "hdr_detection",
+      "status": "checkpoint",
+      "elapsedMs": 27
+    },
+    {
+      "phase": "audio_process",
+      "status": "start",
+      "elapsedMs": 27
+    },
+    {
+      "phase": "audio_process",
+      "status": "end",
+      "elapsedMs": 689,
+      "durationMs": 662
+    },
+    {
+      "phase": "file_server",
+      "status": "start",
+      "elapsedMs": 689
+    },
+    {
+      "phase": "file_server",
+      "status": "end",
+      "elapsedMs": 692,
+      "durationMs": 3
+    },
+    {
+      "phase": "capture_calibration",
+      "status": "start",
+      "elapsedMs": 693
+    },
+    {
+      "phase": "capture_calibration",
+      "status": "end",
+      "elapsedMs": 5501,
+      "durationMs": 4808
+    },
+    {
+      "phase": "capture_calibration",
+      "status": "checkpoint",
+      "elapsedMs": 5502
+    },
+    {
+      "phase": "worker_resolution",
+      "status": "checkpoint",
+      "elapsedMs": 5503
+    },
+    {
+      "phase": "capture_strategy",
+      "status": "checkpoint",
+      "elapsedMs": 5504
+    },
+    {
+      "phase": "capture_disk",
+      "status": "start",
+      "elapsedMs": 5509
+    },
+    {
+      "phase": "capture_disk",
+      "status": "end",
+      "elapsedMs": 21391,
+      "durationMs": 15882
+    },
+    {
+      "phase": "encode",
+      "status": "start",
+      "elapsedMs": 21391
+    },
+    {
+      "phase": "encode",
+      "status": "end",
+      "elapsedMs": 21523,
+      "durationMs": 132
+    },
+    {
+      "phase": "assemble",
+      "status": "start",
+      "elapsedMs": 21523
+    },
+    {
+      "phase": "assemble",
+      "status": "end",
+      "elapsedMs": 21911,
+      "durationMs": 388
+    },
+    {
+      "phase": "pipeline",
+      "status": "checkpoint",
+      "elapsedMs": 21979
+    }
+  ],
+  "perfSummary": {
+    "renderId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3",
+    "totalElapsedMs": 21974,
+    "fps": 30,
+    "quality": "high",
+    "workers": 5,
+    "workerSizing": {
+      "workers": 5,
+      "boundBy": "heap",
+      "effectiveMaxWorkers": 6,
+      "cpuBasedWorkers": 26,
+      "memoryBasedWorkers": 31,
+      "frameBasedWorkers": 10,
+      "heapBasedWorkers": 5,
+      "heapLimitMb": 4288,
+      "totalMemoryMb": 98066,
+      "cpuCount": 28,
+      "captureCostMultiplier": 1,
+      "exceedsHeapAdvisory": false
+    },
+    "chunkedEncode": false,
+    "chunkSizeFrames": null,
+    "compositionDurationSeconds": 10,
+    "totalFrames": 300,
+    "resolution": {
+      "width": 1920,
+      "height": 1080
+    },
+    "videoCount": 1,
+    "audioCount": 2,
+    "stages": {
+      "compileOnlyMs": 18,
+      "browserProbeMs": 2,
+      "compileMs": 23,
+      "videoExtractMs": 3,
+      "audioProcessMs": 661,
+      "captureMs": 20702,
+      "captureFrameMs": 15882,
+      "captureSetupMs": 4820,
+      "encodeMs": 132,
+      "assembleMs": 388
+    },
+    "videoExtractBreakdown": {
+      "resolveMs": 0,
+      "cachePublishFailures": 0,
+      "cacheGcEvictions": 0,
+      "cacheGcBytesFreed": 0,
+      "cacheAgedPartialsCleared": 0,
+      "hdrProbeMs": 0,
+      "hdrPreflightMs": 0,
+      "hdrPreflightCount": 0,
+      "vfrProbeMs": 0,
+      "vfrPreflightMs": 0,
+      "vfrPreflightCount": 0,
+      "extractMs": 2,
+      "cacheHits": 1,
+      "cacheMisses": 0,
+      "transientRetries": 0
+    },
+    "tmpPeakBytes": 128149222,
+    "captureCalibration": {
+      "sampledFrames": [
+        0,
+        75,
+        150,
+        225,
+        299
+      ],
+      "p95Ms": 72,
+      "multiplier": 1,
+      "reasons": []
+    },
+    "captureAttempts": [
+      {
+        "attempt": 0,
+        "workers": 5,
+        "frameCount": 300,
+        "reason": "initial"
+      }
+    ],
+    "observability": {
+      "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3",
+      "compositionHash": "70f672d223db7aec",
+      "events": [
+        {
+          "phase": "pipeline",
+          "status": "checkpoint",
+          "elapsedMs": 1,
+          "message": "started",
+          "data": {
+            "format": "mp4",
+            "quality": "high",
+            "browserGpuMode": "software",
+            "forceScreenshot": true,
+            "protocolTimeoutMs": 300000,
+            "pageNavigationTimeoutMs": 60000,
+            "playerReadyTimeoutMs": 45000,
+            "requestedWorkers": "auto"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "compile",
+          "status": "start",
+          "elapsedMs": 1,
+          "data": {
+            "needsAlpha": false
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "compile",
+          "status": "end",
+          "elapsedMs": 20,
+          "durationMs": 19,
+          "data": {
+            "needsAlpha": false
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "compile",
+          "status": "checkpoint",
+          "elapsedMs": 21,
+          "message": "composition metadata resolved",
+          "data": {
+            "width": 1920,
+            "height": 1080,
+            "videoCount": 1,
+            "audioCount": 2,
+            "imageCount": 0,
+            "deviceScaleFactor": 1,
+            "forceScreenshot": true,
+            "compositionHash": "70f672d223db7aec"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "start",
+          "elapsedMs": 21,
+          "data": {
+            "forceScreenshot": true,
+            "stagePhase": "calibrating"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "end",
+          "elapsedMs": 24,
+          "durationMs": 3,
+          "data": {
+            "forceScreenshot": true,
+            "stagePhase": "calibrating"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "checkpoint",
+          "elapsedMs": 24,
+          "message": "duration resolved",
+          "data": {
+            "durationSeconds": 10,
+            "totalFrames": 300,
+            "compositionHash": "70f672d223db7aec",
+            "beginFrameStalled": false
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "video_extract",
+          "status": "start",
+          "elapsedMs": 24,
+          "data": {
+            "videoCount": 1
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "video_extract",
+          "status": "end",
+          "elapsedMs": 27,
+          "durationMs": 3,
+          "data": {
+            "videoCount": 1
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "video_extract",
+          "status": "checkpoint",
+          "elapsedMs": 27,
+          "message": "frames resolved",
+          "data": {
+            "videoCount": 1,
+            "extractedVideoCount": 1,
+            "totalFramesExtracted": 180,
+            "maxFramesPerVideo": 180,
+            "avgFramesPerExtractedVideo": 180,
+            "vfrPreflightCount": 0,
+            "vfrPreflightMs": 0,
+            "cacheHits": 1,
+            "cacheMisses": 0,
+            "transientRetries": 0,
+            "minVideoFrameCoverageRatio": 1,
+            "authoredTimedClipCount": 7
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "hdr_detection",
+          "status": "checkpoint",
+          "elapsedMs": 27,
+          "message": "resolved",
+          "data": {
+            "requestedHdrMode": "force-sdr",
+            "effectiveHdr": "sdr",
+            "nativeHdrVideoCount": 0,
+            "nativeHdrImageCount": 0
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "audio_process",
+          "status": "start",
+          "elapsedMs": 27,
+          "data": {
+            "audioCount": 2
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "audio_process",
+          "status": "end",
+          "elapsedMs": 689,
+          "durationMs": 662,
+          "data": {
+            "audioCount": 2
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "file_server",
+          "status": "start",
+          "elapsedMs": 689,
+          "data": {
+            "reused": false
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "file_server",
+          "status": "end",
+          "elapsedMs": 692,
+          "durationMs": 3,
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_calibration",
+          "status": "start",
+          "elapsedMs": 693,
+          "data": {
+            "stagePhase": "calibrating",
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 0,
+            "captureMode": "screenshot",
+            "captureOperation": "captureScreenshot"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_calibration",
+          "status": "end",
+          "elapsedMs": 5501,
+          "durationMs": 4808,
+          "data": {
+            "stagePhase": "calibrating",
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 0,
+            "captureMode": "screenshot",
+            "captureOperation": "captureScreenshot"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_calibration",
+          "status": "checkpoint",
+          "elapsedMs": 5502,
+          "message": "resolved",
+          "data": {
+            "forceScreenshot": true,
+            "multiplier": 1,
+            "p95Ms": 72
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "worker_resolution",
+          "status": "checkpoint",
+          "elapsedMs": 5503,
+          "message": "resolved",
+          "data": {
+            "workerCount": 5
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_strategy",
+          "status": "checkpoint",
+          "elapsedMs": 5504,
+          "message": "resolved",
+          "data": {
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "captureBeyondViewport": true,
+            "useStreamingEncode": false,
+            "useLayeredComposite": false,
+            "usePageSideCompositing": false,
+            "hasHdrContent": false,
+            "hasShaderTransitions": false,
+            "isPngSequence": false
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_disk",
+          "status": "start",
+          "elapsedMs": 5509,
+          "data": {
+            "stagePhase": "capturing",
+            "needsAlpha": false,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 0,
+            "captureMode": "screenshot",
+            "captureOperation": "captureScreenshot"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "capture_disk",
+          "status": "end",
+          "elapsedMs": 21391,
+          "durationMs": 15882,
+          "data": {
+            "stagePhase": "capturing",
+            "needsAlpha": false,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 300,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "encode",
+          "status": "start",
+          "elapsedMs": 21391,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": true,
+            "isPngSequence": false,
+            "isGif": false,
+            "chunkedEncode": false,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 300,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "encode",
+          "status": "end",
+          "elapsedMs": 21523,
+          "durationMs": 132,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": true,
+            "isPngSequence": false,
+            "isGif": false,
+            "chunkedEncode": false,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 300,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "assemble",
+          "status": "start",
+          "elapsedMs": 21523,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": true,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 300,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "assemble",
+          "status": "end",
+          "elapsedMs": 21911,
+          "durationMs": 388,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": true,
+            "workerCount": 5,
+            "forceScreenshot": true,
+            "totalFrames": 300,
+            "framesCompleted": 300,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        },
+        {
+          "phase": "pipeline",
+          "status": "checkpoint",
+          "elapsedMs": 21979,
+          "message": "artifact validated",
+          "data": {
+            "totalElapsedMs": 21974
+          },
+          "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+        }
+      ],
+      "eventCount": 27,
+      "lastEvent": {
+        "phase": "pipeline",
+        "status": "checkpoint",
+        "elapsedMs": 21979,
+        "message": "artifact validated",
+        "data": {
+          "totalElapsedMs": 21974
+        },
+        "renderJobId": "8201eb1f-7698-4850-8e6c-2e62dd6342c3"
+      },
+      "browserDiagnostics": {
+        "total": 0,
+        "errors": 0,
+        "pageErrors": 0,
+        "requestFailed": 0,
+        "httpErrors": 0,
+        "navigationStarts": 0,
+        "navigationFailures": 0,
+        "consoleErrors": 0,
+        "consoleWarnings": 0
+      },
+      "capture": {
+        "forceScreenshot": true,
+        "captureMode": "screenshot",
+        "browserGpuMode": "software",
+        "protocolTimeoutMs": 300000,
+        "pageNavigationTimeoutMs": 60000,
+        "playerReadyTimeoutMs": 45000,
+        "captureBeyondViewport": true,
+        "chromeBrowserRssPeakMb": 59,
+        "chromeRendererRssPeakMb": 425,
+        "chromeRssLastMb": 639,
+        "chromeGpuProcessSeenLastSample": true,
+        "chromeMemorySamples": 2,
+        "workerCount": 5,
+        "compositionElementCount": 16,
+        "compositionElementCountSource": "static",
+        "compositionElementTags": {
+          "div": 4,
+          "audio": 2,
+          "meta": 1,
+          "title": 1,
+          "head": 1,
+          "video": 1,
+          "circle": 1,
+          "text": 1,
+          "svg": 1,
+          "small": 1,
+          "body": 1,
+          "html": 1
+        },
+        "arollVideoCount": 0,
+        "heygenVideoCount": 0,
+        "adaptersUsed": [
+          "gsap"
+        ],
+        "audioCount": 2,
+        "imageCount": 0,
+        "subCompositionCount": 0,
+        "audioGroupCount": 0,
+        "colorGradingCount": 0,
+        "hasLut": false,
+        "rootBodyMismatch": false,
+        "rootBodyDeltaPxBucket": "0",
+        "captureParallelStream": "eligible_off",
+        "capturePath": "disk",
+        "useStreamingEncode": false,
+        "useLayeredComposite": false,
+        "usePageSideCompositing": false,
+        "hasHdrContent": false
+      },
+      "extraction": {
+        "videoCount": 1,
+        "extractedVideoCount": 1,
+        "totalFramesExtracted": 180,
+        "maxFramesPerVideo": 180,
+        "avgFramesPerExtractedVideo": 180,
+        "vfrProbeMs": 0,
+        "vfrPreflightMs": 0,
+        "vfrPreflightCount": 0,
+        "cacheHits": 1,
+        "cacheMisses": 0,
+        "transientRetries": 0,
+        "minVideoFrameCoverageRatio": 1,
+        "authoredTimedClipCount": 7
+      },
+      "init": {
+        "initDurationMs": 738,
+        "tweenCount": 6,
+        "elementCount": 29
+      }
+    },
+    "captureAvgMs": 53,
+    "subTimelineWait": "ready",
+    "captureP50Ms": 93,
+    "peakRssMb": 274,
+    "peakHeapUsedMb": 113,
+    "staticDedup": {
+      "enabled": true,
+      "armed": false,
+      "predictedFrames": 0,
+      "reusedFrames": 0,
+      "skipReason": "video_injection"
+    },
+    "chromeMemory": {
+      "browserRssPeakMb": 59,
+      "rendererRssPeakMb": 367,
+      "rssLastMb": 2875,
+      "gpuProcessSeenLastSample": true,
+      "samples": 5
+    },
+    "drawElement": {
+      "mode": "screenshot",
+      "clampReason": "software_gpu",
+      "workerInversion": "none",
+      "compositionElementCount": 16,
+      "compositionElementCountSource": "static",
+      "compositionElementTags": {
+        "div": 4,
+        "audio": 2,
+        "meta": 1,
+        "title": 1,
+        "head": 1,
+        "video": 1,
+        "circle": 1,
+        "text": 1,
+        "svg": 1,
+        "small": 1,
+        "body": 1,
+        "html": 1
+      },
+      "arollVideoCount": 0,
+      "heygenVideoCount": 0,
+      "adaptersUsed": [
+        "gsap"
+      ],
+      "audioCount": 2,
+      "imageCount": 0,
+      "subCompositionCount": 0,
+      "audioGroupCount": 0,
+      "colorGradingCount": 0,
+      "hasLut": false,
+      "rootBodyMismatch": false,
+      "rootBodyDeltaPxBucket": "0",
+      "vfxHostCount": 0,
+      "vfxTypes": "",
+      "parallelRouter": "none",
+      "workerEncode": false,
+      "verifyArmed": 0,
+      "verifyChecked": 0,
+      "verifyInitMs": 0,
+      "selfVerifyFallback": false,
+      "blankSuspects": 0,
+      "blankDeterministicAccepts": 0,
+      "blankRecaptures": 0,
+      "boundaryFrames": 0,
+      "riskFrames": 0,
+      "ncprFallbacks": 0,
+      "frameTimeouts": 0
+    },
+    "host": {
+      "platform": "win32",
+      "arch": "x64",
+      "cpuCount": 28,
+      "totalMemMb": 98066,
+      "nodeVersion": "v24.20.0",
+      "gpuDisabled": false
+    }
+  },
+  "jobStatus": "complete"
+}

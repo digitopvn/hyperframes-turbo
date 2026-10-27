@@ -1,0 +1,537 @@
+{
+  "source": "benchmarks\\results\\2026-10-27-1c4a1c1\\summary.json",
+  "sdrCaptureModes": [
+    "screenshot/disk",
+    "screenshot/streaming"
+  ],
+  "drawElementClampReasons": {
+    "audio-mix/cli-local-default": "parallel",
+    "audio-mix/producer-default": "software_gpu",
+    "canvas-webgl/cli-local-default": "parallel",
+    "canvas-webgl/producer-default": "software_gpu",
+    "css-filters-blend/cli-local-default": "parallel",
+    "css-filters-blend/producer-default": "software_gpu",
+    "gsap-static-holds/cli-local-default": "parallel",
+    "gsap-static-holds/producer-default": "software_gpu",
+    "hdr-hlg-regression/cli-local-default": null,
+    "hdr-hlg-regression/producer-default": null,
+    "hdr-regression/cli-local-default": null,
+    "hdr-regression/producer-default": null,
+    "mixed-complex/cli-local-default": "parallel",
+    "mixed-complex/producer-default": "software_gpu",
+    "typography-svg/cli-local-default": "parallel",
+    "typography-svg/producer-default": "software_gpu",
+    "video-heavy/cli-local-default": "parallel",
+    "video-heavy/producer-default": "software_gpu",
+    "webm-transparency/cli-local-default": null,
+    "webm-transparency/producer-default": "software_gpu"
+  },
+  "sdrRenderFactor": {
+    "min": 0.3016932397317996,
+    "minCell": "webm-transparency/producer-default",
+    "max": 0.8643308448268743,
+    "maxCell": "gsap-static-holds/producer-default",
+    "n": 16
+  },
+  "hdrRenderFactor": {
+    "min": 0.061794115392118876,
+    "minCell": "hdr-regression/cli-local-default",
+    "max": 0.1784315134119528,
+    "maxCell": "hdr-hlg-regression/producer-default",
+    "n": 4
+  },
+  "hdrFps": {
+    "min": 1.8538234617635663,
+    "minCell": "hdr-regression/cli-local-default",
+    "max": 5.352945402358584,
+    "maxCell": "hdr-hlg-regression/producer-default",
+    "n": 4
+  },
+  "sdrCaptureShareOfWall": {
+    "min": 0.9233727279816032,
+    "minCell": "audio-mix/producer-default",
+    "max": 0.980268058838618,
+    "maxCell": "gsap-static-holds/cli-local-default",
+    "n": 16
+  },
+  "sdrCaptureSetupMs": {
+    "min": 4,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 8138,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 16
+  },
+  "sdrEncodeMs": {
+    "min": 98,
+    "minCell": "audio-mix/cli-local-default",
+    "max": 6394,
+    "maxCell": "webm-transparency/producer-default",
+    "n": 16
+  },
+  "overlapMs": {
+    "min": 0,
+    "minCell": "audio-mix/cli-local-default",
+    "max": 93871,
+    "maxCell": "hdr-regression/cli-local-default",
+    "n": 20
+  },
+  "cellsWithInferredEncode": [
+    "hdr-hlg-regression/cli-local-default",
+    "hdr-hlg-regression/producer-default",
+    "hdr-regression/cli-local-default",
+    "hdr-regression/producer-default",
+    "webm-transparency/cli-local-default",
+    "webm-transparency/producer-default"
+  ],
+  "sdrCaptureRpcP50Ms": {
+    "min": 32.22030000000086,
+    "minCell": "webm-transparency/producer-default",
+    "max": 93.65890000003856,
+    "maxCell": "css-filters-blend/producer-default",
+    "n": 15
+  },
+  "sdrFrameRpcKiBPerFrame": {
+    "min": 12.4517578125,
+    "minCell": "webm-transparency/producer-default",
+    "max": 723.6719618055556,
+    "maxCell": "canvas-webgl/producer-default",
+    "n": 16
+  },
+  "hdrCdpInMiB": {
+    "min": 5.836260795593262,
+    "minCell": "hdr-hlg-regression/cli-local-default",
+    "max": 8.654470443725586,
+    "maxCell": "hdr-regression/producer-default",
+    "n": 4
+  },
+  "hdrCdpOutMiB": {
+    "min": 33.064138412475586,
+    "minCell": "hdr-hlg-regression/producer-default",
+    "max": 36.08941650390625,
+    "maxCell": "hdr-regression/cli-local-default",
+    "n": 4
+  },
+  "hdrDiskWriteGiB": {
+    "min": 7.001057064160705,
+    "minCell": "hdr-hlg-regression/producer-default",
+    "max": 8.791990057565272,
+    "maxCell": "hdr-regression/producer-default",
+    "n": 4
+  },
+  "sdrDiskWriteMiB": {
+    "min": 6.649504661560059,
+    "minCell": "webm-transparency/producer-default",
+    "max": 820.0487594604492,
+    "maxCell": "mixed-complex/producer-default",
+    "n": 16
+  },
+  "hdrCpuSeconds": {
+    "min": 319.640625,
+    "minCell": "hdr-hlg-regression/producer-default",
+    "max": 500.40625,
+    "maxCell": "hdr-regression/producer-default",
+    "n": 4
+  },
+  "sdrCpuSeconds": {
+    "min": 4.328125,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 119.296875,
+    "maxCell": "canvas-webgl/producer-default",
+    "n": 16
+  },
+  "cpuSecondsPerOutputMin": {
+    "min": 129.84375,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 5004.0625,
+    "maxCell": "hdr-regression/producer-default",
+    "n": 20
+  },
+  "estUsdPerOutputMin": {
+    "min": 0.0016086197916666666,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 0.061994774305555556,
+    "maxCell": "hdr-regression/producer-default",
+    "n": 20
+  },
+  "coldVideoExtractMs": {
+    "min": 229,
+    "minCell": "hdr-regression/cli-local-default",
+    "max": 1410,
+    "maxCell": "video-heavy/producer-default",
+    "n": 8
+  },
+  "warmVideoExtractMs": {
+    "min": 3,
+    "minCell": "hdr-hlg-regression/cli-local-default",
+    "max": 6,
+    "maxCell": "video-heavy/cli-local-default",
+    "n": 8
+  },
+  "peakTreeWorkingSetMiB": {
+    "min": 658.3046875,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 7384.86328125,
+    "maxCell": "video-heavy/cli-local-default",
+    "n": 20
+  },
+  "peakVramDeltaMiB": {
+    "min": 0,
+    "minCell": "video-heavy/cli-local-default",
+    "max": 1234,
+    "maxCell": "css-filters-blend/cli-local-default",
+    "n": 20
+  },
+  "warmCv": {
+    "min": 0.011178269959404498,
+    "minCell": "video-heavy/producer-default",
+    "max": 0.11921514008244789,
+    "maxCell": "gsap-static-holds/cli-local-default",
+    "n": 20
+  },
+  "cliVsProducer": [
+    {
+      "fixture": "audio-mix",
+      "producerMs": 15326.421900000016,
+      "cliMs": 17029.378200000006,
+      "cliDeltaPct": 11.111245084542459
+    },
+    {
+      "fixture": "canvas-webgl",
+      "producerMs": 16340.09659999999,
+      "cliMs": 17095.1458,
+      "cliDeltaPct": 4.620836819287892
+    },
+    {
+      "fixture": "css-filters-blend",
+      "producerMs": 14141.519300000014,
+      "cliMs": 14771.813300000038,
+      "cliDeltaPct": 4.457045856452091
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "producerMs": 11569.64379999999,
+      "cliMs": 13276.98060000001,
+      "cliDeltaPct": 14.757038587480286
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "producerMs": 28021.9559,
+      "cliMs": 28087.276499999978,
+      "cliDeltaPct": 0.23310507029945501
+    },
+    {
+      "fixture": "hdr-regression",
+      "producerMs": 94559.62199999997,
+      "cliMs": 97096.62419999996,
+      "cliDeltaPct": 2.6829656742917063
+    },
+    {
+      "fixture": "mixed-complex",
+      "producerMs": 22406.91829999999,
+      "cliMs": 24285.680900000036,
+      "cliDeltaPct": 8.38474338526082
+    },
+    {
+      "fixture": "typography-svg",
+      "producerMs": 9925.31640000001,
+      "cliMs": 10774.290099999984,
+      "cliDeltaPct": 8.553618502277391
+    },
+    {
+      "fixture": "video-heavy",
+      "producerMs": 16591.29130000004,
+      "cliMs": 18235.3321,
+      "cliDeltaPct": 9.909058736133183
+    },
+    {
+      "fixture": "webm-transparency",
+      "producerMs": 6629.250299999985,
+      "cliMs": 5403.330199999997,
+      "cliDeltaPct": -18.492590331066413
+    }
+  ],
+  "cliSlowerCount": 9,
+  "harnessOverheadWarmPct": {
+    "min": -1.6392397620065418,
+    "minCell": "gsap-static-holds/producer-default",
+    "max": 6.481091683053379,
+    "maxCell": "canvas-webgl/producer-default",
+    "n": 10,
+    "perCell": [
+      {
+        "cell": "audio-mix/producer-default",
+        "pct": -1.070507572816329,
+        "controlCv": 0.025442519092982306,
+        "instrumentedCv": 0.04228682680198932
+      },
+      {
+        "cell": "canvas-webgl/producer-default",
+        "pct": 6.481091683053379,
+        "controlCv": 0.046397633061414645,
+        "instrumentedCv": 0.029633822622775512
+      },
+      {
+        "cell": "css-filters-blend/producer-default",
+        "pct": -0.9028615387013146,
+        "controlCv": 0.024778349577731052,
+        "instrumentedCv": 0.035986919604602575
+      },
+      {
+        "cell": "gsap-static-holds/producer-default",
+        "pct": -1.6392397620065418,
+        "controlCv": 0.0628386479126366,
+        "instrumentedCv": 0.03732517977897766
+      },
+      {
+        "cell": "hdr-hlg-regression/producer-default",
+        "pct": 3.123789060873671,
+        "controlCv": 0.0815848348734097,
+        "instrumentedCv": 0.040179788997129734
+      },
+      {
+        "cell": "hdr-regression/producer-default",
+        "pct": 0.10295348328524367,
+        "controlCv": 0.01429927037171239,
+        "instrumentedCv": 0.013244913245806981
+      },
+      {
+        "cell": "mixed-complex/producer-default",
+        "pct": 6.1215607469034055,
+        "controlCv": 0.04370002709910055,
+        "instrumentedCv": 0.05263521066547062
+      },
+      {
+        "cell": "typography-svg/producer-default",
+        "pct": 0.6464378000759609,
+        "controlCv": 0.029995061655424197,
+        "instrumentedCv": 0.0277292620034805
+      },
+      {
+        "cell": "video-heavy/producer-default",
+        "pct": 3.1405211994221913,
+        "controlCv": 0.006520200457682247,
+        "instrumentedCv": 0.011178269959404498
+      },
+      {
+        "cell": "webm-transparency/producer-default",
+        "pct": -1.4598567162389404,
+        "controlCv": 0.0435433585879976,
+        "instrumentedCv": 0.031131999746214046
+      }
+    ]
+  },
+  "harnessOverheadColdPct": {
+    "min": -3.8353508508534353,
+    "minCell": "hdr-hlg-regression/producer-default",
+    "max": 4.799872270496647,
+    "maxCell": "mixed-complex/producer-default",
+    "n": 10,
+    "perCell": [
+      {
+        "cell": "audio-mix/producer-default",
+        "pct": 1.427605397098934,
+        "controlCv": 0.025442519092982306,
+        "instrumentedCv": 0.04228682680198932
+      },
+      {
+        "cell": "canvas-webgl/producer-default",
+        "pct": -1.110989705414343,
+        "controlCv": 0.046397633061414645,
+        "instrumentedCv": 0.029633822622775512
+      },
+      {
+        "cell": "css-filters-blend/producer-default",
+        "pct": 2.3723998597035583,
+        "controlCv": 0.024778349577731052,
+        "instrumentedCv": 0.035986919604602575
+      },
+      {
+        "cell": "gsap-static-holds/producer-default",
+        "pct": 1.7270841633671958,
+        "controlCv": 0.0628386479126366,
+        "instrumentedCv": 0.03732517977897766
+      },
+      {
+        "cell": "hdr-hlg-regression/producer-default",
+        "pct": -3.8353508508534353,
+        "controlCv": 0.0815848348734097,
+        "instrumentedCv": 0.040179788997129734
+      },
+      {
+        "cell": "hdr-regression/producer-default",
+        "pct": -1.1468885639305044,
+        "controlCv": 0.01429927037171239,
+        "instrumentedCv": 0.013244913245806981
+      },
+      {
+        "cell": "mixed-complex/producer-default",
+        "pct": 4.799872270496647,
+        "controlCv": 0.04370002709910055,
+        "instrumentedCv": 0.05263521066547062
+      },
+      {
+        "cell": "typography-svg/producer-default",
+        "pct": 1.3074804089289602,
+        "controlCv": 0.029995061655424197,
+        "instrumentedCv": 0.0277292620034805
+      },
+      {
+        "cell": "video-heavy/producer-default",
+        "pct": 3.5051500870645063,
+        "controlCv": 0.006520200457682247,
+        "instrumentedCv": 0.011178269959404498
+      },
+      {
+        "cell": "webm-transparency/producer-default",
+        "pct": 4.729297637243542,
+        "controlCv": 0.0435433585879976,
+        "instrumentedCv": 0.031131999746214046
+      }
+    ]
+  },
+  "mixedPathCells": [],
+  "diskPathWorkers": [
+    5
+  ],
+  "diskPathWarmRuns": 105,
+  "diskPathSetupMs": {
+    "min": 2202,
+    "minCell": "typography-svg/producer-default.control",
+    "max": 8138,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 21
+  },
+  "diskPathFramesMs": {
+    "min": 7315,
+    "minCell": "typography-svg/producer-default",
+    "max": 15509,
+    "maxCell": "mixed-complex/producer-default",
+    "n": 21
+  },
+  "diskPathWallMs": {
+    "min": 9861.567500000005,
+    "minCell": "typography-svg/producer-default.control",
+    "max": 24285.680900000036,
+    "maxCell": "mixed-complex/cli-local-default",
+    "n": 21
+  },
+  "streamingPathWorkers": [
+    1
+  ],
+  "streamingPathWarmRuns": 15,
+  "streamingPathSetupMs": {
+    "min": 4,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 5,
+    "maxCell": "webm-transparency/producer-default.control",
+    "n": 3
+  },
+  "streamingPathFramesMs": {
+    "min": 5226,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 6478,
+    "maxCell": "webm-transparency/producer-default.control",
+    "n": 3
+  },
+  "streamingPathWallMs": {
+    "min": 5403.330199999997,
+    "minCell": "webm-transparency/cli-local-default",
+    "max": 6727.4615999999805,
+    "maxCell": "webm-transparency/producer-default.control",
+    "n": 3
+  },
+  "mixedCells_diskSetupMs": null,
+  "mixedCells_diskWallMs": null,
+  "mixedCells_streamingSetupMs": null,
+  "mixedCells_streamingWallMs": null,
+  "calibrationVsPath": {
+    "disk/calibrationFailed=false": 126,
+    "hdr_layered/calibrationFailed=false": 36,
+    "streaming/calibrationFailed=false": 18
+  },
+  "calibrationFailures": {
+    "cold": 0,
+    "warm": 0,
+    "errors": {},
+    "renderFailures": {}
+  },
+  "mixedCellCount": 0,
+  "sdrCellCount": 24,
+  "pathMatchedOverheadPct": [
+    {
+      "cell": "audio-mix/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": -1.070507572816329
+    },
+    {
+      "cell": "canvas-webgl/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": 6.481091683053379
+    },
+    {
+      "cell": "css-filters-blend/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": -0.9028615387013146
+    },
+    {
+      "cell": "gsap-static-holds/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": -1.6392397620065418
+    },
+    {
+      "cell": "mixed-complex/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": 6.1215607469034055
+    },
+    {
+      "cell": "typography-svg/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": 0.6464378000759609
+    },
+    {
+      "cell": "video-heavy/producer-default",
+      "path": "disk",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": 3.1405211994221913
+    },
+    {
+      "cell": "webm-transparency/producer-default",
+      "path": "streaming",
+      "nInstrumented": 5,
+      "nControl": 5,
+      "pct": -1.4598567162389404
+    }
+  ],
+  "concurrency": {
+    "min": 1,
+    "minCell": "audio-mix/cli-local-default",
+    "max": 1.9773493073755148,
+    "maxCell": "webm-transparency/cli-local-default",
+    "n": 20
+  },
+  "concurrencyInferredCells": {
+    "min": 1.873877419585674,
+    "minCell": "hdr-hlg-regression/producer-default",
+    "max": 1.9773493073755148,
+    "maxCell": "webm-transparency/cli-local-default",
+    "n": 6
+  },
+  "diskSetupExceedsFrames": {
+    "over": 0,
+    "of": 14,
+    "cells": []
+  }
+}

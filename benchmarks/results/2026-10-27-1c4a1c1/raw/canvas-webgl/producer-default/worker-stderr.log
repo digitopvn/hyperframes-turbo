@@ -1,0 +1,510 @@
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (404ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (514ms)
+[Browser:WARN] [.WebGL-0x5fd400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (516ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (517ms)
+[initSession:screenshot] applyVideoMetadataHints complete (517ms)
+[initSession:screenshot] media + fonts + tailwind ready (519ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (522ms)
+[Browser:WARN] [.WebGL-0x5fd400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x5fd400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x5fd400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (1ms)
+[initSession:screenshot] page.goto complete (379ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (422ms)
+[initSession:screenshot] pollHfReady complete (488ms)
+[Browser:WARN] [.WebGL-0x297400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (489ms)
+[initSession:screenshot] applyVideoMetadataHints complete (489ms)
+[initSession:screenshot] media + fonts + tailwind ready (490ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (493ms)
+[Browser:WARN] [.WebGL-0x297400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x297400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x297400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (378ms)
+[initSession:screenshot] page.goto start (0ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (419ms)
+[Browser:WARN] [.WebGL-0x4a3400407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (387ms)
+[initSession:screenshot] page.goto start (0ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (427ms)
+[initSession:screenshot] pollHfReady complete (605ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (606ms)
+[initSession:screenshot] applyVideoMetadataHints complete (606ms)
+[initSession:screenshot] media + fonts + tailwind ready (607ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (611ms)
+[Browser:WARN] [.WebGL-0x602c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x4a3400407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (606ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (608ms)
+[initSession:screenshot] applyVideoMetadataHints complete (608ms)
+[initSession:screenshot] media + fonts + tailwind ready (609ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (612ms)
+[initSession:screenshot] page.goto complete (386ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x602c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x4a3400407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (431ms)
+[initSession:screenshot] pollHfReady complete (510ms)
+[Browser:WARN] [.WebGL-0x569400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (513ms)
+[initSession:screenshot] applyVideoMetadataHints complete (513ms)
+[initSession:screenshot] media + fonts + tailwind ready (517ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (534ms)
+[initSession:screenshot] page.goto complete (405ms)
+[Browser:WARN] [.WebGL-0x602c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x4a3400407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x569400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x602c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] GSAP proxy flush complete (548ms)
+[Browser:WARN] [.WebGL-0x2b8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (550ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (552ms)
+[initSession:screenshot] applyVideoMetadataHints complete (552ms)
+[initSession:screenshot] media + fonts + tailwind ready (553ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (557ms)
+[Browser:WARN] [.WebGL-0x569400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x2b8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x569400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x2b8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x2b8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 0 (cold): 16122 ms
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (365ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (396ms)
+[Browser:WARN] [.WebGL-0x1b1c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (582ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (583ms)
+[initSession:screenshot] applyVideoMetadataHints complete (583ms)
+[initSession:screenshot] media + fonts + tailwind ready (584ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (586ms)
+[Browser:WARN] [.WebGL-0x1b1c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1b1c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1b1c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (377ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto complete (386ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (489ms)
+[Browser:WARN] [.WebGL-0x1f400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (490ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (492ms)
+[initSession:screenshot] applyVideoMetadataHints complete (492ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] media + fonts + tailwind ready (493ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (497ms)
+[Browser:WARN] [.WebGL-0x1f400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (506ms)
+[Browser:WARN] [.WebGL-0x3d4c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (507ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (509ms)
+[initSession:screenshot] applyVideoMetadataHints complete (509ms)
+[initSession:screenshot] media + fonts + tailwind ready (510ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (514ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (388ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (425ms)
+[Browser:WARN] [.WebGL-0x1f400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3d4c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x10e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1f400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x3d4c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (611ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (613ms)
+[initSession:screenshot] applyVideoMetadataHints complete (613ms)
+[initSession:screenshot] media + fonts + tailwind ready (614ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (618ms)
+[Browser:WARN] [.WebGL-0x10e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (431ms)
+[Browser:WARN] [.WebGL-0x3d4c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto complete (415ms)
+[Browser:WARN] [.WebGL-0x10e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (559ms)
+[Browser:WARN] [.WebGL-0x1cfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (561ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (563ms)
+[initSession:screenshot] applyVideoMetadataHints complete (563ms)
+[initSession:screenshot] media + fonts + tailwind ready (564ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (572ms)
+[initSession:screenshot] GSAP proxy flush complete (554ms)
+[Browser:WARN] [.WebGL-0x49240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1cfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (556ms)
+[Browser:WARN] [.WebGL-0x10e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (557ms)
+[initSession:screenshot] applyVideoMetadataHints complete (557ms)
+[initSession:screenshot] media + fonts + tailwind ready (558ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (562ms)
+[Browser:WARN] [.WebGL-0x49240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1cfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x49240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x1cfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x49240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 1 (warm): 16340 ms
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (368ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (460ms)
+[Browser:WARN] [.WebGL-0x75240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (461ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (462ms)
+[initSession:screenshot] applyVideoMetadataHints complete (462ms)
+[initSession:screenshot] media + fonts + tailwind ready (462ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (465ms)
+[Browser:WARN] [.WebGL-0x75240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x75240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x75240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (1ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (380ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (416ms)
+[Browser:WARN] [.WebGL-0x18d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (598ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (599ms)
+[initSession:screenshot] applyVideoMetadataHints complete (599ms)
+[initSession:screenshot] media + fonts + tailwind ready (599ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (602ms)
+[Browser:WARN] [.WebGL-0x18d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (384ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (415ms)
+[initSession:screenshot] page.goto complete (376ms)
+[Browser:WARN] [.WebGL-0x18d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] GSAP proxy flush complete (419ms)
+[Browser:WARN] [.WebGL-0x48cc0041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto start (0ms)
+[Browser:WARN] [.WebGL-0x18d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x514c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (590ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (591ms)
+[initSession:screenshot] applyVideoMetadataHints complete (591ms)
+[initSession:screenshot] media + fonts + tailwind ready (592ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (594ms)
+[initSession:screenshot] pollHfReady complete (617ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (618ms)
+[initSession:screenshot] applyVideoMetadataHints complete (618ms)
+[initSession:screenshot] media + fonts + tailwind ready (619ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (622ms)
+[Browser:WARN] [.WebGL-0x48cc0041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x514c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x48cc0041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x514c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (389ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x48cc0041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] page.goto complete (405ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x514c0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] GSAP proxy flush complete (526ms)
+[Browser:WARN] [.WebGL-0xbfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (537ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (539ms)
+[initSession:screenshot] applyVideoMetadataHints complete (539ms)
+[initSession:screenshot] media + fonts + tailwind ready (540ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (550ms)
+[Browser:WARN] [.WebGL-0xbfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (547ms)
+[Browser:WARN] [.WebGL-0x38a400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (548ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (549ms)
+[initSession:screenshot] applyVideoMetadataHints complete (549ms)
+[initSession:screenshot] media + fonts + tailwind ready (552ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (559ms)
+[Browser:WARN] [.WebGL-0x38a400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0xbfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x38a400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0xbfc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x38a400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 2 (warm): 15852 ms
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (366ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (463ms)
+[Browser:WARN] [.WebGL-0x7c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (464ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (465ms)
+[initSession:screenshot] applyVideoMetadataHints complete (465ms)
+[initSession:screenshot] media + fonts + tailwind ready (466ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (469ms)
+[Browser:WARN] [.WebGL-0x7c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x7c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x7c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (372ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (475ms)
+[Browser:WARN] [.WebGL-0x2a0400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (476ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (477ms)
+[initSession:screenshot] applyVideoMetadataHints complete (477ms)
+[initSession:screenshot] media + fonts + tailwind ready (478ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (481ms)
+[Browser:WARN] [.WebGL-0x2a0400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto start (0ms)
+[Browser:WARN] [.WebGL-0x2a0400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (370ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (414ms)
+[Browser:WARN] [.WebGL-0x2a0400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x717c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] pollHfReady complete (592ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (593ms)
+[initSession:screenshot] applyVideoMetadataHints complete (593ms)
+[initSession:screenshot] media + fonts + tailwind ready (594ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (598ms)
+[initSession:screenshot] page.goto complete (396ms)
+[initSession:screenshot] page.goto start (0ms)
+[Browser:WARN] [.WebGL-0x717c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (442ms)
+[Browser:WARN] [.WebGL-0x717c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (532ms)
+[Browser:WARN] [.WebGL-0x7b40041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (534ms)
+[initSession:screenshot] applyVideoMetadataHints complete (534ms)
+[initSession:screenshot] media + fonts + tailwind ready (535ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (538ms)
+[Browser:WARN] [.WebGL-0x717c00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x7b40041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (381ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x7b40041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (497ms)
+[Browser:WARN] [.WebGL-0x389400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (498ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (500ms)
+[initSession:screenshot] applyVideoMetadataHints complete (500ms)
+[initSession:screenshot] media + fonts + tailwind ready (501ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (506ms)
+[initSession:screenshot] page.goto complete (409ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x389400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (454ms)
+[Browser:WARN] [.WebGL-0x7b40041f000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] pollHfReady complete (544ms)
+[Browser:WARN] [.WebGL-0x26dc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (545ms)
+[initSession:screenshot] applyVideoMetadataHints complete (545ms)
+[initSession:screenshot] media + fonts + tailwind ready (546ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (550ms)
+[Browser:WARN] [.WebGL-0x389400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x26dc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x389400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x26dc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x26dc0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 3 (warm): 16393 ms
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (1ms)
+[initSession:screenshot] page.goto complete (371ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (403ms)
+[Browser:WARN] [.WebGL-0x6aec00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (568ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (569ms)
+[initSession:screenshot] applyVideoMetadataHints complete (570ms)
+[initSession:screenshot] media + fonts + tailwind ready (571ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (575ms)
+[Browser:WARN] [.WebGL-0x6aec00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x6aec00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x6aec00406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (368ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (402ms)
+[initSession:screenshot] page.goto complete (382ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x5aac00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (424ms)
+[Browser:WARN] [.WebGL-0x2eec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (384ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (577ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (578ms)
+[initSession:screenshot] applyVideoMetadataHints complete (578ms)
+[initSession:screenshot] media + fonts + tailwind ready (579ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (583ms)
+[initSession:screenshot] GSAP proxy flush complete (434ms)
+[initSession:screenshot] pollHfReady complete (603ms)
+[initSession:screenshot] page.goto complete (389ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (606ms)
+[initSession:screenshot] applyVideoMetadataHints complete (606ms)
+[initSession:screenshot] media + fonts + tailwind ready (609ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (613ms)
+[Browser:WARN] [.WebGL-0x5ed40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x5aac00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (392ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[Browser:WARN] [.WebGL-0x2eec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] GSAP proxy flush complete (430ms)
+[initSession:screenshot] pollHfReady complete (596ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (597ms)
+[initSession:screenshot] applyVideoMetadataHints complete (597ms)
+[initSession:screenshot] media + fonts + tailwind ready (600ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (604ms)
+[initSession:screenshot] GSAP proxy flush complete (540ms)
+[Browser:WARN] [.WebGL-0x2e8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (541ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (546ms)
+[initSession:screenshot] applyVideoMetadataHints complete (546ms)
+[initSession:screenshot] media + fonts + tailwind ready (548ms)
+[Browser:WARN] [.WebGL-0x5aac00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (552ms)
+[Browser:WARN] [.WebGL-0x7cec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x5ed40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x2eec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x2e8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x5aac00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] pollHfReady complete (648ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (651ms)
+[initSession:screenshot] applyVideoMetadataHints complete (651ms)
+[initSession:screenshot] media + fonts + tailwind ready (653ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (656ms)
+[Browser:WARN] [.WebGL-0x5ed40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x2eec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x2e8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x7cec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x5ed40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x2e8400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x7cec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x7cec0041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 4 (warm): 16876 ms
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (368ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (457ms)
+[Browser:WARN] [.WebGL-0x3240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (458ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (459ms)
+[initSession:screenshot] applyVideoMetadataHints complete (459ms)
+[initSession:screenshot] media + fonts + tailwind ready (460ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (463ms)
+[Browser:WARN] [.WebGL-0x3240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (360ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] GSAP proxy flush complete (463ms)
+[Browser:WARN] [.WebGL-0x570c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (464ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (465ms)
+[initSession:screenshot] applyVideoMetadataHints complete (465ms)
+[initSession:screenshot] media + fonts + tailwind ready (466ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (469ms)
+[Browser:WARN] [.WebGL-0x570c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x570c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x570c00407000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] page.goto complete (383ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] GSAP proxy flush complete (493ms)
+[Browser:WARN] [.WebGL-0x59240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (495ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (497ms)
+[initSession:screenshot] applyVideoMetadataHints complete (497ms)
+[initSession:screenshot] media + fonts + tailwind ready (498ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (502ms)
+[Browser:WARN] [.WebGL-0x59240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto start (0ms)
+[Browser:WARN] [.WebGL-0x59240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x59240041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[initSession:screenshot] page.goto complete (375ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] GSAP proxy flush complete (413ms)
+[Browser:WARN] [.WebGL-0x3e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] page.goto complete (387ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] page.goto complete (381ms)
+[initSession:screenshot] GSAP proxy flush complete (426ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (599ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (604ms)
+[initSession:screenshot] applyVideoMetadataHints complete (604ms)
+[initSession:screenshot] media + fonts + tailwind ready (607ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (611ms)
+[initSession:screenshot] GSAP proxy flush complete (451ms)
+[Browser:WARN] [.WebGL-0x77d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollHfReady complete (529ms)
+[Browser:WARN] [.WebGL-0x15640041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (532ms)
+[initSession:screenshot] applyVideoMetadataHints complete (532ms)
+[initSession:screenshot] media + fonts + tailwind ready (533ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (537ms)
+[initSession:screenshot] pollHfReady complete (626ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (628ms)
+[initSession:screenshot] applyVideoMetadataHints complete (628ms)
+[initSession:screenshot] media + fonts + tailwind ready (630ms)
+[initSession:screenshot] static-frame dedup: disabled (canvas/webgl) (633ms)
+[Browser:WARN] [.WebGL-0x15640041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x77d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x15640041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x3e400406a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x77d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[Browser:WARN] [.WebGL-0x15640041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[Browser:WARN] [.WebGL-0x77d40041ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[worker] canvas-webgl/producer-default run 5 (warm): 15659 ms

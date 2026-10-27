@@ -1,0 +1,103 @@
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[hyperframes] browserGpuMode probe → hardware (WebGL renderer vendor="Google Inc. (Intel)" renderer="ANGLE (Intel, Intel(R) UHD Graphics 770 (0x0000A780) Direct3D11 vs_5_0 ps_5_0, D3D11)")
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (383ms)
+[initSession:screenshot] GSAP proxy flush complete (390ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (525ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (527ms)
+[initSession:screenshot] applyVideoMetadataHints complete (527ms)
+[initSession:screenshot] media + fonts + tailwind ready (529ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (590ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (594ms)
+[initSession:drawelement] drawElement canvas injected (597ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (598ms)
+[worker] webm-transparency/cli-local-default run 0 (cold): 12891 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (383ms)
+[initSession:screenshot] GSAP proxy flush complete (391ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (528ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (529ms)
+[initSession:screenshot] applyVideoMetadataHints complete (529ms)
+[initSession:screenshot] media + fonts + tailwind ready (530ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (537ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (539ms)
+[initSession:drawelement] drawElement canvas injected (541ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (542ms)
+[worker] webm-transparency/cli-local-default run 1 (warm): 5387 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (387ms)
+[initSession:screenshot] GSAP proxy flush complete (395ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (532ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (533ms)
+[initSession:screenshot] applyVideoMetadataHints complete (533ms)
+[initSession:screenshot] media + fonts + tailwind ready (533ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (540ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (543ms)
+[initSession:drawelement] drawElement canvas injected (545ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (545ms)
+[worker] webm-transparency/cli-local-default run 2 (warm): 5403 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (382ms)
+[initSession:screenshot] GSAP proxy flush complete (389ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (529ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (530ms)
+[initSession:screenshot] applyVideoMetadataHints complete (530ms)
+[initSession:screenshot] media + fonts + tailwind ready (531ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (538ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (540ms)
+[initSession:drawelement] drawElement canvas injected (542ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (543ms)
+[worker] webm-transparency/cli-local-default run 3 (warm): 5403 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (380ms)
+[initSession:screenshot] GSAP proxy flush complete (388ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (525ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (526ms)
+[initSession:screenshot] applyVideoMetadataHints complete (526ms)
+[initSession:screenshot] media + fonts + tailwind ready (527ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (534ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (537ms)
+[initSession:drawelement] drawElement canvas injected (540ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (540ms)
+[worker] webm-transparency/cli-local-default run 4 (warm): 5775 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Injected deterministic @font-face rules for 1 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=d3d11, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (401ms)
+[initSession:screenshot] GSAP proxy flush complete (409ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (549ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (549ms)
+[initSession:screenshot] applyVideoMetadataHints complete (549ms)
+[initSession:screenshot] media + fonts + tailwind ready (550ms)
+[initSession:screenshot] timeline at-risk predictor: 0/60 frames (0%) (559ms)
+[initSession:screenshot] static-frame dedup: disabled (eligible) (561ms)
+[initSession:drawelement] drawElement canvas injected (563ms)
+[initSession:drawelement] screenshot fallback: 8 clip-boundary frame(s) (563ms)
+[worker] webm-transparency/cli-local-default run 5 (warm): 5797 ms

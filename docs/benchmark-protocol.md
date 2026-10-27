@@ -21,10 +21,13 @@ Runner options:
 | `--control <profile>` / `--no-control` | Add or skip the uninstrumented control cell. Default: control for `producer-default` |
 | `--out dir` | Write results to `dir` |
 | `--strict-idle` | Refuse to run on a busy host instead of only flagging it |
+| `--settle-ms n` | Settle cooldown before every run (default 5000; 0 = back to back) |
+| `--max-chrome`, `--min-free-ram-pct`, `--min-free-ram-gib`, `--max-commit-pct`, `--max-consecutive-failures` | Fail-closed host limits; see *Host safety* |
 
 Other commands, run from `benchmarks/` (`benchmarks/package.json` has the same commands as scripts):
 
 - Regenerate the report from raw data: `node --import … src/report.ts results/<dir>`
+- Calibration diagnostic: `node --import … src/diag-calibration.ts --out results/<dir>/diagnostics/<name>`. It renders one fixture in four modes (a fresh process per run or the same process, each with or without the settle wait) and records the calibration outcome per run, with upstream's full warning metadata.
 - Recompute every number the ADR quotes: `node --import … src/adr-facts.ts results/<dir>`
 - Typecheck: `../upstream/hyperframes/node_modules/.bin/tsc -p tsconfig.json`
 
@@ -38,6 +41,10 @@ Other commands, run from `benchmarks/` (`benchmarks/package.json` has the same c
   - The variant order rotates by (fixture index + run), so slow host drift hits every variant alike.
   - Only one render runs at a time. Idle workers stay alive between their runs.
 - **Control.** A control cell runs with no CDP tap, no GPU or process-tree samplers, and `HF_PROFILE_FALLBACK_CAPTURE` unset. It records wall time and ffprobe output only. `overhead.csv` and the report's *Harness overhead* table compare it with the instrumented cell of the same profile.
+- **Settle wait.** Before every run (`--settle-ms`, default 5000), the worker waits up to 60 s for every `chrome-headless-shell.exe`, `ffmpeg.exe` and `ffprobe.exe` on the host to exit, then sleeps the fixed cooldown.
+  - The result is recorded per run under `settle` (alive at start and at end, waited ms).
+  - Desktop `chrome.exe` is not watched. The benchmark host must not run other headless-shell or FFmpeg work.
+  - `--settle-ms 0` runs back to back.
 - **Idle gate.** Before the benchmark starts, a 10 s check runs; before every run, a 3 s check. Thresholds: CPU < 20 % (above this desktop's measured noise floor of ~10-14 %) and GPU util < 15 %. The gate retries for up to 60 s.
   - Each run records `idle.attempts` and `idle.ok`.
   - `ok=false` is counted as an *idle flag*.
@@ -56,6 +63,38 @@ Other commands, run from `benchmarks/` (`benchmarks/package.json` has the same c
   - The critical path is a heuristic, not a dependency graph: at each instant it takes the stage that ends last.
 - **Statistics.** With n = 5 warm runs, a nearest-rank p95 equals the max, so the report shows median, **max** and cv. Raw `Distribution` objects keep `p95` for larger n.
 - **Cost.** The measured cost figures are CPU-seconds and wall-seconds per output minute. `est. $/output-min` is an **estimate**: CPU-seconds × a reference vCPU-hour price. The price defaults to AWS c7i.xlarge on-demand in us-east-1 ($0.0446/vCPU-h, a public list price as known in 2025) and can be overridden with `BENCH_USD_PER_VCPU_HOUR`. The source string is written into `summary.json → referenceRate`.
+
+## Host safety
+
+An earlier full baseline froze the benchmark desktop and needed a hard reset. Dozens of visible console windows appeared, each from a `chrome-headless-shell` NetworkService utility process failing with `0x800700e8` (`ERROR_NO_DATA`: the pipe to its parent had already closed). The harness now has these guards (`benchmarks/src/process-guard.ts`):
+
+- **Hidden consoles.** Every `spawn`/`spawnSync` in `benchmarks/src` passes `windowsHide: true`. Chrome is launched by upstream through puppeteer, so the harness cannot set this flag on it. Chrome and FFmpeg are console programs: they inherit the worker's hidden console instead of each opening a visible window. A worker without `windowsHide`, started from a parent that has no console, gets a new visible console, and so does every descendant that does not inherit one.
+- **Process ownership.** A hidden PowerShell loop samples the process table every 2 s.
+  - Every process descended from a worker the runner started is tracked by (PID, creation time). PID reuse can therefore never make the harness kill an unrelated process.
+  - A tracked process stays tracked after its parent dies. This covers the orphan case that `taskkill /T` cannot reach.
+  - Processes are never killed by image name alone.
+- **Tree kill.** The runner kills a worker's whole tree with `taskkill /T /F /PID` in each of these cases:
+  - a run takes longer than 20 min;
+  - `close` takes longer than 60 s;
+  - the guard aborts;
+  - the harness gets SIGINT, SIGTERM or SIGHUP, or exits.
+
+  After every fixture, and at teardown, it sweeps any tracked survivor. Swept processes are listed in `run-manifest.json → guard.leftovers`.
+- **Fail-closed resource limits.** The run aborts when any limit is crossed: all workers are killed, the sweep runs, `run-manifest.json → abort` records the reason and the sample that triggered it, no report is written, and the exit code is 3.
+
+  | Limit | Default | Option |
+  |---|---|---|
+  | Live `chrome-headless-shell.exe` processes, host-wide | 80 (a 5-worker render peaked at 25 in the smoke test) | `--max-chrome` |
+  | Free physical RAM | ≥ max(15 %, 4 GiB) | `--min-free-ram-pct`, `--min-free-ram-gib` |
+  | Commit charge | ≤ 90 % of the commit limit | `--max-commit-pct` |
+  | Consecutive failed runs (run error, worker death, or upstream calibration failure) | 3 | `--max-consecutive-failures` |
+
+  The limits are checked once before any render starts. The run refuses to start on a host that is already over a limit.
+- **Worker stderr.** The full stderr of each worker is kept in `raw/<fixture>/<variant>/worker-stderr.log`. Upstream prints its GPU-mode probe result (`browserGpuMode probe → …`) and Chrome launch errors there, not through the job logger.
+
+`diag-calibration.ts` uses the same guard and kill paths.
+
+Fault-injection check: `--inject-worker-kill-ms <ms>` kills one worker process mid-run, in the last round. It kills the process only, not its tree. The killed cell must be recorded with `exitCode: 1`, the other cells must finish, and no `chrome-headless-shell`/`ffmpeg` may remain on the host afterwards. Run this check with one fixture and `--warm-runs 1` before every full baseline on a new host.
 
 ## Fixtures
 

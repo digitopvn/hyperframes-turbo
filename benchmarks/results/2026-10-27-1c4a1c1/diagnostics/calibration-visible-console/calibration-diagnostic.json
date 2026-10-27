@@ -1,0 +1,457 @@
+{
+  "fixture": "gsap-static-holds",
+  "profile": "producer-default",
+  "settleMs": 5000,
+  "summary": [
+    {
+      "mode": "fresh-settled",
+      "freshProcessPerRun": true,
+      "settleMs": 5000,
+      "runs": 6,
+      "calibrationFailed": 3,
+      "sequence": "sFsFsF"
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "freshProcessPerRun": true,
+      "settleMs": 0,
+      "runs": 6,
+      "calibrationFailed": 4,
+      "sequence": "sFFFFs"
+    },
+    {
+      "mode": "same-back-to-back",
+      "freshProcessPerRun": false,
+      "settleMs": 0,
+      "runs": 6,
+      "calibrationFailed": 2,
+      "sequence": "FsssFs"
+    },
+    {
+      "mode": "same-settled",
+      "freshProcessPerRun": false,
+      "settleMs": 5000,
+      "runs": 6,
+      "calibrationFailed": 2,
+      "sequence": "sssFsF"
+    }
+  ],
+  "runs": [
+    {
+      "mode": "fresh-settled",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-26T23:53:39.945Z",
+      "wallMs": 32309.6304,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9135,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 979,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-1",
+      "run": 0,
+      "startedAt": "2026-10-26T23:54:23.233Z",
+      "wallMs": 62487.15670000001,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35398,
+      "calibrationFailed": true,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 989,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": {
+        "renderJobId": "92ce5928-262e-42ff-8210-b33b510610d5",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-2",
+      "run": 0,
+      "startedAt": "2026-10-26T23:55:36.658Z",
+      "wallMs": 27838.35,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9000,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 930,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-3",
+      "run": 0,
+      "startedAt": "2026-10-26T23:56:15.525Z",
+      "wallMs": 78083.3983,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35458,
+      "calibrationFailed": true,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 1013,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": {
+        "renderJobId": "5d86fa3b-86bb-484d-80ed-68081274c57a",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-4",
+      "run": 0,
+      "startedAt": "2026-10-26T23:57:47.547Z",
+      "wallMs": 28347.336000000003,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9138,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 880,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-5",
+      "run": 0,
+      "startedAt": "2026-10-26T23:58:26.865Z",
+      "wallMs": 70807.27739999999,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35438,
+      "calibrationFailed": true,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 953,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": {
+        "renderJobId": "cab333c3-44ec-40c3-8252-d39749421f46",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-26T23:59:42.688Z",
+      "wallMs": 47543.772300000004,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 24520,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-1",
+      "run": 0,
+      "startedAt": "2026-10-27T00:00:35.237Z",
+      "wallMs": 164702.2637,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35413,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "74a42270-cdc6-4a82-a542-0f44e11c3d9f",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-2",
+      "run": 0,
+      "startedAt": "2026-10-27T00:03:24.956Z",
+      "wallMs": 340640.37549999997,
+      "capturePath": null,
+      "workers": null,
+      "captureSetupMs": null,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "1c49b23c-3692-48d8-abe8-ba707b35e86a",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-3",
+      "run": 0,
+      "startedAt": "2026-10-27T00:09:10.590Z",
+      "wallMs": 340611.86,
+      "capturePath": null,
+      "workers": null,
+      "captureSetupMs": null,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "fc4a10a8-6bdc-4df4-9752-b279a2c0b94f",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-4",
+      "run": 0,
+      "startedAt": "2026-10-27T00:14:56.146Z",
+      "wallMs": 218351.7006,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35440,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "0693ea02-0cf9-40d9-8324-594b3adc17b9",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-5",
+      "run": 0,
+      "startedAt": "2026-10-27T00:18:39.487Z",
+      "wallMs": 168290.23440000002,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 12756,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T00:21:32.782Z",
+      "wallMs": 77213.9875,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35413,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "785edfb0-4db6-43b5-bf8a-a6de28e89544",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 1,
+      "startedAt": "2026-10-27T00:22:54.159Z",
+      "wallMs": 27987.716799999995,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9080,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 2,
+      "startedAt": "2026-10-27T00:23:26.302Z",
+      "wallMs": 114155.3588,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8550,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 3,
+      "startedAt": "2026-10-27T00:25:24.638Z",
+      "wallMs": 28634.498300000007,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9054,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 4,
+      "startedAt": "2026-10-27T00:25:57.444Z",
+      "wallMs": 133236.7047,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35157,
+      "calibrationFailed": true,
+      "settle": null,
+      "calibrationWarnMeta": {
+        "renderJobId": "478de8a6-e54d-43dd-87c4-b67a660e4b74",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 5,
+      "startedAt": "2026-10-27T00:28:14.859Z",
+      "wallMs": 28188.879399999976,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9263,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T00:28:54.028Z",
+      "wallMs": 114048.8279,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9093,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 969,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 1,
+      "startedAt": "2026-10-27T00:30:58.236Z",
+      "wallMs": 27897.28879999998,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9022,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 989,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 2,
+      "startedAt": "2026-10-27T00:31:36.328Z",
+      "wallMs": 124355.17420000001,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8952,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 998,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 3,
+      "startedAt": "2026-10-27T00:33:50.776Z",
+      "wallMs": 61151.755799999984,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35044,
+      "calibrationFailed": true,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 917,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": {
+        "renderJobId": "8e5d298f-ae8c-4d87-88a9-c34084e823cb",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 4,
+      "startedAt": "2026-10-27T00:35:02.047Z",
+      "wallMs": 27652.610199999996,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8657,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 953,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 5,
+      "startedAt": "2026-10-27T00:35:39.854Z",
+      "wallMs": 108688.57280000002,
+      "capturePath": "streaming",
+      "workers": 1,
+      "captureSetupMs": 35129,
+      "calibrationFailed": true,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 1000,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": {
+        "renderJobId": "c3de360b-f82d-41f7-89e8-4ac14e7a8d68",
+        "protocolTimeout": 30000,
+        "error": "Network.enable timed out. Increase the 'protocolTimeout' setting in launch/connect calls for a higher timeout if needed."
+      }
+    }
+  ]
+}
