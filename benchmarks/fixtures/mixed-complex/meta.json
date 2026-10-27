@@ -1,0 +1,8 @@
+{
+  "name": "Mixed complex scene",
+  "description": "HyperFrames Turbo golden benchmark fixture (1920x1080, 30 fps).",
+  "tags": ["mixed","video","audio","css","svg","cuts", "turbo-golden"],
+  "renderConfig": {
+    "fps": 30
+  }
+}

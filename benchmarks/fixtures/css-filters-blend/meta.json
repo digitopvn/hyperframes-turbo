@@ -1,0 +1,8 @@
+{
+  "name": "CSS filters, blend and backdrop",
+  "description": "HyperFrames Turbo golden benchmark fixture (1920x1080, 30 fps).",
+  "tags": ["css","filter","blend","backdrop", "turbo-golden"],
+  "renderConfig": {
+    "fps": 30
+  }
+}

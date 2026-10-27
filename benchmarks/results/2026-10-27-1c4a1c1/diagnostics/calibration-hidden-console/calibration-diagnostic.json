@@ -1,0 +1,413 @@
+{
+  "fixture": "gsap-static-holds",
+  "profile": "producer-default",
+  "settleMs": 5000,
+  "summary": [
+    {
+      "mode": "fresh-settled",
+      "freshProcessPerRun": true,
+      "settleMs": 5000,
+      "runs": 6,
+      "calibrationFailed": 0,
+      "sequence": "ssssss"
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "freshProcessPerRun": true,
+      "settleMs": 0,
+      "runs": 6,
+      "calibrationFailed": 0,
+      "sequence": "ssssss"
+    },
+    {
+      "mode": "same-back-to-back",
+      "freshProcessPerRun": false,
+      "settleMs": 0,
+      "runs": 6,
+      "calibrationFailed": 0,
+      "sequence": "ssssss"
+    },
+    {
+      "mode": "same-settled",
+      "freshProcessPerRun": false,
+      "settleMs": 5000,
+      "runs": 6,
+      "calibrationFailed": 0,
+      "sequence": "ssssss"
+    }
+  ],
+  "runs": [
+    {
+      "mode": "fresh-settled",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T03:43:34.385Z",
+      "wallMs": 16909.3553,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 4587,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 520,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-1",
+      "run": 0,
+      "startedAt": "2026-10-27T03:44:03.886Z",
+      "wallMs": 18624.727899999998,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 5954,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 537,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-2",
+      "run": 0,
+      "startedAt": "2026-10-27T03:44:34.761Z",
+      "wallMs": 17197.6091,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 4927,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 550,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-3",
+      "run": 0,
+      "startedAt": "2026-10-27T03:45:06.596Z",
+      "wallMs": 16741.299,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 4725,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 535,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-4",
+      "run": 0,
+      "startedAt": "2026-10-27T03:45:35.561Z",
+      "wallMs": 18618.422599999998,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 5852,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 532,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-settled",
+      "process": "process-5",
+      "run": 0,
+      "startedAt": "2026-10-27T03:46:07.481Z",
+      "wallMs": 18426.2206,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 5873,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 573,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T03:46:33.307Z",
+      "wallMs": 21674.1881,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8102,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-1",
+      "run": 0,
+      "startedAt": "2026-10-27T03:47:04.369Z",
+      "wallMs": 29903.485,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8567,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-2",
+      "run": 0,
+      "startedAt": "2026-10-27T03:47:42.252Z",
+      "wallMs": 19513.255100000002,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 6010,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-3",
+      "run": 0,
+      "startedAt": "2026-10-27T03:48:08.810Z",
+      "wallMs": 21587.3931,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8641,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-4",
+      "run": 0,
+      "startedAt": "2026-10-27T03:48:38.129Z",
+      "wallMs": 22539.8189,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 10477,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "fresh-back-to-back",
+      "process": "process-5",
+      "run": 0,
+      "startedAt": "2026-10-27T03:49:09.404Z",
+      "wallMs": 19021.978199999998,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 8073,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T03:49:36.461Z",
+      "wallMs": 20940.5619,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 9809,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 1,
+      "startedAt": "2026-10-27T03:50:01.573Z",
+      "wallMs": 26275.221999999998,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 15234,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 2,
+      "startedAt": "2026-10-27T03:50:32.028Z",
+      "wallMs": 28034.114500000003,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 16984,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 3,
+      "startedAt": "2026-10-27T03:51:04.241Z",
+      "wallMs": 29750.933300000004,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 18768,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 4,
+      "startedAt": "2026-10-27T03:51:41.239Z",
+      "wallMs": 30180.489499999996,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 19110,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-back-to-back",
+      "process": "process-0",
+      "run": 5,
+      "startedAt": "2026-10-27T03:52:15.610Z",
+      "wallMs": 31961.189400000003,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 20761,
+      "calibrationFailed": false,
+      "settle": null,
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 0,
+      "startedAt": "2026-10-27T03:53:03.756Z",
+      "wallMs": 17326.939700000003,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 6131,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 537,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 1,
+      "startedAt": "2026-10-27T03:53:30.846Z",
+      "wallMs": 24031.838099999994,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 12962,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 564,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 2,
+      "startedAt": "2026-10-27T03:54:04.665Z",
+      "wallMs": 23016.01280000001,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 11874,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 599,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 3,
+      "startedAt": "2026-10-27T03:54:37.453Z",
+      "wallMs": 27830.244399999996,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 16996,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 578,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 4,
+      "startedAt": "2026-10-27T03:55:15.120Z",
+      "wallMs": 30177.6814,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 18403,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 631,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    },
+    {
+      "mode": "same-settled",
+      "process": "process-0",
+      "run": 5,
+      "startedAt": "2026-10-27T03:55:55.076Z",
+      "wallMs": 28120.9099,
+      "capturePath": "disk",
+      "workers": 5,
+      "captureSetupMs": 17278,
+      "calibrationFailed": false,
+      "settle": {
+        "aliveAtStart": 0,
+        "aliveAtEnd": 0,
+        "waitedMs": 574,
+        "cooldownMs": 5000
+      },
+      "calibrationWarnMeta": null
+    }
+  ]
+}

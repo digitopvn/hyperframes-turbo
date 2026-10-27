@@ -1,0 +1,1515 @@
+{
+  "schema": "turbo-bench-run/1",
+  "fixture": "webm-transparency",
+  "category": "transparent-alpha",
+  "source": "upstream",
+  "fixtureSourceSha256": "b9d989e99b201ea5f02a579e9197a6a049b8d173fe7c243746097e44e849ee69",
+  "inputs": {
+    "media": {},
+    "vendor": {}
+  },
+  "profile": "producer-default",
+  "instrumented": true,
+  "profileEnv": {
+    "HF_PROFILE_FALLBACK_CAPTURE": "true",
+    "HYPERFRAMES_EXTRACT_CACHE_DIR": "$TMP\\turbo-bench-xcache-5vMXJi"
+  },
+  "run": 4,
+  "kind": "warm",
+  "startedAt": "2026-10-27T02:58:06.692Z",
+  "wallMs": 6431.290399999998,
+  "error": null,
+  "idle": {
+    "ok": true,
+    "cpuBusyPct": 11.72943066214528,
+    "gpuUtilPct": 1.5,
+    "gpuEncPct": 0,
+    "attempts": 1,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "cdpTap": {
+    "installedOn": [
+      "puppeteer-core@25.11.0+a5c24e19fe1df48a",
+      "puppeteer-core@25.8.0+a5c24e19fe1df48a"
+    ],
+    "inboundBytes": 1139825,
+    "outboundBytes": 228240,
+    "eventBytes": 370671,
+    "byMethod": {
+      "Target.setDiscoverTargets": {
+        "calls": 1,
+        "bytes": 20,
+        "sentBytes": 56,
+        "latenciesMs": [
+          0.4861000000091735
+        ]
+      },
+      "Target.setAutoAttach": {
+        "calls": 5,
+        "bytes": 289,
+        "sentBytes": 521,
+        "latenciesMs": [
+          0.5184000000008382,
+          0.6873000000196043,
+          1.735000000015134,
+          1583.4363000000012,
+          1868.4251999999979
+        ]
+      },
+      "Runtime.runIfWaitingForDebugger": {
+        "calls": 4,
+        "bytes": 270,
+        "sentBytes": 132,
+        "latenciesMs": [
+          0.6049000000057276,
+          1.691499999986263,
+          1583.4055999999982,
+          1868.7164000000048
+        ]
+      },
+      "Browser.getVersion": {
+        "calls": 1,
+        "bytes": 302,
+        "sentBytes": 20,
+        "latenciesMs": [
+          0.215600000025006
+        ]
+      },
+      "Target.createTarget": {
+        "calls": 1,
+        "bytes": 65,
+        "sentBytes": 40,
+        "latenciesMs": [
+          1.4042999999946915
+        ]
+      },
+      "Network.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 16,
+        "latenciesMs": [
+          1868.5527000000002
+        ]
+      },
+      "Page.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 13,
+        "latenciesMs": [
+          1868.520599999989
+        ]
+      },
+      "Page.getFrameTree": {
+        "calls": 1,
+        "bytes": 457,
+        "sentBytes": 19,
+        "latenciesMs": [
+          1868.4882000000216
+        ]
+      },
+      "Page.setLifecycleEventsEnabled": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 46,
+        "latenciesMs": [
+          1868.6038999999873
+        ]
+      },
+      "Runtime.enable": {
+        "calls": 2,
+        "bytes": 136,
+        "sentBytes": 32,
+        "latenciesMs": [
+          1869.2090999999782,
+          0.20379999998840503
+        ]
+      },
+      "Audits.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 15,
+        "latenciesMs": [
+          1869.3332999999984
+        ]
+      },
+      "Performance.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 20,
+        "latenciesMs": [
+          1869.3205000000016
+        ]
+      },
+      "Log.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 12,
+        "latenciesMs": [
+          1869.3072000000102
+        ]
+      },
+      "WebMCP.enable": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 15,
+        "latenciesMs": [
+          1869.2911000000022
+        ]
+      },
+      "Page.addScriptToEvaluateOnNewDocument": {
+        "calls": 4,
+        "bytes": 336,
+        "sentBytes": 1879,
+        "latenciesMs": [
+          0.4182999999902677,
+          0.21330000000307336,
+          0.16340000001946464,
+          0.19950000001699664
+        ]
+      },
+      "Page.createIsolatedWorld": {
+        "calls": 1,
+        "bytes": 90,
+        "sentBytes": 145,
+        "latenciesMs": [
+          0.5701999999873806
+        ]
+      },
+      "Emulation.setDeviceMetricsOverride": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 154,
+        "latenciesMs": [
+          0.27700000000186265
+        ]
+      },
+      "Emulation.setTouchEmulationEnabled": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 51,
+        "latenciesMs": [
+          0.24380000002565794
+        ]
+      },
+      "Target.attachToTarget": {
+        "calls": 2,
+        "bytes": 135,
+        "sentBytes": 170,
+        "latenciesMs": [
+          0.20329999999376014,
+          0.3568000000086613
+        ]
+      },
+      "Page.navigate": {
+        "calls": 1,
+        "bytes": 177,
+        "sentBytes": 101,
+        "latenciesMs": [
+          353.5966999999946
+        ]
+      },
+      "Runtime.evaluate": {
+        "calls": 7,
+        "bytes": 733,
+        "sentBytes": 3431,
+        "latenciesMs": [
+          7.369899999990594,
+          25.12290000001667,
+          0.5049999999755528,
+          0.30930000002263114,
+          0.48470000000088476,
+          0.3212000000057742,
+          0.25730000002658926
+        ]
+      },
+      "Runtime.callFunctionOn": {
+        "calls": 254,
+        "bytes": 26329,
+        "sentBytes": 211016,
+        "latenciesMs": [
+          0.3717000000178814,
+          0.2729000000108499,
+          0.25089999998454005,
+          0.33280000000377186,
+          0.25950000001466833,
+          0.2111999999906402,
+          0.2171999999845866,
+          0.30560000002151355,
+          0.8306999999913387,
+          0.7722999999823514,
+          0.34299999999348074,
+          0.29390000001876615,
+          2.138999999995576,
+          0.43969999998807907,
+          0.24959999998100102,
+          0.22349999999278225,
+          0.3847000000241678,
+          0.746899999998277,
+          0.26209999999264255,
+          0.22379999997792765,
+          0.20539999997708946,
+          0.741600000008475,
+          0.41740000000572763,
+          0.22740000000339933,
+          0.2054000000061933,
+          0.8446999999869149,
+          0.2605000000039581,
+          0.2168999999994412,
+          0.20999999999185093,
+          0.7250000000058208,
+          0.3132000000041444,
+          0.26580000002286397,
+          0.23910000000614673,
+          0.6755000000121072,
+          0.2823000000207685,
+          0.23519999999552965,
+          0.18760000000474975,
+          0.6612000000022817,
+          0.3165000000153668,
+          0.21619999999529682,
+          0.19389999998384155,
+          0.6352999999944586,
+          0.3099000000220258,
+          0.2031999999890104,
+          0.2116000000096392,
+          0.779099999985192,
+          0.7894999999844003,
+          0.24439999999594875,
+          0.20749999998952262,
+          0.6328999999968801,
+          0.3834999999962747,
+          0.22649999998975545,
+          0.17459999999846332,
+          0.6362999999837484,
+          0.2994999999937136,
+          0.21409999998286366,
+          0.1700999999884516,
+          0.5697999999974854,
+          0.2844000000040978,
+          0.22570000000996515,
+          0.1959999999962747,
+          0.6313000000081956,
+          0.30049999998300336,
+          0.2143999999971129,
+          0.22740000000339933,
+          0.6291999999957625,
+          0.29699999999138527,
+          0.20800000001327135,
+          0.16960000002291054,
+          0.6509000000078231,
+          0.28340000001480803,
+          0.2126000000280328,
+          0.3557999999902677,
+          0.852599999983795,
+          0.3007999999972526,
+          0.2047000000020489,
+          0.17970000000786968,
+          0.6863000000012107,
+          0.3255000000062864,
+          0.2019999999902211,
+          0.2176999999792315,
+          0.6332000000111293,
+          0.3095000000030268,
+          0.2206000000005588,
+          0.1872999999905005,
+          0.6567999999970198,
+          0.2868000000016764,
+          0.2114000000001397,
+          0.17990000001736917,
+          1.0243999999947846,
+          0.3050000000221189,
+          0.2074000000138767,
+          0.18410000001313165,
+          0.7927000000199769,
+          0.29399999999441206,
+          0.20679999998537824,
+          0.19409999999334104,
+          0.6607000000076368,
+          0.3281000000133645,
+          0.21150000000488944,
+          0.20339999999850988,
+          0.6523000000161119,
+          0.3172999999951571,
+          0.19729999999981374,
+          0.2086999999883119,
+          0.7251000000105705,
+          0.3515000000188593,
+          0.2039000000222586,
+          0.2203000000154134,
+          0.7958999999973457,
+          0.41719999999622814,
+          0.4213999999919906,
+          0.20429999998304993,
+          0.6934999999939464,
+          0.3705000000190921,
+          0.3908999999985099,
+          0.2511999999987893,
+          0.5816000000049826,
+          0.287400000001071,
+          0.21350000001257285,
+          0.18399999997927807,
+          0.6418000000121538,
+          0.41169999999692664,
+          0.24580000000423752,
+          0.19529999999213032,
+          0.6310999999986961,
+          0.27979999998933636,
+          0.1927000000141561,
+          0.16210000001592562,
+          0.6564000000071246,
+          0.32110000000102445,
+          0.17660000000614673,
+          0.1551999999792315,
+          0.7479999999923166,
+          0.3032999999995809,
+          0.2019000000145752,
+          0.1934999999939464,
+          0.6326000000117347,
+          0.2888000000093598,
+          0.21199999999953434,
+          0.1907000000064727,
+          0.6058999999950174,
+          0.3055999999924097,
+          0.2039000000222586,
+          0.19880000001285225,
+          0.6649999999790452,
+          0.4452999999921303,
+          0.2270999999891501,
+          0.1934000000183005,
+          0.5924999999988358,
+          0.26110000000335276,
+          0.208199999993667,
+          0.1792999999888707,
+          0.573499999998603,
+          0.29020000001764856,
+          0.23060000000987202,
+          0.20459999999729916,
+          0.6884000000136439,
+          0.3673000000126194,
+          0.2831000000005588,
+          0.27030000000377186,
+          0.6942999999737367,
+          0.31979999999748543,
+          0.21880000000237487,
+          0.2210999999952037,
+          0.7137999999977183,
+          0.29399999999441206,
+          0.20720000000437722,
+          0.2355999999854248,
+          0.8780999999726191,
+          0.3147000000171829,
+          0.21429999999236315,
+          0.2173999999940861,
+          0.7454999999899883,
+          0.31339999998454005,
+          0.18760000000474975,
+          0.1992000000027474,
+          0.6032000000122935,
+          0.3129999999946449,
+          0.20310000001336448,
+          0.18510000000242144,
+          0.7973999999812804,
+          0.3132999999797903,
+          0.20650000000023283,
+          0.17939999999362044,
+          0.6426999999966938,
+          0.2937999999849126,
+          0.1989999999932479,
+          0.19310000000405125,
+          0.6388000000151806,
+          0.31010000000242144,
+          0.266700000007404,
+          0.2293999999819789,
+          0.6572999999916647,
+          0.37909999999101274,
+          0.2088999999978114,
+          0.20759999999427237,
+          0.6613000000070315,
+          0.28919999999925494,
+          0.2076999999990221,
+          0.172099999996135,
+          0.6128999999782536,
+          0.3030000000144355,
+          0.21600000001490116,
+          0.18919999999343418,
+          0.6429000000061933,
+          0.2766999999876134,
+          0.20689999999012798,
+          0.2059000000008382,
+          0.7118999999947846,
+          0.30590000000665896,
+          0.25089999998454005,
+          0.25710000001708977,
+          0.7523999999975786,
+          0.31110000002081506,
+          0.23989999998593703,
+          0.23329999999259599,
+          0.6699000000080559,
+          0.31390000000828877,
+          0.22119999999995343,
+          0.3251999999920372,
+          0.6327999999921303,
+          0.2755999999935739,
+          0.1755999999877531,
+          0.18419999998877756,
+          0.6520000000018626,
+          0.31359999999403954,
+          0.23999999999068677,
+          0.2091999999829568,
+          0.6736000000091735,
+          0.2863000000070315,
+          0.1987000000081025,
+          0.17350000000442378,
+          0.7592000000004191,
+          0.3724000000220258,
+          0.23970000000554137,
+          0.2601999999897089,
+          0.623699999996461,
+          0.2789999999804422,
+          0.19509999998263083,
+          0.17569999999250285,
+          0.6204999999899883,
+          0.26250000001164153,
+          0.21530000001075678,
+          0.19550000000162981,
+          0.5983000000123866,
+          0.25909999999566935,
+          0.20660000000498258,
+          0.21050000001559965,
+          1.047099999996135,
+          0.28649999998742715,
+          0.19009999997797422,
+          0.2026999999943655,
+          0.4765000000188593
+        ]
+      },
+      "Emulation.setDefaultBackgroundColorOverride": {
+        "calls": 1,
+        "bytes": 68,
+        "sentBytes": 78,
+        "latenciesMs": [
+          0.18820000000414439
+        ]
+      },
+      "Page.captureScreenshot": {
+        "calls": 60,
+        "bytes": 738707,
+        "sentBytes": 10080,
+        "latenciesMs": [
+          32.04159999999683,
+          30.454100000002654,
+          48.867199999978766,
+          30.440800000011222,
+          30.764199999975972,
+          49.23970000000554,
+          30.80470000000787,
+          49.05590000000666,
+          29.439400000002934,
+          48.240200000000186,
+          31.370699999999488,
+          49.345100000005914,
+          31.92809999999008,
+          47.55059999998775,
+          31.176800000015646,
+          47.75500000000466,
+          32.99009999999544,
+          47.115200000000186,
+          31.919299999979557,
+          48.31479999999283,
+          30.59759999997914,
+          49,
+          31.034899999998743,
+          48.37210000000778,
+          29.61740000001737,
+          47.91690000001108,
+          32.397999999986496,
+          48.16899999999441,
+          30.797400000010384,
+          49.50539999999455,
+          29.83969999998226,
+          48.705099999991944,
+          31.737999999983003,
+          48.163799999980256,
+          30.97530000002007,
+          48.664600000018254,
+          30.635899999993853,
+          48.36960000000545,
+          31.17300000000978,
+          47.672200000000885,
+          31.207499999989523,
+          48.77180000001681,
+          30.425799999997253,
+          48.70119999998133,
+          31.176299999991897,
+          49.04170000000158,
+          30.49210000000312,
+          48.51870000001509,
+          31.48560000001453,
+          48.02629999999772,
+          30.3804999999993,
+          49.17290000000503,
+          30.151799999992363,
+          49.08429999998771,
+          31.64110000000801,
+          47.43969999998808,
+          31.034600000013597,
+          48.19249999997555,
+          32.099500000011176,
+          31.085699999995995
+        ]
+      },
+      "SystemInfo.getProcessInfo": {
+        "calls": 1,
+        "bytes": 348,
+        "sentBytes": 27,
+        "latenciesMs": [
+          0.7270999999891501
+        ]
+      },
+      "Target.detachFromTarget": {
+        "calls": 1,
+        "bytes": 22,
+        "sentBytes": 71,
+        "latenciesMs": [
+          0.16890000001876615
+        ]
+      },
+      "Target.closeTarget": {
+        "calls": 1,
+        "bytes": 36,
+        "sentBytes": 65,
+        "latenciesMs": [
+          0.16180000000167638
+        ]
+      },
+      "Browser.close": {
+        "calls": 1,
+        "bytes": 22,
+        "sentBytes": 15,
+        "latenciesMs": [
+          0.6757000000216067
+        ]
+      }
+    }
+  },
+  "gpu": {
+    "samples": 32,
+    "avgUtilGpuPct": 0.625,
+    "peakUtilGpuPct": 10,
+    "avgUtilEncPct": 0,
+    "avgUtilDecPct": 0,
+    "peakVramUsedMiB": 3648,
+    "baselineVramUsedMiB": 3648,
+    "peakVramDeltaMiB": 0
+  },
+  "gpuTimeline": [
+    [
+      1793069886733,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069886933,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069887136,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069887338,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069887542,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069887743,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069887946,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069888149,
+      0,
+      0,
+      0,
+      3624
+    ],
+    [
+      1793069888351,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069888554,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069888758,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069888961,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069889173,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069889362,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069889564,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069889768,
+      0,
+      0,
+      0,
+      3625
+    ],
+    [
+      1793069889970,
+      0,
+      0,
+      0,
+      3625
+    ],
+    [
+      1793069890172,
+      0,
+      0,
+      0,
+      3625
+    ],
+    [
+      1793069890374,
+      0,
+      0,
+      0,
+      3616
+    ],
+    [
+      1793069890576,
+      0,
+      0,
+      0,
+      3616
+    ],
+    [
+      1793069890779,
+      0,
+      0,
+      0,
+      3616
+    ],
+    [
+      1793069890981,
+      0,
+      0,
+      0,
+      3616
+    ],
+    [
+      1793069891184,
+      0,
+      0,
+      0,
+      3616
+    ],
+    [
+      1793069891385,
+      0,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069891589,
+      10,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069891791,
+      10,
+      0,
+      0,
+      3634
+    ],
+    [
+      1793069891993,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069892195,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069892398,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069892602,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069892804,
+      0,
+      0,
+      0,
+      3648
+    ],
+    [
+      1793069893005,
+      0,
+      0,
+      0,
+      3648
+    ]
+  ],
+  "processTree": {
+    "supported": true,
+    "sampleIntervalMs": 1000,
+    "samples": 5,
+    "peakWorkingSetBytes": 733048832,
+    "peakProcessCount": 20,
+    "peakByName": {
+      "node.exe": 202530816,
+      "conhost.exe": 30150656,
+      "nvidia-smi.exe": 32235520,
+      "ffmpeg.exe": 468131840
+    },
+    "cpuSeconds": 5.4375,
+    "readTransferBytes": 29904283,
+    "writeTransferBytes": 7907625
+  },
+  "processTreeTimeline": [
+    [
+      1793069887747,
+      492699648,
+      18
+    ],
+    [
+      1793069889089,
+      572923904,
+      18
+    ],
+    [
+      1793069890406,
+      616038400,
+      18
+    ],
+    [
+      1793069891749,
+      635834368,
+      20
+    ],
+    [
+      1793069893075,
+      733048832,
+      9
+    ]
+  ],
+  "extractCacheBytesAfter": 0,
+  "output": {
+    "sizeBytes": 27293,
+    "durationSec": 2,
+    "bitRate": 109172,
+    "formatName": "matroska,webm",
+    "streams": [
+      {
+        "type": "video",
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "width": 640,
+        "height": 360,
+        "rFrameRate": "30/1",
+        "avgFrameRate": "30/1",
+        "packets": 60,
+        "alphaMode": "1"
+      }
+    ]
+  },
+  "upstreamLog": {
+    "counts": {
+      "error": 0,
+      "warn": 0,
+      "info": 27,
+      "debug": 1
+    },
+    "firstMessages": [],
+    "warnMeta": []
+  },
+  "settle": {
+    "aliveAtStart": 0,
+    "aliveAtEnd": 0,
+    "waitedMs": 553,
+    "cooldownMs": 5000
+  },
+  "traceEvents": [
+    {
+      "phase": "pipeline",
+      "status": "checkpoint",
+      "elapsedMs": 1
+    },
+    {
+      "phase": "compile",
+      "status": "start",
+      "elapsedMs": 1
+    },
+    {
+      "phase": "compile",
+      "status": "end",
+      "elapsedMs": 156,
+      "durationMs": 155
+    },
+    {
+      "phase": "compile",
+      "status": "checkpoint",
+      "elapsedMs": 156
+    },
+    {
+      "phase": "browser_probe",
+      "status": "start",
+      "elapsedMs": 156
+    },
+    {
+      "phase": "browser_probe",
+      "status": "end",
+      "elapsedMs": 171,
+      "durationMs": 15
+    },
+    {
+      "phase": "browser_probe",
+      "status": "checkpoint",
+      "elapsedMs": 171
+    },
+    {
+      "phase": "video_extract",
+      "status": "start",
+      "elapsedMs": 171
+    },
+    {
+      "phase": "video_extract",
+      "status": "end",
+      "elapsedMs": 171,
+      "durationMs": 0
+    },
+    {
+      "phase": "video_extract",
+      "status": "checkpoint",
+      "elapsedMs": 172
+    },
+    {
+      "phase": "hdr_detection",
+      "status": "checkpoint",
+      "elapsedMs": 172
+    },
+    {
+      "phase": "audio_process",
+      "status": "start",
+      "elapsedMs": 172
+    },
+    {
+      "phase": "audio_process",
+      "status": "end",
+      "elapsedMs": 172,
+      "durationMs": 0
+    },
+    {
+      "phase": "file_server",
+      "status": "start",
+      "elapsedMs": 172
+    },
+    {
+      "phase": "file_server",
+      "status": "end",
+      "elapsedMs": 174,
+      "durationMs": 2
+    },
+    {
+      "phase": "capture_calibration",
+      "status": "checkpoint",
+      "elapsedMs": 175
+    },
+    {
+      "phase": "worker_resolution",
+      "status": "checkpoint",
+      "elapsedMs": 177
+    },
+    {
+      "phase": "capture_strategy",
+      "status": "checkpoint",
+      "elapsedMs": 177
+    },
+    {
+      "phase": "capture_streaming",
+      "status": "start",
+      "elapsedMs": 177
+    },
+    {
+      "phase": "capture_streaming",
+      "status": "end",
+      "elapsedMs": 6372,
+      "durationMs": 6195
+    },
+    {
+      "phase": "assemble",
+      "status": "start",
+      "elapsedMs": 6372
+    },
+    {
+      "phase": "assemble",
+      "status": "end",
+      "elapsedMs": 6372,
+      "durationMs": 0
+    },
+    {
+      "phase": "pipeline",
+      "status": "checkpoint",
+      "elapsedMs": 6428
+    }
+  ],
+  "perfSummary": {
+    "renderId": "8422d344-164b-4bd1-8aab-d82cea955341",
+    "totalElapsedMs": 6428,
+    "fps": 30,
+    "quality": "high",
+    "workers": 1,
+    "workerSizing": {
+      "workers": 1,
+      "boundBy": "explicit",
+      "effectiveMaxWorkers": 24,
+      "cpuBasedWorkers": 26,
+      "memoryBasedWorkers": 31,
+      "frameBasedWorkers": 2,
+      "heapBasedWorkers": 5,
+      "heapLimitMb": 4288,
+      "totalMemoryMb": 98066,
+      "cpuCount": 28,
+      "captureCostMultiplier": 1,
+      "exceedsHeapAdvisory": false
+    },
+    "chunkedEncode": false,
+    "chunkSizeFrames": null,
+    "compositionDurationSeconds": 2,
+    "totalFrames": 60,
+    "resolution": {
+      "width": 640,
+      "height": 360
+    },
+    "videoCount": 0,
+    "audioCount": 0,
+    "stages": {
+      "compileOnlyMs": 155,
+      "browserProbeMs": 15,
+      "compileMs": 170,
+      "videoExtractMs": 0,
+      "audioProcessMs": 0,
+      "captureMs": 6200,
+      "captureFrameMs": 6195,
+      "captureSetupMs": 5,
+      "encodeMs": 6190,
+      "assembleMs": 0
+    },
+    "tmpPeakBytes": 275267,
+    "observability": {
+      "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341",
+      "compositionHash": "c77a561570adb32c",
+      "events": [
+        {
+          "phase": "pipeline",
+          "status": "checkpoint",
+          "elapsedMs": 1,
+          "message": "started",
+          "data": {
+            "format": "webm",
+            "quality": "high",
+            "browserGpuMode": "software",
+            "forceScreenshot": true,
+            "protocolTimeoutMs": 300000,
+            "pageNavigationTimeoutMs": 60000,
+            "playerReadyTimeoutMs": 45000,
+            "requestedWorkers": 1
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "compile",
+          "status": "start",
+          "elapsedMs": 1,
+          "data": {
+            "needsAlpha": true
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "compile",
+          "status": "end",
+          "elapsedMs": 156,
+          "durationMs": 155,
+          "data": {
+            "needsAlpha": true
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "compile",
+          "status": "checkpoint",
+          "elapsedMs": 156,
+          "message": "composition metadata resolved",
+          "data": {
+            "width": 640,
+            "height": 360,
+            "videoCount": 0,
+            "audioCount": 0,
+            "imageCount": 0,
+            "deviceScaleFactor": 1,
+            "forceScreenshot": true,
+            "compositionHash": "c77a561570adb32c"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "start",
+          "elapsedMs": 156,
+          "data": {
+            "forceScreenshot": true,
+            "stagePhase": "calibrating"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "end",
+          "elapsedMs": 171,
+          "durationMs": 15,
+          "data": {
+            "forceScreenshot": true,
+            "stagePhase": "calibrating"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "browser_probe",
+          "status": "checkpoint",
+          "elapsedMs": 171,
+          "message": "duration resolved",
+          "data": {
+            "durationSeconds": 2,
+            "totalFrames": 60,
+            "compositionHash": "c77a561570adb32c",
+            "beginFrameStalled": false
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "video_extract",
+          "status": "start",
+          "elapsedMs": 171,
+          "data": {
+            "videoCount": 0
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "video_extract",
+          "status": "end",
+          "elapsedMs": 171,
+          "durationMs": 0,
+          "data": {
+            "videoCount": 0
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "video_extract",
+          "status": "checkpoint",
+          "elapsedMs": 172,
+          "message": "frames resolved",
+          "data": {
+            "videoCount": 0,
+            "extractedVideoCount": 0,
+            "totalFramesExtracted": 0,
+            "maxFramesPerVideo": 0,
+            "avgFramesPerExtractedVideo": null,
+            "vfrPreflightCount": null,
+            "vfrPreflightMs": null,
+            "cacheHits": null,
+            "cacheMisses": null,
+            "transientRetries": null,
+            "minVideoFrameCoverageRatio": null,
+            "authoredTimedClipCount": 3
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "hdr_detection",
+          "status": "checkpoint",
+          "elapsedMs": 172,
+          "message": "resolved",
+          "data": {
+            "requestedHdrMode": "force-sdr",
+            "effectiveHdr": "sdr",
+            "nativeHdrVideoCount": 0,
+            "nativeHdrImageCount": 0
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "audio_process",
+          "status": "start",
+          "elapsedMs": 172,
+          "data": {
+            "audioCount": 0
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "audio_process",
+          "status": "end",
+          "elapsedMs": 172,
+          "durationMs": 0,
+          "data": {
+            "audioCount": 0
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "file_server",
+          "status": "start",
+          "elapsedMs": 172,
+          "data": {
+            "reused": false
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "file_server",
+          "status": "end",
+          "elapsedMs": 174,
+          "durationMs": 2,
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "capture_calibration",
+          "status": "checkpoint",
+          "elapsedMs": 175,
+          "message": "skipped",
+          "data": {
+            "requestedWorkers": 1,
+            "totalFrames": 60,
+            "htmlInCanvasDetected": false,
+            "lowMemoryMode": false,
+            "deInversionEligible": false,
+            "deParallelRouterEligible": false
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "worker_resolution",
+          "status": "checkpoint",
+          "elapsedMs": 177,
+          "message": "resolved",
+          "data": {
+            "workerCount": 1
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "capture_strategy",
+          "status": "checkpoint",
+          "elapsedMs": 177,
+          "message": "resolved",
+          "data": {
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "captureBeyondViewport": null,
+            "useStreamingEncode": true,
+            "useLayeredComposite": false,
+            "usePageSideCompositing": false,
+            "hasHdrContent": false,
+            "hasShaderTransitions": false,
+            "isPngSequence": false
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "capture_streaming",
+          "status": "start",
+          "elapsedMs": 177,
+          "data": {
+            "stagePhase": "capturing",
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "totalFrames": 60,
+            "framesCompleted": 0,
+            "captureMode": "screenshot",
+            "captureOperation": "captureScreenshot"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "capture_streaming",
+          "status": "end",
+          "elapsedMs": 6372,
+          "durationMs": 6195,
+          "data": {
+            "stagePhase": "capturing",
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "totalFrames": 60,
+            "framesCompleted": 60,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "assemble",
+          "status": "start",
+          "elapsedMs": 6372,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": false,
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "totalFrames": 60,
+            "framesCompleted": 60,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "assemble",
+          "status": "end",
+          "elapsedMs": 6372,
+          "durationMs": 0,
+          "data": {
+            "stagePhase": "capturing",
+            "hasAudio": false,
+            "workerCount": 1,
+            "forceScreenshot": true,
+            "totalFrames": 60,
+            "framesCompleted": 60,
+            "captureMode": "screenshot",
+            "captureOperation": "encode"
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        },
+        {
+          "phase": "pipeline",
+          "status": "checkpoint",
+          "elapsedMs": 6428,
+          "message": "artifact validated",
+          "data": {
+            "totalElapsedMs": 6428
+          },
+          "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+        }
+      ],
+      "eventCount": 23,
+      "lastEvent": {
+        "phase": "pipeline",
+        "status": "checkpoint",
+        "elapsedMs": 6428,
+        "message": "artifact validated",
+        "data": {
+          "totalElapsedMs": 6428
+        },
+        "renderJobId": "8422d344-164b-4bd1-8aab-d82cea955341"
+      },
+      "browserDiagnostics": {
+        "total": 3,
+        "errors": 0,
+        "pageErrors": 0,
+        "requestFailed": 0,
+        "httpErrors": 0,
+        "navigationStarts": 1,
+        "navigationFailures": 0,
+        "consoleErrors": 0,
+        "consoleWarnings": 0
+      },
+      "capture": {
+        "forceScreenshot": true,
+        "captureMode": "screenshot",
+        "browserGpuMode": "software",
+        "protocolTimeoutMs": 300000,
+        "pageNavigationTimeoutMs": 60000,
+        "playerReadyTimeoutMs": 45000,
+        "workerCount": 1,
+        "compositionElementCount": 7,
+        "compositionElementCountSource": "static",
+        "compositionElementTags": {
+          "div": 3,
+          "meta": 1,
+          "head": 1,
+          "body": 1,
+          "html": 1
+        },
+        "arollVideoCount": 0,
+        "heygenVideoCount": 0,
+        "adaptersUsed": [
+          "gsap"
+        ],
+        "audioCount": 0,
+        "imageCount": 0,
+        "subCompositionCount": 0,
+        "audioGroupCount": 0,
+        "colorGradingCount": 0,
+        "hasLut": false,
+        "capturePath": "streaming",
+        "useStreamingEncode": true,
+        "useLayeredComposite": false,
+        "usePageSideCompositing": false,
+        "hasHdrContent": false,
+        "chromeBrowserRssPeakMb": 57,
+        "chromeRendererRssPeakMb": 82,
+        "chromeRssLastMb": 232,
+        "chromeGpuProcessSeenLastSample": true,
+        "chromeMemorySamples": 1,
+        "captureBeyondViewport": false
+      },
+      "extraction": {
+        "videoCount": 0,
+        "extractedVideoCount": 0,
+        "totalFramesExtracted": 0,
+        "maxFramesPerVideo": 0,
+        "authoredTimedClipCount": 3
+      },
+      "init": {
+        "initDurationMs": 531,
+        "tweenCount": 2,
+        "elementCount": 21
+      }
+    },
+    "captureAvgMs": 103,
+    "subTimelineWait": "ready",
+    "captureP50Ms": 35,
+    "peakRssMb": 195,
+    "peakHeapUsedMb": 68,
+    "staticDedup": {
+      "enabled": true,
+      "armed": false,
+      "predictedFrames": 0,
+      "reusedFrames": 0,
+      "skipReason": "ineligible"
+    },
+    "drawElement": {
+      "mode": "screenshot",
+      "clampReason": "software_gpu",
+      "workerInversion": "none",
+      "compositionElementCount": 7,
+      "compositionElementCountSource": "static",
+      "compositionElementTags": {
+        "div": 3,
+        "meta": 1,
+        "head": 1,
+        "body": 1,
+        "html": 1
+      },
+      "arollVideoCount": 0,
+      "heygenVideoCount": 0,
+      "adaptersUsed": [
+        "gsap"
+      ],
+      "audioCount": 0,
+      "imageCount": 0,
+      "subCompositionCount": 0,
+      "audioGroupCount": 0,
+      "colorGradingCount": 0,
+      "hasLut": false,
+      "vfxHostCount": 0,
+      "vfxTypes": "",
+      "parallelRouter": "none",
+      "workerEncode": false,
+      "verifyArmed": 0,
+      "verifyChecked": 0,
+      "verifyInitMs": 0,
+      "selfVerifyFallback": false,
+      "blankSuspects": 0,
+      "blankDeterministicAccepts": 0,
+      "blankRecaptures": 0,
+      "boundaryFrames": 0,
+      "riskFrames": 0,
+      "ncprFallbacks": 0,
+      "frameTimeouts": 0
+    },
+    "host": {
+      "platform": "win32",
+      "arch": "x64",
+      "cpuCount": 28,
+      "totalMemMb": 98066,
+      "nodeVersion": "v24.20.0",
+      "gpuDisabled": false
+    }
+  },
+  "jobStatus": "complete"
+}

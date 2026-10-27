@@ -1,0 +1,209 @@
+{
+  "schema": "turbo-bench-manifest/1",
+  "startedAt": "2026-10-27T02:00:32.741Z",
+  "finishedAt": "2026-10-27T03:42:26.354Z",
+  "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --warm-runs 5",
+  "warmRuns": 5,
+  "profiles": {
+    "producer-default": {
+      "description": "Producer API defaults (what packages/producer/src/benchmark.ts and the regression harness exercise): browserGpuMode=software (SwiftShader), which also clamps capture to Page.captureScreenshot.",
+      "env": {},
+      "evidence": "upstream packages/engine/src/config.ts:295 (browserGpuMode: \"software\")"
+    },
+    "cli-local-default": {
+      "description": "What `hyperframes render` does on a local machine with no flags: --browser-gpu resolves to auto (hardware GPU when Chrome can use it) and the software-GPU screenshot clamp is lifted.",
+      "env": {
+        "PRODUCER_BROWSER_GPU_MODE": "auto",
+        "PRODUCER_FORCE_SCREENSHOT": "false"
+      },
+      "evidence": "upstream packages/cli/src/browser/gpuPolicy.ts:14 (default \"auto\"), packages/cli/src/commands/render.ts:1098-1105 (forceScreenshot:false for auto)"
+    }
+  },
+  "control": {
+    "profile": "producer-default",
+    "cell": "producer-default.control",
+    "instrumentation": "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)"
+  },
+  "settle": "before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then 5000 ms",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
+  "preflight": {
+    "ok": true,
+    "cpuBusyPct": 12.261023729752962,
+    "gpuUtilPct": 5.973684210526316,
+    "gpuEncPct": 0,
+    "attempts": 1,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "guard": {
+    "limits": {
+      "maxChrome": 80,
+      "minFreeRamFraction": 0.15,
+      "minFreeRamBytes": 4294967296,
+      "maxCommitFraction": 0.9,
+      "maxConsecutiveFailures": 3
+    },
+    "peak": {
+      "chrome": 25,
+      "tracked": 64,
+      "minFreeRamBytes": 50076049408,
+      "maxCommittedBytes": 61375291392
+    },
+    "leftovers": []
+  },
+  "abort": null,
+  "cells": [
+    {
+      "fixture": "typography-svg",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "typography-svg",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "typography-svg",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "css-filters-blend",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "canvas-webgl",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "canvas-webgl",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "canvas-webgl",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "video-heavy",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "audio-mix",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "mixed-complex",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "mixed-complex",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "mixed-complex",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "webm-transparency",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-hlg-regression",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-regression",
+      "profile": "producer-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-regression",
+      "profile": "cli-local-default",
+      "exitCode": 0
+    },
+    {
+      "fixture": "hdr-regression",
+      "profile": "producer-default.control",
+      "exitCode": 0
+    }
+  ]
+}

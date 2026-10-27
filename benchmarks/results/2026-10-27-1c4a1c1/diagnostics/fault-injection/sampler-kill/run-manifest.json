@@ -1,0 +1,87 @@
+{
+  "schema": "turbo-bench-manifest/1",
+  "startedAt": "2026-10-27T04:10:32.044Z",
+  "finishedAt": "2026-10-27T04:10:39.555Z",
+  "command": "node --import ./upstream/hyperframes/node_modules/tsx/dist/loader.mjs benchmarks/src/run-benchmark.ts --fixtures gsap-static-holds --warm-runs 1 --inject-sampler-kill-ms 5000 --out benchmarks/results/2026-10-27-1c4a1c1/diagnostics/fault-injection/sampler-kill",
+  "warmRuns": 1,
+  "profiles": {
+    "producer-default": {
+      "description": "Producer API defaults (what packages/producer/src/benchmark.ts and the regression harness exercise): browserGpuMode=software (SwiftShader), which also clamps capture to Page.captureScreenshot.",
+      "env": {},
+      "evidence": "upstream packages/engine/src/config.ts:295 (browserGpuMode: \"software\")"
+    },
+    "cli-local-default": {
+      "description": "What `hyperframes render` does on a local machine with no flags: --browser-gpu resolves to auto (hardware GPU when Chrome can use it) and the software-GPU screenshot clamp is lifted.",
+      "env": {
+        "PRODUCER_BROWSER_GPU_MODE": "auto",
+        "PRODUCER_FORCE_SCREENSHOT": "false"
+      },
+      "evidence": "upstream packages/cli/src/browser/gpuPolicy.ts:14 (default \"auto\"), packages/cli/src/commands/render.ts:1098-1105 (forceScreenshot:false for auto)"
+    }
+  },
+  "control": {
+    "profile": "producer-default",
+    "cell": "producer-default.control",
+    "instrumentation": "none (no CDP tap, no host samplers, HF_PROFILE_FALLBACK_CAPTURE unset)"
+  },
+  "settle": "before every run: wait for chrome-headless-shell/ffmpeg/ffprobe to exit (≤60 s), then 5000 ms",
+  "orderRule": "per fixture: all cold runs, then warm rounds A,B,C,...; variant order rotates by (fixture index + run)",
+  "preflight": {
+    "ok": true,
+    "cpuBusyPct": 17.81482780239515,
+    "gpuUtilPct": 1.236842105263158,
+    "gpuEncPct": 0,
+    "attempts": 1,
+    "thresholds": {
+      "cpuPct": 20,
+      "gpuPct": 15
+    }
+  },
+  "guard": {
+    "limits": {
+      "maxChrome": 80,
+      "minFreeRamFraction": 0.15,
+      "minFreeRamBytes": 4294967296,
+      "maxCommitFraction": 0.9,
+      "maxConsecutiveFailures": 3
+    },
+    "peak": {
+      "chrome": 0,
+      "tracked": 6,
+      "minFreeRamBytes": 57334247424,
+      "maxCommittedBytes": 69509046272
+    },
+    "leftovers": []
+  },
+  "abort": {
+    "reason": "host-safety sampler exited (1)",
+    "at": "2026-10-27T04:10:37.421Z",
+    "sample": {
+      "t": 1793074235037,
+      "chrome": 0,
+      "ffmpeg": 0,
+      "tracked": 6,
+      "freeRamBytes": 57998839808,
+      "totalRamBytes": 102830084096,
+      "committedBytes": 69062885376,
+      "commitLimitBytes": 137189822464
+    }
+  },
+  "cells": [
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default",
+      "exitCode": 1
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "cli-local-default",
+      "exitCode": 1
+    },
+    {
+      "fixture": "gsap-static-holds",
+      "profile": "producer-default.control",
+      "exitCode": 1
+    }
+  ]
+}

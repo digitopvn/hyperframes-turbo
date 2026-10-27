@@ -1,0 +1,126 @@
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (432ms)
+[initSession:screenshot] GSAP proxy flush complete (446ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (563ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (564ms)
+[initSession:screenshot] applyVideoMetadataHints complete (566ms)
+[initSession:screenshot] media + fonts + tailwind ready (568ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (570ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (570ms)
+[worker] hdr-regression/producer-default run 0 (cold): 98257 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (423ms)
+[initSession:screenshot] GSAP proxy flush complete (437ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (569ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (571ms)
+[initSession:screenshot] applyVideoMetadataHints complete (572ms)
+[initSession:screenshot] media + fonts + tailwind ready (574ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (575ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (576ms)
+[worker] hdr-regression/producer-default run 1 (warm): 94560 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (431ms)
+[initSession:screenshot] GSAP proxy flush complete (445ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (578ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (579ms)
+[initSession:screenshot] applyVideoMetadataHints complete (581ms)
+[initSession:screenshot] media + fonts + tailwind ready (582ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (584ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (584ms)
+[worker] hdr-regression/producer-default run 2 (warm): 94047 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (433ms)
+[initSession:screenshot] GSAP proxy flush complete (445ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (550ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (551ms)
+[initSession:screenshot] applyVideoMetadataHints complete (553ms)
+[initSession:screenshot] media + fonts + tailwind ready (555ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (557ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (557ms)
+[worker] hdr-regression/producer-default run 3 (warm): 95807 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (561ms)
+[initSession:screenshot] GSAP proxy flush complete (576ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (678ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (680ms)
+[initSession:screenshot] applyVideoMetadataHints complete (682ms)
+[initSession:screenshot] media + fonts + tailwind ready (684ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (686ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (686ms)
+[worker] hdr-regression/producer-default run 4 (warm): 96736 ms
+[INFO] [Compiler] Fetched 11 font face(s) for "Inter" from Google Fonts (cached to ~\.cache\hyperframes\fonts\inter)
+[INFO] [Compiler] Fetched 11 font face(s) for "Roboto" from Google Fonts (cached to ~\.cache\hyperframes\fonts\roboto)
+[INFO] [Compiler] Injected deterministic @font-face rules for 2 requested font families
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js
+[INFO] [Compiler] Inlined CDN script: https://cdn.jsdelivr.net/npm/@hyperframes/shader-transitions@0.4.11/dist/index.global.js
+[WARN] [Compiler] WARNING: Video "wa-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wb-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wc-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[WARN] [Compiler] WARNING: Video "wd-video" has sparse keyframes (max interval: 5s). Long GOPs can make preview seeking slower; rendering is unaffected. If preview seeking is slow, re-encode with: ffmpeg -i "hdr-clip.mp4" -c:v libx264 -r 30 -g 30 -keyint_min 30 -movflags +faststart -c:a copy output.mp4
+[BrowserManager] Browser launched (HeadlessChrome/152.0.7977.30, screenshot, gl=--use-gl=angle --use-angle=swiftshader, headlessShell=true, platform=win32)
+[initSession:screenshot] page.goto start (0ms)
+[initSession:screenshot] page.goto complete (426ms)
+[initSession:screenshot] GSAP proxy flush complete (439ms)
+[HyperFrames] render runtime fps {"canonicalFps":30,"source":"render-options","rawFpsSource":"render-options","rawFps":30}
+[initSession:screenshot] pollHfReady complete (544ms)
+[initSession:screenshot] pollSubCompositionTimelines complete (ready) (546ms)
+[initSession:screenshot] applyVideoMetadataHints complete (547ms)
+[initSession:screenshot] media + fonts + tailwind ready (549ms)
+[initSession:screenshot] captureBeyondViewport downgraded: page content fits the capture viewport (550ms)
+[initSession:screenshot] static-frame dedup: disabled (before-capture hook / video injection active) (550ms)
+[worker] hdr-regression/producer-default run 5 (warm): 93749 ms

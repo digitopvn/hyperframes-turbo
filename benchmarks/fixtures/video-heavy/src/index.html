@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo golden: video-heavy multi-source</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      .full { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      .pip { position: absolute; width: 640px; height: 360px; object-fit: cover; border: 4px solid #fff; }
+      #pip1 { right: 60px; top: 60px; }
+      #pip2 { right: 60px; bottom: 60px; }
+      .tag { position: absolute; left: 60px; bottom: 60px; color: #fff; font: 700 44px Arial, sans-serif; background: rgba(0, 0, 0, 0.6); padding: 8px 16px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="video-heavy" data-width="1920" data-height="1080" data-duration="8">
+      <!-- H.264 1080p30 CFR background, cut at 4 s to a seeked second span of the same file -->
+      <video id="bg-a" class="clip full" src="media/h264-1080p30.mp4" data-start="0" data-duration="4" data-track-index="0" muted playsinline></video>
+      <video id="bg-b" class="clip full" src="media/h264-1080p30.mp4" data-start="4" data-duration="4" data-media-start="2" data-track-index="1" muted playsinline></video>
+      <!-- HEVC 1080p60 picture-in-picture -->
+      <video id="pip1" class="clip pip" src="media/hevc-1080p60.mp4" data-start="0" data-duration="8" data-track-index="2" muted playsinline></video>
+      <!-- Variable-frame-rate H.264 picture-in-picture -->
+      <video id="pip2" class="clip pip" src="media/h264-vfr.mp4" data-start="1" data-duration="6" data-track-index="3" muted playsinline></video>
+      <div class="tag clip" id="tag" data-start="0" data-duration="8" data-track-index="10">H.264 CFR + HEVC 60p + VFR</div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.from("#tag", { x: -600, duration: 0.8, ease: "power3.out" }, 0.2);
+      tl.to("#pip1", { scale: 0.8, duration: 2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 2);
+      tl.to({}, { duration: 8 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["video-heavy"] = tl;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo golden: GSAP static holds</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #f4f1de; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #f4f1de; }
+      .card { position: absolute; width: 520px; height: 300px; border-radius: 24px; color: #fff; font: 700 56px Arial, sans-serif; display: flex; align-items: center; justify-content: center; }
+      #a { left: 120px; top: 160px; background: #e07a5f; }
+      #b { left: 700px; top: 160px; background: #3d405b; }
+      #c { left: 1280px; top: 160px; background: #81b29a; }
+      .caption { position: absolute; top: 640px; left: 0; width: 100%; text-align: center; font: 400 64px Georgia, serif; color: #3d405b; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="gsap-static-holds" data-width="1920" data-height="1080" data-duration="10">
+      <div class="card" id="a">ONE</div>
+      <div class="card" id="b">TWO</div>
+      <div class="card" id="c">THREE</div>
+      <div class="caption" id="cap">Long holds between short moves</div>
+    </div>
+    <script>
+      // 10 s timeline; motion only at 0-1.2 s, 3-4 s and 6.5-7 s, so most frames are static holds.
+      const tl = gsap.timeline({ paused: true });
+      tl.from(".card", { y: 400, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, 0);
+      tl.to("#b", { scale: 1.15, duration: 1, ease: "power2.inOut" }, 3);
+      tl.to("#cap", { color: "#e07a5f", duration: 0.5 }, 6.5);
+      tl.to({}, { duration: 10 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["gsap-static-holds"] = tl;
+    </script>
+  </body>
+</html>

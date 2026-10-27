@@ -1,0 +1,8 @@
+[bench] 1 fixture(s) x 2 profile(s) x (1 cold + 1 warm) -> benchmarks/results/2026-10-27-1c4a1c1/diagnostics/fault-injection/sampler-kill
+[bench] preflight idle: {"ok":true,"cpuBusyPct":17.81482780239515,"gpuUtilPct":1.236842105263158,"gpuEncPct":0,"attempts":1,"thresholds":{"cpuPct":20,"gpuPct":15}}
+[bench] fault injection: killing host-safety sampler 39508
+[bench] ABORT: host-safety sampler exited (1)
+[bench] gsap-static-holds/producer-default: worker exited (1) during run 0
+[bench] aborted fail-closed: host-safety sampler exited (1); no report written
+exit code: 3
+host after exit: chrome-headless-shell=0 ffmpeg=0 render-worker node=0

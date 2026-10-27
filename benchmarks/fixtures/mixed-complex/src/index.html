@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Turbo golden: mixed complex scene</title>
+    <script src="gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      .full { position: absolute; inset: 0; width: 1920px; height: 1080px; object-fit: cover; }
+      .panel { position: absolute; left: 120px; top: 640px; width: 1100px; height: 300px; border-radius: 28px; backdrop-filter: blur(16px); background: rgba(0, 0, 0, 0.35); color: #fff; padding: 40px; font: 700 64px Georgia, serif; }
+      .panel small { display: block; font: 400 32px Arial, sans-serif; margin-top: 16px; color: #ddd; }
+      svg { position: absolute; right: 120px; top: 120px; }
+      .glow { position: absolute; left: 1400px; top: 640px; width: 320px; height: 320px; border-radius: 50%; background: #ffd166; mix-blend-mode: overlay; filter: blur(30px); }
+      .scene2 { position: absolute; inset: 0; background: linear-gradient(135deg, #073b4c, #118ab2); color: #fff; font: 700 110px Arial, sans-serif; display: flex; align-items: center; justify-content: center; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="mixed-complex" data-width="1920" data-height="1080" data-duration="10">
+      <audio id="bed" src="media/music-bed.wav" data-start="0" data-duration="8" data-track-index="0" data-volume="1"></audio>
+      <audio id="hit" src="media/sfx-blip.wav" data-start="6" data-duration="0.3" data-track-index="1" data-volume="1"></audio>
+      <video id="bg" class="clip full" src="media/h264-1080p30.mp4" data-start="0" data-duration="6" data-track-index="2" muted playsinline></video>
+      <div class="glow clip" id="glow" data-start="0" data-duration="6" data-track-index="3"></div>
+      <svg class="clip" data-start="0" data-duration="6" data-track-index="4" width="360" height="360" viewBox="-180 -180 360 360">
+        <circle r="150" fill="none" stroke="#fff" stroke-width="10" stroke-dasharray="40 20" id="ring" />
+        <text y="18" text-anchor="middle" font-family="Arial" font-size="56" fill="#fff" id="num">0</text>
+      </svg>
+      <div class="panel clip" id="panel" data-start="0" data-duration="6" data-track-index="5">Video + text + blur<small>SVG, blend, backdrop-filter, audio bed, hard cut at 6 s</small></div>
+      <div class="scene2 clip" id="scene2" data-start="6" data-duration="4" data-track-index="6">Scene two</div>
+    </div>
+    <script>
+      const n = { v: 0 };
+      const tl = gsap.timeline({ paused: true });
+      tl.from("#panel", { y: 200, opacity: 0, duration: 1, ease: "power3.out" }, 0.3);
+      tl.to("#ring", { rotation: 360, transformOrigin: "50% 50%", duration: 6, ease: "none" }, 0);
+      tl.to(n, { v: 100, duration: 5, ease: "none", onUpdate: () => {
+        document.getElementById("num").textContent = Math.round(n.v);
+      } }, 0.5);
+      tl.to("#glow", { x: -300, scale: 1.4, duration: 6, ease: "sine.inOut" }, 0);
+      tl.from("#scene2", { scale: 1.2, opacity: 0, duration: 0.6 }, 6);
+      tl.to({}, { duration: 10 }, 0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["mixed-complex"] = tl;
+    </script>
+  </body>
+</html>
